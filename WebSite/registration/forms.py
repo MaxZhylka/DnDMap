@@ -218,6 +218,6 @@ class CharacterForm(ModelForm):
                 'id': 'temporaryHitPoints',
                 'style': 'width: 286px;height: 96px;border: none;outline: none;text-align: center;font-size: 50px;background-color: transparent;'
             }),
-            "hitDice":  forms.Select(attrs={'choices':'dice_choices','id': 'hitDice', 'style': 'width: 286px;height: 96px;border: none;outline: none;text-align: center;font-size: 50px;background-color: transparent;'})
+            "hitDice":  forms.Select(attrs={'choices':'dice_choices','id': 'hitDice', 'style': 'width: 100px;height: 100px;border: none;outline: none;text-align: center;font-size: 50px;background-color: transparent;'})
 
         }
