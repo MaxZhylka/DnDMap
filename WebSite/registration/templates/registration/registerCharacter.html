@@ -1,0 +1,485 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лист персонажа D&D</title>
+    <link rel="stylesheet" href="{%static 'registration/css/NummainSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/oneSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/Sheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/templates.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/threeSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/twoSheet.css'%}">
+    <script src="{%static 'registration/js/jquery-3.7.1.min.js'%}"></script>
+    <script src="{%static 'registration/js/event.js'%}"></script>
+
+    <style>
+          label
+        {
+            color: #838383;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DUNGEONS & DRAGONS</h1>
+    </header>
+            <form class="forma" method="POST">
+                <div class="headSheet">
+                    <div class="leftHeadSheet">
+                        {{ form.name }}
+                        <label>ИМЯ ПЕРСОНАЖА</label>
+                    </div>
+                    <div class="rightHeadSheet">
+                        <div class="headContent characterClass">
+                            {{ form.characterClass }}
+                            <label>КЛАСС</label>
+                        </div>
+                        <div class="headContent characterBackstory">
+                            {{ form.backstorys }}
+                            <label>ПРЕДЫСТОРИЯ</label>
+                        </div>
+                        <div class="headContent сharacterPlayer">
+                            {{ form.сharacterPlayer }}
+                            <label>ИМЯ ИГРОКА</label>
+                        </div>
+                        <div class="headContent characterRace">
+                            {{ form.race }}
+                            <label>РАСА</label>
+                        </div>
+                        <div class="headContent worldviews">
+                            {{ form.worldviews }}
+                            <label>МИРОВОЗРЕНИЕ</label>
+                        </div>
+                        <div class="headContent experience">
+                            {{ form.experience }}
+                            <label>ОПЫТ</label>
+                        </div>
+                        <div class="headContent level">
+                            {{ form.level }}
+                            <label>УРОВЕНЬ</label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mainSheet">
+                    <div class="onemainSheet">
+                        <div class="abillitis">
+                            <div class="abilliti strength">
+                                <div class="text">СИЛА</div>
+                                <div class="modifier strengthmodifier">
+                                    0
+                                </div>
+                                <div class="formab">
+                                {{form.strength}}
+                                </div>
+
+                            </div>
+                            <div class="abilliti dexterity">
+                                <div class="text">ЛОВКОСТЬ</div>
+                                <div class="modifier dexteritymodifier">
+                                    0
+                                </div>
+                                <div class="formab">
+                                {{form.dexterity}}
+                                </div>
+                            </div>
+                            <div class="abilliti constitution">
+                                <div class="textconst">ТЕЛОСЛОЖЕНИЕ</div>
+                                <div class="modifier constitutionmodifier">
+                                    0
+                                </div>
+                                <div class="formab">
+                                {{form.constitution}}
+                                </div>
+                            </div>
+                                <div class="abilliti intelligence">
+                                <div class="text">ИНТЕЛЕКТ</div>
+                                <div class="modifier intelligencemodifier">
+                                    0
+                                </div>
+                                    <div class="formab">
+                                {{form.intelligence}}
+                                </div>
+                                </div>
+                            <div class="abilliti wisdom">
+                                <div class="text">МУДРОСТЬ</div>
+                                <div class="modifier wisdommodifier">
+                                    0
+                                </div>
+                                <div class="formab">
+                                {{form.wisdom}}
+                                </div>
+                            </div>
+                            <div class="abilliti charisma">
+                                <div class="text">ХАРИЗМА</div>
+                                <div class="modifier charismamodifier">
+                                    0
+                                </div>
+                                <div class="formab">
+                                {{form.charisma}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="functions">
+                            <div class="function inspiration">
+                                <div class="insbollen">
+                                    <div class="image-wrapper">
+                                        <img src="{% static 'registration/img/inspirone.png' %}" id="toggle-image">
+                                        <button type="button" id="inspiration-button"></button>
+                                    </div>
+                                </div>
+                                <div class="instext">ВДОХНОВЕНИЕ</div>
+                            </div>
+                            <div class="function profsheet">
+                                <div class="profiency">+2</div>
+                                <div class="profiencytext">БОНУС МАСТЕРСТВА</div>
+                            </div>
+                            <div class="function savingthrows">
+                                <div class="savingthrow strengthSt">
+                                    <div class="bollen strbollen">
+                                        <div class="wrapper savingthrow-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="strength-image" class="savingthrow-image">
+                                            <button type="button" id="strength-button" class="savingthrow-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="stindex strIndex">0</div>
+                                    <div class="sttext strText">СИЛА</div>
+                                </div>
+                                <div class="savingthrow dexteritySt">
+                                    <div class="bollen dexbollen">
+                                        <div class="wrapper savingthrow-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="dexterity-image" class="savingthrow-image">
+                                            <button type="button" id="dexterity-button" class="savingthrow-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="stindex dexIndex">0</div>
+                                    <div class="sttext dexText">ЛОВКОСТЬ</div>
+                                </div>
+                                <div class="savingthrow constitutionSt">
+                                    <div class="bollen constbollen">
+                                        <div class="wrapper savingthrow-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="constitution-image" class="savingthrow-image">
+                                            <button type="button" id="constitution-button" class="savingthrow-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="stindex conIndex">0</div>
+                                    <div class="sttext conText">ТЕЛОСЛОЖЕНИЕ</div>
+                                </div>
+                                <div class="savingthrow intelligenceSt">
+                                    <div class="bollen intbollen">
+                                        <div class="wrapper savingthrow-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="intelligence-image" class="savingthrow-image">
+                                            <button type="button" id="intelligence-button" class="savingthrow-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="stindex intIndex">0</div>
+                                    <div class="sttext intText">ИНТЕЛЕКТ</div>
+                                </div>
+                                <div class="savingthrow wisdomSt">
+                                    <div class="bollen wisbollen">
+                                        <div class="wrapper savingthrow-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="wisdom-image" class="savingthrow-image">
+                                            <button type="button" id="wisdom-button" class="savingthrow-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="stindex wisIndex">0</div>
+                                    <div class="sttext wisText">МУДРОСТЬ</div>
+                                </div>
+                                <div class="savingthrow charismaSt">
+                                    <div class="bollen chabollen">
+                                        <div class="wrapper savingthrow-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="charisma-image" class="savingthrow-image">
+                                            <button type="button" id="charisma-button" class="savingthrow-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="stindex chaIndex">0</div>
+                                    <div class="sttext chaText">ХАРИЗМА</div>
+                                </div>
+                                <div class="savetxt">СПАСБРОСКИ</div>
+                            </div>
+                            <div class="function skills">
+                                <div class="skill acrobatic">
+                                    <div class="bollen acrbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="acrobatic-image" class="skill-image">
+                                            <button type="button" id="acrobatic-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex acrobaticIndex">0</div>
+                                    <div class="skilltext acrobaticText">Акробатика</div>
+                                </div>
+                                <div class="skill athletics">
+                                    <div class="bollen athbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="athletics-image" class="skill-image">
+                                            <button type="button" id="athletics-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex athleticsIndex">0</div>
+                                    <div class="skilltext athleticsText">Атлетика</div>
+                                </div>
+                                <div class="skill perception">
+                                    <div class="bollen perbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="perception-image" class="skill-image">
+                                            <button type="button" id="perception-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex perceptionIndex">0</div>
+                                    <div class="skilltext perceptionText">Восприятие</div>
+                                </div>
+                                <div class="skill survival">
+                                    <div class="bollen surbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="survival-image" class="skill-image">
+                                            <button type="button" id="survival-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex survivalIndex">0</div>
+                                    <div class="skilltext survivalText">Выживание</div>
+                                </div>
+                                <div class="skill performance">
+                                    <div class="bollen perbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="performance-image" class="skill-image">
+                                            <button type="button" id="performance-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex performanceIndex">0</div>
+                                    <div class="skilltext performanceText">Выступление</div>
+                                </div>
+                                <div class="skill intimidation">
+                                    <div class="bollen intibollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="intimidation-image" class="skill-image">
+                                            <button type="button" id="intimidation-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex intimidationIndex">0</div>
+                                    <div class="skilltext intimidationText">Запугивание</div>
+                                </div>
+                                <div class="skill history">
+                                    <div class="bollen hisbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="history-image" class="skill-image">
+                                            <button type="button" id="history-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex historyIndex">0</div>
+                                    <div class="skilltext historyText">История</div>
+                                </div>
+                                <div class="skill sleightOfHand">
+                                    <div class="bollen sohbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="sleightOfHand-image" class="skill-image">
+                                            <button type="button" id="sleightOfHand-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex sleightOfHandIndex">0</div>
+                                    <div class="skilltext sleightOfHandText">Ловкость Рук</div>
+                                </div>
+                                <div class="skill arcane">
+                                    <div class="bollen arcbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="arcane-image" class="skill-image">
+                                            <button type="button" id="arcane-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex arcaneIndex">0</div>
+                                    <div class="skilltext arcaneText">Магия</div>
+                                </div>
+                                <div class="skill medicine">
+                                    <div class="bollen medbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="medicine-image" class="skill-image">
+                                            <button type="button" id="medicine-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex medicineIndex">0</div>
+                                    <div class="skilltext medicineText">Медицина</div>
+                                </div>
+                                <div class="skill deception">
+                                    <div class="bollen decbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="deception-image" class="skill-image">
+                                            <button type="button" id="deception-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex deceptionIndex">0</div>
+                                    <div class="skilltext deceptionText">Обман</div>
+                                </div>
+                                <div class="skill nature">
+                                    <div class="bollen natbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="nature-image" class="skill-image">
+                                            <button type="button" id="nature-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex natureIndex">0</div>
+                                    <div class="skilltext natureText">Природа</div>
+                                </div>
+                                <div class="skill insight">
+                                    <div class="bollen insbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="insight-image" class="skill-image">
+                                            <button type="button" id="insight-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex insightIndex">0</div>
+                                    <div class="skilltext insightText">Проницательность</div>
+                                </div>
+                                <div class="skill investigation">
+                                    <div class="bollen invbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="investigation-image" class="skill-image">
+                                            <button type="button" id="investigation-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex investigationIndex">0</div>
+                                    <div class="skilltext investigationText">Расследование</div>
+                                </div>
+                                <div class="skill religion">
+                                    <div class="bollen relbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="religion-image" class="skill-image">
+                                            <button type="button" id="religion-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex religionIndex">0</div>
+                                    <div class="skilltext religionText">Религия</div>
+                                </div>
+                                <div class="skill stealth">
+                                    <div class="bollen stebollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="stealth-image" class="skill-image">
+                                            <button type="button" id="stealth-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex stealthIndex">0</div>
+                                    <div class="skilltext stealthText">Скрытность</div>
+                                </div>
+                                <div class="skill persuasion">
+                                    <div class="bollen perbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="persuasion-image" class="skill-image">
+                                            <button type="button" id="persuasion-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex persuasionIndex">0</div>
+                                    <div class="skilltext persuasionText">Убеждение</div>
+                                </div>
+                                <div class="skill animalHandling">
+                                    <div class="bollen ahbollen">
+                                        <div class="wrapper skill-wrapper">
+                                            <img src="{% static 'registration/img/inspirone.png' %}" id="animalHandling-image" class="skill-image">
+                                            <button type="button" id="animalHandling-button" class="skill-button"></button>
+                                        </div>
+                                    </div>
+                                    <div class="skillindex animalHandlingIndex">0</div>
+                                    <div class="skilltext animalHandlingText">Уход за животными</div>
+                                </div>
+                                <div class="skillstext">Навыки</div>
+                            </div>
+
+                        </div>
+                        <div class="other">
+                            <div class="passivwisdom">
+                                <div class="passivwisdomIndex">10</div>
+                                <div class="passivwisdomtext">Пасивное Восприятие</div>
+                            </div>
+                        </div>
+                        <div class="prof">
+                                {{form.proficiencies}}
+                                    ВЛАДЕНИЯ
+                            </div>
+                    </div>
+                    <div class="twomainSheet">
+                        <div class="staticstiq">
+                            <div class="arinsp">
+                                <div class="armor">
+                                    {{ form.armourclass}}
+                                    <img src="{% static 'registration/img/shcild.png' %}" id="shield-image">
+                                    КД
+
+                                </div>
+                                <div class="initiative">
+
+                                    <div class="initIndex">
+                                        <div class="initIndextext">
+                                            0
+                                        </div>
+                                    </div>
+                                     Инициатива
+                                </div>
+                                <div class="speed">
+                                    <div class="speedIndex">
+                                        {{ form.speed }}
+                                    </div>
+                                    СКОРОСТЬ
+                                </div>
+                            </div>
+                            <div class="health">
+                                <div class="currenhit">
+                                    <div class="maxhit">Максимум хитов {{ form.hitPointsMax}}</div>
+                                    <div class="curhit">{{ form.hitPoints }}</div>
+                                    ТЕКУЩИЕ ХИТЫ
+                                </div>
+                                <div class="temporalhit">
+                                    <div class="tempHitIndex">{{ form.temporaryHitPoints }}</div>
+                                    <div class="tempHitText">ВРЕМЕННЫЕ ХИТЫ</div>
+                                </div>
+                                <div class="diceanddeath">
+                                    <div class="dicechose">
+                                        <div class="vsego">
+                                            <div class="vsegoIndexText">
+                                                Всего Костей:
+                                            </div>
+                                            <div class="vsegoIndex">
+                                                0
+                                            </div>
+                                        </div>
+
+                                            {{ form.hitDice }}
+
+                                        Кости Хитов
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="atack"></div>
+                        <div class="equipment"></div>
+                    </div>
+                    <div class="threemainSheet">
+                        <div class="personal">
+                            <div class="three personalTraits">
+                                {{form.personalTraits}}
+                                <div id="article personalTraitsText">
+                                    ЧЕРТЫ ХАРАКТЕРА
+                                </div>
+                            </div>
+                            <div class="three ideals">
+                                {{form.ideals}}
+                                    ИДЕАЛЫ
+                            </div>
+                            <div class="three bonds">
+                                {{form.bonds}}
+                                    ПРИВЯЗАННОСТИ
+                            </div>
+                            <div class="three flaws">
+                                {{form.flaws}}
+                                    СЛАБОСТИ
+                            </div>
+                        </div>
+                        <div class="features">
+                            {{form.features}}
+                                    ОСОБЕННОСТИ
+                        </div>
+                    </div>
+                </div>
+            </form>
+</body>
+</html>

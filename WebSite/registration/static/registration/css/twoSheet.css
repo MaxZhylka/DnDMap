@@ -1,0 +1,102 @@
+.staticstiq
+{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.armor
+{
+    width: 80px;
+    height: 80px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}
+#shield-image
+{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.arinsp
+{
+    justify-content: space-around;
+    display: flex;
+    width: 296px;
+}
+.maxhit
+{
+    display: flex;
+    width: 273px;
+}
+.initiative
+{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.initIndex
+{
+    margin-left: 5px;
+    width: 76px;
+    height: 76px;
+    border-radius: 20px;
+    border: 2px solid black;
+    font-size: 50px;
+    outline: none;
+}
+.initIndextext
+{
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 50px;
+    outline: none;
+}
+.currenhit
+{
+    padding: 5px;
+    width: 282px;
+   border-radius: 20px;
+    border: 2px solid black;
+}
+.speedIndexa
+{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    border: 2px solid black;
+    font-size: 50px;
+    outline: none;
+}
+.speedIndex{
+    margin-left: 4px;
+    width: 80px;
+    height: 80px;
+}
+.speed
+{
+    width: 88px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.temporalhit
+{
+    border-radius: 20px;
+    border: 2px solid black;
+}
+.vsego
+{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+}
+

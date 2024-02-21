@@ -1,0 +1,188 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""  />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+<script src="{%static 'map/js/RGBDistance.js'%}"></script>
+<script src="{%static 'map/js/ShortestWay.js'%}"></script>
+    <script>var Cities = [];
+
+// Цикл для обхода массива cities и добавления каждого значения в Cities
+{% for el in cities %}
+    Cities.push(["{{ el.coordinates }}", "{{ el.name }}", "{{ el.icon.url }}"]);
+{% endfor %}
+      let Road=[];
+    {% for el in roads %}
+    Road.push(["{{ el.coordinates }}", "{{ el.name }}"]);
+    {% endfor %}
+</script>
+
+<style>
+    #map{
+        width: 100%;
+        height: 100vh;
+    }
+</style>
+</head>
+<body>
+<div id="map">
+</div>
+
+</body>
+</html>
+<script>
+
+    var map = L.map('map', {
+    crs: L.CRS.Simple} );
+    var bounds = [[0,0], [1061,1587]];
+    var image = L.imageOverlay("{% static 'map/img/Test2.jpg'%}" , bounds).addTo(map);
+    map.fitBounds(bounds);
+    map.setMaxBounds(bounds);
+    map.maxBounds = bounds;
+    map.maxBoundsViscosity=1000.0;
+    map.setMaxZoom(5);
+    map.setMinZoom(1);
+    map.setView([0, 0], 1);
+
+
+
+
+    var wheelIcon = L.icon({
+    iconUrl: 0,
+    iconSize:     [35, 45],
+    iconAnchor:   [17.5, 45],
+    popupAnchor:  [-3, -46]
+});
+       function CreateAndDrawCities(Cities, wheelIcon) {
+    for (let el of Cities) {
+        wheelIcon.options.iconUrl =el[2];
+        let str = el[0];
+        var numbers = str.split(',').map(function(item) { return parseFloat(item.trim()); });
+
+        L.marker(numbers, {icon: wheelIcon}).addTo(map).bindPopup(el[1]);
+    }
+}
+
+
+
+    CreateAndDrawCities(Cities,wheelIcon);
+var Roads=[];
+function  CreateAndDrawRoads(Road,Roads)
+{
+    for(let el of Road)
+    {
+        var coordinates= JSON.parse(el[0]);
+        //console.log(coordinates);
+        var road={
+            "type": "LineString",
+            "coordinates": coordinates
+
+        }
+        Roads.push(road);
+        L.geoJSON(road).addTo(map);
+    }
+}
+CreateAndDrawRoads(Road,Roads);
+
+    let coordinatesArray=[];
+
+//Считывание координат с точки по лкм
+
+// map.eachLayer(function(layer) {
+//     if (layer instanceof L.Marker) {
+//         layer.on('click', function(e) {
+//             var latlng = e.latlng; //
+//
+//             coordinatesArray.push([latlng.lng, latlng.lat]);
+//             console.log(JSON.stringify(coordinatesArray));
+//         });
+//     }
+// });
+    // map.on('click', function(e) {
+//     var latlng = e.latlng; // Получаем координаты клика на карте
+//     // Округляем координаты до 4 знаков после запятой и добавляем их в массив
+//     coordinatesArray.push([latlng.lng, latlng.lat]);
+//     console.log(JSON.stringify(coordinatesArray));
+// });
+//
+// map.on('contextmenu', function(e) {
+//     var latlng = e.latlng; // Получаем координаты клика на карте
+//     var roundedLat = latlng.lat.toFixed(4); // Округляем широту
+//     var roundedLng = latlng.lng.toFixed(4); // Округляем долготу
+//     var roundedCoords = [roundedLat, roundedLng]; // Формируем массив округленных координат
+//     // Добавляем округленные координаты клика на карту в массив или делаем с ними что-то другое
+//     alert(roundedCoords); // Выводим округленные координаты в виде всплывающего сообщения
+// });
+
+
+   // var start = [[833.7813, 231.2500],[676, 345],[724.0000, 419.7500],[874.7500, 250.8125],[836.1875, 334.8750],[690.1100,431.3806],[703.1875, 447.8125],[698.6250,  467.1875]];
+    //var end = [[833.7813, 231.2500],[676, 345],[724.0000, 419.7500],[874.7500, 250.8125],[836.1875, 334.8750],[690.1100,431.3806],[703.1875, 447.8125],[698.6250,  467.1875]];
+      const Road99 = new ShortestWay(Roads,0,0);
+
+map.eachLayer(function(layer) {
+    if (layer instanceof L.Marker) {
+        layer.on('click', function(e) {
+            var lat = e.latlng.lat; // Получаем широту точки
+            var lng = e.latlng.lng; // Получаем долготу точки
+
+            coordinatesArray.push([lng, lat]); // Добавляем координаты в массив
+
+            console.log(JSON.stringify(coordinatesArray)); // Выводим массив в консоль
+
+            if (coordinatesArray.length === 2) {
+                Road99.start = Road99.pointCoordinatesSwap(coordinatesArray[0]); // Устанавливаем начальную точку
+                Road99.end = Road99.pointCoordinatesSwap(coordinatesArray[1]);  // Устанавливаем конечную точку
+                console.log(Road99.GetShortestRoad()); // Выводим кратчайший путь в консоль
+                Road99.RedRoad(); // Отображаем кратчайший путь на карте
+                coordinatesArray.length = 0; // Очищаем массив координат
+            }
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+    function test(start,end)
+    {
+        for(let el1 of start)
+        {
+            for(let el2 of end)
+            {
+                if(el1[0] == el2[0])
+                {
+                    continue;
+                }
+                else
+                {
+                    Road99.SetEnd(el2);
+                    Road99.SetStart(el1);
+                    console.log(Road99.GetShortestRoad());
+                }
+            }
+        }
+    }
+    // test(start,end,Roads);\
+    // Road99.RedRoad();
+    // console.log(Road99.GetShortestRoad());
+
+
+
+</script>

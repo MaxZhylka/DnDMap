@@ -1,0 +1,24 @@
+.personal
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 296px;
+}
+.three
+{
+    margin-bottom: 5px;
+    padding: 2px;
+    width: 296px;
+    height: 110px;
+    border-radius: 10px;
+    border: 2px solid black;
+    outline: none;
+}
+.features
+{
+    padding: 2px;
+    width: 296px;
+    border-radius: 10px;
+    border: 2px solid black;
+    outline: none;
+}
