@@ -14,6 +14,7 @@
 <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
 <script src="{%static 'map/js/RGBDistance.js'%}"></script>
 <script src="{%static 'map/js/ShortestWay.js'%}"></script>
+<link rel="stylesheet" href="{% static 'map/css/header.css' %}" >
     <script>var Cities = [];
 
 // Цикл для обхода массива cities и добавления каждого значения в Cities
@@ -24,25 +25,65 @@
     {% for el in roads %}
     Road.push(["{{ el.coordinates }}", "{{ el.name }}"]);
     {% endfor %}
+    var Characters=[];
+    Characters.push();
 </script>
 
-<style>
-    #map{
-        width: 100%;
-        height: 100vh;
-    }
-</style>
+
 </head>
+
 <body>
-<div id="map">
-</div>
+
+    <header class="Header">
+        <div class="search-form">
+        <input type="text" id="search-box" class="search-form_txt" placeholder="Введите название"  oninput="suggestCities()" >
+
+          <button class="search-form-btn">
+              <img class="search-form_image" src="{%static 'map/img/search.png' %}" alt="image">
+          </button>
+
+        </div>
+         <div id="suggestions" class="suggestions"></div>
+    </header>
+
+
+<div id="map"></div>
 
 </body>
 </html>
 <script>
+   function suggestCities() {
+    var input = document.getElementById('search-box').value.toLowerCase(); // Получаем текущий ввод пользователя
+    var suggestionsPanel = document.getElementById('suggestions');
+    suggestionsPanel.innerHTML = ''; // Очищаем предыдущие предложения
 
+    if (input.length > 0) {
+        // Фильтруем массив Cities, чтобы найти соответствующие названия городов
+        var filteredCities = Cities.filter(function(city) {
+            return city[1].toLowerCase().startsWith(input);
+        });
+
+        // Создаем предложения для каждого отфильтрованного города
+        filteredCities.forEach(function(city) {
+            var div = document.createElement('div');
+            div.innerHTML = city[1]; // Используем второй элемент массива для названия города
+            div.onclick = function() {
+                document.getElementById('search-box').value = city[1]; // Заполняем поле ввода выбранным названием города
+                suggestionsPanel.innerHTML = ''; // Очищаем предложения
+                // Здесь можно добавить вызов функции для фокусировки карты на маркере, например:
+                focusOnMarker(city[0]); // Предполагается, что функция focusOnMarker будет определена для обработки фокусировки карты
+            };
+            suggestionsPanel.appendChild(div);
+        });
+    }
+}
+
+function focusOnMarker(coordinatesStr) {
+    var coordinates = coordinatesStr.split(',').map(function(item) { return parseFloat(item.trim()); });
+    map.setView(coordinates, 7);
+}
     var map = L.map('map', {
-    crs: L.CRS.Simple} );
+    crs: L.CRS.Simple, zoomControl: false, attributionControl:false}, );
     var bounds = [[0,0], [1061,1587]];
     var image = L.imageOverlay("{% static 'map/img/Test2.jpg'%}" , bounds).addTo(map);
     map.fitBounds(bounds);
@@ -148,41 +189,6 @@ map.eachLayer(function(layer) {
         });
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-    function test(start,end)
-    {
-        for(let el1 of start)
-        {
-            for(let el2 of end)
-            {
-                if(el1[0] == el2[0])
-                {
-                    continue;
-                }
-                else
-                {
-                    Road99.SetEnd(el2);
-                    Road99.SetStart(el1);
-                    console.log(Road99.GetShortestRoad());
-                }
-            }
-        }
-    }
-    // test(start,end,Roads);\
-    // Road99.RedRoad();
-    // console.log(Road99.GetShortestRoad());
-
 
 
 </script>
