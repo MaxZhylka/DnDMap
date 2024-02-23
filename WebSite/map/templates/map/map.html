@@ -20,13 +20,16 @@
 // Цикл для обхода массива cities и добавления каждого значения в Cities
 {% for el in cities %}
     Cities.push(["{{ el.coordinates }}", "{{ el.name }}", "{{ el.icon.url }}"]);
-{% endfor %}
+    {% endfor %}
       let Road=[];
     {% for el in roads %}
     Road.push(["{{ el.coordinates }}", "{{ el.name }}"]);
     {% endfor %}
     var Characters=[];
-    Characters.push();
+    {% for el in characters %}
+     Characters.push("{{ el.name }}","{{ el.location }}");
+    {%  endfor%}
+
 </script>
 
 
@@ -36,9 +39,9 @@
 
     <header class="Header">
         <div class="search-form">
-        <input type="text" id="search-box" class="search-form_txt" placeholder="Введите название"  oninput="suggestCities()" >
+        <input type="text" id="search-box" class="search-form_txt" placeholder="Введите название"  oninput="suggestCities()" on="moveToCity()" >
 
-          <button class="search-form-btn">
+          <button class="search-form-btn" onclick="moveToCity()">
               <img class="search-form_image" src="{%static 'map/img/search.png' %}" alt="image">
           </button>
 
@@ -52,6 +55,27 @@
 </body>
 </html>
 <script>
+
+    document.getElementById('search-box').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        moveToCity();
+    }
+});
+
+    function moveToCity() {
+    var input = document.getElementById('search-box').value.trim().toLowerCase(); // Получаем текущий ввод пользователя
+    var cityFound = Cities.find(function(city) {
+        return city[1].toLowerCase() === input;
+    });
+
+    if (cityFound) {
+        var coordinates = cityFound[0].split(',').map(function(item) { return parseFloat(item.trim()); });
+        map.flyTo(coordinates, 4);
+    } else {
+        console.log("Город не найден.");
+    }
+}
+
    function suggestCities() {
     var input = document.getElementById('search-box').value.toLowerCase(); // Получаем текущий ввод пользователя
     var suggestionsPanel = document.getElementById('suggestions');
@@ -80,7 +104,8 @@
 
 function focusOnMarker(coordinatesStr) {
     var coordinates = coordinatesStr.split(',').map(function(item) { return parseFloat(item.trim()); });
-    map.setView(coordinates, 7);
+
+    map.flyTo(coordinates, 4);
 }
     var map = L.map('map', {
     crs: L.CRS.Simple, zoomControl: false, attributionControl:false}, );
@@ -93,7 +118,6 @@ function focusOnMarker(coordinatesStr) {
     map.setMaxZoom(5);
     map.setMinZoom(1);
     map.setView([0, 0], 1);
-
 
 
 
@@ -129,7 +153,9 @@ function  CreateAndDrawRoads(Road,Roads)
 
         }
         Roads.push(road);
-        L.geoJSON(road).addTo(map);
+        L.geoJSON(road, {style: function (feature) {return {color: '#808080',weight: 5};
+                    }
+                }).addTo(map);
     }
 }
 CreateAndDrawRoads(Road,Roads);
