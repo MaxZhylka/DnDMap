@@ -15,10 +15,10 @@
 <script src="{%static 'map/js/RGBDistance.js'%}"></script>
 <script src="{%static 'map/js/ShortestWay.js'%}"></script>
 <link rel="stylesheet" href="{% static 'map/css/header.css' %}" >
-    <script>var Cities = [];
-
-// Цикл для обхода массива cities и добавления каждого значения в Cities
-{% for el in cities %}
+    <script>
+    // Добавления данных из bd в переменные
+    var Cities = [];
+    {% for el in cities %}
     Cities.push(["{{ el.coordinates }}", "{{ el.name }}", "{{ el.icon.url }}"]);
     {% endfor %}
       let Road=[];
@@ -29,7 +29,11 @@
     {% for el in characters %}
      Characters.push("{{ el.name }}","{{ el.location }}");
     {%  endfor%}
-
+    var News=[];
+    {% for el in news%}
+    News.push( {mainHeader: "{{el.Header}}", secondaryHeader: "{{el.Header2}}",mainText:"{{el.Body}}", secondaryText:"{{el.Body2}}",
+        mainImage:"{{ el.GeneralImage }}",   secondaryImage:"{{el.SecondaryImage}}",date: "{{ el.date}}"})
+    {% endfor %}
 </script>
 
 
@@ -38,6 +42,9 @@
 <body>
 
     <header class="Header">
+        <button class="News-btn" onclick="togglePanel()">
+            <img class="News-img" src="{%static 'map/img/news.png' %}" alt="News">
+        </button>
         <div class="search-form">
         <input type="text" id="search-box" class="search-form_txt" placeholder="Введите название"  oninput="suggestCities()" on="moveToCity()" >
 
@@ -50,11 +57,34 @@
     </header>
 
 
-<div id="map"></div>
+    <aside id="panel" class="news-panel"></aside>
+    <div id="map"></div>
 
 </body>
 </html>
 <script>
+
+document.addEventListener('click', function(event) {
+    var panel = document.getElementById('panel');
+    var targetElement = event.target; // Элемент, на который был произведен клик
+
+    console.log(targetElement);
+    // Проверяем, произошел ли клик вне панели и кнопки открытия панели
+    if (!panel.contains(targetElement) && targetElement.className !== 'News-btn'&& targetElement.className !== 'News-img') {
+        panel.style.left = '-25%'; // Закрываем панель
+    }
+});
+    function togglePanel() {
+    var panel = document.getElementById('panel');
+    let temp = String(panel.style.left);
+    if ( panel.style.left!=='0px') {
+        panel.style.left = '0';
+    }
+
+    else {
+        panel.style.left = '-25%';
+    }
+}
 
     document.getElementById('search-box').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
