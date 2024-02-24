@@ -167,3 +167,15 @@
     justify-content: space-around;
     text-align: center;
 }
+.atack-wrapper {
+    margin-left: -1px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box; /* новое */
+}
+.InputFieldStyle
+{
+    width: 97px;
+}

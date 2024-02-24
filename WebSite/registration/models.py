@@ -81,7 +81,7 @@ class Character(models.Model):
     eyeColor = models.IntegerField('Глаза',default='  ')
     skinColor = models.IntegerField('Кожа',default='  ')
     hairColor = models.IntegerField('Волосы',default='  ')
-    appearance = models.ImageField('Картинка',default='')
+    appearance = models.ImageField('Изображение',upload_to='registration/photo/',default='')
     allies = models.TextField('Союзники и Организации',default='')
     backstory = models.TextField('Предыстория персонажа',default='')
     additionalfeatures = models.TextField('Дополнительные способности и умения',default='')

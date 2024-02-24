@@ -444,4 +444,59 @@ $(function() {
     $('#animalHandling-button').click(function() {
         handleSavingThrowClick("animalHandling", "animalHandling-image", "animalHandling", AhIndex)
     });
+    $('#plus-button').click(function () {
+        AttackAndSpells.push(new AttackFormul("","",""));
+        var MarginIndex = 10*SpellCounter+15;
+        var oneSpell= document.createElement("div");
+        oneSpell.style.backgroundColor = '#00000';
+        for(var i=0;i<3;i++)
+        {
+            var InputField=document.createElement("input");
+            InputField.className ='InputFieldStyle';
+            InputField.id ='InputField';
+            oneSpell.appendChild(InputField);
+            AllInputFields.push(InputField);
+        }
+        AttackAndSpellsInputFields.push(oneSpell);
+        SpellCounter++;
+        var InputSpellContainer = document.getElementById('attackContainer');
+        InputSpellContainer.appendChild(oneSpell);
+        console.log(AttackAndSpells);
+    });
+    $('#minus-button').click(function () {
+        if (AttackAndSpellsInputFields.length > 0) {
+        var removedSpell = AttackAndSpellsInputFields.pop();
+        AttackAndSpells.pop();
+        for(let i = 0;i<3;i++){
+            AllInputFields.pop();
+        }
+        removedSpell.remove(); // Remove the spell from the DOM
+        SpellCounter--; // Decrement the counter
+        }
+    });
+    $('[name="name"]').on('input', function() {
+        var secName = parseInt($(this).val());
+        $('.secondNameText').text(secName);
+    });
+    $("#character-image").on("click", function() {$("#id_appearance").click();});
+    $("#id_appearance").on("change", function() {
+    var input = this;
+    if (input.files && input.files[0]) {
+        if (input.files[0].size > 3000000) {
+        alert("Размер файла превышает 3 МБайта. Выберите файл меньшего размера.");
+        this.value = ""; // Очищаем поле ввода, чтобы пользователь мог выбрать другой файл
+        return;
+      }
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        // Обновляем атрибут src изображения
+        $("#character-image").attr("src", e.target.result);
+        $("#appearance").val(input.files[0].name);
+      };
+
+      // Читаем выбранный файл как Data URL
+      reader.readAsDataURL(input.files[0]);
+    }
+  });
 });

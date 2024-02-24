@@ -12,8 +12,17 @@
     <link rel="stylesheet" href="{%static 'registration/css/templates.css'%}">
     <link rel="stylesheet" href="{%static 'registration/css/threeSheet.css'%}">
     <link rel="stylesheet" href="{%static 'registration/css/twoSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/oneSecondSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/twoSecondSheet.css'%}">
     <script src="{%static 'registration/js/jquery-3.7.1.min.js'%}"></script>
     <script src="{%static 'registration/js/event.js'%}"></script>
+    <script src="{%static 'registration/js/atackformul.js'%}"></script>
+    <script>
+        let AttackAndSpells=[];
+        let AttackAndSpellsInputFields=[];
+        let SpellCounter=0;
+        let AllInputFields=[];
+    </script>
 
     <style>
           label
@@ -462,7 +471,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="atack"></div>
+                        <div class="atack">
+                            <div class="atackBox">
+                                <div class="atack-wrapper plus-wrapper">
+                                        <button type="button" id="plus-button">+</button>
+                                </div>
+                                <div class="atack-wrapper minus-wrapper">
+                                        <button type="button" id="minus-button">-</button>
+                                </div>
+                                <div class="attackContainer" id="attackContainer">
+                                </div>
+                            </div>
+                        </div>
                         <div class="equipment">
                             <div class="coins">
                                 <div class="coin platinum">{{ form.platinum }}<br>ПМ</div>
@@ -478,9 +498,7 @@
                         <div class="personal">
                             <div class="three personalTraits">
                                 {{form.personalTraits}}
-                                <div id="article personalTraitsText">
                                     ЧЕРТЫ ХАРАКТЕРА
-                                </div>
                             </div>
                             <div class="three ideals">
                                 {{form.ideals}}
@@ -501,6 +519,68 @@
                         </div>
                     </div>
                 </div>
+                <div class="headSheet">
+                        <div class="leftHeadSheet">
+                        <div class="secondName">
+                            <div class="nameText secondNameText"></div>
+                            <label>ИМЯ ПЕРСОНАЖА</label>
+                        </div>
+                    </div>
+                        <div class="rightHeadSheet">
+                        <div class="headContent age">
+                            {{ form.age }}
+                            <label>ВОЗРАСТ</label>
+                        </div>
+                        <div class="headContent height">
+                            {{ form.height }}
+                            <label>РОСТ</label>
+                        </div>
+                        <div class="headContent weight">
+                            {{ form.weight }}
+                            <label>ВЕС</label>
+                        </div>
+                        <div class="headContent eyeColor">
+                            {{ form.eyeColor }}
+                            <label>ГЛАЗА</label>
+                        </div>
+                        <div class="headContent skinColor">
+                            {{ form.skinColor }}
+                            <label>КОЖА</label>
+                        </div>
+                        <div class="headContent hairColor">
+                            {{ form.hairColor }}
+                            <label>ГЛАЗА</label>
+                        </div>
+
+                    </div>
+                    </div>
+                <div class="mainSheet">
+                        <div class="leftSheet">
+                            <div class="ImageBox">
+                                <img src="{% static 'registration/img/character.png' %}" alt="Image" id="character-image">
+                                <input type="file" name="appearance"  required id="id_appearance"  accept="image/*" size="3000000" style="display: none;">
+                            </div>
+                            <div class="fours backstory">
+                                {{ form.backstory }}
+                                ПРЕДЫСТОРИЯ
+                            </div>
+                    </div>
+                        <div class="rightSheet">
+                            <div class="fours allies">
+                                {{ form.allies }}
+                                СОЮЗНИКИ И ОРГАНИЗАЦИИ
+                            </div>
+                            <div class="fours additionalfeatures">
+                                {{ form.additionalfeatures }}
+                                ДОПОЛНИТЕЛЬНЫЕ СПОСОБНОСТИ И УМЕНИЯ
+                            </div>
+                            <div class="fours treasure">
+                                {{ form.treasure }}
+                                СОКРОВИЩА
+                            </div>
+                        </div>
+                    </div>
+
             </form>
 </body>
 </html>

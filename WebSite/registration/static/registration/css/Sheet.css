@@ -9,13 +9,14 @@ form{
     margin-top: 50px ;
 }
 .headSheet{
-    width: 890px;
+    width: 900px;
     height: 100px;
     display: flex;
     margin: auto;
 }
 .rightHeadSheet
 {
+    width: 66%;
     border-radius: 10px;
     border: 2px solid black;
     margin: auto;
@@ -25,13 +26,33 @@ form{
 }
 .leftHeadSheet
 {
+    width: 33%;
     padding: 5px;
     margin: auto;
     flex-basis: 33% ;
 }
+.leftSheet
+{
+    width: 33%;
+    height: 100%;
+    text-align: center;
+    font-size: 10px;
+    flex-wrap: wrap;
+}
+.rightSheet
+{
+    margin-left: 5px;
+    width: 66%;
+    height: 100%;
+    text-align: center;
+    font-size: 10px;
+    flex-wrap: wrap;
+}
 .mainSheet
 {
-    width: 1000px;
+    width: 900px;
+    height: 1100px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }

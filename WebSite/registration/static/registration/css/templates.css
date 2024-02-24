@@ -8,7 +8,7 @@ body {
     margin: 20px;
 }
 .headContent{
-   width: 210px;
+   width: 194.5px;
 }
 header {
     text-align: center;
@@ -23,7 +23,13 @@ section {
 }
 .test
 {
-    width: 210px;border: none; border-bottom: 1px solid black; display: block;outline: none;
+    width: 100%;
+border: none; border-bottom: 1px solid black; display: block;outline: none;
+}
+.nameText
+{
+
+    font-size:30px;width: 100%;border: none; border-bottom: 1px solid black; display: block;outline: none;
 }
 .per
 {
@@ -50,4 +56,17 @@ section {
     background: none;
     text-align: center;
     font-size: 50px;
+}
+.point
+{
+    width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;
+}
+.gold
+{
+   width: 50px;height: 40px; border-radius: 5px;border: 2px solid black;outline: none;text-align: center;font-size: 15px;
+}
+.secondеTrip
+{
+    min-width: 100%; max-width: 100%;min-height: 341px; max-height: 341px;
+    border: none; display: block;outline: none;background-color: transparent;
 }
