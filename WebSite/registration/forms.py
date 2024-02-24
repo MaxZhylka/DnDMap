@@ -4,7 +4,7 @@ from django import forms
 class CharacterForm(ModelForm):
     class Meta:
         model = Character
-        fields = ['name','characterClass','race','backstorys','сharacterPlayer','worldviews','experience','level','personalTraits','ideals','bonds','flaws','features','strength','dexterity','constitution','intelligence','wisdom','charisma','inspiration','strength_savingthrow','dexterity_savingthrow','constitution_savingthrow','intelligence_savingthrow','wisdom_savingthrow','charisma_savingthrow','acrobatic','athletics','perception','survival','performance','intimidation','history','sleightOfHand','arcane','medicine','deception','nature','insight','investigation','religion','stealth','persuasion','animalHandling','proficiencies','armourclass','speed','hitPoints','hitPointsMax','temporaryHitPoints','hitDice']
+        fields = ['name','characterClass','race','backstorys','сharacterPlayer','worldviews','experience','level','personalTraits','ideals','bonds','flaws','features','strength','dexterity','constitution','intelligence','wisdom','charisma','inspiration','strength_savingthrow','dexterity_savingthrow','constitution_savingthrow','intelligence_savingthrow','wisdom_savingthrow','charisma_savingthrow','acrobatic','athletics','perception','survival','performance','intimidation','history','sleightOfHand','arcane','medicine','deception','nature','insight','investigation','religion','stealth','persuasion','animalHandling','proficiencies','armourclass','speed','hitPoints','hitPointsMax','temporaryHitPoints','hitDice','equipment','platinum','electrum','golden','silver','copper']
 
         dice_choices = (
             (0, ''),
@@ -216,8 +216,32 @@ class CharacterForm(ModelForm):
             }),
             "temporaryHitPoints": NumberInput(attrs={
                 'id': 'temporaryHitPoints',
-                'style': 'width: 286px;height: 96px;border: none;outline: none;text-align: center;font-size: 50px;background-color: transparent;'
+                'style': 'width: 286px;height: 86px;border: none;outline: none;text-align: center;font-size: 50px;background-color: transparent;'
             }),
-            "hitDice":  forms.Select(attrs={'choices':'dice_choices','id': 'hitDice', 'style': 'width: 100px;height: 100px;border: none;outline: none;text-align: center;font-size: 20px;background-color: transparent;'})
-
+            "hitDice":  forms.Select(attrs={'choices':'dice_choices','id': 'hitDice', 'style': 'width: 75px;height: 50px;border: none;outline: none;text-align: center;font-size: 20px;background-color: transparent;'}),
+            "equipment": Textarea(attrs={
+                'id': 'equipment',
+                'style': 'min-width: 290px; max-width: 290px;min-height: 345px; max-height: 345px;'
+                         'border: none; display: block;outline: none;background-color: transparent;'
+            }),
+            "platinum": NumberInput(attrs={
+                'id': 'platinum',
+                'style': 'width: 50px;height: 40px; border-radius: 5px;border: 2px solid black;outline: none;text-align: center;font-size: 15px;'
+            }),
+            "electrum": NumberInput(attrs={
+                'id': 'electrum',
+                'style': 'width: 50px;height: 40px; border-radius: 5px;border: 2px solid black;outline: none;text-align: center;font-size: 15px;'
+            }),
+            "golden": NumberInput(attrs={
+                'id': 'golden',
+                'style': 'width: 50px;height: 40px; border-radius: 5px;border: 2px solid black;outline: none;text-align: center;font-size: 15px;'
+            }),
+            "silver": NumberInput(attrs={
+                'id': 'silver',
+                'style': 'width: 50px;height: 40px; border-radius: 5px;border: 2px solid black;outline: none;text-align: center;font-size: 15px;'
+            }),
+            "copper": NumberInput(attrs={
+                'id': 'copper',
+                'style': 'width: 50px;height: 40px; border-radius: 5px;border: 2px solid black;outline: none;text-align: center;font-size: 15px;'
+            }),
         }

@@ -42,10 +42,6 @@
                             {{ form.backstorys }}
                             <label>ПРЕДЫСТОРИЯ</label>
                         </div>
-                        <div class="headContent сharacterPlayer">
-                            {{ form.сharacterPlayer }}
-                            <label>ИМЯ ИГРОКА</label>
-                        </div>
                         <div class="headContent characterRace">
                             {{ form.race }}
                             <label>РАСА</label>
@@ -399,7 +395,7 @@
                     </div>
                     <div class="twomainSheet">
                         <div class="staticstiq">
-                            <div class="arinsp">
+                            <div class="otst arinsp">
                                 <div class="armor">
                                     {{ form.armourclass}}
                                     <img src="{% static 'registration/img/shcild.png' %}" id="shield-image">
@@ -407,7 +403,6 @@
 
                                 </div>
                                 <div class="initiative">
-
                                     <div class="initIndex">
                                         <div class="initIndextext">
                                             0
@@ -423,33 +418,61 @@
                                 </div>
                             </div>
                             <div class="health">
-                                <div class="currenhit">
+                                <div class="otst currenhit">
                                     <div class="maxhit">Максимум хитов {{ form.hitPointsMax}}</div>
                                     <div class="curhit">{{ form.hitPoints }}</div>
                                     ТЕКУЩИЕ ХИТЫ
                                 </div>
-                                <div class="temporalhit">
+                                <div class="otst temporalhit">
                                     <div class="tempHitIndex">{{ form.temporaryHitPoints }}</div>
                                     <div class="tempHitText">ВРЕМЕННЫЕ ХИТЫ</div>
                                 </div>
-                                <div class="diceanddeath">
+                                <div class="otst diceanddeath">
                                     <div class="dicechose">
                                         <div class="vsego">
                                             <div class="vsegoIndexText">
                                                 Всего Костей:
                                             </div>
                                             <div class="vsegoIndex">
-                                                0
+                                                1
                                             </div>
                                         </div>
                                         <div class="hitdiceindex">{{ form.hitDice }}</div>
                                         Кости Хитов
                                     </div>
+                                    <div class="deathsavingthrow">
+                                        <div class="secses">
+                                            <div class="secsestext">Успех:</div>
+                                            <div class="secsesindex">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="secses0-image" class="deathimage">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="secses1-image" class="deathimage">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="secses2-image" class="deathimage">
+                                            </div>
+                                        </div>
+                                        <div class="failer">
+                                            <div class="failertext">Провал:</div>
+                                            <div class="failerindex">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="failer0-image" class="deathimage">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="failer1-image" class="deathimage">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="failer2-image" class="deathimage">
+                                            </div>
+                                        </div>
+                                        <div class="savtext">Спасбросок от Смерти</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="atack"></div>
-                        <div class="equipment"></div>
+                        <div class="equipment">
+                            <div class="coins">
+                                <div class="coin platinum">{{ form.platinum }}<br>ПМ</div>
+                                <div class="coin electrum">{{ form.electrum }}<br>ЭМ</div>
+                                <div class="coin golden">{{ form.golden }}<br>ЗМ</div>
+                                <div class="coin silver">{{ form.silver }}<br>СМ</div>
+                                <div class="coin copper">{{ form.copper }}<br>ММ</div>
+                            </div>
+                            <div class="table">{{ form.equipment }}</div>
+                        </div>
                     </div>
                     <div class="threemainSheet">
                         <div class="personal">

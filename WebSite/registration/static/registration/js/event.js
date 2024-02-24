@@ -183,15 +183,15 @@ $(function() {
             }
             if (dexterityValue >= 12) {
                 $('.dexteritymodifier').text("+" + Math.floor((dexterityValue - 10) / 2));
-                $('.initIndex').text("+" + Math.floor((dexterityValue - 10) / 2));
+                $('.initIndextext').text("+" + Math.floor((dexterityValue - 10) / 2));
             } else if (dexterityValue <= 8) {
                 $('.dexteritymodifier').text(Math.floor((dexterityValue - 10) / 2));
-                $('.initIndex').text(Math.floor((dexterityValue - 10) / 2));
+                $('.initIndextext').text(Math.floor((dexterityValue - 10) / 2));
             } else {
                 $('.dexteritymodifier').text(Math.floor((dexterityValue - 10) / 2));
-                $('.initIndex').text(Math.floor((dexterityValue - 10) / 2));
+                $('.initIndextext').text(Math.floor((dexterityValue - 10) / 2));
             }
-            // if (dexterityValue == 30) {$('.initIndex').css('width', '140px');} else {$('.initIndex').css('width', '80px');}
+            if (dexterityValue == 30) {$('.initIndextext').css('font-size', '40');} else {$('.initIndex').css('font-size', '50px');}
         }
          DexIndex();
         AcrIndex();
@@ -307,6 +307,36 @@ $(function() {
 
         });
     });
+    $('#secses0-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#secses1-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#secses2-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#failer0-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#failer1-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#failer2-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
     $('#hitPoints').on('input', function() {
         var maxHitValue = parseInt($('#hitPointsMax').val());
         var currentHitValue = parseInt($(this).val());
@@ -326,6 +356,7 @@ $(function() {
             $(this).val(1);
             levelValue = 1;
         }
+        $('.vsegoIndex').text(levelValue);
         var proficiency = Math.floor(((levelValue - 1) / 4)) + 2;
         $('.profiency').text("+" + proficiency);
         StrIndex();
