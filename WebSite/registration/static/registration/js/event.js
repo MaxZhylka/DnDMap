@@ -444,36 +444,6 @@ $(function() {
     $('#animalHandling-button').click(function() {
         handleSavingThrowClick("animalHandling", "animalHandling-image", "animalHandling", AhIndex)
     });
-    $('#plus-button').click(function () {
-        AttackAndSpells.push(new AttackFormul("","",""));
-        var MarginIndex = 10*SpellCounter+15;
-        var oneSpell= document.createElement("div");
-        oneSpell.style.backgroundColor = '#00000';
-        for(var i=0;i<3;i++)
-        {
-            var InputField=document.createElement("input");
-            InputField.className ='InputFieldStyle';
-            InputField.id ='InputField';
-            oneSpell.appendChild(InputField);
-            AllInputFields.push(InputField);
-        }
-        AttackAndSpellsInputFields.push(oneSpell);
-        SpellCounter++;
-        var InputSpellContainer = document.getElementById('attackContainer');
-        InputSpellContainer.appendChild(oneSpell);
-        console.log(AttackAndSpells);
-    });
-    $('#minus-button').click(function () {
-        if (AttackAndSpellsInputFields.length > 0) {
-        var removedSpell = AttackAndSpellsInputFields.pop();
-        AttackAndSpells.pop();
-        for(let i = 0;i<3;i++){
-            AllInputFields.pop();
-        }
-        removedSpell.remove(); // Remove the spell from the DOM
-        SpellCounter--; // Decrement the counter
-        }
-    });
     $('[name="name"]').on('input', function() {
         var secName = parseInt($(this).val());
         $('.secondNameText').text(secName);
@@ -499,4 +469,64 @@ $(function() {
       reader.readAsDataURL(input.files[0]);
     }
   });
+    $('#plus-button').click(function () {
+    AttackAndSpells.push(new AttackFormul("","",""));
+    var MarginIndex = 10*SpellCounter+15;
+    var oneSpell= document.createElement("div");
+    oneSpell.style.backgroundColor = '#00000';
+    for(var i=0;i<3;i++)
+    {
+        var InputField=document.createElement("input");
+        InputField.className ='InputFieldStyle';
+        var inputFieldId = 'InputField' + i + '-' + SpellCounter; // Генерируем уникальный ID для каждого поля
+        InputField.id = inputFieldId;
+        InputField.addEventListener('change', function(event,) {
+            handleInputChange(event,InputField); // Передаем ID поля в функцию обработки изменений
+        });
+        oneSpell.appendChild(InputField);
+        AllInputFields.push(InputField);
+    }
+    AttackAndSpellsInputFields.push(oneSpell);
+    SpellCounter++;
+    var InputSpellContainer = document.getElementById('attackContainer');
+    InputSpellContainer.appendChild(oneSpell);
+    console.log(AttackAndSpells);
+});
+    $('#minus-button').click(function () {
+    if (AttackAndSpellsInputFields.length > 0) {
+        var removedSpell = AttackAndSpellsInputFields.pop();
+        AttackAndSpells.pop();
+        for(let i = 0;i<3;i++){
+            AllInputFields.pop();
+        }
+        removedSpell.remove(); // Remove the spell from the DOM
+        SpellCounter--; // Decrement the counter
+    }
+});
+    function handleInputChange(event,InputField) {
+    // Получаем значение, которое было изменено
+    var changedValue = event.target.value;
+    for (let i =0;i<AllInputFields.length;i++){
+
+        if (InputField==AllInputFields[i]){
+            var Index = Math.floor(i / 3);
+            alert(i)
+
+            if (i%3==1)
+            {
+                AttackAndSpells[Index].setName(changedValue);
+            }
+            alert(Index)
+            if (i%3==2)
+            {
+                AttackAndSpells[Index].setModifier(changedValue);
+            }
+            if (i%3==0)
+            {
+                AttackAndSpells[Index].setDamage(changedValue);
+            }
+        }
+    }
+
+}
 });
