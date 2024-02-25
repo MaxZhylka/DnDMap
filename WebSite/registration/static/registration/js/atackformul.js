@@ -8,6 +8,14 @@ this.checkprof=checkprof;
 this.modifier=modifier;
 this.damage=damage;
 }
+setCheckProf(checkprof)
+{
+    this.checkprof=checkprof;
+}
+setAtribut(atribut)
+{
+    this.atributmodifier=atribut;
+}
 setName(name){
     this.names=name;
 }

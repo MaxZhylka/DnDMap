@@ -524,20 +524,32 @@ $(function() {
     function handleInputChange(event,InputField) {
     var changedValue = event.target.value;
     for (let i =0;i<AllInputFields.length;i++){
-        if (InputField==AllInputFields[i]){
+
+        if (InputField.id===AllInputFields[i].id){
             var Index = Math.floor(i / 3);
-            if (i%3==0)
+
+            if(event.target.id=="profienc-checkbox")
             {
-                AttackAndSpells[Index].setName(changedValue);
+                AttackAndSpells[index].setCheckProf(changedValue);
             }
-            if (i%3==1)
+            if(event.target.id=="profienc-modifire")
             {
-                AttackAndSpells[Index].setModifier(changedValue);
+                     AttackAndSpells[Index].setModifier(changedValue);
             }
-            if (i%3==2)
+            if(event.target.id=="attackroll")
             {
                 AttackAndSpells[Index].setDamage(changedValue);
             }
+            if(event.target.id=="windowSelect")
+            {
+               AttackAndSpells[Index].setAtributmodifier(changedValue);
+            }
+            if(event.target.id=="attacknametext")
+            {
+                 AttackAndSpells[Index].setName(changedValue);
+            }
+
+
         }
     }
 
@@ -563,6 +575,11 @@ $(function() {
     function closeWindow(){
     var openPanel = document.getElementById('window');
     openPanel.style.opacity = '0'; // Устанавливаем прозрачность в 0
+         let InputFields = document.getElementsByClassName('winowtempl');
+    for (let i = 0; i < InputFields.length; i++) {
+        let inputField = InputFields[i];
+        inputField.removeEventListener('change', handleInputChange);
+    }
     setTimeout(function() {openPanel.style.display = 'none';}, 500);
 
     var backGround = document.getElementById('background');
@@ -576,7 +593,7 @@ $(function() {
     {
         var selectedValue = $('#windowSelect').val();
         if(selectedValue === '0') {
-            AttackAndSpells.push($('#profienc-modifire'));
+           // AttackAndSpells.push($('#profienc-modifire'));
         }
         else if(selectedValue === '1') {
             Index(AttackAndSpells,'strengthmodifier')
@@ -588,13 +605,13 @@ $(function() {
             Index(AttackAndSpells,'constitutionmodifier')
         }
         else if(selectedValue === '4') {
-            Index('AttackAndSpells','intelligencemodifier')
+            Index(AttackAndSpells,'intelligencemodifier')
         }
         else if(selectedValue === '5') {
-            Index('AttackAndSpells','wisdommodifier')
+            Index(AttackAndSpells,'wisdommodifier')
         }
         else if(selectedValue === '6') {
-            Index('AttackAndSpells','charismamodifier')
+            Index(AttackAndSpells,'charismamodifier')
         }
     }
     $('#background').click(function (){
