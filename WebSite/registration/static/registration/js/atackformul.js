@@ -1,8 +1,10 @@
 class AttackFormul
 {
-constructor(names,modifier,damage)
+constructor(names,atributmodifier,checkprof,modifier,damage)
 {
 this.names=names;
+this.atributmodifier=atributmodifier;
+this.checkprof=checkprof;
 this.modifier=modifier;
 this.damage=damage;
 }
@@ -14,6 +16,12 @@ setModifier(modifier){
 }
 setDamage(damage){
     this.damage=damage;
+}
+setAtributmodifier(atributmodifier){
+    this.atributmodifier=atributmodifier;
+}
+setCheckprof(checkprof){
+    this.checkprof=checkprof;
 }
 getName(){
     return this.names;

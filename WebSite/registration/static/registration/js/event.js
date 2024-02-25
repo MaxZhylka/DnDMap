@@ -1,4 +1,22 @@
 $(function() {
+    function Index(indexClass, modifierClass) {
+        var $savingthrowImage = $('#profienc-checkbox');
+        var isChecked = $savingthrowImage.data('checked');
+        var modifier = parseInt($('.' + modifierClass).text());
+        var profiency = parseInt($('.profiency').text());
+        var mid = parseInt($('#profienc-modifire').text());
+        var index = isChecked ?mid + modifier + profiency : mid + modifier;
+        if (index > 0) {
+            index = "+" + index;
+        }
+        if (index < 0) {
+            index = "" + index;
+        }
+        if (index == 0) {
+            index = "" + index;
+        }
+        indexClass +=index;
+    }
     function updateIndex(imageId, indexClass, modifierClass) {
         var $savingthrowImage = $('#' + imageId);
         var isChecked = $savingthrowImage.data('checked');
@@ -476,12 +494,12 @@ $(function() {
     oneSpell.style.backgroundColor = '#00000';
     for(var i=0;i<3;i++)
     {
-        var InputField=document.createElement("input");
+        let InputField=document.createElement("input");
         InputField.className ='InputFieldStyle';
         var inputFieldId = 'InputField' + i + '-' + SpellCounter; // Генерируем уникальный ID для каждого поля
         InputField.id = inputFieldId;
-        InputField.addEventListener('change', function(event,) {
-            handleInputChange(event,InputField); // Передаем ID поля в функцию обработки изменений
+        InputField.addEventListener('click', function(event,) {
+            openWindow(event);
         });
         oneSpell.appendChild(InputField);
         AllInputFields.push(InputField);
@@ -504,24 +522,19 @@ $(function() {
     }
 });
     function handleInputChange(event,InputField) {
-    // Получаем значение, которое было изменено
     var changedValue = event.target.value;
     for (let i =0;i<AllInputFields.length;i++){
-
         if (InputField==AllInputFields[i]){
             var Index = Math.floor(i / 3);
-            alert(i)
-
-            if (i%3==1)
+            if (i%3==0)
             {
                 AttackAndSpells[Index].setName(changedValue);
             }
-            alert(Index)
-            if (i%3==2)
+            if (i%3==1)
             {
                 AttackAndSpells[Index].setModifier(changedValue);
             }
-            if (i%3==0)
+            if (i%3==2)
             {
                 AttackAndSpells[Index].setDamage(changedValue);
             }
@@ -529,4 +542,78 @@ $(function() {
     }
 
 }
+    function openWindow(event){
+        let tartget = event.target;
+        var openPanel = document.getElementById('window');
+        openPanel.style.display = 'block';
+        setTimeout(function() {openPanel.style.opacity = '1';}, 100);
+        var backGround = document.getElementById('background');
+        backGround.style.display = 'block';
+        setTimeout(function() {backGround.style.opacity = '0.7';}, 100); // Добавляем небольшую задержку перед установкой прозрачности
+        let InputField = document.getElementsByClassName('winowtempl');
+        for (let i =0;i<4;i++)
+        {
+            InputField[i].addEventListener('change', function(event,) {
+            handleInputChange(event,tartget);
+        });
+        }
+
+
+    }
+    function closeWindow(){
+    var openPanel = document.getElementById('window');
+    openPanel.style.opacity = '0'; // Устанавливаем прозрачность в 0
+    setTimeout(function() {openPanel.style.display = 'none';}, 500);
+
+    var backGround = document.getElementById('background');
+    backGround.style.opacity = '0'; // Устанавливаем прозрачность в 0
+    setTimeout(function() {backGround.style.display = 'none';}, 500); }
+    $('#close-button').click(function (){
+    closeWindow();
+    modifirecalcutin();
+});
+    function modifirecalcutin()
+    {
+        var selectedValue = $('#windowSelect').val();
+        if(selectedValue === '0') {
+            AttackAndSpells.push($('#profienc-modifire'));
+        }
+        else if(selectedValue === '1') {
+            Index(AttackAndSpells,'strengthmodifier')
+        }
+        else if(selectedValue === '2') {
+            Index(AttackAndSpells,'dexteritymodifier')
+        }
+        else if(selectedValue === '3') {
+            Index(AttackAndSpells,'constitutionmodifier')
+        }
+        else if(selectedValue === '4') {
+            Index('AttackAndSpells','intelligencemodifier')
+        }
+        else if(selectedValue === '5') {
+            Index('AttackAndSpells','wisdommodifier')
+        }
+        else if(selectedValue === '6') {
+            Index('AttackAndSpells','charismamodifier')
+        }
+    }
+    $('#background').click(function (){
+    closeWindow();
+});
+    $('#windowSelect').change(function(){
+        var selectedValue = $(this).val();
+        if(selectedValue === '0') {
+            $('.windowSelector').css('width', '50%');
+            $('.profiencycheck').css('display','none');
+            $('.selectorandother').css('justify-content','left');
+            $('.modifire').css('width', '50%');
+
+
+        } else {
+            $('.windowSelector').css('width', '30%');
+            $('.profiencycheck').css('display','block');
+            $('.selectorandother').css('justify-content','space-around');
+            $('.modifire').css('width', '30%');
+        }
+    });
 });

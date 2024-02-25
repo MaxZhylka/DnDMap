@@ -1,0 +1,34 @@
+.window{
+    margin-bottom: 5%;
+    width: 50%;
+    height: 20%;
+    margin-left: 5%;
+}
+.winowtempl
+{
+    width: 100%;
+    height: 70%;
+    font-size: 40px;
+    text-align: center;
+    border: none;
+    border-bottom: 1px black solid;
+    display: block;
+    outline: none;
+}
+.selectorandother
+{
+    display: flex;
+}
+.profiencycheck
+{
+    display: none;
+}
+#profienc-checkbox
+{
+    width: 50%;
+    height: 50%;
+}
+#profienc-modifire
+{
+ width: 100%;
+}
