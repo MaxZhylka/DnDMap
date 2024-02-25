@@ -1,11 +1,43 @@
 $(function() {
-    function Index(indexClass, modifierClass) {
-        var $savingthrowImage = $('#profienc-checkbox');
-        var isChecked = $savingthrowImage.data('checked');
-        var modifier = parseInt($('.' + modifierClass).text());
+    function Index(modifierClass) {
+       var isChecked = modifierClass.getCheckProf();
+
+        var selectedValue = modifierClass.getAtribution();
+
+        let Type=0;
+        if(selectedValue === '0') {
+           // AttackAndSpells.push($('#profienc-modifire'));
+        }
+        else if(selectedValue === '1') {
+          Type='strengthmodifier';
+        }
+        else if(selectedValue === '2') {
+           Type='dexteritymodifier';
+        }
+        else if(selectedValue === '3') {
+           Type='constitutionmodifier';
+        }
+        else if(selectedValue === '4') {
+            Type='intelligencemodifier';
+        }
+        else if(selectedValue === '5') {
+           Type='wisdommodifier';
+        }
+        else if(selectedValue === '6') {
+            Type='charismamodifier';
+        }
+        var modifier = parseInt($('.' + Type).text());
         var profiency = parseInt($('.profiency').text());
-        var mid = parseInt($('#profienc-modifire').text());
-        var index = isChecked ?mid + modifier + profiency : mid + modifier;
+        var mid = parseInt(modifierClass.getModifier());
+        if(Type==0)
+        {
+            var index = isChecked ?mid  + profiency : mid;
+        }
+        else{
+             var index = isChecked ?mid + modifier + profiency : mid + modifier;
+        }
+
+
         if (index > 0) {
             index = "+" + index;
         }
@@ -15,11 +47,14 @@ $(function() {
         if (index == 0) {
             index = "" + index;
         }
-        indexClass +=index;
+
+        console.log(index);
+        return index;
     }
     function updateIndex(imageId, indexClass, modifierClass) {
         var $savingthrowImage = $('#' + imageId);
         var isChecked = $savingthrowImage.data('checked');
+        modifirecalcutin();
         var modifier = parseInt($('.' + modifierClass).text());
         var profiency = parseInt($('.profiency').text());
         var index = isChecked ?modifier + profiency : modifier;
@@ -528,9 +563,12 @@ $(function() {
         if (InputField.id===AllInputFields[i].id){
             var Index = Math.floor(i / 3);
 
+            console.log(changedValue);
             if(event.target.id=="profienc-checkbox")
             {
-                AttackAndSpells[index].setCheckProf(changedValue);
+
+                  let isChecked = event.target.checked;
+                AttackAndSpells[Index].setCheckProf(isChecked ? 1 : 0);
             }
             if(event.target.id=="profienc-modifire")
             {
@@ -555,7 +593,8 @@ $(function() {
 
 }
     function openWindow(event){
-        let tartget = event.target;
+        let target = event.target;
+        currentRow=target;
         var openPanel = document.getElementById('window');
         openPanel.style.display = 'block';
         setTimeout(function() {openPanel.style.opacity = '1';}, 100);
@@ -563,60 +602,79 @@ $(function() {
         backGround.style.display = 'block';
         setTimeout(function() {backGround.style.opacity = '0.7';}, 100); // Добавляем небольшую задержку перед установкой прозрачности
         let InputField = document.getElementsByClassName('winowtempl');
-        for (let i =0;i<4;i++)
+        for (let i =0;i<InputField.length;i++)
         {
             InputField[i].addEventListener('change', function(event,) {
-            handleInputChange(event,tartget);
+            handleInputChange(event,target);
         });
         }
 
 
     }
-    function closeWindow(){
-    var openPanel = document.getElementById('window');
-    openPanel.style.opacity = '0'; // Устанавливаем прозрачность в 0
+    function closeWindow()
+    {
+        var openPanel = document.getElementById('window');
+        openPanel.style.opacity = '0'; // Устанавливаем прозрачность в 0
          let InputFields = document.getElementsByClassName('winowtempl');
-    for (let i = 0; i < InputFields.length; i++) {
+        for (let i = 0; i < InputFields.length; i++) {
         let inputField = InputFields[i];
         inputField.removeEventListener('change', handleInputChange);
-    }
-    setTimeout(function() {openPanel.style.display = 'none';}, 500);
+        }
+        setTimeout(function() {openPanel.style.display = 'none';}, 500);
 
-    var backGround = document.getElementById('background');
-    backGround.style.opacity = '0'; // Устанавливаем прозрачность в 0
-    setTimeout(function() {backGround.style.display = 'none';}, 500); }
+        var backGround = document.getElementById('background');
+        backGround.style.opacity = '0'; // Устанавливаем прозрачность в 0
+        setTimeout(function() {backGround.style.display = 'none';}, 500);
+         modifirecalcutin();
+    }
+
+
+
+
     $('#close-button').click(function (){
     closeWindow();
-    modifirecalcutin();
+
 });
     function modifirecalcutin()
     {
-        var selectedValue = $('#windowSelect').val();
-        if(selectedValue === '0') {
-           // AttackAndSpells.push($('#profienc-modifire'));
+        for(let i=0;i<AllInputFields.length;i++)
+        {
+            if(AllInputFields[i]==currentRow)
+            {
+                if(i%3==0)
+                {
+                    AllInputFields[i].value=AttackAndSpells[Math.floor(i/3)].getName();
+                     AllInputFields[i+1].value=Index(AttackAndSpells[Math.floor(i/3)]);
+                     AllInputFields[i+2].value= AttackAndSpells[Math.floor(i/3)].getDamage();
+                }
+                if(i%3==1)
+                {
+                      AllInputFields[i-1].value=AttackAndSpells[Math.floor(i/3)].getName();
+                     AllInputFields[i].value=Index(AttackAndSpells[Math.floor(i/3)]);
+                     AllInputFields[i+1].value= AttackAndSpells[Math.floor(i/3)].getDamage();
+
+                }
+                 if(i%3==2)
+                 {
+                          AllInputFields[i-2].value=AttackAndSpells[Math.floor(i/3)].getName();
+                     AllInputFields[i-1].value=Index(AttackAndSpells[Math.floor(i/3)]);
+                     AllInputFields[i].value= AttackAndSpells[Math.floor(i/3)].getDamage();
+                 }
+            }
         }
-        else if(selectedValue === '1') {
-            Index(AttackAndSpells,'strengthmodifier')
-        }
-        else if(selectedValue === '2') {
-            Index(AttackAndSpells,'dexteritymodifier')
-        }
-        else if(selectedValue === '3') {
-            Index(AttackAndSpells,'constitutionmodifier')
-        }
-        else if(selectedValue === '4') {
-            Index(AttackAndSpells,'intelligencemodifier')
-        }
-        else if(selectedValue === '5') {
-            Index(AttackAndSpells,'wisdommodifier')
-        }
-        else if(selectedValue === '6') {
-            Index(AttackAndSpells,'charismamodifier')
-        }
+
     }
-    $('#background').click(function (){
-    closeWindow();
-});
+
+
+    $('#background').click(function ()
+    {
+        closeWindow();
+    });
+
+
+
+
+
     $('#windowSelect').change(function(){
         var selectedValue = $(this).val();
         if(selectedValue === '0') {

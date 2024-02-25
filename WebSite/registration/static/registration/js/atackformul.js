@@ -12,10 +12,8 @@ setCheckProf(checkprof)
 {
     this.checkprof=checkprof;
 }
-setAtribut(atribut)
-{
-    this.atributmodifier=atribut;
-}
+
+
 setName(name){
     this.names=name;
 }
@@ -28,9 +26,7 @@ setDamage(damage){
 setAtributmodifier(atributmodifier){
     this.atributmodifier=atributmodifier;
 }
-setCheckprof(checkprof){
-    this.checkprof=checkprof;
-}
+
 getName(){
     return this.names;
 }
@@ -39,6 +35,14 @@ getModifier(){
 }
 getDamage(){
     return this.damage;
+}
+getCheckProf()
+{
+    return this.checkprof;
+}
+getAtribution()
+{
+    return this.atributmodifier;
 }
 getAllData()
 {
