@@ -25,6 +25,7 @@
         let SpellCounter=0;
         let AllInputFields=[];
         let currentRow;
+        let InputFieldForListeners=[];
     </script>
 
     <style>
@@ -583,43 +584,7 @@
                             </div>
                         </div>
                     </div>
-                <div class="windows" id="window">
-                    <div class="close-button">
-                    <button type="button" id="close-button">x</button>
-                    </div>
-                    <div class="window attackName">
-                        <input type="text" class="winowtempl" id="attacknametext" maxlength="20"><br>
-                        <label>НАЗВАНИЕ</label>
-                    </div>
-                    <div class="selectorandother">
-                        <div class="window windowSelector">
-                            <select class="winowtempl" id="windowSelect">
-                                <option value="0">Без Характеристики</option>
-                                <option value="1">Сила</option>
-                                <option value="2">Ловкость</option>
-                                <option value="3">Телосложение</option>
-                                <option value="4">Интелект</option>
-                                <option value="5">Мудрость</option>
-                                <option value="6">Харизма</option>
-                            </select><br>
-                            <label>ХАРАКТЕРИСТИКА</label>
-                        </div>
-                        <div class="profiencycheck">
-                            <input id="profienc-checkbox" class="profienc-checkbox winowtempl" type="checkbox">
-                            <label>ВЛАДЕНИЕ</label>
-                        </div>
-                        <div class="window modifire">
-                            <input id="profienc-modifire" class="winowtempl" type="number"><br>
-                            <label>МОДИФИКАТОР</label>
-                        </div>
-                    </div>
-                    <div class="window attackRoll">
-                        <input type="text" class="winowtempl" id="attackroll" maxlength="20"><br>
-                        <label>УРОН</label>
-                    </div>
 
-                </div>
-                <div class="background" id="background"></div>
             </form>
 
 </body>
