@@ -523,7 +523,7 @@ $(function() {
     }
   });
     $('#plus-button').click(function () {
-    AttackAndSpells.push(new AttackFormul("","","",0,0));
+    AttackAndSpells.push(new AttackFormul("","",""));
     var MarginIndex = 10*SpellCounter+15;
     var oneSpell= document.createElement("div");
     oneSpell.style.backgroundColor = '#00000';
@@ -563,7 +563,7 @@ $(function() {
         if (InputField.id===AllInputFields[i].id){
             var Index = Math.floor(i / 3);
 
-
+            console.log(changedValue);
             if(event.target.id=="profienc-checkbox")
             {
 
@@ -592,177 +592,39 @@ $(function() {
     }
 
 }
-  function openWindow(event){
-    let target = event.target;
-    currentRow = target;
-
- // Создаем основной контейнер окна
-    const windowDiv = document.createElement('div');
-    windowDiv.className = 'windows';
-    windowDiv.id = 'window';
-
-    // Кнопка закрытия
-    const closeButtonDiv = document.createElement('div');
-    closeButtonDiv.className = 'close-button';
-    const closeButton = document.createElement('button');
-    closeButton.type = 'button';
-   closeButton.onclick = closeWindow;
-    closeButton.id = 'close-button';
-    closeButton.textContent = 'x';
-    closeButtonDiv.appendChild(closeButton);
-
-    // Секция для ввода названия
-    const attackNameDiv = document.createElement('div');
-    attackNameDiv.className = 'window attackName';
-    const attackNameInput = document.createElement('input');
-    attackNameInput.type = 'text';
-    attackNameInput.className = 'winowtempl';
-    attackNameInput.id = 'attacknametext';
-    attackNameInput.maxLength = 20;
-    const attackNameLabel = document.createElement('label');
-    attackNameLabel.textContent = 'НАЗВАНИЕ';
-    attackNameDiv.appendChild(attackNameInput);
-    attackNameDiv.appendChild(document.createElement('br'));
-    attackNameDiv.appendChild(attackNameLabel);
-
-    // Селектор характеристики и другие элементы
-    const selectorAndOtherDiv = document.createElement('div');
-    selectorAndOtherDiv.className = 'selectorandother';
-
-    const windowSelectorDiv = document.createElement('div');
-    windowSelectorDiv.className = 'window windowSelector';
-    const windowSelect = document.createElement('select');
-    windowSelect.className = 'winowtempl';
-    windowSelect.id = 'windowSelect';
-    const options = [
-        'Без Характеристики', 'Сила', 'Ловкость', 'Телосложение', 'Интелект', 'Мудрость', 'Харизма'
-    ];
-    options.forEach((optionText, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = optionText;
-        windowSelect.appendChild(option);
-    });
-    const windowSelectLabel = document.createElement('label');
-    windowSelectLabel.textContent = 'ХАРАКТЕРИСТИКА';
-    windowSelectorDiv.appendChild(windowSelect);
-    windowSelectorDiv.appendChild(document.createElement('br'));
-    windowSelectorDiv.appendChild(windowSelectLabel);
-
-    // Чекбокс владения
-    const profiencyCheckDiv = document.createElement('div');
-    profiencyCheckDiv.className = 'profiencycheck';
-    profiencyCheckDiv.id = 'checkbox-container';
-    const profiencyCheckbox = document.createElement('input');
-    profiencyCheckbox.type = 'checkbox';
-    profiencyCheckbox.className = 'profienc-checkbox winowtempl';
-    profiencyCheckbox.id = 'profienc-checkbox';
-    const profiencyLabel = document.createElement('label');
-    profiencyLabel.textContent = 'ВЛАДЕНИЕ';
-    profiencyCheckDiv.appendChild(profiencyCheckbox);
-    profiencyCheckDiv.appendChild(profiencyLabel);
-
-    // Модификатор
-    const modifireDiv = document.createElement('div');
-    modifireDiv.className = 'window modifire';
-    const modifireInput = document.createElement('input');
-    modifireInput.type = 'number';
-    modifireInput.className = 'winowtempl';
-    modifireInput.id = 'profienc-modifire';
-    modifireInput.value = 0;
-    const modifireLabel = document.createElement('label');
-    modifireLabel.textContent = 'МОДИФИКАТОР';
-    modifireDiv.appendChild(modifireInput);
-    modifireDiv.appendChild(document.createElement('br'));
-    modifireDiv.appendChild(modifireLabel);
-
-    // Собираем селектор и другие элементы
-    selectorAndOtherDiv.appendChild(windowSelectorDiv);
-    selectorAndOtherDiv.appendChild(profiencyCheckDiv);
-    selectorAndOtherDiv.appendChild(modifireDiv);
-
-    // Секция урона
-    const attackRollDiv = document.createElement('div');
-    attackRollDiv.className = 'window attackRoll';
-    const attackRollInput = document.createElement('input');
-    attackRollInput.type = 'text';
-    attackRollInput.className = 'winowtempl';
-    attackRollInput.id = 'attackroll';
-    attackRollInput.maxLength = 20;
-    const attackRollLabel = document.createElement('label');
-    attackRollLabel.textContent = 'УРОН';
-    attackRollDiv.appendChild(attackRollInput);
-    attackRollDiv.appendChild(document.createElement('br'));
-    attackRollDiv.appendChild(attackRollLabel);
-
-    // Собираем все элементы в основном контейнере
-    windowDiv.appendChild(closeButtonDiv);
-    windowDiv.appendChild(attackNameDiv);
-    windowDiv.appendChild(selectorAndOtherDiv);
-    windowDiv.appendChild(attackRollDiv);
-
-    // Фоновый слой
-    const backgroundDiv = document.createElement('div');
-    backgroundDiv.className = 'background';
-    backgroundDiv.id = 'background';
-   backgroundDiv.onclick = closeWindow;
-    // Добавляем основное окно и фон на страницу
-    document.body.appendChild(windowDiv);
-    document.body.appendChild(backgroundDiv);
-
- var openPanel = document.getElementById('window');
-    openPanel.style.display = 'block';
-    setTimeout(function() {openPanel.style.opacity = '1';}, 100);
-    var backGround = document.getElementById('background');
-    backGround.style.display = 'block';
-    setTimeout(function() {backGround.style.opacity = '0.7';}, 100);
-
-    // Добавление обработчиков событий к элементам с классом 'winowtempl'
-     InputFieldForListeners = document.getElementsByClassName('winowtempl');
-    for (let i = 0; i < InputFieldForListeners.length; i++) {
-        InputFieldForListeners[i].addEventListener('input', function(event) {
-            handleInputChange(event, target);
+    function openWindow(event){
+        let target = event.target;
+        currentRow=target;
+        var openPanel = document.getElementById('window');
+        openPanel.style.display = 'block';
+        setTimeout(function() {openPanel.style.opacity = '1';}, 100);
+        var backGround = document.getElementById('background');
+        backGround.style.display = 'block';
+        setTimeout(function() {backGround.style.opacity = '0.7';}, 100); // Добавляем небольшую задержку перед установкой прозрачности
+        let InputField = document.getElementsByClassName('winowtempl');
+        for (let i =0;i<InputField.length;i++)
+        {
+            InputField[i].addEventListener('change', function(event,) {
+            handleInputChange(event,target);
         });
+        }
+
+
     }
-}
+    function closeWindow()
+    {
+        var openPanel = document.getElementById('window');
+        openPanel.style.opacity = '0'; // Устанавливаем прозрачность в 0
+         let InputFields = document.getElementsByClassName('winowtempl');
+        for (let i = 0; i < InputFields.length; i++) {
+        let inputField = InputFields[i];
+        inputField.removeEventListener('change', handleInputChange);
+        }
+        setTimeout(function() {openPanel.style.display = 'none';}, 500);
 
-
-    function closeWindow() {
-    var openPanel = document.getElementById('window');
-
-  // Находим основное окно и фон по идентификатору
-    const windowDiv = document.getElementById('window');
-    const backgroundDiv = document.getElementById('background');
-
-
-  windowDiv.style.opacity = '0';
-
-
-  backgroundDiv.style.opacity = '0';
-
-
-
-  setTimeout(deleteWindow,200);
-
-
-
-
-
-
-
-
-        // $('#attackroll').val(0);
-        // $('#profienc-checkbox').prop('checked', false);
-        // document.getElementById('checkbox-container').style.display='none';
-        //     $('.windowSelector').css('width', '50%');
-        //     $('.profiencycheck').css('display','none');
-        //     $('.selectorandother').css('justify-content','left');
-        //     $('.modifire').css('width', '50%');
-        // $('#profienc-modifire').val(0);
-        // $('#windowSelect').val(0);
-        // $('#attacknametext').val(0);
-
-
+        var backGround = document.getElementById('background');
+        backGround.style.opacity = '0'; // Устанавливаем прозрачность в 0
+        setTimeout(function() {backGround.style.display = 'none';}, 500);
          modifirecalcutin();
     }
 
@@ -773,19 +635,6 @@ $(function() {
     closeWindow();
 
 });
-    function deleteWindow()
-    {
-         const windowDiv = document.getElementById('window');
-    const backgroundDiv = document.getElementById('background');
-  if (windowDiv) {
-        windowDiv.parentNode.removeChild(windowDiv);
-    }
-
-
-    if (backgroundDiv) {
-        backgroundDiv.parentNode.removeChild(backgroundDiv);
-    }
-    }
     function modifirecalcutin()
     {
         for(let i=0;i<AllInputFields.length;i++)
