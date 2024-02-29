@@ -14,10 +14,11 @@
 <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
 <script src="{%static 'map/js/RGBDistance.js'%}"></script>
 <script src="{%static 'map/js/ShortestWay.js'%}"></script>
+<script src="{% static 'map/js/functions.js' %}"></script>
 <link rel="stylesheet" href="{% static 'map/css/header.css' %}" >
     <script>
     // Добавления данных из bd в переменные
-    var Cities = [];
+    let Cities = [];
     {% for el in cities %}
     Cities.push(["{{ el.coordinates }}", "{{ el.name }}", "{{ el.icon.url }}"]);
     {% endfor %}
@@ -25,11 +26,11 @@
     {% for el in roads %}
     Road.push(["{{ el.coordinates }}", "{{ el.name }}"]);
     {% endfor %}
-    var Characters=[];
+    let Characters=[];
     {% for el in characters %}
      Characters.push("{{ el.name }}","{{ el.location }}");
     {%  endfor%}
-    var News=[];
+    let News=[];
     {% for el in news%}
     News.push( {mainHeader: "{{el.Header}}", secondaryHeader: "{{el.Header2}}",mainText:"{{el.Body}}", secondaryText:"{{el.Body2}}",
         mainImage:"{{ el.GeneralImage }}",   secondaryImage:"{{el.SecondaryImage}}",date: "{{ el.date}}"})
@@ -63,84 +64,36 @@
 </body>
 </html>
 <script>
+function addNews(News) {
+    let panel=  document.getElementById("panel");
+    let list =document.createElement("ul");
+    list.className="News_container";
+    let one_News;
+    let MainHeader;
+    let MainText;
+    let MainImage;
+    for (let el of News) {
+        one_News=document.createElement("li");
+        one_News.className="News_Style";
+        MainHeader=document.createElement("div");
+        MainHeader.className="Main_Header";
+        MainText=document.createElement("div");
+        MainText.className="Main_Text";
+        MainImage=document.createElement("Image");
+        MainImage.className=
 
-document.addEventListener('click', function(event) {
-    var panel = document.getElementById('panel');
-    var targetElement = event.target; // Элемент, на который был произведен клик
-
-    console.log(targetElement);
-    // Проверяем, произошел ли клик вне панели и кнопки открытия панели
-    if (!panel.contains(targetElement) && targetElement.className !== 'News-btn'&& targetElement.className !== 'News-img') {
-        panel.style.left = '-25%'; // Закрываем панель
-    }
-});
-    function togglePanel() {
-    var panel = document.getElementById('panel');
-    let temp = String(panel.style.left);
-    if ( panel.style.left!=='0px') {
-        panel.style.left = '0';
-    }
-
-    else {
-        panel.style.left = '-25%';
     }
 }
-
-    document.getElementById('search-box').addEventListener('keypress', function(event) {
+ document.getElementById('search-box').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         moveToCity();
     }
 });
 
-    function moveToCity() {
-    var input = document.getElementById('search-box').value.trim().toLowerCase(); // Получаем текущий ввод пользователя
-    var cityFound = Cities.find(function(city) {
-        return city[1].toLowerCase() === input;
-    });
-
-    if (cityFound) {
-        var coordinates = cityFound[0].split(',').map(function(item) { return parseFloat(item.trim()); });
-        map.flyTo(coordinates, 4);
-    } else {
-        console.log("Город не найден.");
-    }
-}
-
-   function suggestCities() {
-    var input = document.getElementById('search-box').value.toLowerCase(); // Получаем текущий ввод пользователя
-    var suggestionsPanel = document.getElementById('suggestions');
-    suggestionsPanel.innerHTML = ''; // Очищаем предыдущие предложения
-
-    if (input.length > 0) {
-        // Фильтруем массив Cities, чтобы найти соответствующие названия городов
-        var filteredCities = Cities.filter(function(city) {
-            return city[1].toLowerCase().startsWith(input);
-        });
-
-        // Создаем предложения для каждого отфильтрованного города
-        filteredCities.forEach(function(city) {
-            var div = document.createElement('div');
-            div.innerHTML = city[1]; // Используем второй элемент массива для названия города
-            div.onclick = function() {
-                document.getElementById('search-box').value = city[1]; // Заполняем поле ввода выбранным названием города
-                suggestionsPanel.innerHTML = ''; // Очищаем предложения
-                // Здесь можно добавить вызов функции для фокусировки карты на маркере, например:
-                focusOnMarker(city[0]); // Предполагается, что функция focusOnMarker будет определена для обработки фокусировки карты
-            };
-            suggestionsPanel.appendChild(div);
-        });
-    }
-}
-
-function focusOnMarker(coordinatesStr) {
-    var coordinates = coordinatesStr.split(',').map(function(item) { return parseFloat(item.trim()); });
-
-    map.flyTo(coordinates, 4);
-}
-    var map = L.map('map', {
+   let map = L.map('map', {
     crs: L.CRS.Simple, zoomControl: false, attributionControl:false}, );
-    var bounds = [[0,0], [1061,1587]];
-    var image = L.imageOverlay("{% static 'map/img/Test2.jpg'%}" , bounds).addTo(map);
+    let bounds = [[0,0], [1061,1587]];
+    let image = L.imageOverlay("{% static 'map/img/Test2.jpg'%}" , bounds).addTo(map);
     map.fitBounds(bounds);
     map.setMaxBounds(bounds);
     map.maxBounds = bounds;
@@ -151,85 +104,19 @@ function focusOnMarker(coordinatesStr) {
 
 
 
-    var wheelIcon = L.icon({
+    let wheelIcon = L.icon({
     iconUrl: 0,
     iconSize:     [35, 45],
     iconAnchor:   [17.5, 45],
     popupAnchor:  [-3, -46]
 });
-       function CreateAndDrawCities(Cities, wheelIcon) {
-    for (let el of Cities) {
-        wheelIcon.options.iconUrl =el[2];
-        let str = el[0];
-        var numbers = str.split(',').map(function(item) { return parseFloat(item.trim()); });
-
-        L.marker(numbers, {icon: wheelIcon}).addTo(map).bindPopup(el[1]);
-    }
-}
-
-
-
     CreateAndDrawCities(Cities,wheelIcon);
-var Roads=[];
-function  CreateAndDrawRoads(Road,Roads)
-{
-    for(let el of Road)
-    {
-        var coordinates= JSON.parse(el[0]);
-        //console.log(coordinates);
-        var road={
-            "type": "LineString",
-            "coordinates": coordinates
-
-        }
-        Roads.push(road);
-        L.geoJSON(road, {style: function (feature) {return {color: '#808080',weight: 5};
-                    }
-                }).addTo(map);
-    }
-}
-CreateAndDrawRoads(Road,Roads);
-
-    let coordinatesArray=[];
-
-//Считывание координат с точки по лкм
-
-// map.eachLayer(function(layer) {
-//     if (layer instanceof L.Marker) {
-//         layer.on('click', function(e) {
-//             var latlng = e.latlng; //
-//
-//             coordinatesArray.push([latlng.lng, latlng.lat]);
-//             console.log(JSON.stringify(coordinatesArray));
-//         });
-//     }
-// });
-    // map.on('click', function(e) {
-//     var latlng = e.latlng; // Получаем координаты клика на карте
-//     // Округляем координаты до 4 знаков после запятой и добавляем их в массив
-//     coordinatesArray.push([latlng.lng, latlng.lat]);
-//     console.log(JSON.stringify(coordinatesArray));
-// });
-//
-// map.on('contextmenu', function(e) {
-//     var latlng = e.latlng; // Получаем координаты клика на карте
-//     var roundedLat = latlng.lat.toFixed(4); // Округляем широту
-//     var roundedLng = latlng.lng.toFixed(4); // Округляем долготу
-//     var roundedCoords = [roundedLat, roundedLng]; // Формируем массив округленных координат
-//     // Добавляем округленные координаты клика на карту в массив или делаем с ними что-то другое
-//     alert(roundedCoords); // Выводим округленные координаты в виде всплывающего сообщения
-// });
-
-
-   // var start = [[833.7813, 231.2500],[676, 345],[724.0000, 419.7500],[874.7500, 250.8125],[836.1875, 334.8750],[690.1100,431.3806],[703.1875, 447.8125],[698.6250,  467.1875]];
-    //var end = [[833.7813, 231.2500],[676, 345],[724.0000, 419.7500],[874.7500, 250.8125],[836.1875, 334.8750],[690.1100,431.3806],[703.1875, 447.8125],[698.6250,  467.1875]];
-      const Road99 = new ShortestWay(Roads,0,0);
-
+let Roads=[];
 map.eachLayer(function(layer) {
     if (layer instanceof L.Marker) {
         layer.on('click', function(e) {
-            var lat = e.latlng.lat; // Получаем широту точки
-            var lng = e.latlng.lng; // Получаем долготу точки
+            let lat = e.latlng.lat; // Получаем широту точки
+            let lng = e.latlng.lng; // Получаем долготу точки
 
             coordinatesArray.push([lng, lat]); // Добавляем координаты в массив
 
@@ -245,6 +132,12 @@ map.eachLayer(function(layer) {
         });
     }
 });
+CreateAndDrawRoads(Road,Roads);
+
+ let coordinatesArray=[];
+ const Road99 = new ShortestWay(Roads,0,0);
+
+
 
 
 </script>
