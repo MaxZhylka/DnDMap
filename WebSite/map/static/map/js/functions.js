@@ -61,7 +61,8 @@ function OpenNews(el,News)
      Author.innerText="Автор: "+News[el].author;
      let Date=document.createElement("div");
      Date.className='Date';
-     Date.innerText=News[el].date;
+     let ParseDate= parseDate(News[el].date);
+     Date.innerText= ParseDate;
      authorAndTime.appendChild(Author);
      authorAndTime.appendChild(Date);
      //Задний фон
@@ -83,6 +84,24 @@ function CloseNews(el,BackGround) {
     el.style.display="none";
     BackGround.style.display="none";
 }
+function parseDate(str) {
+    const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+
+    const parts = str.split(' ');
+
+    const day = parseInt(parts[0], 10);
+    const monthIndex = months.indexOf(parts[1]) + 1;
+    const year = parseInt(parts[2], 10);
+
+
+    const monthString = monthIndex < 10 ? "0" + monthIndex : monthIndex;
+    const dayString = day < 10 ? "0" + day : day;
+
+    return `${dayString}.${monthString}.${year}`;
+}
+
+// Приклад використання
+console.log(parseDate("23 февраля 2024 г.")); // Виведе: "23.02.24"
 
 document.addEventListener('click', function(event) {
     let panel = document.getElementById('panel');
