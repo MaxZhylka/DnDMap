@@ -11,12 +11,65 @@
     }
 }
 
+function OpenNews(el,News)
+{
+ let index=el.id;
+ let FullNews= document.createElement("div");
+ FullNews.className="Full_News";
+ let FullNewsImage= document.createElement("img");
+ FullNewsImage.className="Full_News_Img";
+ if(News[index].secondaryImage==0)
+ {
+     FullNewsImage.src=News[index].mainImage.url;
+ }
+ else
+ {
+     FullNews.src=News[index].secondaryImage.url;
+ }
+ let HeaderText=document.createElement("div");
+ HeaderText.className="Full_Header";
+ if(News[index].secondaryHeader==0)
+ {
+      HeaderText.innerText=News[index].mainHeader;
+ }
+ else
+ {
+     HeaderText.innerText=News[index].secondaryHeader;
+ }
+let Text=document.createElement("div");
+ Text.className="Full_Text";
+ if(News[index].secondaryText==0)
+ {
+      Text.innerText=News[index].mainText;
+ }
+ else
+ {
+     Text.innerText=News[index].secondaryText;
+ }
+ let FullTextContainer= document.createElement("div");
+ FullTextContainer.className="Full_Flex_Container";
+ FullTextContainer.appendChild(HeaderText);
+ FullTextContainer.appendChild(Text);
+ FullNews.appendChild(FullNewsImage);
+ FullNews.appendChild(FullTextContainer);
+ let BackGround=document.createElement("div");
+ BackGround.className="BG_Style";
+ BackGround.addEventListener("click", function() {
+            CloseNews(el);
+});
+ let body=document.getElementById("body");
+ body.appendChild(BackGround);
+ body.appendChild(FullNews);
+
+}
+function CloseNews(el)
+{
+    el.style.display="none";
+}
 
 document.addEventListener('click', function(event) {
     let panel = document.getElementById('panel');
     let targetElement = event.target; // Элемент, на который был произведен клик
-
-    console.log(targetElement);
     // Проверяем, произошел ли клик вне панели и кнопки открытия панели
     if (!panel.contains(targetElement) && targetElement.className !== 'News-btn'&& targetElement.className !== 'News-img') {
         panel.style.left = '-480px'; // Закрываем панель
@@ -35,6 +88,7 @@ document.addEventListener('click', function(event) {
         console.log("Город не найден.");
     }
 }
+
 
    function suggestCities() {
     let input = document.getElementById('search-box').value.toLowerCase(); // Получаем текущий ввод пользователя
