@@ -34,7 +34,7 @@
     let News=[];
     {% for el in news%}
     News.push( {mainHeader: "{{el.Header}}", secondaryHeader: "{{el.Header2}}",mainText:"{{el.Body}}", secondaryText:"{{el.Body2}}",
-        mainImage:"{{ el.GeneralImage.url }}",   secondaryImage:"{{el.SecondaryImage}}",date: "{{ el.date}}"});
+        mainImage:"{{ el.GeneralImage.url }}",   secondaryImage:"{{el.SecondaryImage}}",date: "{{ el.date}}",author:"{{ el.Author }}"});
     {% endfor %}
 </script>
 
@@ -69,42 +69,47 @@ function addNews(News) {
     let panel=  document.getElementById("panel");
     let list =document.createElement("ul");
     list.className="News_container";
-    let one_News;
+
     let MainHeader;
     let MainText;
     let MainImage;
     let AllTextFields;
     let overlay;
     let counter=0;
-    for (let el of News) {
-        one_News=document.createElement("li");
-        one_News.className="News_Style";
-        one_News.id=counter;
-        MainHeader=document.createElement("div");
-        MainHeader.className="Main_Header";
-        MainHeader.innerText=el.mainHeader;
-        MainText=document.createElement("div");
-        MainText.className="Main_Text";
-        MainText.innerText=el.mainText;
-        MainImage=document.createElement("img");
-        MainImage.className="Main_News_Image";
-        MainImage.src=el.mainImage;
-        AllTextFields= document.createElement("div");
-        AllTextFields.className="News_Flex_Container";
-        overlay= document.createElement("div");
-        overlay.className="overlay";
-        AllTextFields.appendChild(MainHeader);
-        AllTextFields.appendChild(MainText);
-        one_News.appendChild(MainImage);
-        one_News.appendChild(AllTextFields);
-        one_News.appendChild(overlay);
-        list.appendChild(one_News);
-          one_News.addEventListener("click", function() {
-            OpenNews(one_News,News);
-        });
-        counter++;
+  for (let el of News) {
+    let one_News = document.createElement("li");
+    one_News.className = "News_Style";
+    one_News.id = counter;
+    MainHeader = document.createElement("div");
+    MainHeader.className = "Main_Header";
+    MainHeader.innerText = el.mainHeader;
+    MainText = document.createElement("div");
+    MainText.className = "Main_Text";
+    MainText.innerText = el.mainText;
+    MainImage = document.createElement("img");
+    MainImage.className = "Main_News_Image";
+    MainImage.src = el.mainImage;
+    AllTextFields = document.createElement("div");
+    AllTextFields.className = "News_Flex_Container";
+    overlay = document.createElement("div");
+    overlay.className = "overlay";
+    AllTextFields.appendChild(MainHeader);
+    AllTextFields.appendChild(MainText);
+    one_News.appendChild(MainImage);
+    one_News.appendChild(AllTextFields);
+    one_News.appendChild(overlay);
+    list.appendChild(one_News);
 
-    }
+    // Создаем область видимости для каждой итерации цикла
+    (function(id) {
+        one_News.addEventListener("click", function() {
+            OpenNews(id, News);
+        });
+    })(counter);
+
+    counter++;
+}
+
     panel.appendChild(list);
 }
 addNews(News);
