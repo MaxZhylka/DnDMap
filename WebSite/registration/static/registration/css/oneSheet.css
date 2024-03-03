@@ -1,6 +1,6 @@
 .abillitis
 {
-    width: 90px;
+    width: 30%;
     height: 675px;
 }
 .abilliti
@@ -29,7 +29,7 @@
 }
 .inspiration
 {
-    width: 200px;
+    width: 98%;
     height: 40px;
     display: flex;
     flex-wrap: wrap;
@@ -38,7 +38,7 @@
 }
 .functions
 {
-    width: 200px;
+    width: 70%;
     height: 675px;
 
 }
@@ -81,7 +81,7 @@
 }
 .profsheet
 {
-    width:200px;
+    width:98%;
     height:38px ;
     border-radius: 30px;
     border: 2px solid black;
@@ -158,11 +158,15 @@
 }
 .savingthrows
 {
-    width: 190px;
+    width: 93%;
     height: 130px;
     border-radius: 15px;
     border: 2px solid black;
     padding: 5px;
+}
+.other
+{
+    width: 100%;
 }
 .savingthrow
 {

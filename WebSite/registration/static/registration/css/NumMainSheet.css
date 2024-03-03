@@ -2,7 +2,16 @@
 {
     display: flex;
     width: 296px;
-    height: 900px;
+    height: 1070px;
+    text-align: center;
+    font-size: 10px;
+    flex-wrap: wrap;
+}
+.twomainSheet
+{
+    display: flex;
+    width: 296px;
+    height: 1070px;
     text-align: center;
     font-size: 10px;
     flex-wrap: wrap;
@@ -10,7 +19,7 @@
 .threemainSheet
 {
     width: 296px;
-    height: 900px;
+    height: 1070px;
     text-align: center;
     font-size: 10px;
 }

@@ -1,0 +1,18 @@
+.threeRightHeadSheet
+{
+    width: 66%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    justify-content: space-between;
+}
+.spell
+{
+    text-align: center;
+    width: 28%;
+}
+.labul
+{
+    font-size: 10px;
+}

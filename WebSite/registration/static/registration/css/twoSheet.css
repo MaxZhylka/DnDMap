@@ -29,6 +29,7 @@
 {
     display: flex;
     width: 273px;
+    font-size: 15px;
 }
 .initiative
 {
@@ -38,7 +39,7 @@
 }
 .initIndex
 {
-    margin-left: 5px;
+    margin-left: 3px;
     width: 76px;
     height: 76px;
     border-radius: 20px;
@@ -48,7 +49,11 @@
 }
 .initIndextext
 {
+    width: 80px;
+    height: 50px;
     margin-top: 10px;
+    margin-left: -1px;
+    margin-bottom: 20px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -89,8 +94,15 @@
 }
 .temporalhit
 {
+    width: 292px;
+    height: 106px;
     border-radius: 20px;
     border: 2px solid black;
+}
+.diceanddeath
+{
+    display: flex;
+    justify-content: space-around;
 }
 .vsego
 {
@@ -98,5 +110,114 @@
     align-items: center;
     text-align: center;
     display: flex;
+    font-size: 14px;
+    margin-top: 5px;
 }
+.dicechose
+{
+    border-radius: 20px;
+    border: 2px solid black;
+    width: 104px;
+    height: 104px;
+    font-size: 15px;
+}
+.deathimage
+{
+    width: 13px;
+    height: 13px;
+}
+.secses
+{
+      margin-top: 5px;
+}
+.failer
+{
+}
+.tempHitIndex
+{
+    height: 86px;
+}
+.deathsavingthrow
+{
+    width: 104px;
+    height: 104px;
+    border-radius: 20px;
+    border: 2px solid black;
 
+    align-items: center;
+    text-align: center;
+}
+.savtext
+{
+    font-size: 10px;
+}
+.otst
+{
+    margin-bottom: 5px;
+}
+.equipment
+{
+    height: 370px;
+    margin-top: 25px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+#plus-button
+{
+    width:25px;
+    height: 25px;
+}
+#minus-button
+{
+    width:25px;
+    height: 25px;
+}
+.atackBox
+{
+    display: flex;
+    justify-content: space-between;
+}
+#attackContainer
+{
+    justify-content: center;
+    width: 278px;
+    height: 128px;
+    overflow-y:auto;
+}
+#attackContainer::-webkit-scrollbar
+{
+    display: none;
+}
+.atackText
+{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 18px;
+}
+.coins
+{
+    margin-top: -20px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.atack
+{
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 5px;
+}
+.atack-wrapper {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box; /* новое */
+    align-content: center;
+    justify-content: center;
+}
+.InputFieldStyle
+{
+    width: 92px;
+}

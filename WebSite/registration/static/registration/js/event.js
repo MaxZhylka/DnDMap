@@ -1,7 +1,60 @@
 $(function() {
+    function Index(modifierClass) {
+       var isChecked = modifierClass.getCheckProf();
+
+        var selectedValue = modifierClass.getAtribution();
+
+        let Type=0;
+        if(selectedValue === '0') {
+           // AttackAndSpells.push($('#profienc-modifire'));
+        }
+        else if(selectedValue === '1') {
+          Type='strengthmodifier';
+        }
+        else if(selectedValue === '2') {
+           Type='dexteritymodifier';
+        }
+        else if(selectedValue === '3') {
+           Type='constitutionmodifier';
+        }
+        else if(selectedValue === '4') {
+            Type='intelligencemodifier';
+        }
+        else if(selectedValue === '5') {
+           Type='wisdommodifier';
+        }
+        else if(selectedValue === '6') {
+            Type='charismamodifier';
+        }
+        var modifier = parseInt($('.' + Type).text());
+        var profiency = parseInt($('.profiency').text());
+        var mid = parseInt(modifierClass.getModifier());
+        if(Type==0)
+        {
+            var index = isChecked ?mid  + profiency : mid;
+        }
+        else{
+             var index = isChecked ?mid + modifier + profiency : mid + modifier;
+        }
+
+
+        if (index > 0) {
+            index = "+" + index;
+        }
+        if (index < 0) {
+            index = "" + index;
+        }
+        if (index == 0) {
+            index = "" + index;
+        }
+
+        console.log(index);
+        return index;
+    }
     function updateIndex(imageId, indexClass, modifierClass) {
         var $savingthrowImage = $('#' + imageId);
         var isChecked = $savingthrowImage.data('checked');
+        modifirecalcutin();
         var modifier = parseInt($('.' + modifierClass).text());
         var profiency = parseInt($('.profiency').text());
         var index = isChecked ?modifier + profiency : modifier;
@@ -15,6 +68,22 @@ $(function() {
             index = "" + index;
         }
         $('.' + indexClass).text(index);
+    }
+
+    function midIndex(modifierClass){
+        $('.savingthrowequil').text(8 + (parseInt($('.' + modifierClass).text())) + (parseInt($('.profiency').text())))
+            $('.atackbonustext').text('+' + ((parseInt($('.' + modifierClass).text())) + (parseInt($('.profiency').text()))))
+    }
+    function modifIndex() {
+        if($('#spellcastingAbilityScore').val() == "0") {
+            midIndex('intelligencemodifier');
+        }
+        if($('#spellcastingAbilityScore').val() == "1") {
+            midIndex('wisdommodifier');
+        }
+        if($('#spellcastingAbilityScore').val() == "2") {
+            midIndex('charismamodifier');
+        }
     }
     function passupdateIndex(imageId, indexClass,passIndexClass, modifierClass) {
         var $savingthrowImage = $('#' + imageId);
@@ -107,6 +176,9 @@ $(function() {
     function AhIndex() {
         updateIndex('animalHandling-image', 'animalHandlingIndex', 'wisdommodifier');
     }
+    function AtIndex(){
+        updateIndex()
+    }
     function all()
     {
        AthIndex();
@@ -128,6 +200,7 @@ $(function() {
        IntiIndex();
        DecIndex();
        PersIndex();
+       modifIndex()
     }
 
     function handleSavingThrowClick(attribute, imageId, savingThrowId, indexFunction) {
@@ -183,15 +256,15 @@ $(function() {
             }
             if (dexterityValue >= 12) {
                 $('.dexteritymodifier').text("+" + Math.floor((dexterityValue - 10) / 2));
-                $('.initIndex').text("+" + Math.floor((dexterityValue - 10) / 2));
+                $('.initIndextext').text("+" + Math.floor((dexterityValue - 10) / 2));
             } else if (dexterityValue <= 8) {
                 $('.dexteritymodifier').text(Math.floor((dexterityValue - 10) / 2));
-                $('.initIndex').text(Math.floor((dexterityValue - 10) / 2));
+                $('.initIndextext').text(Math.floor((dexterityValue - 10) / 2));
             } else {
                 $('.dexteritymodifier').text(Math.floor((dexterityValue - 10) / 2));
-                $('.initIndex').text(Math.floor((dexterityValue - 10) / 2));
+                $('.initIndextext').text(Math.floor((dexterityValue - 10) / 2));
             }
-            // if (dexterityValue == 30) {$('.initIndex').css('width', '140px');} else {$('.initIndex').css('width', '80px');}
+            if (dexterityValue == 30) {$('.initIndextext').css('font-size', '40');} else {$('.initIndex').css('font-size', '50px');}
         }
          DexIndex();
         AcrIndex();
@@ -244,6 +317,7 @@ $(function() {
         ArcIndex();
         NatIndex();
         RelIndex();
+        modifIndex();
     });
     $('[name="wisdom"]').on('input', function() {
         var wisdomValue = parseInt($(this).val());
@@ -271,6 +345,7 @@ $(function() {
         InsIndex();
         AhIndex();
         PerIndex();
+        modifIndex();
     });
     $('[name="charisma"]').on('input', function() {
         var charismaValue = parseInt($(this).val());
@@ -296,7 +371,7 @@ $(function() {
         IntiIndex();
         DecIndex();
         PersIndex();
-
+        modifIndex();
     });
     $('#inspiration-button').click(function() {
         $('#toggle-image').attr('src', function(_, oldSrc) {
@@ -305,6 +380,36 @@ $(function() {
         $('#inspiration').prop('checked', function (_, checked) {
             return !checked;
 
+        });
+    });
+    $('#secses0-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#secses1-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#secses2-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#failer0-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#failer1-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
+        });
+    });
+    $('#failer2-image').click(function() {
+        $(this).attr('src', function(_, oldSrc) {
+            return oldSrc.includes('inspirone.png') ? "/static/registration/img/inspirtwo.png" : "/static/registration/img/inspirone.png";
         });
     });
     $('#hitPoints').on('input', function() {
@@ -326,6 +431,7 @@ $(function() {
             $(this).val(1);
             levelValue = 1;
         }
+        $('.vsegoIndex').text(levelValue);
         var proficiency = Math.floor(((levelValue - 1) / 4)) + 2;
         $('.profiency').text("+" + proficiency);
         StrIndex();
@@ -413,4 +519,201 @@ $(function() {
     $('#animalHandling-button').click(function() {
         handleSavingThrowClick("animalHandling", "animalHandling-image", "animalHandling", AhIndex)
     });
+    $('[name="name"]').on('input', function() {
+        var secName = parseInt($(this).val());
+        $('.secondNameText').text(secName);
+    });
+    $("#character-image").on("click", function() {$("#id_appearance").click();});
+    $("#id_appearance").on("change", function() {
+    var input = this;
+    if (input.files && input.files[0]) {
+        if (input.files[0].size > 3000000) {
+        alert("Размер файла превышает 3 МБайта. Выберите файл меньшего размера.");
+        this.value = ""; // Очищаем поле ввода, чтобы пользователь мог выбрать другой файл
+        return;
+      }
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        // Обновляем атрибут src изображения
+        $("#character-image").attr("src", e.target.result);
+        $("#appearance").val(input.files[0].name);
+      };
+
+      // Читаем выбранный файл как Data URL
+      reader.readAsDataURL(input.files[0]);
+    }
+  });
+    $('#plus-button').click(function () {
+    AttackAndSpells.push(new AttackFormul("","",""));
+    var MarginIndex = 10*SpellCounter+15;
+    var oneSpell= document.createElement("div");
+    oneSpell.style.backgroundColor = '#00000';
+    for(var i=0;i<3;i++)
+    {
+        let InputField=document.createElement("input");
+        InputField.className ='InputFieldStyle';
+        var inputFieldId = 'InputField' + i + '-' + SpellCounter; // Генерируем уникальный ID для каждого поля
+        InputField.id = inputFieldId;
+        InputField.addEventListener('click', function(event,) {
+            openWindow(event);
+        });
+        oneSpell.appendChild(InputField);
+        AllInputFields.push(InputField);
+    }
+    AttackAndSpellsInputFields.push(oneSpell);
+    SpellCounter++;
+    var InputSpellContainer = document.getElementById('attackContainer');
+    InputSpellContainer.appendChild(oneSpell);
+    console.log(AttackAndSpells);
+});
+    $('#minus-button').click(function () {
+    if (AttackAndSpellsInputFields.length > 0) {
+        var removedSpell = AttackAndSpellsInputFields.pop();
+        AttackAndSpells.pop();
+        for(let i = 0;i<3;i++){
+            AllInputFields.pop();
+        }
+        removedSpell.remove(); // Remove the spell from the DOM
+        SpellCounter--; // Decrement the counter
+    }
+});
+    function handleInputChange(event,InputField) {
+    var changedValue = event.target.value;
+    for (let i =0;i<AllInputFields.length;i++){
+
+        if (InputField.id===AllInputFields[i].id){
+            var Index = Math.floor(i / 3);
+
+            console.log(changedValue);
+            if(event.target.id=="profienc-checkbox")
+            {
+
+                  let isChecked = event.target.checked;
+                AttackAndSpells[Index].setCheckProf(isChecked ? 1 : 0);
+            }
+            if(event.target.id=="profienc-modifire")
+            {
+                     AttackAndSpells[Index].setModifier(changedValue);
+            }
+            if(event.target.id=="attackroll")
+            {
+                AttackAndSpells[Index].setDamage(changedValue);
+            }
+            if(event.target.id=="windowSelect")
+            {
+               AttackAndSpells[Index].setAtributmodifier(changedValue);
+            }
+            if(event.target.id=="attacknametext")
+            {
+                 AttackAndSpells[Index].setName(changedValue);
+            }
+
+
+        }
+    }
+
+}
+    function openWindow(event){
+        let target = event.target;
+        currentRow=target;
+        var openPanel = document.getElementById('window');
+        openPanel.style.display = 'block';
+        setTimeout(function() {openPanel.style.opacity = '1';}, 100);
+        var backGround = document.getElementById('background');
+        backGround.style.display = 'block';
+        setTimeout(function() {backGround.style.opacity = '0.7';}, 100); // Добавляем небольшую задержку перед установкой прозрачности
+        let InputField = document.getElementsByClassName('winowtempl');
+        for (let i =0;i<InputField.length;i++)
+        {
+            InputField[i].addEventListener('change', function(event,) {
+            handleInputChange(event,target);
+        });
+        }
+
+
+    }
+    function closeWindow()
+    {
+        var openPanel = document.getElementById('window');
+        openPanel.style.opacity = '0'; // Устанавливаем прозрачность в 0
+         let InputFields = document.getElementsByClassName('winowtempl');
+        for (let i = 0; i < InputFields.length; i++) {
+        let inputField = InputFields[i];
+        inputField.removeEventListener('change', handleInputChange);
+        }
+        setTimeout(function() {openPanel.style.display = 'none';}, 500);
+
+        var backGround = document.getElementById('background');
+        backGround.style.opacity = '0'; // Устанавливаем прозрачность в 0
+        setTimeout(function() {backGround.style.display = 'none';}, 500);
+         modifirecalcutin();
+    }
+
+
+
+
+    $('#close-button').click(function (){
+    closeWindow();
+
+});
+    function modifirecalcutin()
+    {
+        for(let i=0;i<AllInputFields.length;i++)
+        {
+            if(AllInputFields[i]==currentRow)
+            {
+                if(i%3==0)
+                {
+                    AllInputFields[i].value=AttackAndSpells[Math.floor(i/3)].getName();
+                     AllInputFields[i+1].value=Index(AttackAndSpells[Math.floor(i/3)]);
+                     AllInputFields[i+2].value= AttackAndSpells[Math.floor(i/3)].getDamage();
+                }
+                if(i%3==1)
+                {
+                      AllInputFields[i-1].value=AttackAndSpells[Math.floor(i/3)].getName();
+                     AllInputFields[i].value=Index(AttackAndSpells[Math.floor(i/3)]);
+                     AllInputFields[i+1].value= AttackAndSpells[Math.floor(i/3)].getDamage();
+
+                }
+                 if(i%3==2)
+                 {
+                          AllInputFields[i-2].value=AttackAndSpells[Math.floor(i/3)].getName();
+                     AllInputFields[i-1].value=Index(AttackAndSpells[Math.floor(i/3)]);
+                     AllInputFields[i].value= AttackAndSpells[Math.floor(i/3)].getDamage();
+                 }
+            }
+        }
+
+    }
+
+
+    $('#background').click(function ()
+    {
+        closeWindow();
+    });
+
+
+
+
+
+    $('#windowSelect').change(function(){
+        var selectedValue = $(this).val();
+        if(selectedValue === '0') {
+            $('.windowSelector').css('width', '50%');
+            $('.profiencycheck').css('display','none');
+            $('.selectorandother').css('justify-content','left');
+            $('.modifire').css('width', '50%');
+
+
+        } else {
+            $('.windowSelector').css('width', '30%');
+            $('.profiencycheck').css('display','block');
+            $('.selectorandother').css('justify-content','space-around');
+            $('.modifire').css('width', '30%');
+        }
+    });
+    $('#spellcastingAbilityScore').change(function (){
+        modifIndex();
+    })
 });

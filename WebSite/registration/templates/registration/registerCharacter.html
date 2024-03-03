@@ -12,8 +12,21 @@
     <link rel="stylesheet" href="{%static 'registration/css/templates.css'%}">
     <link rel="stylesheet" href="{%static 'registration/css/threeSheet.css'%}">
     <link rel="stylesheet" href="{%static 'registration/css/twoSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/oneSecondSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/twoSecondSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/background.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/thirdSheet.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/window.css'%}">
     <script src="{%static 'registration/js/jquery-3.7.1.min.js'%}"></script>
     <script src="{%static 'registration/js/event.js'%}"></script>
+    <script src="{%static 'registration/js/atackformul.js'%}"></script>
+    <script>
+        let AttackAndSpells=[];
+        let AttackAndSpellsInputFields=[];
+        let SpellCounter=0;
+        let AllInputFields=[];
+        let currentRow;
+    </script>
 
     <style>
           label
@@ -41,10 +54,6 @@
                         <div class="headContent characterBackstory">
                             {{ form.backstorys }}
                             <label>ПРЕДЫСТОРИЯ</label>
-                        </div>
-                        <div class="headContent сharacterPlayer">
-                            {{ form.сharacterPlayer }}
-                            <label>ИМЯ ИГРОКА</label>
                         </div>
                         <div class="headContent characterRace">
                             {{ form.race }}
@@ -399,7 +408,7 @@
                     </div>
                     <div class="twomainSheet">
                         <div class="staticstiq">
-                            <div class="arinsp">
+                            <div class="otst arinsp">
                                 <div class="armor">
                                     {{ form.armourclass}}
                                     <img src="{% static 'registration/img/shcild.png' %}" id="shield-image">
@@ -407,7 +416,6 @@
 
                                 </div>
                                 <div class="initiative">
-
                                     <div class="initIndex">
                                         <div class="initIndextext">
                                             0
@@ -423,41 +431,86 @@
                                 </div>
                             </div>
                             <div class="health">
-                                <div class="currenhit">
+                                <div class="otst currenhit">
                                     <div class="maxhit">Максимум хитов {{ form.hitPointsMax}}</div>
                                     <div class="curhit">{{ form.hitPoints }}</div>
                                     ТЕКУЩИЕ ХИТЫ
                                 </div>
-                                <div class="temporalhit">
+                                <div class="otst temporalhit">
                                     <div class="tempHitIndex">{{ form.temporaryHitPoints }}</div>
                                     <div class="tempHitText">ВРЕМЕННЫЕ ХИТЫ</div>
                                 </div>
-                                <div class="diceanddeath">
+                                <div class="otst diceanddeath">
                                     <div class="dicechose">
                                         <div class="vsego">
                                             <div class="vsegoIndexText">
                                                 Всего Костей:
                                             </div>
                                             <div class="vsegoIndex">
-                                                0
+                                                1
                                             </div>
                                         </div>
                                         <div class="hitdiceindex">{{ form.hitDice }}</div>
                                         Кости Хитов
                                     </div>
+                                    <div class="deathsavingthrow">
+                                        <div class="secses">
+                                            <div class="secsestext">Успех:</div>
+                                            <div class="secsesindex">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="secses0-image" class="deathimage">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="secses1-image" class="deathimage">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="secses2-image" class="deathimage">
+                                            </div>
+                                        </div>
+                                        <div class="failer">
+                                            <div class="failertext">Провал:</div>
+                                            <div class="failerindex">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="failer0-image" class="deathimage">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="failer1-image" class="deathimage">
+                                                <img src="{% static 'registration/img/inspirone.png' %}" id="failer2-image" class="deathimage">
+                                            </div>
+                                        </div>
+                                        <div class="savtext">Спасбросок от Смерти</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="atack"></div>
-                        <div class="equipment"></div>
+                        <div class="atack">
+                            <div class="atackBox">
+                                <div class="atack-wrapper plus-wrapper">
+                                        <button type="button" id="plus-button">+</button>
+                                </div>
+                                <div class="atackText"><p>
+                                Название<p>
+                                Модификатор<p>
+                                Урон
+                                </div>
+                                <div class="atack-wrapper minus-wrapper">
+                                        <button type="button" id="minus-button">-</button>
+                                </div>
+                            </div>
+                            <div class="attackContainer" id="attackContainer"></div>
+                            {{ form.attackundspells }}
+                            АТАКИ И ЗАКЛИНАНИЯ
+
+                        </div>
+                        <div class="equipment">
+                            <div class="coins">
+                                <div class="coin platinum">{{ form.platinum }}<br>ПМ</div>
+                                <div class="coin electrum">{{ form.electrum }}<br>ЭМ</div>
+                                <div class="coin golden">{{ form.golden }}<br>ЗМ</div>
+                                <div class="coin silver">{{ form.silver }}<br>СМ</div>
+                                <div class="coin copper">{{ form.copper }}<br>ММ</div>
+                            </div>
+                            <div class="table">{{ form.equipment }}</div>
+                            СНАРЯЖЕНИЕ
+                        </div>
                     </div>
                     <div class="threemainSheet">
                         <div class="personal">
                             <div class="three personalTraits">
                                 {{form.personalTraits}}
-                                <div id="article personalTraitsText">
                                     ЧЕРТЫ ХАРАКТЕРА
-                                </div>
                             </div>
                             <div class="three ideals">
                                 {{form.ideals}}
@@ -478,6 +531,124 @@
                         </div>
                     </div>
                 </div>
+                <div class="headSheet">
+                        <div class="leftHeadSheet">
+                        <div class="secondName">
+                            <div class="nameText secondNameText"></div>
+                            <label>ИМЯ ПЕРСОНАЖА</label>
+                        </div>
+                    </div>
+                        <div class="rightHeadSheet">
+                        <div class="headContent age">
+                            {{ form.age }}
+                            <label>ВОЗРАСТ</label>
+                        </div>
+                        <div class="headContent height">
+                            {{ form.height }}
+                            <label>РОСТ</label>
+                        </div>
+                        <div class="headContent weight">
+                            {{ form.weight }}
+                            <label>ВЕС</label>
+                        </div>
+                        <div class="headContent eyeColor">
+                            {{ form.eyeColor }}
+                            <label>ГЛАЗА</label>
+                        </div>
+                        <div class="headContent skinColor">
+                            {{ form.skinColor }}
+                            <label>КОЖА</label>
+                        </div>
+                        <div class="headContent hairColor">
+                            {{ form.hairColor }}
+                            <label>ГЛАЗА</label>
+                        </div>
+
+                    </div>
+                    </div>
+                <div class="mainSheet">
+                        <div class="leftSheet">
+                            <div class="ImageBox">
+                                <img src="{% static 'registration/img/character.png' %}" alt="Image" id="character-image">
+                                <input type="file" name="appearance"  required id="id_appearance"  accept="image/*" size="3000000" style="display: none;">
+                            </div>
+                            <div class="fours backstory">
+                                {{ form.backstory }}
+                                ПРЕДЫСТОРИЯ
+                            </div>
+                    </div>
+                        <div class="rightSheet">
+                            <div class="fours allies">
+                                {{ form.allies }}
+                                СОЮЗНИКИ И ОРГАНИЗАЦИИ
+                            </div>
+                            <div class="fours additionalfeatures">
+                                {{ form.additionalfeatures }}
+                                ДОПОЛНИТЕЛЬНЫЕ СПОСОБНОСТИ И УМЕНИЯ
+                            </div>
+                            <div class="fours treasure">
+                                {{ form.treasure }}
+                                СОКРОВИЩА
+                            </div>
+                        </div>
+                    </div>
+                <div class="headSheet">
+                    <div class="leftHeadSheet">
+                        {{ form.spellcastingClass }}
+                        <label>КЛАСС ЗАКЛИНАТЕЛЯ</label></div>
+                    <div class="threeRightHeadSheet">
+                        <div class="spell spellcastingAbilityScore">
+                        {{ form.spellcastingAbilityScore }}<br>
+                        <label class="labul">БАЗОВАЯ ХАРАКТЕРИСТИКА ЗАКЛИНАНИЙ</label>
+                        </div>
+                        <div class="spell savingthrowpoint">
+                            <div class="spelltext savingthrowequil"></div>
+                            <label>СЛОЖНОСТЬ СПАСБРОСКА</label>
+                        </div>
+                        <div class="spell atackbonus">
+                            <div class="spelltext atackbonustext"></div>
+                            <label>БОНУС АТАКИ</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="windows" id="window">
+                    <div class="close-button">
+                    <button type="button" id="close-button">x</button>
+                    </div>
+                    <div class="window attackName">
+                        <input type="text" class="winowtempl" id="attacknametext" maxlength="20"><br>
+                        <label>НАЗВАНИЕ</label>
+                    </div>
+                    <div class="selectorandother">
+                        <div class="window windowSelector">
+                            <select class="winowtempl" id="windowSelect">
+                                <option value="0">Без Характеристики</option>
+                                <option value="1">Сила</option>
+                                <option value="2">Ловкость</option>
+                                <option value="3">Телосложение</option>
+                                <option value="4">Интелект</option>
+                                <option value="5">Мудрость</option>
+                                <option value="6">Харизма</option>
+                            </select><br>
+                            <label>ХАРАКТЕРИСТИКА</label>
+                        </div>
+                        <div class="profiencycheck">
+                            <input id="profienc-checkbox" class="profienc-checkbox winowtempl" type="checkbox">
+                            <label>ВЛАДЕНИЕ</label>
+                        </div>
+                        <div class="window modifire">
+                            <input id="profienc-modifire" class="winowtempl" type="number"><br>
+                            <label>МОДИФИКАТОР</label>
+                        </div>
+                    </div>
+                    <div class="window attackRoll">
+                        <input type="text" class="winowtempl" id="attackroll" maxlength="20"><br>
+                        <label>УРОН</label>
+                    </div>
+
+                </div>
+                <div class="background" id="background"></div>
             </form>
+
 </body>
 </html>

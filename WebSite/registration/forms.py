@@ -1,10 +1,10 @@
 from.models import Character
-from django.forms import ModelForm, TextInput, NumberInput, Textarea,BooleanField,CheckboxInput,ChoiceField
+from django.forms import ModelForm, TextInput, NumberInput, Textarea,BooleanField,CheckboxInput,ChoiceField,ImageField,ClearableFileInput
 from django import forms
 class CharacterForm(ModelForm):
     class Meta:
         model = Character
-        fields = ['name','characterClass','race','backstorys','сharacterPlayer','worldviews','experience','level','personalTraits','ideals','bonds','flaws','features','strength','dexterity','constitution','intelligence','wisdom','charisma','inspiration','strength_savingthrow','dexterity_savingthrow','constitution_savingthrow','intelligence_savingthrow','wisdom_savingthrow','charisma_savingthrow','acrobatic','athletics','perception','survival','performance','intimidation','history','sleightOfHand','arcane','medicine','deception','nature','insight','investigation','religion','stealth','persuasion','animalHandling','proficiencies','armourclass','speed','hitPoints','hitPointsMax','temporaryHitPoints','hitDice']
+        fields = ['name','characterClass','race','backstorys','сharacterPlayer','worldviews','experience','level','personalTraits','ideals','bonds','flaws','features','strength','dexterity','constitution','intelligence','wisdom','charisma','inspiration','strength_savingthrow','dexterity_savingthrow','constitution_savingthrow','intelligence_savingthrow','wisdom_savingthrow','charisma_savingthrow','acrobatic','athletics','perception','survival','performance','intimidation','history','sleightOfHand','arcane','medicine','deception','nature','insight','investigation','religion','stealth','persuasion','animalHandling','proficiencies','armourclass','speed','hitPoints','hitPointsMax','temporaryHitPoints','hitDice','equipment','platinum','electrum','golden','silver','copper','age','height','weight','eyeColor','skinColor','hairColor','appearance','backstory','allies','additionalfeatures','treasure','attackundspells','spellcastingClass','spellcastingAbilityScore']
 
         dice_choices = (
             (0, ''),
@@ -16,8 +16,8 @@ class CharacterForm(ModelForm):
         widgets = {
             "name": TextInput(attrs={
                 'id': 'name',
-                'class': "test"
-            }),
+                'class': "nameText"
+                }),
             "characterClass": TextInput(attrs={
                 'id': 'characterClass',
                 'class':"test"
@@ -98,100 +98,100 @@ class CharacterForm(ModelForm):
             }),
             "inspiration": CheckboxInput(attrs={
                 'id': 'inspiration',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
 
             }),
             "strength_savingthrow": CheckboxInput(attrs={
                 'id': 'strength_savingthrow',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "dexterity_savingthrow": CheckboxInput(attrs={
                 'id': 'dexterity_savingthrow',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "constitution_savingthrow": CheckboxInput(attrs={
                 'id': 'constitution_savingthrow',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "intelligence_savingthrow": CheckboxInput(attrs={
                 'id': 'intelligence_savingthrow',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "wisdom_savingthrow": CheckboxInput(attrs={
                 'id': 'wisdom_savingthrow',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "charisma_savingthrow": CheckboxInput(attrs={
                 'id': 'charisma_savingthrow',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "acrobatic": CheckboxInput(attrs={
                 'id': 'acrobatic',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "perception": CheckboxInput(attrs={
                 'id': 'perception',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "survival": CheckboxInput(attrs={
                 'id': 'survival',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "performance": CheckboxInput(attrs={
                 'id': 'performance',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "intimidation": CheckboxInput(attrs={
                 'id': 'intimidation',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "history": CheckboxInput(attrs={
                 'id': 'history',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "sleightOfHand": CheckboxInput(attrs={
                 'id': 'sleightOfHand',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "arcane": CheckboxInput(attrs={
                 'id': 'arcane',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "medicine": CheckboxInput(attrs={
                 'id': 'medicine',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "deception": CheckboxInput(attrs={
                 'id': 'deception',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "nature": CheckboxInput(attrs={
                 'id': 'nature',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "insight": CheckboxInput(attrs={
                 'id': 'insight',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "investigation": CheckboxInput(attrs={
                 'id': 'investigation',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "religion": CheckboxInput(attrs={
                 'id': 'religion',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "stealth": CheckboxInput(attrs={
                 'id': 'stealth',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "persuasion": CheckboxInput(attrs={
                 'id': 'persuasion',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "animalHandling": CheckboxInput(attrs={
                 'id': 'animalHandling',
-                'style': 'width: 20px; height: 20px;border-radius: 30px;border: 2px solid black;'
+                'class':"point"
             }),
             "proficiencies": Textarea(attrs={
                 'id': 'proficiencies',
@@ -216,8 +216,89 @@ class CharacterForm(ModelForm):
             }),
             "temporaryHitPoints": NumberInput(attrs={
                 'id': 'temporaryHitPoints',
-                'style': 'width: 286px;height: 96px;border: none;outline: none;text-align: center;font-size: 50px;background-color: transparent;'
+                'style': 'width: 286px;height: 86px;border: none;outline: none;text-align: center;font-size: 50px;background-color: transparent;'
             }),
-            "hitDice":  forms.Select(attrs={'choices':'dice_choices','id': 'hitDice', 'style': 'width: 100px;height: 100px;border: none;outline: none;text-align: center;font-size: 20px;background-color: transparent;'})
+            "hitDice":  forms.Select(attrs={'choices':'dice_choices','id': 'hitDice', 'style': 'width: 75px;height: 50px;border: none;outline: none;text-align: center;font-size: 20px;background-color: transparent;'}),
+            "attackundspells": Textarea(attrs={
+                'id': 'attackundspells',
+                'style': 'min-width: 278px; max-width: 278px;min-height: 47px; max-height: 47px;'
+                         'border: 2px solid #a6a6a6;border-radius: 10px; display: block;'
+                         'outline: none;'
+                         'background-image: repeating-linear-gradient(rgb(255, 255, 255) 1px, rgb(255, 255, 255) 14px, rgb(218, 218, 218) 1px, rgb(218, 218, 218) 15px);'
+                         'line-height: inherit;'
+            }),
+            "equipment": Textarea(attrs={
+                'id': 'equipment',
+                'style': 'min-width: 290px; max-width: 290px;min-height: 320px; max-height: 320px;'
+                         'border: none; display: block;outline: none;background-color: transparent;'
+            }),
 
-        }
+            "platinum": NumberInput(attrs={
+                'id': 'platinum',
+                'class':"gold"
+            }),
+            "electrum": NumberInput(attrs={
+                'id': 'electrum',
+                'class':"gold"
+            }),
+            "golden": NumberInput(attrs={
+                'id': 'golden',
+                'class':"gold"
+            }),
+            "silver": NumberInput(attrs={
+                'id': 'silver',
+                'class':"gold"
+            }),
+            "copper": NumberInput(attrs={
+                'id': 'copper',
+                'class':"gold"
+            }),
+            "age": TextInput(attrs={
+                'id': 'age',
+                'class': "test"
+            }),
+            "height": TextInput(attrs={
+                'id': 'height',
+                'class': "test"
+            }),
+            "weight": TextInput(attrs={
+                'id': 'weight',
+                'class': "test"
+            }),
+            "eyeColor": TextInput(attrs={
+                'id': 'eyeColor',
+                'class': "test"
+            }),
+            "skinColor": TextInput(attrs={
+                'id': 'skinColor',
+                'class': "test"
+            }),
+            "hairColor": TextInput(attrs={
+                'id': 'hairColor',
+                'class': "test"
+            }),
+            "appearance":ClearableFileInput(),
+            "backstory": Textarea(attrs={
+                'id': 'backstory',
+                'style': 'min-width: 100%; max-width: 100%;min-height: 621px; max-height: 621px;'
+                         'border: none; display: block;outline: none;background-color: transparent;'
+            }),
+            "allies": Textarea(attrs={
+                'id': 'allies',
+                'class': "secondеTrip"
+            }),
+            "additionalfeatures": Textarea(attrs={
+                'id': 'additionalfeatures',
+                'class': "secondеTrip"
+            }),
+            "treasure": Textarea(attrs={
+                'id': 'treasure',
+                'class': "secondеTrip"
+            }),
+            "spellcastingClass": TextInput(attrs={
+                'id': 'spellcastingClass',
+                'class': "nameText"
+            }),
+            "spellcastingAbilityScore": forms.Select(attrs={'choices': 'spellcastingAbility', 'id': 'spellcastingAbilityScore','style': 'width: 150px;height: 50px;border: black solid 2px; border-radius: 5px;outline: none;text-align: center;font-size: 25px;background-color: transparent;'}),
+
+        };
