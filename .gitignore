@@ -136,3 +136,4 @@ GitHub.sublime-settings
 !.vscode/extensions.json
 .history
 /WebSite/registration/migrations/0008_character_attackundspells_and_more.py
+/.idea/vcs.xml
