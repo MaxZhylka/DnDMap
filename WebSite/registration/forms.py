@@ -4,7 +4,7 @@ from django import forms
 class CharacterForm(ModelForm):
     class Meta:
         model = Character
-        fields = ['name','characterClass','race','backstorys','сharacterPlayer','worldviews','experience','level','personalTraits','ideals','bonds','flaws','features','strength','dexterity','constitution','intelligence','wisdom','charisma','inspiration','strength_savingthrow','dexterity_savingthrow','constitution_savingthrow','intelligence_savingthrow','wisdom_savingthrow','charisma_savingthrow','acrobatic','athletics','perception','survival','performance','intimidation','history','sleightOfHand','arcane','medicine','deception','nature','insight','investigation','religion','stealth','persuasion','animalHandling','proficiencies','armourclass','speed','hitPoints','hitPointsMax','temporaryHitPoints','hitDice','equipment','platinum','electrum','golden','silver','copper','age','height','weight','eyeColor','skinColor','hairColor','appearance','backstory','allies','additionalfeatures','treasure']
+        fields = ['name','characterClass','race','backstorys','сharacterPlayer','worldviews','experience','level','personalTraits','ideals','bonds','flaws','features','strength','dexterity','constitution','intelligence','wisdom','charisma','inspiration','strength_savingthrow','dexterity_savingthrow','constitution_savingthrow','intelligence_savingthrow','wisdom_savingthrow','charisma_savingthrow','acrobatic','athletics','perception','survival','performance','intimidation','history','sleightOfHand','arcane','medicine','deception','nature','insight','investigation','religion','stealth','persuasion','animalHandling','proficiencies','armourclass','speed','hitPoints','hitPointsMax','temporaryHitPoints','hitDice','equipment','platinum','electrum','golden','silver','copper','age','height','weight','eyeColor','skinColor','hairColor','appearance','backstory','allies','additionalfeatures','treasure','attackundspells','spellcastingClass','spellcastingAbilityScore']
 
         dice_choices = (
             (0, ''),
@@ -219,11 +219,20 @@ class CharacterForm(ModelForm):
                 'style': 'width: 286px;height: 86px;border: none;outline: none;text-align: center;font-size: 50px;background-color: transparent;'
             }),
             "hitDice":  forms.Select(attrs={'choices':'dice_choices','id': 'hitDice', 'style': 'width: 75px;height: 50px;border: none;outline: none;text-align: center;font-size: 20px;background-color: transparent;'}),
+            "attackundspells": Textarea(attrs={
+                'id': 'attackundspells',
+                'style': 'min-width: 278px; max-width: 278px;min-height: 47px; max-height: 47px;'
+                         'border: 2px solid #a6a6a6;border-radius: 10px; display: block;'
+                         'outline: none;'
+                         'background-image: repeating-linear-gradient(rgb(255, 255, 255) 1px, rgb(255, 255, 255) 14px, rgb(218, 218, 218) 1px, rgb(218, 218, 218) 15px);'
+                         'line-height: inherit;'
+            }),
             "equipment": Textarea(attrs={
                 'id': 'equipment',
-                'style': 'min-width: 290px; max-width: 290px;min-height: 345px; max-height: 345px;'
+                'style': 'min-width: 290px; max-width: 290px;min-height: 320px; max-height: 320px;'
                          'border: none; display: block;outline: none;background-color: transparent;'
             }),
+
             "platinum": NumberInput(attrs={
                 'id': 'platinum',
                 'class':"gold"
@@ -271,7 +280,7 @@ class CharacterForm(ModelForm):
             "appearance":ClearableFileInput(),
             "backstory": Textarea(attrs={
                 'id': 'backstory',
-                'style': 'min-width: 100%; max-width: 100%;min-height: 671px; max-height: 671px;'
+                'style': 'min-width: 100%; max-width: 100%;min-height: 621px; max-height: 621px;'
                          'border: none; display: block;outline: none;background-color: transparent;'
             }),
             "allies": Textarea(attrs={
@@ -286,4 +295,10 @@ class CharacterForm(ModelForm):
                 'id': 'treasure',
                 'class': "secondеTrip"
             }),
+            "spellcastingClass": TextInput(attrs={
+                'id': 'spellcastingClass',
+                'class': "nameText"
+            }),
+            "spellcastingAbilityScore": forms.Select(attrs={'choices': 'spellcastingAbility', 'id': 'spellcastingAbilityScore','style': 'width: 150px;height: 50px;border: black solid 2px; border-radius: 5px;outline: none;text-align: center;font-size: 25px;background-color: transparent;'}),
+
         };

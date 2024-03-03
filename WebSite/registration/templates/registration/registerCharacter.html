@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{%static 'registration/css/oneSecondSheet.css'%}">
     <link rel="stylesheet" href="{%static 'registration/css/twoSecondSheet.css'%}">
     <link rel="stylesheet" href="{%static 'registration/css/background.css'%}">
+    <link rel="stylesheet" href="{%static 'registration/css/thirdSheet.css'%}">
     <link rel="stylesheet" href="{%static 'registration/css/window.css'%}">
     <script src="{%static 'registration/js/jquery-3.7.1.min.js'%}"></script>
     <script src="{%static 'registration/js/event.js'%}"></script>
@@ -479,12 +480,19 @@
                                 <div class="atack-wrapper plus-wrapper">
                                         <button type="button" id="plus-button">+</button>
                                 </div>
+                                <div class="atackText"><p>
+                                Название<p>
+                                Модификатор<p>
+                                Урон
+                                </div>
                                 <div class="atack-wrapper minus-wrapper">
                                         <button type="button" id="minus-button">-</button>
                                 </div>
-                                <div class="attackContainer" id="attackContainer">
-                                </div>
                             </div>
+                            <div class="attackContainer" id="attackContainer"></div>
+                            {{ form.attackundspells }}
+                            АТАКИ И ЗАКЛИНАНИЯ
+
                         </div>
                         <div class="equipment">
                             <div class="coins">
@@ -495,6 +503,7 @@
                                 <div class="coin copper">{{ form.copper }}<br>ММ</div>
                             </div>
                             <div class="table">{{ form.equipment }}</div>
+                            СНАРЯЖЕНИЕ
                         </div>
                     </div>
                     <div class="threemainSheet">
@@ -583,6 +592,25 @@
                             </div>
                         </div>
                     </div>
+                <div class="headSheet">
+                    <div class="leftHeadSheet">
+                        {{ form.spellcastingClass }}
+                        <label>КЛАСС ЗАКЛИНАТЕЛЯ</label></div>
+                    <div class="threeRightHeadSheet">
+                        <div class="spell spellcastingAbilityScore">
+                        {{ form.spellcastingAbilityScore }}<br>
+                        <label class="labul">БАЗОВАЯ ХАРАКТЕРИСТИКА ЗАКЛИНАНИЙ</label>
+                        </div>
+                        <div class="spell savingthrowpoint">
+                            <div class="spelltext savingthrowequil"></div>
+                            <label>СЛОЖНОСТЬ СПАСБРОСКА</label>
+                        </div>
+                        <div class="spell atackbonus">
+                            <div class="spelltext atackbonustext"></div>
+                            <label>БОНУС АТАКИ</label>
+                        </div>
+                    </div>
+                </div>
                 <div class="windows" id="window">
                     <div class="close-button">
                     <button type="button" id="close-button">x</button>

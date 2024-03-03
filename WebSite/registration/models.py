@@ -69,6 +69,7 @@ class Character(models.Model):
     flaws = models.TextField('Слабости',default='')
     features = models.TextField('Особенности',default='')
     proficiencies = models.TextField('Умения',default='')
+    attackundspells = models.TextField('Атаки и Заклинания', default='')
     equipment = models.TextField('Снарежение',default='')
     platinum = models.IntegerField('Платиновые Монеты',default='  ')
     electrum = models.IntegerField('Электровиумые Монеты',default='  ')
@@ -92,6 +93,7 @@ class Character(models.Model):
         (1, 'Мудрость'),
         (2, 'Харизма'),
     )
+    spellcastingAbilityScore = models.IntegerField('Базовые характеристики Заклинаний',choices=spellcastingAbility,default='0')
     spellSavingThrow = models.IntegerField('Сложность Спасброска',default='  ')
     spellAttackBonus = models.IntegerField('Бонус Атаки Залинанием',default='  ')
     levelOneTotal = models.IntegerField('Количество ячеек 1 уровня',default='  ')

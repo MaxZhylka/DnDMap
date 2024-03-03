@@ -69,6 +69,22 @@ $(function() {
         }
         $('.' + indexClass).text(index);
     }
+
+    function midIndex(modifierClass){
+        $('.savingthrowequil').text(8 + (parseInt($('.' + modifierClass).text())) + (parseInt($('.profiency').text())))
+            $('.atackbonustext').text('+' + ((parseInt($('.' + modifierClass).text())) + (parseInt($('.profiency').text()))))
+    }
+    function modifIndex() {
+        if($('#spellcastingAbilityScore').val() == "0") {
+            midIndex('intelligencemodifier');
+        }
+        if($('#spellcastingAbilityScore').val() == "1") {
+            midIndex('wisdommodifier');
+        }
+        if($('#spellcastingAbilityScore').val() == "2") {
+            midIndex('charismamodifier');
+        }
+    }
     function passupdateIndex(imageId, indexClass,passIndexClass, modifierClass) {
         var $savingthrowImage = $('#' + imageId);
         var isChecked = $savingthrowImage.data('checked');
@@ -160,6 +176,9 @@ $(function() {
     function AhIndex() {
         updateIndex('animalHandling-image', 'animalHandlingIndex', 'wisdommodifier');
     }
+    function AtIndex(){
+        updateIndex()
+    }
     function all()
     {
        AthIndex();
@@ -181,6 +200,7 @@ $(function() {
        IntiIndex();
        DecIndex();
        PersIndex();
+       modifIndex()
     }
 
     function handleSavingThrowClick(attribute, imageId, savingThrowId, indexFunction) {
@@ -297,6 +317,7 @@ $(function() {
         ArcIndex();
         NatIndex();
         RelIndex();
+        modifIndex();
     });
     $('[name="wisdom"]').on('input', function() {
         var wisdomValue = parseInt($(this).val());
@@ -324,6 +345,7 @@ $(function() {
         InsIndex();
         AhIndex();
         PerIndex();
+        modifIndex();
     });
     $('[name="charisma"]').on('input', function() {
         var charismaValue = parseInt($(this).val());
@@ -349,7 +371,7 @@ $(function() {
         IntiIndex();
         DecIndex();
         PersIndex();
-
+        modifIndex();
     });
     $('#inspiration-button').click(function() {
         $('#toggle-image').attr('src', function(_, oldSrc) {
@@ -691,4 +713,7 @@ $(function() {
             $('.modifire').css('width', '30%');
         }
     });
+    $('#spellcastingAbilityScore').change(function (){
+        modifIndex();
+    })
 });

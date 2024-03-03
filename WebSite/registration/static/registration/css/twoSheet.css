@@ -29,6 +29,7 @@
 {
     display: flex;
     width: 273px;
+    font-size: 15px;
 }
 .initiative
 {
@@ -156,9 +157,43 @@
 }
 .equipment
 {
+    height: 370px;
     margin-top: 25px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: 2px solid black;
+}
+#plus-button
+{
+    width:25px;
+    height: 25px;
+}
+#minus-button
+{
+    width:25px;
+    height: 25px;
+}
+.atackBox
+{
+    display: flex;
+    justify-content: space-between;
+}
+#attackContainer
+{
+    justify-content: center;
+    width: 278px;
+    height: 128px;
+    overflow-y:auto;
+}
+#attackContainer::-webkit-scrollbar
+{
+    display: none;
+}
+.atackText
+{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 18px;
 }
 .coins
 {
@@ -167,15 +202,22 @@
     justify-content: space-around;
     text-align: center;
 }
+.atack
+{
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 5px;
+}
 .atack-wrapper {
-    margin-left: -1px;
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     position: relative;
     display: inline-block;
     box-sizing: border-box; /* новое */
+    align-content: center;
+    justify-content: center;
 }
 .InputFieldStyle
 {
-    width: 97px;
+    width: 92px;
 }

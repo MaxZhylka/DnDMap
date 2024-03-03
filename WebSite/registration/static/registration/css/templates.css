@@ -67,6 +67,15 @@ border: none; border-bottom: 1px solid black; display: block;outline: none;
 }
 .secondеTrip
 {
-    min-width: 100%; max-width: 100%;min-height: 341px; max-height: 341px;
+    min-width: 100%; max-width: 100%;min-height: 324px; max-height: 324px;
     border: none; display: block;outline: none;background-color: transparent;
+}
+.spelltext
+{
+    font-size: 45px;
+    width: 150px;
+    height: 50px;
+    border: black solid 2px;
+    border-radius: 5px;
+    margin: auto;
 }
