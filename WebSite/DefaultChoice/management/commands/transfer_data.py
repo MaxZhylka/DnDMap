@@ -2,33 +2,50 @@ from django.core.management.base import BaseCommand
 from DefaultChoice.models import Spells, WheelSpells
 
 class Command(BaseCommand):
-    help = 'Transfers data from Classes to WheelClasses'
+    help = 'Transfers data from Spells to WheelSpells'
 
     def handle(self, *args, **kwargs):
-        # Ваш код для переноса данных
-        objects_to_transfer = Spells.objects.all()
-        for obj in objects_to_transfer:
+        spells = Spells.objects.all()
+        wheel_spells_to_update = []
+        wheel_spells_to_create = []
+
+        for spell in spells:
             try:
-                wheel_obj = WheelSpells.objects.get(id=obj.id)
-                wheel_obj.SpellName = obj.SpellName
-                wheel_obj.SpellLevel = obj.SpellLevel
-                wheel_obj.SpellSchool = obj.SpellSchool
-                wheel_obj.SpellCastTime = obj.SpellCastTime
-                wheel_obj.SpellCastTimeText = obj.SpellCastTimeText
-                wheel_obj.SpellDistance = obj.SpellDistance
-                wheel_obj.SpellDistanceText = obj.SpellDistanceText
-                wheel_obj.SpellVerbal = obj.SpellVerbal
-                wheel_obj.SpellSomat = obj.SpellSomat
-                wheel_obj.SpellMaterial = obj.SpellMaterial
-                wheel_obj.SpellMaterials = obj.SpellMaterials
-                wheel_obj.SpellDuration = obj.SpellDuration
-                wheel_obj.SpellCaster = obj.SpellCaster
-                wheel_obj.SpellArchtipes = obj.SpellArchtipes
-                wheel_obj.SpellSource = obj.SpellSource
-                wheel_obj.SpellDescription = obj.SpellDescription
-                wheel_obj.SpellLevelDescription = obj.SpellLevelDescription
-                wheel_obj.SpellCheckBox = obj.SpellCheckBox
-                wheel_obj.save()
+                wheel_spell = WheelSpells.objects.get(id=spell.id)
             except WheelSpells.DoesNotExist:
-                pass
-        self.stdout.write(self.style.SUCCESS(objects_to_transfer))
+                wheel_spell = WheelSpells(id=spell.id)
+
+            wheel_spell.SpellName = spell.SpellName
+            wheel_spell.SpellLevel = spell.SpellLevel
+            wheel_spell.SpellSchool = spell.SpellSchool
+            wheel_spell.SpellCastTime = spell.SpellCastTime
+            wheel_spell.SpellCastTimeText = spell.SpellCastTimeText
+            wheel_spell.SpellDistance = spell.SpellDistance
+            wheel_spell.SpellDistanceText = spell.SpellDistanceText
+            wheel_spell.SpellVerbal = spell.SpellVerbal
+            wheel_spell.SpellSomat = spell.SpellSomat
+            wheel_spell.SpellMaterial = spell.SpellMaterial
+            wheel_spell.SpellMaterials = spell.SpellMaterials
+            wheel_spell.SpellDuration = spell.SpellDuration
+            wheel_spell.SpellCaster = spell.SpellCaster
+            wheel_spell.SpellArchtipes = spell.SpellArchtipes
+            wheel_spell.SpellSource = spell.SpellSource
+            wheel_spell.SpellDescription = spell.SpellDescription
+            wheel_spell.SpellLevelDescription = spell.SpellLevelDescription
+            wheel_spell.SpellCheckBox = spell.SpellCheckBox
+
+            if wheel_spell._state.adding:
+                wheel_spells_to_create.append(wheel_spell)
+            else:
+                wheel_spells_to_update.append(wheel_spell)
+
+        WheelSpells.objects.bulk_create(wheel_spells_to_create)
+        WheelSpells.objects.bulk_update(wheel_spells_to_update, [
+            'SpellName', 'SpellLevel', 'SpellSchool', 'SpellCastTime',
+            'SpellCastTimeText', 'SpellDistance', 'SpellDistanceText',
+            'SpellVerbal', 'SpellSomat', 'SpellMaterial', 'SpellMaterials',
+            'SpellDuration', 'SpellCaster', 'SpellArchtipes', 'SpellSource',
+            'SpellDescription', 'SpellLevelDescription', 'SpellCheckBox'
+        ])
+
+        self.stdout.write(self.style.SUCCESS('Successfully transferred Spells to WheelSpells'))
