@@ -16,6 +16,7 @@ class Command(BaseCommand):
                 wheel_spell = WheelSpells(id=spell.id)
 
             wheel_spell.SpellName = spell.SpellName
+            wheel_spell.SpellEngName = spell.SpellEngName
             wheel_spell.SpellLevel = spell.SpellLevel
             wheel_spell.SpellSchool = spell.SpellSchool
             wheel_spell.SpellCastTime = spell.SpellCastTime
@@ -41,7 +42,7 @@ class Command(BaseCommand):
 
         WheelSpells.objects.bulk_create(wheel_spells_to_create)
         WheelSpells.objects.bulk_update(wheel_spells_to_update, [
-            'SpellName', 'SpellLevel', 'SpellSchool', 'SpellCastTime',
+            'SpellName', 'SpellEngName', 'SpellLevel', 'SpellSchool', 'SpellCastTime',
             'SpellCastTimeText', 'SpellDistance', 'SpellDistanceText',
             'SpellVerbal', 'SpellSomat', 'SpellMaterial', 'SpellMaterials',
             'SpellDuration', 'SpellCaster', 'SpellArchtipes', 'SpellSource',

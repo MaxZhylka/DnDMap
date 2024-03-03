@@ -4,7 +4,11 @@ admin.site.register(Classes)
 from .models import WheelClasses
 admin.site.register(WheelClasses)
 from .models import Spells
-admin.site.register(Spells)
 from .models import WheelSpells
 admin.site.register(WheelSpells)
-# Register your models here.
+
+class SpellsAdmin(admin.ModelAdmin):  # Используем admin.ModelAdmin
+    list_display = ('SpellName', 'SpellLevel','SpellSchool','SpellConcentration','SpellCaster','SpellSource')  # Поля, отображаемые в админке
+    ordering = ('SpellName',)  # Сортировка по убыванию имени заклинания
+
+admin.site.register(Spells, SpellsAdmin)
