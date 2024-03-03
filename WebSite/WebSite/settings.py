@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'registration',
     'map',
+    'DefaultChoice',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
