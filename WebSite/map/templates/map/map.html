@@ -1,4 +1,5 @@
 {% load static %}
+
 <!doctype html>
 <html lang="ru">
 <head>
@@ -14,37 +15,114 @@
 <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
 <script src="{%static 'map/js/RGBDistance.js'%}"></script>
 <script src="{%static 'map/js/ShortestWay.js'%}"></script>
-    <script>var Cities = [];
-
-// Цикл для обхода массива cities и добавления каждого значения в Cities
-{% for el in cities %}
+<script src="{% static 'map/js/functions.js' %}"></script>
+<link rel="stylesheet" href="{% static 'map/css/header.css' %}" >
+    <script>
+    // Добавления данных из bd в переменные
+    let Cities = [];
+    {% for el in cities %}
     Cities.push(["{{ el.coordinates }}", "{{ el.name }}", "{{ el.icon.url }}"]);
-{% endfor %}
+    {% endfor %}
       let Road=[];
     {% for el in roads %}
     Road.push(["{{ el.coordinates }}", "{{ el.name }}"]);
     {% endfor %}
+    let Characters=[];
+    {% for el in characters %}
+     Characters.push("{{ el.name }}","{{ el.location }}");
+    {%  endfor%}
+    let News=[];
+    {% for el in news%}
+    News.push( {mainHeader: "{{el.Header}}", secondaryHeader: "{{el.Header2}}",mainText:"{{el.Body}}", secondaryText:"{{el.Body2}}",
+        mainImage:"{{ el.GeneralImage.url }}",   secondaryImage:"{{el.SecondaryImage}}",date: "{{ el.date}}",author:"{{ el.Author }}"});
+    {% endfor %}
 </script>
 
-<style>
-    #map{
-        width: 100%;
-        height: 100vh;
-    }
-</style>
+
 </head>
-<body>
-<div id="map">
-</div>
+
+<body id="body">
+
+    <header class="Header">
+        <button class="News-btn" onclick="togglePanel()">
+            <img class="News-img" src="{%static 'map/img/news.png' %}" alt="News">
+        </button>
+        <div class="search-form">
+        <input type="text" id="search-box" class="search-form_txt" placeholder="Введите название"  oninput="suggestCities()" on="moveToCity()" >
+
+          <button class="search-form-btn" onclick="moveToCity()">
+              <img class="search-form_image" src="{%static 'map/img/search.png' %}" alt="image">
+          </button>
+
+        </div>
+         <div id="suggestions" class="suggestions"></div>
+    </header>
+
+
+    <aside id="panel" class="news-panel"></aside>
+    <div id="map"></div>
 
 </body>
 </html>
 <script>
+function addNews(News) {
+    let panel=  document.getElementById("panel");
+    let list =document.createElement("ul");
+    list.className="News_container";
 
-    var map = L.map('map', {
-    crs: L.CRS.Simple} );
-    var bounds = [[0,0], [1061,1587]];
-    var image = L.imageOverlay("{% static 'map/img/Test2.jpg'%}" , bounds).addTo(map);
+    let MainHeader;
+    let MainText;
+    let MainImage;
+    let AllTextFields;
+    let overlay;
+    let counter=0;
+  for (let el of News) {
+    let one_News = document.createElement("li");
+    one_News.className = "News_Style";
+    one_News.id = counter;
+    MainHeader = document.createElement("div");
+    MainHeader.className = "Main_Header";
+    MainHeader.innerText = el.mainHeader;
+    MainText = document.createElement("div");
+    MainText.className = "Main_Text";
+    MainText.innerText = el.mainText;
+    MainImage = document.createElement("img");
+    MainImage.className = "Main_News_Image";
+    MainImage.src = el.mainImage;
+    AllTextFields = document.createElement("div");
+    AllTextFields.className = "News_Flex_Container";
+    overlay = document.createElement("div");
+    overlay.className = "overlay";
+    AllTextFields.appendChild(MainHeader);
+    AllTextFields.appendChild(MainText);
+    one_News.appendChild(MainImage);
+    one_News.appendChild(AllTextFields);
+    one_News.appendChild(overlay);
+    list.appendChild(one_News);
+
+    // Создаем область видимости для каждой итерации цикла
+    (function(id) {
+        one_News.addEventListener("click", function() {
+            OpenNews(id, News);
+        });
+    })(counter);
+
+    counter++;
+}
+
+    panel.appendChild(list);
+}
+addNews(News);
+ document.getElementById('search-box').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        moveToCity();
+    }
+});
+
+   let map = L.map('map', {
+    crs: L.CRS.Simple, zoomControl: false, attributionControl:false}, );
+    let bounds = [[0,0], [1061,1587]];
+    let image = L.imageOverlay("{% static 'map/img/Test2.jpg'%}" , bounds).addTo(map);
     map.fitBounds(bounds);
     map.setMaxBounds(bounds);
     map.maxBounds = bounds;
@@ -55,84 +133,19 @@
 
 
 
-
-    var wheelIcon = L.icon({
+    let wheelIcon = L.icon({
     iconUrl: 0,
     iconSize:     [35, 45],
     iconAnchor:   [17.5, 45],
     popupAnchor:  [-3, -46]
 });
-       function CreateAndDrawCities(Cities, wheelIcon) {
-    for (let el of Cities) {
-        wheelIcon.options.iconUrl =el[2];
-        let str = el[0];
-        var numbers = str.split(',').map(function(item) { return parseFloat(item.trim()); });
-
-        L.marker(numbers, {icon: wheelIcon}).addTo(map).bindPopup(el[1]);
-    }
-}
-
-
-
     CreateAndDrawCities(Cities,wheelIcon);
-var Roads=[];
-function  CreateAndDrawRoads(Road,Roads)
-{
-    for(let el of Road)
-    {
-        var coordinates= JSON.parse(el[0]);
-        //console.log(coordinates);
-        var road={
-            "type": "LineString",
-            "coordinates": coordinates
-
-        }
-        Roads.push(road);
-        L.geoJSON(road).addTo(map);
-    }
-}
-CreateAndDrawRoads(Road,Roads);
-
-    let coordinatesArray=[];
-
-//Считывание координат с точки по лкм
-
-// map.eachLayer(function(layer) {
-//     if (layer instanceof L.Marker) {
-//         layer.on('click', function(e) {
-//             var latlng = e.latlng; //
-//
-//             coordinatesArray.push([latlng.lng, latlng.lat]);
-//             console.log(JSON.stringify(coordinatesArray));
-//         });
-//     }
-// });
-    // map.on('click', function(e) {
-//     var latlng = e.latlng; // Получаем координаты клика на карте
-//     // Округляем координаты до 4 знаков после запятой и добавляем их в массив
-//     coordinatesArray.push([latlng.lng, latlng.lat]);
-//     console.log(JSON.stringify(coordinatesArray));
-// });
-//
-// map.on('contextmenu', function(e) {
-//     var latlng = e.latlng; // Получаем координаты клика на карте
-//     var roundedLat = latlng.lat.toFixed(4); // Округляем широту
-//     var roundedLng = latlng.lng.toFixed(4); // Округляем долготу
-//     var roundedCoords = [roundedLat, roundedLng]; // Формируем массив округленных координат
-//     // Добавляем округленные координаты клика на карту в массив или делаем с ними что-то другое
-//     alert(roundedCoords); // Выводим округленные координаты в виде всплывающего сообщения
-// });
-
-
-   // var start = [[833.7813, 231.2500],[676, 345],[724.0000, 419.7500],[874.7500, 250.8125],[836.1875, 334.8750],[690.1100,431.3806],[703.1875, 447.8125],[698.6250,  467.1875]];
-    //var end = [[833.7813, 231.2500],[676, 345],[724.0000, 419.7500],[874.7500, 250.8125],[836.1875, 334.8750],[690.1100,431.3806],[703.1875, 447.8125],[698.6250,  467.1875]];
-      const Road99 = new ShortestWay(Roads,0,0);
-
+let Roads=[];
 map.eachLayer(function(layer) {
     if (layer instanceof L.Marker) {
         layer.on('click', function(e) {
-            var lat = e.latlng.lat; // Получаем широту точки
-            var lng = e.latlng.lng; // Получаем долготу точки
+            let lat = e.latlng.lat; // Получаем широту точки
+            let lng = e.latlng.lng; // Получаем долготу точки
 
             coordinatesArray.push([lng, lat]); // Добавляем координаты в массив
 
@@ -148,40 +161,11 @@ map.eachLayer(function(layer) {
         });
     }
 });
+CreateAndDrawRoads(Road,Roads);
 
+ let coordinatesArray=[];
+ const Road99 = new ShortestWay(Roads,0,0);
 
-
-
-
-
-
-
-
-
-
-
-    function test(start,end)
-    {
-        for(let el1 of start)
-        {
-            for(let el2 of end)
-            {
-                if(el1[0] == el2[0])
-                {
-                    continue;
-                }
-                else
-                {
-                    Road99.SetEnd(el2);
-                    Road99.SetStart(el1);
-                    console.log(Road99.GetShortestRoad());
-                }
-            }
-        }
-    }
-    // test(start,end,Roads);\
-    // Road99.RedRoad();
-    // console.log(Road99.GetShortestRoad());
 
 
 

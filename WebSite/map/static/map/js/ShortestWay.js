@@ -50,9 +50,7 @@ class ShortestWay
             for (let el of CompletedRoad) {
 
 
-                var geojsonLine = L.geoJSON(el, {
-                    style: function (feature) {
-                        return {color: '#ff0000',width:1};
+                var geojsonLine = L.geoJSON(el, {style: function (feature) {return {color: '#ff0000',weight:7};
                     }
                 }).addTo(map);
             }
