@@ -33,7 +33,11 @@ class Command(BaseCommand):
             wheel_spell.SpellSource = spell.SpellSource
             wheel_spell.SpellDescription = spell.SpellDescription
             wheel_spell.SpellLevelDescription = spell.SpellLevelDescription
-            wheel_spell.SpellCheckBox = spell.SpellCheckBox
+            if wheel_spell.SpellSource == 'Players handbook':
+                wheel_spell.SpellCheckBox = '1'
+            else:
+                wheel_spell.SpellCheckBox = '0'
+
 
             if wheel_spell._state.adding:
                 wheel_spells_to_create.append(wheel_spell)

@@ -36,13 +36,13 @@ class Spells(models.Model):
     SpellCastTime =models.IntegerField('Время накладывания', default=1)
     SpellCastTimeText = models.TextField('Еденица измерения', default='Действие')
     SpellDistance = models.CharField('Дистания',max_length=40,default='')
-    SpellDistanceText = models.CharField('Еденица измерения', max_length=20, default='Футы')
+    SpellDistanceText = models.CharField('Еденица измерения', max_length=20,blank=True, default='Футы')
     SpellVerbal = models.BooleanField('Вербальные Компоненты', default='0')
     SpellSomat = models.BooleanField('Соматические Компоненты', default='0')
     SpellConcentration = models.BooleanField('Концентрация', default='0')
     SpellMaterial = models.BooleanField('Материальные Компоненты', default='0')
     SpellMaterials = models.TextField('Материалы', default='',blank=True)
-    SpellDuration = models.TextField('Длительность', max_length=20, default='Мгновенно')
+    SpellDuration = models.TextField('Длительность', default='Мгновенно')
     SpellCaster = models.TextField('Класс с маленькой буквы!', default='')
     SpellArchtipes = models.TextField('Архетипы', default='',blank=True)
     SpellSource = models.TextField('Источник', default='Players handbook')
@@ -89,7 +89,7 @@ class WheelSpells(models.Model):
     SpellSource = models.TextField('Источник', default='Players handbook')
     SpellDescription = models.TextField('Описание',default='')
     SpellLevelDescription = models.TextField('На больших уровнях',default='',blank=True)
-    SpellCheckBox = models.BooleanField('Имеется ли', default='1')
+    SpellCheckBox = models.BooleanField('Имеется ли', default='0')
     def __str__(self):
         return self.SpellName
 class Users(models.Model):
