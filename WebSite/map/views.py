@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from rest_framework import viewsets
 from django.http import HttpResponse
 from .models import Cities
 from .models import Roads
 from .models import News
 from registration.models import Character
-
+from map.Serializer import MapSerializer
 
 def Name(request):
     cities=Cities.objects.all()
@@ -13,3 +14,8 @@ def Name(request):
     news=News.objects.all()
     return render(request, "map/map.html",{'cities': cities, 'roads': roads, 'characters': characters, 'news': news})
 
+# ---------------- api -------------------
+class MapApiView(viewsets.ModelViewSet):
+    queryset = Cities.objects.all()
+    serializer_class = MapSerializer
+    http_method_names = ['get']

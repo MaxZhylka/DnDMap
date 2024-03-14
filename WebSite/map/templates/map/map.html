@@ -18,6 +18,7 @@
 <script src="{% static 'map/js/functions.js' %}"></script>
 <link rel="stylesheet" href="{% static 'map/css/header.css' %}" >
     <script>
+
     // Добавления данных из bd в переменные
     let Cities = [];
     {% for el in cities %}
@@ -44,6 +45,7 @@
 <body id="body">
 
     <header class="Header">
+        <div id="app"></div>
         <button class="News-btn" onclick="togglePanel()">
             <img class="News-img" src="{%static 'map/img/news.png' %}" alt="News">
         </button>

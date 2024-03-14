@@ -1,11 +1,16 @@
 
-from django.urls import  path
+from django.urls import  path, include
 from . import views
+from rest_framework import routers
+from .views import  MapApiView
 from django.conf import settings
 from django.conf.urls.static import static
 
+router = routers.DefaultRouter()
+router.register(r'api/map', MapApiView)
 urlpatterns = [
 
 
-    path('map', views.Name)
+    path('map', views.Name),
+    path('', include(router.urls))
 ]
