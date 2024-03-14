@@ -6,4 +6,4 @@ from django import forms
 class UserForm(ModelForm):
     class Meta:
         model = Classes,WheelClasses,Spells
-        fields = ['ClassName','ClassCheckBox','SpellName','SpellLevel','SpellSchool','SpellCastTime','SpellCastTimeText','SpellDistance','SpellDistanceText','SpellVerbal','SpellSomat','SpellMaterial','SpellMaterials','SpellDuration','SpellCaster','SpellArchtipes','SpellSource','SpellDescription','SpellLevelDescription','SpellCheckBox']
+        fields = ['ClassName','ClassCheckBox','SpellName','SpellEngName','SpellLevel','SpellSchool','SpellCastTime','SpellCastTimeText','SpellDistance','SpellDistanceText','SpellVerbal','SpellSomat','SpellMaterial','SpellMaterials','SpellDuration','SpellCaster','SpellArchtipes','SpellSource','SpellDescription','SpellLevelDescription']
