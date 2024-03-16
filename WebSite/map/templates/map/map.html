@@ -146,19 +146,19 @@ let Roads=[];
 map.eachLayer(function(layer) {
     if (layer instanceof L.Marker) {
         layer.on('click', function(e) {
-            let lat = e.latlng.lat; // Получаем широту точки
-            let lng = e.latlng.lng; // Получаем долготу точки
+            let lat = e.latlng.lat;
+            let lng = e.latlng.lng;
 
-            coordinatesArray.push([lng, lat]); // Добавляем координаты в массив
+            coordinatesArray.push([lng, lat]);
 
-            console.log(JSON.stringify(coordinatesArray)); // Выводим массив в консоль
+            console.log(JSON.stringify(coordinatesArray));
 
             if (coordinatesArray.length === 2) {
-                Road99.start = Road99.pointCoordinatesSwap(coordinatesArray[0]); // Устанавливаем начальную точку
-                Road99.end = Road99.pointCoordinatesSwap(coordinatesArray[1]);  // Устанавливаем конечную точку
-                console.log(Road99.GetShortestRoad()); // Выводим кратчайший путь в консоль
-                Road99.RedRoad(); // Отображаем кратчайший путь на карте
-                coordinatesArray.length = 0; // Очищаем массив координат
+                Road99.start = Road99.pointCoordinatesSwap(coordinatesArray[0]);
+                Road99.end = Road99.pointCoordinatesSwap(coordinatesArray[1]);
+                console.log(Road99.GetShortestRoad());
+                Road99.RedRoad();
+                coordinatesArray.length = 0;
             }
         });
     }

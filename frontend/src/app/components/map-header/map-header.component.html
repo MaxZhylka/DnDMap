@@ -1,0 +1,15 @@
+    <header class="Header">
+        <div id="app"></div>
+        <button class="News-btn" onclick="togglePanel()">
+            <img class="News-img" src=" " alt="News">
+        </button>
+        <div class="search-form">
+        <input type="text" id="search-box" class="search-form_txt" placeholder="Введите название"  oninput="suggestCities()" on="moveToCity()" >
+
+          <button class="search-form-btn" onclick="moveToCity()">
+              <img class="search-form_image" src="" alt="image">
+          </button>
+
+        </div>
+         <div id="suggestions" class="suggestions"></div>
+    </header>
