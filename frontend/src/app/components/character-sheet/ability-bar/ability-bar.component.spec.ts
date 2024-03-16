@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CharecterHeaderComponent } from './charecter-header.component';
+import { AbilityBarComponent } from './ability-bar.component';
 
-describe('CharecterHeaderComponent', () => {
-  let component: CharecterHeaderComponent;
-  let fixture: ComponentFixture<CharecterHeaderComponent>;
+describe('AbilityBarComponent', () => {
+  let component: AbilityBarComponent;
+  let fixture: ComponentFixture<AbilityBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CharecterHeaderComponent]
+      imports: [AbilityBarComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CharecterHeaderComponent);
+    fixture = TestBed.createComponent(AbilityBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

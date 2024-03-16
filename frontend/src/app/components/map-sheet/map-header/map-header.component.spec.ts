@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapHeaderComponent } from './map-header.component';
+import { MapHeaderComponent} from "./map-header.component";
 
 describe('MapHeaderComponent', () => {
   let component: MapHeaderComponent;
@@ -11,7 +11,7 @@ describe('MapHeaderComponent', () => {
       imports: [MapHeaderComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(MapHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

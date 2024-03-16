@@ -1,5 +1,5 @@
 import {Component, OnInit, Inject, PLATFORM_ID, AfterViewInit, inject} from '@angular/core';
-import { MapService } from "../../services/map.service";
+import { MapService } from "../../../services/map.service";
 import { isPlatformBrowser } from '@angular/common';
 
 
@@ -8,7 +8,7 @@ declare const ShortestWay: any;
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css','../../../../node_modules/leaflet/dist/leaflet.css']
+  styleUrls: ['./map.component.css','../../../../../node_modules/leaflet/dist/leaflet.css']
 })
 export class MapComponent implements OnInit, AfterViewInit {
   cities: any = [];
