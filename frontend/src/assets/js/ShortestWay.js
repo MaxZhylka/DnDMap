@@ -1,3 +1,6 @@
+
+
+
 class ShortestWay
        {
             constructor(Roads, Start, End)
@@ -44,17 +47,18 @@ class ShortestWay
              return this.LineLength(Points)*2.39401496 ;
 
         }
-        DrawRedLine(chosenRoad) {
-            var CompletedRoad = chosenRoad.GetRoad();
-            //console.log(CompletedRoad);
-            for (let el of CompletedRoad) {
-
-
-                var geojsonLine = L.geoJSON(el, {style: function (feature) {return {color: '#ff0000',weight:7};
-                    }
-                }).addTo(map);
-            }
-        }
+        // DrawRedLine(chosenRoad) {
+        //
+        //     var CompletedRoad = chosenRoad.GetRoad();
+        //     //console.log(CompletedRoad);
+        //     for (let el of CompletedRoad) {
+        //
+        //
+        //         var geojsonLine = L.geoJSON(el, {style: function (feature) {return {color: '#ff0000',weight:7};
+        //             }
+        //         }).addTo(map);
+        //     }
+        // }
        GetShortestRoad()
        {
             let PossibleRoads = [];
@@ -64,17 +68,22 @@ class ShortestWay
             let start=this.start.slice();
 
             let Result=this.RecursiveSearch(PossibleRoads, chosenRoad, index, CompletedRoads,start);
-            return Result.getGreenValue();
-        }
-      RedRoad()
-       {
-            let PossibleRoads = [];
-            let CompletedRoads = [];
-            let chosenRoad = new RGBDistance();
-            let index;
-            let start=this.start.slice();
 
-             this.DrawRedLine( this.RecursiveSearch(PossibleRoads, chosenRoad, index, CompletedRoads,start) );
+            return Result;
+        }
+      // RedRoad()
+      //  {
+      //       let PossibleRoads = [];
+      //       let CompletedRoads = [];
+      //       let chosenRoad = new RGBDistance();
+      //       let index;
+      //       let start=this.start.slice();
+      //
+      //        this.DrawRedLine( this.RecursiveSearch(PossibleRoads, chosenRoad, index, CompletedRoads,start) );
+      //   }
+        static ReturnLength(Road)
+        {
+           return Road.getGreenValue();
         }
 
         RecursiveSearch(PossibleRoads, chosenRoad, index,  CompletedRoads, start)
@@ -114,6 +123,7 @@ class ShortestWay
                 return this.RecursiveSearch(PossibleRoads, chosenRoad, index, CompletedRoads,start);
             }
          }
+
      checkForCompletedStartPoint(CompletedRoads, chosenRoad,start) {
 
                 let endOfChosenRoad=chosenRoad.lastRoadPoint();

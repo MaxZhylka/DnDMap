@@ -10,7 +10,13 @@ export class MapService {
 
   baseurl = environment.apiUrl;
   constructor(private http: HttpClient) { }
-  getCategory(): Observable<any> {
-    return this.http.get<any>(this.baseurl+'/api/map/')
+  getCities(): Observable<any> {
+    return this.http.get<any>(this.baseurl+'/api/cities/')
+  }
+  getRoads(): Observable<any> {
+    return this.http.get<any>(this.baseurl+'/api/roads/')
+  }
+  getNews(): Observable<any> {
+    return this.http.get<any>(this.baseurl+'/api/news/')
   }
 }
