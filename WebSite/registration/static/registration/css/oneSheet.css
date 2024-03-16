@@ -17,15 +17,16 @@
     font-size: 0.8em;
     font-weight: bold;
 }
+
+.formab
+{
+    margin-top: 6px;
+}
 .modifier
 {
     width: 50px;
     margin: 0 auto;
     font-size: 30px;
-}
-.formab
-{
-    margin-top: 6px;
 }
 .inspiration
 {
