@@ -27,3 +27,8 @@
 {
     width: 50px;height: 50px;font-size: 25px;border-radius: 30px;border: 2px solid black;align-items: center;margin: 0 auto; display: block;text-align: center;
 }
+.text
+{
+    font-size: 1.2em; /* Например, это будет 16px, если базовый размер шрифта равен 16px */
+   font-weight: bold;
+}

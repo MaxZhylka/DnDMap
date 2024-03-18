@@ -1,0 +1,10 @@
+.test
+{
+    width: 190px;
+border: none; border-bottom: 1px solid black; display: block;outline: none;
+}
+label
+{
+  color: #838383;
+            font-size: 14px;
+}

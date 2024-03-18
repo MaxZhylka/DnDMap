@@ -1,0 +1,9 @@
+<div class="personal">
+  <div *ngFor="let text of personaltraitstext; let i = index">
+      <app-personal-traits [personalText]="text" [personalId]="personaltraitsid[i]"></app-personal-traits>
+  </div>
+  <div class="features">
+    <textarea class="feature" id="features"  type="text"></textarea>
+    ОСОБЕННОСТИ
+  </div>
+</div>
