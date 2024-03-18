@@ -9,6 +9,9 @@ import {PersonalTraitsComponent} from "../../components/character-sheet/personal
 import {
   PersonalTraitsBarComponent
 } from "../../components/character-sheet/personal-traits-bar/personal-traits-bar.component";
+import {InspirationComponent} from "../../components/character-sheet/inspiration/inspiration.component";
+import {FunctionsComponent} from "../../components/character-sheet/functions/functions.component";
+import {ProfsheetComponent} from "../../components/character-sheet/profsheet/profsheet.component";
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import {
     AbilityBarComponent,
     HeadContentComponent,
     PersonalTraitsComponent,
-    PersonalTraitsBarComponent
+    PersonalTraitsBarComponent,
+    InspirationComponent,
+    FunctionsComponent,
+    ProfsheetComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +38,10 @@ import {
     AbilityBarComponent,
     HeadContentComponent,
     PersonalTraitsComponent,
-    PersonalTraitsBarComponent
+    PersonalTraitsBarComponent,
+    InspirationComponent,
+    FunctionsComponent,
+    ProfsheetComponent
   ]
 })
 export class CharacterSheetModule { }

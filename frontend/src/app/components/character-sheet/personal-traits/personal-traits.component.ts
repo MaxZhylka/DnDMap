@@ -8,4 +8,5 @@ import {Component, Input} from '@angular/core';
 export class PersonalTraitsComponent {
   @Input() personalId: string='';
   @Input() personalText: string='';
+  text:string='';
 }

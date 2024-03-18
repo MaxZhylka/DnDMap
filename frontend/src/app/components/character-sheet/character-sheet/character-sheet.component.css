@@ -6,6 +6,11 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+.abillitis
+{
+    width: 30%;
+    height: 675px;
+}
 .headSheet{
     width: 900px;
     height: 100px;
