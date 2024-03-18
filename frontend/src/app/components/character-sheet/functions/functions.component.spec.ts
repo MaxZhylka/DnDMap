@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CharacterSheetComponent } from './character-sheet.component';
+import { FunctionsComponent } from './functions.component';
 
-describe('CharacterSheetComponent', () => {
-  let component: CharacterSheetComponent;
-  let fixture: ComponentFixture<CharacterSheetComponent>;
+describe('FunctionsComponent', () => {
+  let component: FunctionsComponent;
+  let fixture: ComponentFixture<FunctionsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CharacterSheetComponent]
+      imports: [FunctionsComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(CharacterSheetComponent);
+    
+    fixture = TestBed.createComponent(FunctionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -21,4 +21,3 @@ describe('CharacterSheetComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

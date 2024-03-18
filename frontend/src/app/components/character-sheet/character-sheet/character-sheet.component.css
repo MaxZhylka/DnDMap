@@ -1,0 +1,44 @@
+.mainSheet
+{
+    width: 900px;
+    height: 1100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.abillitis
+{
+    width: 30%;
+    height: 675px;
+}
+.headSheet{
+    width: 900px;
+    height: 100px;
+    display: flex;
+    margin: auto;
+}
+.onemainSheet
+{
+    display: flex;
+    width: 296px;
+    height: 1070px;
+    text-align: center;
+    font-size: 10px;
+    flex-wrap: wrap;
+}
+.twomainSheet
+{
+    display: flex;
+    width: 296px;
+    height: 1070px;
+    text-align: center;
+    font-size: 10px;
+    flex-wrap: wrap;
+}
+.threemainSheet
+{
+    width: 296px;
+    height: 1070px;
+    text-align: center;
+    font-size: 10px;
+}
