@@ -16,11 +16,12 @@ export class MapComponent implements OnInit, AfterViewInit {
   chosenRoads: any=[];
   roadsCoordinates: any=[];
   image: string = "assets/Test2.jpg";
-  private map: any;
+   map: any;
   showLeaflet = false;
   platformId = inject(PLATFORM_ID);
 
   ShortWay: any;
+
   constructor(private apiMap: MapService) {
   }
 
@@ -59,10 +60,14 @@ export class MapComponent implements OnInit, AfterViewInit {
        this.addMarkers();
        this.addRoads();
        this.FindWay();
+       this.apiMap.setMap(this.map);
  });
   }
   }
-
+ getMap()
+{
+  return this.map;
+}
 private addMarkers(): void {
   if (isPlatformBrowser(this.platformId)) {
     import('leaflet').then((L) => {
@@ -99,30 +104,29 @@ private addRoads(): void
   }
 }
 
-  getCities = () => {
-    this.apiMap.getCities().subscribe(
-      data => {
-
-        this.cities = data;
-
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
+ getCities = () => {
+  this.apiMap.getCities().subscribe({
+    next: (data) => {
+      this.cities = data;
+    },
+    error: (error) => {
+      console.log(error);
+    }
+  });
+}
 
   getRoads = () => {
-    this.apiMap.getRoads().subscribe(
-      data => {
+    this.apiMap.getRoads().subscribe({
+      next: (data) => {
 
         this.roadsData = data;
 
       },
-      error => {
+      error: (error) => {
         console.log(error);
       }
-    );
+    });
+
   }
     DrawRedLine(chosenRoad:any) {
       if (isPlatformBrowser(this.platformId)) {
@@ -175,6 +179,7 @@ private addRoads(): void
     });
   }
 }
+
 
 
 }

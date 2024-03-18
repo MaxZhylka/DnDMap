@@ -1,0 +1,114 @@
+.Header {
+    background-color: #FFB74B;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    top: 0;
+    z-index: 1000; /* Ниже, чем у .CitiesContainer и .suggestions, чтобы они были поверх Header */
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.search-form {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 50px;
+    width: 300px;
+    border-radius: 50px;
+
+    background-color: white;
+    border: 3px solid #FF9900;
+    z-index: 2001; /* Убедитесь, что .search-form находится над Header */
+}
+
+.CitiesContainer {
+    position: absolute;
+    z-index: 2002; /* Значение должно быть выше, чем у .search-form для видимости поверх остальных элементов */
+    width: 100%; /* Или конкретная ширина в пикселях, если требуется */
+    /* Дополнительные стили для позиционирования и отображения, если нужно */
+}
+
+.suggestions {
+    margin-top: -15px;
+    position: absolute;
+    top: 100%;
+
+    box-sizing: border-box;
+    width:250px;
+    left:25px;
+    background-color: white;
+    cursor: pointer;
+    padding-left: 5px;
+    border-top: none;
+    /* Нет необходимости в таком высоком z-index, если структура идет правильно */
+}
+
+.suggestions:hover {
+    background-color: #f0f0f0;
+}
+
+
+.search-form_txt {
+    border: none;
+    padding-left: 15px;
+    border-radius: 50px;
+    height: 50px;
+    width: 300px;
+    outline: none;
+    font-size: 20px;
+    background-color: white;
+  font-family: "Times New Roman",  sans-serif;
+}
+
+.hint {
+  white-space: pre;
+    outline: none;
+    border: none;
+    padding-top:13.5px;
+    position: absolute;
+    cursor: pointer;
+    Width:150px;
+    Height:36.5px;
+    font-family: "Times New Roman",  sans-serif;
+    font-size: 20px;
+    color: #999;
+}
+hint:hover
+{
+  color: black;
+}
+
+
+.search-form_txt + .hint {
+    padding-left: 0;
+}
+
+
+
+.News-btn
+{
+    background-color: transparent;
+    width:80px;
+    height:80px;
+    border: none;
+    border-radius: 10px;
+      transition: background-color 500ms ease-in-out, transform 200ms ease-in-out;
+}
+.News-btn:hover
+{
+    background-color: #FF9900;
+}
+.News-btn:active
+{
+
+    transform: scale(0.9);
+}
+
+.News-img
+{
+    margin-top:-2px;
+    width:50px;
+    height:50px;
+}

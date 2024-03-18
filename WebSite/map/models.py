@@ -26,14 +26,14 @@ class Roads(models.Model):
         verbose_name_plural = 'Дороги'
 
 class News(models.Model):
-    Header = models.CharField('Главный заголвовк', max_length=30)
-    Body = models.TextField('Главный текст')
-    date = models.DateTimeField('Дата публикации', default=timezone.now)
-    Header2 = models.CharField('Второстепенный заголовок', max_length=30, default='0')
-    Body2 = models.TextField('Второстепенный текст', default='0')
-    GeneralImage = models.ImageField(upload_to='GeneralNewsImage/')
-    SecondaryImage = models.ImageField(upload_to='GeneralNewsImage/', default='0')
-    Author = models.CharField('News_Author', max_length=30)
+    mainHeader = models.CharField('Главный заголвовк', max_length=30)
+    mainText = models.TextField('Главный текст')
+    dateOfPublishing = models.DateTimeField('Дата публикации', default=timezone.now)
+    secondaryHeader = models.CharField('Второстепенный заголовок', max_length=30, default='0')
+    secondaryText = models.TextField('Второстепенный текст', default='0')
+    mainImage = models.ImageField(upload_to='GeneralNewsImage/')
+    secondaryImage = models.ImageField(upload_to='GeneralNewsImage/', default='0')
+    author = models.CharField('News_Author', max_length=30)
     def __str__(self):
         return self.Header
     class Meta:

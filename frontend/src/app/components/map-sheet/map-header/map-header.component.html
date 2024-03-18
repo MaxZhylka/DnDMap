@@ -1,15 +1,18 @@
-    <header class="Header">
-        <div id="app"></div>
-        <button class="News-btn" onclick="togglePanel()">
-            <img class="News-img" src=" " alt="News">
-        </button>
-        <div class="search-form">
-        <input type="text" id="search-box" class="search-form_txt" placeholder="Введите название"  oninput="suggestCities()" on="moveToCity()" >
+<header class="Header">
+    <div #app></div>
+    <button class="News-btn" (click)="togglePanel()">
+        <img class="News-img" src="{{newsImg}} " alt="News">
+    </button>
 
-          <button class="search-form-btn" onclick="moveToCity()">
-              <img class="search-form_image" src="" alt="image">
-          </button>
+    <div class="search-form">
+       <div class="CitiesContainer" *ngFor="let city of searchedCities; let i = index">
+  <app-citis-el-li class="suggestions"  (mousedown)="ignoreBlur = true" [ResetFunction]="ResetFocus"  [ngStyle]="{'margin-top.px': 29+18 * i-1}" [city]="city"> </app-citis-el-li>
+</div>
+   <input #searchField type="text" class="search-form_txt"  placeholder="Введите название города..."
+          [(ngModel)]="searchQuery" (click)="suggestCities()" (input)="suggestCities()" (keyup.enter)="moveToCity()" (keydown.tab)="moveToCity()" (blur)="Blur()">
+<span class="hint" (mousedown)="ignoreBlur = true"  *ngIf="hint" [ngStyle]="hintMargin" (click)="moveToCity()">{{ hint }} </span>
 
-        </div>
-         <div id="suggestions" class="suggestions"></div>
-    </header>
+    </div>
+<app-news-panel [left]="displayLeft"> </app-news-panel>
+
+</header>

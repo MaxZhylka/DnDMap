@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
 from .models import Cities, Roads, News
-from .Serializer import CitySerializer, RoadSerializer
+from .Serializer import CitySerializer, RoadSerializer, NewsSerializer
 from registration.models import Character
 from rest_framework import viewsets
 
@@ -23,4 +23,8 @@ class MapApiView(viewsets.ModelViewSet):
 class RoadsApiView(viewsets.ModelViewSet):
     queryset = Roads.objects.all()
     serializer_class = RoadSerializer
+    http_method_names = ['get']
+class NewsApiView(viewsets.ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
     http_method_names = ['get']

@@ -1,0 +1,21 @@
+.newsPanel
+{
+    display: block;
+    position: fixed;
+    z-index: 999;
+    margin-top:40px;
+    background-color: #FFE9C9;
+    width: 480px;
+   transition: 500ms;
+    height: calc(100vh - 80px);
+    list-style: none;
+
+   padding: 0;
+    overflow-y: auto;
+}
+
+.newsPanel::-webkit-scrollbar {
+  display: none;
+    z-index: 0;
+
+}
