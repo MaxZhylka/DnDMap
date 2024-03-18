@@ -1,0 +1,5 @@
+<div class="newsPanel" [ngStyle]="{'left.px': left}">
+<div *ngFor="let news of Newses">
+<app-news [mainHeader]="news.mainHeader" [mainText]="news.mainText" [mainImage]="news.mainImage" ></app-news>
+  </div>
+</div>
