@@ -12,6 +12,7 @@ import {
 import {InspirationComponent} from "../../components/character-sheet/inspiration/inspiration.component";
 import {FunctionsComponent} from "../../components/character-sheet/functions/functions.component";
 import {ProfsheetComponent} from "../../components/character-sheet/profsheet/profsheet.component";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -27,10 +28,11 @@ import {ProfsheetComponent} from "../../components/character-sheet/profsheet/pro
     FunctionsComponent,
     ProfsheetComponent
   ],
-  imports: [
-    CommonModule,
+    imports: [
+        CommonModule,
+        FormsModule,
 
-  ],
+    ],
   exports:[
     CharacterSheetComponent,
     CharacterHeaderComponent,

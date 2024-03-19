@@ -1,4 +1,4 @@
 <div class="characterClass">
-  <input class="headContent test" id="{{ id }}" type="text" maxlength="20" [value]="id === 'level' ? '1' : ''">
+  <input class="headContent test" id="{{ id }}" type="text" maxlength="20" (input)="onInput(value)" [(ngModel)]="value">
   <label>{{ text }}</label>
 </div>
