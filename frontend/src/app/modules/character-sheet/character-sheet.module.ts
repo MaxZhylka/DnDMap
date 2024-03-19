@@ -12,6 +12,8 @@ import {
 import {InspirationComponent} from "../../components/character-sheet/inspiration/inspiration.component";
 import {FunctionsComponent} from "../../components/character-sheet/functions/functions.component";
 import {ProfsheetComponent} from "../../components/character-sheet/profsheet/profsheet.component";
+import {SavingthrowComponent} from "../../components/character-sheet/savingthrow/savingthrow.component";
+import {SavingthrowBarComponent} from "../../components/character-sheet/savingthrow-bar/savingthrow-bar.component";
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {ProfsheetComponent} from "../../components/character-sheet/profsheet/pro
     PersonalTraitsBarComponent,
     InspirationComponent,
     FunctionsComponent,
-    ProfsheetComponent
+    ProfsheetComponent,
+    SavingthrowComponent,
+    SavingthrowBarComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +45,9 @@ import {ProfsheetComponent} from "../../components/character-sheet/profsheet/pro
     PersonalTraitsBarComponent,
     InspirationComponent,
     FunctionsComponent,
-    ProfsheetComponent
+    ProfsheetComponent,
+    SavingthrowComponent,
+    SavingthrowBarComponent
   ]
 })
 export class CharacterSheetModule { }
