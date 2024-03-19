@@ -12,9 +12,7 @@ import {
 import {InspirationComponent} from "../../components/character-sheet/inspiration/inspiration.component";
 import {FunctionsComponent} from "../../components/character-sheet/functions/functions.component";
 import {ProfsheetComponent} from "../../components/character-sheet/profsheet/profsheet.component";
-import {SavingthrowComponent} from "../../components/character-sheet/savingthrow/savingthrow.component";
-import {SavingthrowBarComponent} from "../../components/character-sheet/savingthrow-bar/savingthrow-bar.component";
-
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -28,14 +26,13 @@ import {SavingthrowBarComponent} from "../../components/character-sheet/savingth
     PersonalTraitsBarComponent,
     InspirationComponent,
     FunctionsComponent,
-    ProfsheetComponent,
-     SavingthrowComponent,
-    SavingthrowBarComponent
+    ProfsheetComponent
   ],
-  imports: [
-    CommonModule,
+    imports: [
+        CommonModule,
+        FormsModule,
 
-  ],
+    ],
   exports:[
     CharacterSheetComponent,
     CharacterHeaderComponent,
@@ -46,9 +43,7 @@ import {SavingthrowBarComponent} from "../../components/character-sheet/savingth
     PersonalTraitsBarComponent,
     InspirationComponent,
     FunctionsComponent,
-    ProfsheetComponent,
-     SavingthrowComponent,
-    SavingthrowBarComponent
+    ProfsheetComponent
   ]
 })
 export class CharacterSheetModule { }

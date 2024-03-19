@@ -4,7 +4,6 @@
 </div>
 <div class="rightHeadSheet">
   <div *ngFor="let text of headText; let i = index">
-    <app-head-content [text]="text" [id]="headId[i]"  [(ngModel)]="characterService.headValue[i]" > </app-head-content>
+    <app-head-content [text]="text" [id]="headId[i]"></app-head-content>
   </div>
 </div>
-

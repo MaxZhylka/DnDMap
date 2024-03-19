@@ -25,7 +25,6 @@ export class MapHeaderComponent implements  OnInit{
   newsImg: string=  "../../assets/img/news.png";
   hint:string="";
   displayLeft:number=-480;
-
    constructor(private apiMap: MapService) {
   }
 ngOnInit() {
