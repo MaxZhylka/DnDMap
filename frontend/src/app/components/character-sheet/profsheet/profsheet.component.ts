@@ -1,22 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import {MapHeaderComponent} from "../../map-sheet/map-header/map-header.component";
+import {CharacterHeaderComponent} from "../character-header/character-header.component";
+import {CharacterService} from "../../../services/character.service";
 
 @Component({
   selector: 'app-profsheet',
   templateUrl: './profsheet.component.html',
-  styleUrl: './profsheet.component.css'
+  styleUrls: ['./profsheet.component.css']
 })
-export class ProfsheetComponent {
-@Input() text: string = '';
-@Input() id: string = '';
+export class ProfsheetComponent  {
+  @Input() text: string = '';
+  @Input() id: string = '';
 
-proficiency:string='';
-calculateProficiency(): void {
-  const inputValue = parseInt(this.id);
-  if (inputValue >= 1 && inputValue <= 20) {
-    this.proficiency= '+' + Math.ceil(inputValue / 4);
-  } else {
-    this.proficiency= 'Invalid input';
+  lvl=this.characterService.headValue[5];
+
+  constructor(public characterService: CharacterService) {}
+  get proficiency(): number {
+    const lvl = this.characterService.headValue[5]; // Получаем текущий lvl из CharacterService
+    return (parseInt(lvl) - 1) / 4 + 2; // Пересчитываем proficiency и возвращаем его
   }
 }
-}
-

@@ -1,20 +1,45 @@
-import { Component,Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-head-content',
   templateUrl: './head-content.component.html',
-  styleUrl: './head-content.component.css'
+  styleUrls: ['./head-content.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => HeadContentComponent),
+      multi: true
+    }
+  ]
 })
-export class HeadContentComponent {
-@Input() text: string='';
-@Input()id: string='';
-proficiency:string='';
-calculateProficiency(): void {
-  const inputValue = parseInt(this.id);
-  if (inputValue >= 1 && inputValue <= 20) {
-    this.proficiency = '+' + Math.ceil(inputValue / 4);
-  } else {
-    this.proficiency = 'Invalid input';
+export class HeadContentComponent implements ControlValueAccessor {
+  @Input() text!: string;
+  @Input() id!: string;
+  value!: string;
+
+
+  onChange: any = () => {};
+  onTouch: any = () => {};
+
+
+  writeValue(value: any): void {
+    this.value = value;
   }
-}
+
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  onInput(value: string) {
+
+    this.value = value;
+    this.onChange(value);
+  }
 }
