@@ -1,0 +1,50 @@
+.savingthrow-image {
+    width: 13px; /* Новая ширина */
+    height: 13px; /* Новая высота */
+}
+.savingthrow-wrapper {
+    margin-left: -1px;
+    width: 13px;
+    height: 13px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box; /* новое */
+}
+.savingthrow-button
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    cursor: pointer;
+}
+.bollen {
+    position: relative;
+    width: 13px;
+    height: 13px;
+}
+.stindex
+{
+    width: 13px;
+    height: 13px;
+    font-size: 13px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+.sttext
+{
+    text-align: left;
+    width: 13px;
+    height: 13px;
+    font-size: 13px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+.savingthrow
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 7px;
+}
