@@ -7,13 +7,13 @@ import {CharacterService} from "../../../services/character.service";
   styleUrls: ['./character-header.component.css']
 })
 export class CharacterHeaderComponent {
-  headId: string[] = ['characterClass', 'characterBackstory', 'characterRace', 'worldviews', 'experience', 'level'];
-  headText: string[] = ['КЛАСС', 'ПРЕДЫСТОРИЯ', 'РАСА', 'МИРОВОЗРЕНИЕ', 'ОПЫТ', 'УРОВЕНЬ'];
+    headId: string[] = ['characterClass', 'characterBackstory', 'characterRace', 'worldviews', 'experience', 'level'];
+    headText: string[] = ['КЛАСС', 'ПРЕДЫСТОРИЯ', 'РАСА', 'МИРОВОЗРЕНИЕ', 'ОПЫТ', 'УРОВЕНЬ'];
 
 
-   constructor(public characterService: CharacterService) {
+     constructor(public characterService: CharacterService) {
 
-   }
+     }
 
 
 
