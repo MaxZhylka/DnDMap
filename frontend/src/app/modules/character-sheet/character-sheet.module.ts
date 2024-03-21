@@ -12,7 +12,7 @@ import {
 import {InspirationComponent} from "../../components/character-sheet/inspiration/inspiration.component";
 import {FunctionsComponent} from "../../components/character-sheet/functions/functions.component";
 import {ProfsheetComponent} from "../../components/character-sheet/profsheet/profsheet.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CharacterService} from "../../services/character.service";
 
 
@@ -27,13 +27,14 @@ import {CharacterService} from "../../services/character.service";
     PersonalTraitsBarComponent,
     InspirationComponent,
     FunctionsComponent,
-    ProfsheetComponent
+    ProfsheetComponent,
+
 
   ],
     imports: [
-        CommonModule,
-        FormsModule,
-
+      CommonModule,
+      FormsModule,
+      ReactiveFormsModule
 
     ],
   exports:[

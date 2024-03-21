@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class HeadContentComponent implements ControlValueAccessor {
   @Input() text!: string;
   @Input() id!: string;
-  value!: string;
+  @Input() value!: string;
 
 
   onChange: any = () => {};
