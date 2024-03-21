@@ -1,10 +1,22 @@
-<div class="leftHeadSheet">
-  <input class="nameText test" id="name" type="text" maxlength="20">
+<form [formGroup]="headForm" (ngSubmit)="SubmitForm()">
+<div class="headSheet">
+  <div class="leftHeadSheet">
+  <input formControlName="name" class="nameText" id="name" type="text" maxlength="20">
   <label>ИМЯ ПЕРСОНАЖА</label>
 </div>
+
 <div class="rightHeadSheet">
   <div *ngFor="let text of headText; let i = index">
-    <app-head-content [text]="text" [id]="headId[i]"  [(ngModel)]="characterService.headValue[i]" > </app-head-content>
+    <app-head-content [text]="text" [formControlName]="headId[i]"></app-head-content>
+  </div>
+  <div>
+  <input class="headContent test" formControlName="level" id="level" type="number" maxlength="20" (input)="inputLevel()">
+    <label *ngIf="headForm.valid">УРОВЕНЬ</label>
+    <label *ngIf="headForm.invalid" style="font-weight: bold;color: red">ЗАПОЛНИТЕ ПОЛЕ</label>
   </div>
 </div>
+
+</div>
+  <button type="submit"></button>
+</form>
 

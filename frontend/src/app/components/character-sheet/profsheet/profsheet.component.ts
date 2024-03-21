@@ -12,11 +12,11 @@ export class ProfsheetComponent  {
   @Input() text: string = '';
   @Input() id: string = '';
 
-  lvl=this.characterService.headValue[5];
+  lvl=this.characterService.level;
 
   constructor(public characterService: CharacterService) {}
   get proficiency(): number {
-    const lvl = this.characterService.headValue[5]; // Получаем текущий lvl из CharacterService
-    return (parseInt(lvl) - 1) / 4 + 2; // Пересчитываем proficiency и возвращаем его
+    const lvl = this.characterService.level; // Получаем текущий lvl из CharacterService
+    return Math.floor((lvl - 1) / 4 + 2);
   }
 }

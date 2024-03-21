@@ -15,13 +15,23 @@
     margin: auto;
     flex-basis: 33% ;
 }
+.headSheet{
+    width: 900px;
+    height: 100px;
+    display: flex;
+    margin: auto;
+}
 .nameText
 {
-
-    font-size:30px;width: 100%;border: none; border-bottom: 1px solid black; display: block;outline: none;
+    font-size:30px;width: 90%;border: none; border-bottom: 1px solid black; display: block;outline: none;
 }
 label
 {
   color: #838383;
             font-size: 14px;
+}
+.test
+{
+    width: 190px;
+border: none; border-bottom: 1px solid black; display: block;outline: none;
 }
