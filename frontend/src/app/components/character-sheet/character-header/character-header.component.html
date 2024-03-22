@@ -10,13 +10,13 @@
     <app-head-content [text]="text" [formControlName]="headId[i]"></app-head-content>
   </div>
   <div>
-  <input class="headContent test" formControlName="level" id="level" type="number" maxlength="20" (input)="inputLevel()">
+  <input class="headContent test" formControlName="level" id="level" type="number" maxlength="20">
     <label *ngIf="headForm.valid">УРОВЕНЬ</label>
     <label *ngIf="headForm.invalid" style="font-weight: bold;color: red">ЗАПОЛНИТЕ ПОЛЕ</label>
   </div>
 </div>
 
 </div>
-  <button type="submit"></button>
+
 </form>
 

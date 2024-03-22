@@ -10,10 +10,12 @@ import {
   PersonalTraitsBarComponent
 } from "../../components/character-sheet/personal-traits-bar/personal-traits-bar.component";
 import {InspirationComponent} from "../../components/character-sheet/inspiration/inspiration.component";
-import {FunctionsComponent} from "../../components/character-sheet/functions/functions.component";
+import {SavingThrowsSkillsBarComponent} from "../../components/character-sheet/savingThrows-skills-bar/savingThrows-skills-bar.component";
 import {ProfsheetComponent} from "../../components/character-sheet/profsheet/profsheet.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CharacterService} from "../../services/character.service";
+import {SavingthrowBarComponent} from "../../components/character-sheet/savingthrow-bar/savingthrow-bar.component";
+import {SavingthrowComponent} from "../../components/character-sheet/savingthrow/savingthrow.component";
 
 
 @NgModule({
@@ -26,8 +28,10 @@ import {CharacterService} from "../../services/character.service";
     PersonalTraitsComponent,
     PersonalTraitsBarComponent,
     InspirationComponent,
-    FunctionsComponent,
+    SavingThrowsSkillsBarComponent,
     ProfsheetComponent,
+    SavingthrowComponent,
+    SavingthrowBarComponent,
 
 
   ],
@@ -46,8 +50,9 @@ import {CharacterService} from "../../services/character.service";
     PersonalTraitsComponent,
     PersonalTraitsBarComponent,
     InspirationComponent,
-    FunctionsComponent,
+    SavingThrowsSkillsBarComponent,
     ProfsheetComponent
+
   ],
   providers:[CharacterService]
 })

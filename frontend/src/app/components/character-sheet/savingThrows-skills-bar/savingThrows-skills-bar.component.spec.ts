@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FunctionsComponent } from './functions.component';
+import { SavingThrowsSkillsBarComponent } from './savingThrows-skills-bar.component';
 
 describe('FunctionsComponent', () => {
-  let component: FunctionsComponent;
-  let fixture: ComponentFixture<FunctionsComponent>;
+  let component: SavingThrowsSkillsBarComponent;
+  let fixture: ComponentFixture<SavingThrowsSkillsBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FunctionsComponent]
+      imports: [SavingThrowsSkillsBarComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(FunctionsComponent);
+
+    fixture = TestBed.createComponent(SavingThrowsSkillsBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

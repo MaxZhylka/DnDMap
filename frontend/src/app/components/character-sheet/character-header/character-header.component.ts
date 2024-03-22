@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CharacterService} from "../../../services/character.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {debounceTime, tap} from "rxjs";
 
 @Component({
   selector: 'app-character-header',
@@ -18,25 +19,31 @@ export class CharacterHeaderComponent {
     worldviews: new FormControl(''),
     experience: new FormControl(''),
     level: new FormControl('1', [Validators.required, Validators.pattern(/^[0-9]+$/)]),
+
   });
   SubmitForm(){
     console.log(this.headForm)
   }
 
-   constructor(public CharacterHeaderComponent: CharacterService) {
-   }
-inputLevel() {
-    const level = parseInt(this.headForm.get('level')?.value);
-    if (level < 1) {
-        this.CharacterHeaderComponent.level = 1;
-        this.headForm.get('level')?.setValue(1, { emitEvent: false }); // Set value without emitting valueChanges event
-    } else if (level > 20) {
-        this.CharacterHeaderComponent.level = 20;
-        this.headForm.get('level')?.setValue(20, { emitEvent: false }); // Set value without emitting valueChanges event
-    } else {
-        this.CharacterHeaderComponent.level = level;
-    }
-}
+    constructor() {
+    this.headForm.get('level')?.valueChanges.pipe(
+      tap(level => {
+        const numLevel = parseInt(level);
+        if (numLevel < 1 || numLevel > 20|| isNaN(numLevel)) {
+          let correctedLevel:number;
+          if(!isNaN(numLevel)) {
+           correctedLevel = Math.min(Math.max(numLevel, 1), 20);
+          }else
+          {
+            correctedLevel=1;
+          }
+          this.headForm.get('level')?.setValue(correctedLevel, { emitEvent: false });
+        }
+      })
+    ).subscribe();
+  }
+
+
 
 
 }

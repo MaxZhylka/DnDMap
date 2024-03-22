@@ -1,55 +1,45 @@
-import { Component, Input } from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
+import {tap} from "rxjs";
+
 
 @Component({
   selector: 'app-ability',
   templateUrl: './ability.component.html',
   styleUrls: ['./ability.component.css']
 })
-export class AbilityComponent {
-  @Input() attribute: string='';
+export class AbilityComponent implements OnInit{
+  @Input() formHead!: FormGroup;
+  @Input() attribute: string = '';
+  @Input() headID: string="";
   index: string = '10';
-  formCounter:number =0;
   modifire: string = this.calculateModifire(parseInt(this.index));
 
-  constructor() {}
+  constructor() {
 
-  onInput(event: Event) {
-    const target = event.target as HTMLInputElement;
 
-    if(target.value!="") {
-      this.index = target.value;
-    }
-
-    const value = parseInt(target.value);
-
-    if(isNaN(value))
-    {
-      this.modifire='0';
 
     }
 
-    if (value > 30) {
-      this.index = '30';
-      this.modifire = this.calculateModifire(parseInt(this.index));
+ ngOnInit() {
+    console.log(this.formHead.get(this.headID));
+     this.formHead.get(this.headID)?.valueChanges.pipe(
+      tap(level => {
+        const numLevel = parseInt(level);
+        if (numLevel < 1 || numLevel > 30|| isNaN(numLevel)) {
+          let correctedLevel:number;
+          if(!isNaN(numLevel)) {
+           correctedLevel = Math.min(Math.max(numLevel, 1), 30);
+          }else
+          {
+            correctedLevel=1;
+          }
+          this.formHead.get(this.headID)?.setValue(correctedLevel, { emitEvent: false });
+        }
+      })
+    ).subscribe();
+ }
 
-    } else if (value>1) {
-      this.index = value.toString();
-      this.modifire = this.calculateModifire(parseInt(this.index));
-    }
-    else if (value<=1) {
-      this.index = '1';
-      this.modifire = this.calculateModifire(parseInt(this.index));
-    }
-  }
-
-  onChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    const value = parseInt(target.value);
-    if(isNaN(value)) {
-      this.index = '10';
-    }
-    this.modifire = this.calculateModifire(parseInt(this.index));
-  }
 
   calculateModifire(value: number) {
     let modificator= Math.floor((value - 10) / 2);
@@ -59,4 +49,6 @@ export class AbilityComponent {
     }
     return JSON.stringify(modificator);
   }
+
+  protected readonly FormControl = FormControl;
 }

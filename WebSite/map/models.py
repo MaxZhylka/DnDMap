@@ -35,7 +35,7 @@ class News(models.Model):
     secondaryImage = models.ImageField(upload_to='GeneralNewsImage/', default='0')
     author = models.CharField('News_Author', max_length=30)
     def __str__(self):
-        return self.Header
+        return self.mainHeader
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
