@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
 import {tap} from "rxjs";
+import {CharacterService} from "../../../services/character.service";
 
 
 @Component({
@@ -13,20 +14,18 @@ export class AbilityComponent implements OnInit{
   @Input() attribute: string = '';
   @Input() headID: string="";
   index: string = '10';
-  modifire: string = this.calculateModifire(parseInt(this.index));
+  modifire: string = '0';
 
-  constructor() {
+  constructor(private characterService:CharacterService) {
 
 
 
     }
 
  ngOnInit() {
-
      this.formHead.get(this.headID)?.valueChanges.pipe(
       tap(level => {
         const numLevel = parseInt(level);
-
         if (numLevel < 1 || numLevel > 30|| isNaN(numLevel)) {
           let correctedLevel:number;
           if(!isNaN(numLevel)) {
@@ -34,21 +33,26 @@ export class AbilityComponent implements OnInit{
           }else
           {
             correctedLevel=1;
-          }
+          }console.log(1);
           this.formHead.get(this.headID)?.setValue(correctedLevel, { emitEvent: false });
         }
+        this.characterService[this.headID]=this.formHead.get(this.headID)?.value;
+        this.calculateModifire(this.formHead.get(this.headID)?.value);
       })
     ).subscribe();
  }
 
 
-  calculateModifire(value: number) {
+  calculateModifire(value: number):void {
     let modificator= Math.floor((value - 10) / 2);
     if(modificator>0)
     {
-      return '+'+modificator;
+      this.modifire ='+'+modificator;
     }
-    return JSON.stringify(modificator);
+    else {
+      this.modifire = JSON.stringify(modificator);
+    }
+
   }
 
   protected readonly FormControl = FormControl;
