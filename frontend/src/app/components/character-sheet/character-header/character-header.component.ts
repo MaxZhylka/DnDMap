@@ -19,13 +19,12 @@ export class CharacterHeaderComponent {
     worldviews: new FormControl(''),
     experience: new FormControl(''),
     level: new FormControl('1', [Validators.required, Validators.pattern(/^[0-9]+$/)]),
-
   });
   SubmitForm(){
     console.log(this.headForm)
   }
 
-    constructor() {
+    constructor(characterService:CharacterService) {
     this.headForm.get('level')?.valueChanges.pipe(
       tap(level => {
         const numLevel = parseInt(level);
@@ -39,6 +38,7 @@ export class CharacterHeaderComponent {
           }
           this.headForm.get('level')?.setValue(correctedLevel, { emitEvent: false });
         }
+        characterService.level=this.headForm.get('level')?.value;
       })
     ).subscribe();
   }

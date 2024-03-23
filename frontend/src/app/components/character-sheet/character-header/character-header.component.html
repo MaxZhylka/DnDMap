@@ -7,7 +7,7 @@
 
 <div class="rightHeadSheet">
   <div *ngFor="let text of headText; let i = index">
-    <app-head-content [text]="text" [formControlName]="headId[i]"></app-head-content>
+    <app-head-content [text]="text" [id]="headId[i]"></app-head-content>
   </div>
   <div>
   <input class="headContent test" formControlName="level" id="level" type="number" maxlength="20">

@@ -23,6 +23,7 @@ export class HeadContentComponent implements ControlValueAccessor {
   onTouch: any = () => {};
 
 
+
   writeValue(value: any): void {
     this.value = value;
   }

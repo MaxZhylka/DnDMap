@@ -2,9 +2,10 @@
   <div class="bollen">
     <div class="wrapper savingthrow-wrapper">
       <img [src]="currentImage" id="{{idimage}}" class="savingthrow-image">
-      <button type="button" id="{{abilitybutton}}" class="savingthrow-button" (click)="toggleImage()"></button>
+      <input type="checkbox" id="{{abilitybutton}}" class="savingthrow-button" (click)="toggleImage()">
     </div>
   </div>
   <div class="stindex">0</div>
   <div class="sttext">{{ text}}</div>
 </div>
+
