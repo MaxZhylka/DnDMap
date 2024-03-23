@@ -18,7 +18,8 @@ import {NewsPanelComponent} from "../../components/map-sheet/news-panel/news-pan
     MapHeaderComponent,
     CitisElLiComponent,
     NewsComponent,
-    NewsPanelComponent
+    NewsPanelComponent,
+
   ],
     imports: [
         HttpClientModule,

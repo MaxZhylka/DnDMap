@@ -22,10 +22,11 @@ export class AbilityComponent implements OnInit{
     }
 
  ngOnInit() {
-    console.log(this.formHead.get(this.headID));
+
      this.formHead.get(this.headID)?.valueChanges.pipe(
       tap(level => {
         const numLevel = parseInt(level);
+
         if (numLevel < 1 || numLevel > 30|| isNaN(numLevel)) {
           let correctedLevel:number;
           if(!isNaN(numLevel)) {
