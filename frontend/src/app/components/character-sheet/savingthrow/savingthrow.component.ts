@@ -8,38 +8,41 @@ import {CharacterService} from "../../../services/character.service";
   styleUrl: './savingthrow.component.css'
 })
 export class SavingthrowComponent {
-  @Input()text: string='';
-  @Input()id: string='';
+  @Input() text: string = '';
+  @Input() id: string = '';
+  @Input() abilitysave: string = '';
 
-  @Input()abilitybutton:string='';
-  @Input()abilitysave: string='';
-  abilityIndex:number=0;
-inspirOne:string='../../../assets/img/inspirone.png';
-inspirTwo:string='../../../assets/img/inspirtwo.png';
-currentImage: string = this.inspirOne;
-toggle:boolean= false;
-constructor(private characterService:CharacterService) {
-}
-toggleImage( ) {
+  inspirOne: string = '../../../assets/img/inspirone.png';
+  inspirTwo: string = '../../../assets/img/inspirtwo.png';
+  currentImage: string = this.inspirOne;
+  toggle: boolean = false;
+
+  constructor(private characterService: CharacterService) {
+  }
+
+  toggleImage() {
     this.currentImage = (this.currentImage === this.inspirOne) ? this.inspirTwo : this.inspirOne;
-    if(!this.toggle)
-    {
-      this.toggle=true;
+    if (!this.toggle) {
+      this.toggle = true;
 
-    }
-    else
-    {
-      this.toggle=false;
+    } else {
+      this.toggle = false;
     }
   }
 
   get calculateSavingThrow(): string {
-     let proficiency:number=Math.floor((this.characterService.level - 1) / 4 + 2);
-     let modificator:number=Math.floor(  (this.characterService[this.id]-10)/2  )
-      let result= modificator+proficiency;
-    if(result>0)
-      return '+'+result;
-    else return ''+result;
+    let proficiency: number = Math.floor((this.characterService.level - 1) / 4 + 2);
+    let modificator: number = Math.floor((this.characterService[this.id] - 10) / 2)
+    let result = modificator + proficiency;
+    if (result > 0)
+      return '+' + result;
+    else return '' + result;
   }
 
+  get calculateSavingThrowWithoutTrue(): string {
+    let modificator: number = Math.floor((this.characterService[this.id] - 10) / 2)
+    if (modificator > 0)
+      return '+' + modificator;
+    else return '' + modificator;
+  }
 }

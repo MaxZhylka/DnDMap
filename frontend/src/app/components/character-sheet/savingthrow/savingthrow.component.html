@@ -2,7 +2,7 @@
   <div class="bollen">
     <div class="wrapper savingthrow-wrapper">
       <img [src]="currentImage" class="savingthrow-image">
-      <input type="checkbox" id="{{abilitybutton}}" class="savingthrow-button" (click)="toggleImage()">
+      <input type="checkbox"  class="savingthrow-button" (click)="toggleImage()">
     </div>
   </div>
 <ng-container *ngIf="toggle; then thenBlock else elseBlock"></ng-container>
@@ -14,7 +14,7 @@
 </ng-template>
 
 <ng-template #elseBlock>
-       <div class="stindex">{{abilityIndex}}</div>
+       <div class="stindex">{{ calculateSavingThrowWithoutTrue }}</div>
 </ng-template>
 
   <div class="sttext">{{ text}}</div>
