@@ -31,18 +31,22 @@ export class SavingthrowComponent {
   }
 
   get calculateSavingThrow(): string {
-    let proficiency: number = Math.floor((this.characterService.level - 1) / 4 + 2);
-    let modificator: number = Math.floor((this.characterService[this.id] - 10) / 2)
-    let result = modificator + proficiency;
-    if (result > 0)
-      return '+' + result;
-    else return '' + result;
-  }
-
-  get calculateSavingThrowWithoutTrue(): string {
-    let modificator: number = Math.floor((this.characterService[this.id] - 10) / 2)
+    if(this.toggle) {
+      let proficiency: number = Math.floor((this.characterService.level - 1) / 4 + 2);
+      let modificator: number = Math.floor((this.characterService[this.id] - 10) / 2)
+      let result = modificator + proficiency;
+      if (result > 0)
+        return '+' + result;
+      else return '' + result;
+    }
+    else
+    {
+        let modificator: number = Math.floor((this.characterService[this.id] - 10) / 2)
     if (modificator > 0)
       return '+' + modificator;
     else return '' + modificator;
+    }
   }
+
+
 }
