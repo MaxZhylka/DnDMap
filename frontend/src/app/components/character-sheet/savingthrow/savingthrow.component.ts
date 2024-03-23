@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {CharacterService} from "../../../services/character.service";
 
 @Component({
   selector: 'app-savingthrow',
@@ -8,14 +9,37 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class SavingthrowComponent {
   @Input()text: string='';
-  @Input()idimage: string='';
+  @Input()id: string='';
+
   @Input()abilitybutton:string='';
   @Input()abilitysave: string='';
-  abillityIndex:number=0;
+  abilityIndex:number=0;
 inspirOne:string='../../../assets/img/inspirone.png';
 inspirTwo:string='../../../assets/img/inspirtwo.png';
 currentImage: string = this.inspirOne;
-toggleImage() {
+toggle:boolean= false;
+constructor(private characterService:CharacterService) {
+}
+toggleImage( ) {
     this.currentImage = (this.currentImage === this.inspirOne) ? this.inspirTwo : this.inspirOne;
+    if(!this.toggle)
+    {
+      this.toggle=true;
+
+    }
+    else
+    {
+      this.toggle=false;
+    }
   }
+
+  get calculateSavingThrow(): string {
+     let proficiency:number=Math.floor((this.characterService.level - 1) / 4 + 2);
+     let modificator:number=Math.floor(  (this.characterService[this.id]-10)/2  )
+      let result= modificator+proficiency;
+    if(result>0)
+      return '+'+result;
+    else return ''+result;
+  }
+
 }

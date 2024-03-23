@@ -11,4 +11,6 @@ export class SavingthrowBarComponent {
   saveButton: string[] = ['strength-button', 'dexterity-button', 'constitution-button', 'intelligence-button', 'wisdom-button', 'charisma-button'];
   saveAbillity: string[] = ['strength-savingthrow', 'dexterity-savingthrow', 'constitution-savingthrow', 'intelligence-savingthrow', 'wisdom-savingthrow', 'charisma-savingthrow'];
   saveText: string[] = ['СИЛА', 'ЛОВКОСТЬ', 'ТЕЛОСЛОЖЕНИЕ', 'ИНТЕЛЕКТ', 'МУДРОСТЬ', 'ХАРИЗМА'];
+   attributesID:string[]=['strength','dexterity','constitution', 'intelligence','wisdom','charisma']
+
 }

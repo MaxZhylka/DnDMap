@@ -33,7 +33,7 @@ export class AbilityComponent implements OnInit{
           }else
           {
             correctedLevel=1;
-          }console.log(1);
+          }
           this.formHead.get(this.headID)?.setValue(correctedLevel, { emitEvent: false });
         }
         this.characterService[this.headID]=this.formHead.get(this.headID)?.value;

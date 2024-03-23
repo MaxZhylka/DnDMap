@@ -16,7 +16,7 @@ export class ProfsheetComponent  {
 
   constructor(public characterService: CharacterService) {}
   get proficiency(): number {
-    const lvl = this.characterService.level; // Получаем текущий lvl из CharacterService
+    const lvl = this.characterService.level;
     return Math.floor((lvl - 1) / 4 + 2);
   }
 }
