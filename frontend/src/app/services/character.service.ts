@@ -6,6 +6,9 @@ import { Injectable } from '@angular/core';
 export class CharacterService {
   headValue:string[]=['','','','','',''];
   level:number=1;
+  proficiency:number=2;
+  perception:number = 0;
+  checkboxPerception: boolean = false;
   strength:number=10;
   dexterity:number=10;
   constitution:number=10;

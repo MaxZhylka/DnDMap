@@ -16,6 +16,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CharacterService} from "../../services/character.service";
 import {SavingthrowBarComponent} from "../../components/character-sheet/savingthrow-bar/savingthrow-bar.component";
 import {SavingthrowComponent} from "../../components/character-sheet/savingthrow/savingthrow.component";
+import {SkillComponent} from "../../components/character-sheet/skill/skill.component";
+import {SkillBarComponent} from "../../components/character-sheet/skill-bar/skill-bar.component";
+import {
+  PassivePerceptionComponent
+} from "../../components/character-sheet/passive-perception/passive-perception.component";
 
 
 @NgModule({
@@ -32,7 +37,9 @@ import {SavingthrowComponent} from "../../components/character-sheet/savingthrow
     ProfsheetComponent,
     SavingthrowComponent,
     SavingthrowBarComponent,
-
+    SkillComponent,
+    SkillBarComponent,
+    PassivePerceptionComponent
 
   ],
     imports: [
@@ -51,7 +58,10 @@ import {SavingthrowComponent} from "../../components/character-sheet/savingthrow
     PersonalTraitsBarComponent,
     InspirationComponent,
     SavingThrowsSkillsBarComponent,
-    ProfsheetComponent
+    ProfsheetComponent,
+    SkillComponent,
+    SkillBarComponent,
+    PassivePerceptionComponent
 
   ],
   providers:[CharacterService]
