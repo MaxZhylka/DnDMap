@@ -240,7 +240,6 @@ $(function() {
                 $('.strengthmodifier').text(Math.floor((strengthValue - 10) / 2));
             }
         }
-        AthIndex();
     });
     $('[name="dexterity"]').on('input', function() {
         var dexterityValue = parseInt($(this).val());
