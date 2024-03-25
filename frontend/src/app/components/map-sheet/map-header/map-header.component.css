@@ -4,7 +4,7 @@
     width: 100%;
     height: 80px;
     top: 0;
-    z-index: 1000; /* Ниже, чем у .CitiesContainer и .suggestions, чтобы они были поверх Header */
+    z-index: 950; /* Ниже, чем у .CitiesContainer и .suggestions, чтобы они были поверх Header */
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -20,12 +20,12 @@
 
     background-color: white;
     border: 3px solid #FF9900;
-    z-index: 2001; /* Убедитесь, что .search-form находится над Header */
+    z-index: 951; /* Убедитесь, что .search-form находится над Header */
 }
 
 .CitiesContainer {
     position: absolute;
-    z-index: 2002; /* Значение должно быть выше, чем у .search-form для видимости поверх остальных элементов */
+    z-index: 952; /* Значение должно быть выше, чем у .search-form для видимости поверх остальных элементов */
     width: 100%; /* Или конкретная ширина в пикселях, если требуется */
     /* Дополнительные стили для позиционирования и отображения, если нужно */
 }

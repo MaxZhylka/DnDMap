@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output} from '@angular/core';
 import {News} from '../news-panel/news-panel.component'
 @Component({
   selector: 'app-news',

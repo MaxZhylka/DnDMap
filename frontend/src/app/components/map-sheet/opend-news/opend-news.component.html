@@ -1,10 +1,10 @@
 <div class="BG_Style" >
   <div class="Full_News">
-    <img class="Secondary_News_Img" [src]="news.secondaryImage || news.mainImage">
+    <img class="Secondary_News_Img" [src]=" news.mainImage">
 
     <div class="Secondary_Flex_Container">
-      <div class="Secondary_Header">{{news.secondaryHeader || news.mainHeader}}</div>
-      <div class="Secondary_Text">{{news.secondaryText || news.mainText}}</div>
+      <div class="Secondary_Header">{{news.mainHeader}}</div>
+      <div class="Secondary_Text">{{ news.mainText}}</div>
     </div>
 
     <div class='Author_Flex_Container'>

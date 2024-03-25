@@ -24,7 +24,7 @@ export class NewsPanelComponent implements OnInit{
  @Input() left!:number;
   Newses!:News[];
   display: boolean=false;
-
+  selectedNews: News | null = null;
 
   ngOnInit() {this.getNews()
   }
@@ -34,15 +34,19 @@ export class NewsPanelComponent implements OnInit{
   getNews = () => {
   this.apiMap.getNews().subscribe({
     next: (data) => {
-      this.Newses = data.reverse();
-      console.log(this.Newses);
+      this.Newses = data;
+
     },
     error: (error) => {
       console.log(error);
     }
   });
 }
-display
+
+ displayFullNews(news: News) {
+    this.selectedNews = news; // Збереження вибраної новини
+    this.display = true; // Показати app-opend-news
+  }
 
 
 }
