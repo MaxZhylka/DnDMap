@@ -1,6 +1,6 @@
 <header class="Header">
-    <div #app></div>
-    <button class="News-btn" (click)="togglePanel()">
+
+    <button #openButton class="News-btn" (click)="togglePanel()">
         <img class="News-img" src="{{newsImg}} " alt="News">
     </button>
 
@@ -13,6 +13,6 @@
 <span class="hint" (mousedown)="ignoreBlur = true"  *ngIf="hint" [ngStyle]="hintMargin" (click)="moveToCity()">{{ hint }} </span>
 
     </div>
-<app-news-panel [left]="displayLeft" > </app-news-panel>
+<app-news-panel appClickOutside [ignoreElementRefs]="ignoredElement" (clickOutside)="closePanel()" [left]="displayLeft" > </app-news-panel>
 
 </header>

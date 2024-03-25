@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-
+import {News} from '../news-panel/news-panel.component'
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -7,8 +7,6 @@ import {Component, Input} from '@angular/core';
 })
 export class NewsComponent {
 
-  @Input() mainHeader!:string;
-  @Input() mainImage!:string;
-  @Input() mainText!:string;
+  @Input() news!:News;
 
 }

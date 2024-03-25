@@ -8,9 +8,10 @@ import {CommonModule, NgOptimizedImage} from "@angular/common";
 
 import { FormsModule} from "@angular/forms";
 import {CitisElLiComponent} from "../../components/map-sheet/citis-el-li/citis-el-li.component";
-import {NgForOf} from "@angular/common";
 import {NewsComponent} from "../../components/map-sheet/news/news.component";
 import {NewsPanelComponent} from "../../components/map-sheet/news-panel/news-panel.component";
+import {ClickOutsideDirective} from "../../Directives/click-outside.directive";
+import {OpendNewsComponent} from "../../components/map-sheet/opend-news/opend-news.component";
 
 @NgModule({
   declarations: [
@@ -19,20 +20,22 @@ import {NewsPanelComponent} from "../../components/map-sheet/news-panel/news-pan
     CitisElLiComponent,
     NewsComponent,
     NewsPanelComponent,
-
+    ClickOutsideDirective,
+    OpendNewsComponent
   ],
     imports: [
         HttpClientModule,
         FormsModule,
         CommonModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+
     ],
   providers: [
     MapService
   ],
   exports: [
     MapComponent,
-
+    ClickOutsideDirective
   ],
   bootstrap: [
     MapComponent,

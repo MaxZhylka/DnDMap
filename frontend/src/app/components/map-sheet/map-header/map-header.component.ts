@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MapService} from "../../../services/map.service";
 import {filter} from "rxjs";
 
+
 interface City
 {
   name:string;
@@ -17,6 +18,9 @@ interface City
 
 export class MapHeaderComponent implements  OnInit{
   @ViewChild('searchField') searchField!: ElementRef;
+  @ViewChild('openButton', { static: true }) OpenButton!: ElementRef;
+  ignoredElement:ElementRef[]=[];
+
   cities: City[]=[];
   searchQuery:string="";
   hintMargin={};
@@ -29,7 +33,7 @@ export class MapHeaderComponent implements  OnInit{
   }
 ngOnInit() {
      this.getCities();
-
+     this.ignoredElement.push(this.OpenButton);
 }
 
 moveToCity() {
@@ -59,6 +63,10 @@ moveToCity() {
     else {
       this.displayLeft=-480;
     }
+  }
+  closePanel=()=>
+  {
+     this.displayLeft=-480;
   }
 suggestCities() {
      if(this.searchQuery=="")
@@ -129,4 +137,5 @@ Blur() {
 }
 
 
+  protected readonly ElementRef = ElementRef;
 }

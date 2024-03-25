@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MapService} from "../../../services/map.service";
 import * as url from "url";
 
-interface News
+export interface News
 {
   author:string;
   mainHeader:string;
@@ -23,15 +23,18 @@ export class NewsPanelComponent implements OnInit{
 
  @Input() left!:number;
   Newses!:News[];
+  display: boolean=false;
+
 
   ngOnInit() {this.getNews()
   }
 
   constructor(private apiMap: MapService){}
+
   getNews = () => {
   this.apiMap.getNews().subscribe({
     next: (data) => {
-      this.Newses = data;
+      this.Newses = data.reverse();
       console.log(this.Newses);
     },
     error: (error) => {
@@ -39,6 +42,7 @@ export class NewsPanelComponent implements OnInit{
     }
   });
 }
+display
 
 
 }

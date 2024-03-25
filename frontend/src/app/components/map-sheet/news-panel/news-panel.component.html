@@ -1,5 +1,5 @@
 <div class="newsPanel" [ngStyle]="{'left.px': left}">
 <div *ngFor="let news of Newses">
-<app-news [mainHeader]="news.mainHeader" [mainText]="news.mainText" [mainImage]="news.mainImage" ></app-news>
+<app-news (click)="displayFullNews()" [news]="news"  ></app-news>
   </div>
 </div>
