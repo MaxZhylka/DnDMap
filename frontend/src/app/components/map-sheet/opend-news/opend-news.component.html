@@ -1,15 +1,18 @@
-<div class="BG_Style" >
+<div class="BG_Style" (click)="onClose()">
+  </div>
   <div class="Full_News">
+    <div class="btn-position">
+ <button class="close-button" (click)="onClose()">X</button>
+</div>
     <img class="Secondary_News_Img" [src]=" news.mainImage">
-
     <div class="Secondary_Flex_Container">
       <div class="Secondary_Header">{{news.mainHeader}}</div>
-      <div class="Secondary_Text">{{ news.mainText}}</div>
+      <pre class="Secondary_Text">{{ news.secondaryText}}</pre>
     </div>
 
     <div class='Author_Flex_Container'>
       <div class='AuthorText'>Автор: {{news.author}}</div>
-      <div class='Date'>{{news.date}}</div>
+      <div class='Date'>{{news.dateOfPublishing| date: 'medium'}}</div>
     </div>
   </div>
-</div>
+

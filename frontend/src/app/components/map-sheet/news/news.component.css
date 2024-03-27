@@ -66,6 +66,7 @@ border-radius: 15px;
 .Main_News_Image {
   width: 460px;
   height: 300px;
+     object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;

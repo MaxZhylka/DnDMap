@@ -44,8 +44,8 @@ export class NewsPanelComponent implements OnInit{
 }
 
  displayFullNews(news: News) {
-    this.selectedNews = news; // Збереження вибраної новини
-    this.display = true; // Показати app-opend-news
+    this.selectedNews = news;
+    this.display = true;
   }
 
 
