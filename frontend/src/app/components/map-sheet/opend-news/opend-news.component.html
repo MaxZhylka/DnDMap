@@ -1,0 +1,19 @@
+<div #OpenNews>
+<div [ngStyle]="{'opacity': opacity}"  class="BG_Style" (click)="onClose()">
+  </div>
+  <div [ngStyle]="{'opacity': opacity}" class="Full_News">
+    <div class="btn-position">
+ <button class="close-button" (click)="onClose()">X</button>
+</div>
+    <img class="Secondary_News_Img" [src]=" outputImage">
+    <div class="Secondary_Flex_Container">
+      <div class="Secondary_Header">{{outputHeader}}</div>
+      <pre class="Secondary_Text">{{ outputText}}</pre>
+    </div>
+
+    <div class='Author_Flex_Container'>
+      <div class='AuthorText'>Автор: {{news.author}}</div>
+      <div class='Date'>{{news.dateOfPublishing| date: 'medium'}}</div>
+    </div>
+  </div>
+</div>

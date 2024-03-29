@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {MapService} from "../../../services/map.service";
 import * as url from "url";
 
-interface News
+export interface News
 {
   author:string;
   mainHeader:string;
@@ -23,22 +23,43 @@ export class NewsPanelComponent implements OnInit{
 
  @Input() left!:number;
   Newses!:News[];
-
+  display: boolean=false;
+  selectedNews!: News;
+  opacity =0;
   ngOnInit() {this.getNews()
   }
 
   constructor(private apiMap: MapService){}
+closeFullNews() {
+  this.opacity = 0;
+  setTimeout(() => {
+    this.display = false;
+    this.apiMap.ignoredElement.pop();
+  }, 150);
+}
+
+
   getNews = () => {
   this.apiMap.getNews().subscribe({
     next: (data) => {
       this.Newses = data;
-      console.log(this.Newses);
+
     },
     error: (error) => {
       console.log(error);
     }
   });
 }
+
+ displayFullNews(news: News) {
+
+    this.opacity=0;
+    this.selectedNews = news;
+    this.display = true;
+     setTimeout(() => {
+    this.opacity = 1;
+  }, 0);
+  }
 
 
 }

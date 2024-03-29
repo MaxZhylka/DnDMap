@@ -1,5 +1,11 @@
+
+
 <div class="newsPanel" [ngStyle]="{'left.px': left}">
-<div *ngFor="let news of Newses">
-<app-news [mainHeader]="news.mainHeader" [mainText]="news.mainText" [mainImage]="news.mainImage" ></app-news>
+<div *ngFor="let news of Newses; let i =index ">
+
+ <app-news (click)="displayFullNews(Newses[Newses.length-i-1])" [news]="Newses[Newses.length-i-1]"></app-news>
+  </div>
+  <div *ngIf="display">
+    <app-opend-news  [news]="selectedNews" [opacity]="opacity" (close)="closeFullNews()"></app-opend-news>
   </div>
 </div>
