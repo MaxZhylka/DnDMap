@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {MapService} from "../../../services/map.service";
 import * as url from "url";
 
@@ -24,12 +24,20 @@ export class NewsPanelComponent implements OnInit{
  @Input() left!:number;
   Newses!:News[];
   display: boolean=false;
-  selectedNews: News | null = null;
-
+  selectedNews!: News;
+  opacity =0;
   ngOnInit() {this.getNews()
   }
 
   constructor(private apiMap: MapService){}
+closeFullNews() {
+  this.opacity = 0;
+  setTimeout(() => {
+    this.display = false;
+    this.apiMap.ignoredElement.pop();
+  }, 150);
+}
+
 
   getNews = () => {
   this.apiMap.getNews().subscribe({
@@ -44,8 +52,13 @@ export class NewsPanelComponent implements OnInit{
 }
 
  displayFullNews(news: News) {
+
+    this.opacity=0;
     this.selectedNews = news;
     this.display = true;
+     setTimeout(() => {
+    this.opacity = 1;
+  }, 0);
   }
 
 

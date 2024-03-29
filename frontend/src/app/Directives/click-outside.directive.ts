@@ -16,7 +16,6 @@ export class ClickOutsideDirective {
       return;
     }
 
-
     const isClickedInsideIgnoredElement = this.ignoreElementRefs.some((ignoredRef) => {
       return ignoredRef.nativeElement.contains(targetElement);
     });

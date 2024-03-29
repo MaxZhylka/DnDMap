@@ -6,6 +6,6 @@
  <app-news (click)="displayFullNews(Newses[Newses.length-i-1])" [news]="Newses[Newses.length-i-1]"></app-news>
   </div>
   <div *ngIf="display">
-    <app-opend-news [news]="selectedNews" (close)="display=false"></app-opend-news>
+    <app-opend-news  [news]="selectedNews" [opacity]="opacity" (close)="closeFullNews()"></app-opend-news>
   </div>
 </div>

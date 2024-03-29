@@ -14,12 +14,15 @@
     padding: 0 20px;
     box-sizing: border-box;
     overflow-y: auto;
+
+  transition: opacity 150ms ;
 }
 .Full_News::-webkit-scrollbar {
   display: none;
     z-index: 0;
 
 }
+
 .BG_Style {
     z-index: 1002;
     width: 100%;
@@ -28,14 +31,17 @@
     background-color: rgba(0, 0, 0, 0.4);
     left: 0;
     top: 0;
+  transition: opacity 150ms;
 }
 .Author_Flex_Container
 {
 
     display: flex;
     flex-direction: row;
-    margin-left: 100px;
-    margin-right:100px;
+    margin-bottom: 15px;
+    justify-content: end;
+    padding: 0 5%;
+    box-sizing: border-box;
 
 }
 .btn-position
@@ -79,7 +85,8 @@ background-color: #FFE9B9;
     max-height: 500px;
     object-fit: cover;
 
-    margin: 30px auto;
+    margin: 30px auto 15px auto;
+
     display: block;
     border-radius: 15px;
 }
@@ -88,29 +95,37 @@ background-color: #FFE9B9;
     font-size: 16px;
     font-family: "Times New Roman", sans-serif;
     text-align: justify;
-    margin: 10px 0;
-     white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+    margin: 0 0 15px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
+
 
  .Secondary_Header
  {
    font-size: 20px;
     font-family: "Times New Roman", sans-serif;
       text-align: justify;
-    margin: 10px 0;
+   margin: 0 0 10px 0;
  }
-.Secondary_Flex_Container, .Author_Flex_Container {
+.Secondary_Flex_Container{
     padding: 0 5%;
     box-sizing: border-box;
+    margin-bottom: 0;
 }
 
-.AuthorText, .Date {
+
+.AuthorText{
     background-color: #FF9900;
     border-radius: 100px;
     padding: 5px 10px;
     margin-right: 10px;
+} .Date {
+    background-color: #FF9900;
+    border-radius: 100px;
+    padding: 5px 10px;
+
 }
 
 @media (max-width: 768px) {

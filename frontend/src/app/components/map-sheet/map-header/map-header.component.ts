@@ -1,6 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MapService} from "../../../services/map.service";
-import {filter} from "rxjs";
+import {filter, ignoreElements} from "rxjs";
+import {OpendNewsComponent} from "../opend-news/opend-news.component";
+import {NewsPanelComponent} from "../news-panel/news-panel.component";
 
 
 interface City
@@ -19,7 +21,7 @@ interface City
 export class MapHeaderComponent implements  OnInit{
   @ViewChild('searchField') searchField!: ElementRef;
   @ViewChild('openButton', { static: true }) OpenButton!: ElementRef;
-  ignoredElement:ElementRef[]=[];
+
 
   cities: City[]=[];
   searchQuery:string="";
@@ -29,11 +31,18 @@ export class MapHeaderComponent implements  OnInit{
   newsImg: string=  "../../assets/img/news.png";
   hint:string="";
   displayLeft:number=-480;
-   constructor(private apiMap: MapService) {
+
+   constructor(public apiMap: MapService) {
   }
-ngOnInit() {
+
+ get IgnoredElement()
+  {
+    return this.apiMap.ignoredElement;
+  }
+
+  ngOnInit() {
      this.getCities();
-     this.ignoredElement.push(this.OpenButton);
+      this.apiMap.ignoredElement.push(this.OpenButton);
 }
 
 moveToCity() {
@@ -138,4 +147,6 @@ Blur() {
 
 
   protected readonly ElementRef = ElementRef;
+  protected readonly MapService = MapService;
+  protected readonly ignoreElements = ignoreElements;
 }

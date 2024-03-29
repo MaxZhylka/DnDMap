@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {ElementRef, Injectable} from '@angular/core';
 import {environment} from "../../environments/environments";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
@@ -8,8 +8,8 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class MapService {
  private mapSubject = new BehaviorSubject<any>(null);
-  baseurl = environment.apiUrl;
-
+ baseurl = environment.apiUrl;
+ ignoredElement:ElementRef[]=[];
   constructor(private http: HttpClient) { }
 
 
