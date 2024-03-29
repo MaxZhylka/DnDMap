@@ -1,0 +1,23 @@
+.passivwisdom
+{
+    width: 290px;
+    border-radius: 20px;
+    border: 2px solid black;
+    display: flex;
+}
+.passivwisdomIndex
+{
+    width: 40px;
+    border-radius: 20px;
+    border: 2px solid black;
+    margin-left: -1px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.passivwisdomtext
+{
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}

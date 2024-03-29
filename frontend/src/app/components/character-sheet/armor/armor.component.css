@@ -1,0 +1,24 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#shield-image
+{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.armorcl
+{
+   position: absolute;
+    top: 0;
+    left: -2px;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    text-align: center;
+    font-size: 40px;
+}

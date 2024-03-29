@@ -1,0 +1,27 @@
+.initIndex
+{
+  position: relative;
+    margin-left: 3px;
+    width: 76px;
+    height: 76px;
+    border-radius: 20px;
+    border: 2px solid black;
+    font-size: 50px;
+    outline: none;
+}
+.initIndextext
+{
+  position: absolute;
+    width: 80px;
+    height: 80px;
+  left: -2px;
+  top: -2px;
+  border:none;
+  background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 50px;
+    outline: none;
+  padding: 0px;
+}

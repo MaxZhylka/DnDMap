@@ -8,6 +8,7 @@ export class CharacterService {
   level:number=1;
   proficiency:number=2;
   perception:number = 0;
+  health: number = 1;
   checkboxPerception: boolean = false;
   strength:number=10;
   dexterity:number=10;

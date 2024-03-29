@@ -1,0 +1,16 @@
+.ownerarea
+{
+  min-width: 290px;
+  max-width: 290px;
+  min-height: 345px;
+  max-height: 345px;
+  border: none;
+  display: block;
+  outline: none;
+  background-color: transparent;
+}
+.ownership {
+    margin-top: 5px;
+    border-radius: 10px;
+    border: 2px solid black;
+}

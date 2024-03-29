@@ -21,6 +21,11 @@ import {SkillBarComponent} from "../../components/character-sheet/skill-bar/skil
 import {
   PassivePerceptionComponent
 } from "../../components/character-sheet/passive-perception/passive-perception.component";
+import {OwnershipComponent} from "../../components/character-sheet/ownership/ownership.component";
+import {ArmorComponent} from "../../components/character-sheet/armor/armor.component";
+import {AcHealthSpeedComponent} from "../../components/character-sheet/ac-health-speed/ac-health-speed.component";
+import {InitiativeComponent} from "../../components/character-sheet/initiative/initiative.component";
+import {SpeedComponent} from "../../components/character-sheet/speed/speed.component";
 
 
 @NgModule({
@@ -39,8 +44,12 @@ import {
     SavingthrowBarComponent,
     SkillComponent,
     SkillBarComponent,
-    PassivePerceptionComponent
-
+    PassivePerceptionComponent,
+    OwnershipComponent,
+    ArmorComponent,
+    AcHealthSpeedComponent,
+    InitiativeComponent,
+    SpeedComponent
   ],
     imports: [
       CommonModule,
@@ -61,8 +70,12 @@ import {
     ProfsheetComponent,
     SkillComponent,
     SkillBarComponent,
-    PassivePerceptionComponent
-
+    PassivePerceptionComponent,
+    OwnershipComponent,
+    ArmorComponent,
+    AcHealthSpeedComponent,
+    InitiativeComponent,
+    SpeedComponent
   ],
   providers:[CharacterService]
 })
