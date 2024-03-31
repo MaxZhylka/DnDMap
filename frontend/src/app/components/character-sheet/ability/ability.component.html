@@ -3,6 +3,6 @@
   <div class="modifier">
     {{ modifire }}
   </div>
- <input  class="InputAttribute"  formControlName="{{headID}}" type="number"  [value]="index">
+ <input  class="InputAttribute"  formControlName="{{headID}}"  (change)="onChange()" [value]="index">
 
 </div>

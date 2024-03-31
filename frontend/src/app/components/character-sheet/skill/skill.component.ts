@@ -28,6 +28,10 @@ export class SkillComponent {
     }
     this.getPerception();
   }
+  handleToggleChange(toggle: boolean) {
+    this.toggle = toggle;
+
+  }
 
   get calculateSavingThrow(): string {
     if(this.toggle) {

@@ -27,9 +27,6 @@ export class AbilityBarComponent {
 
 
   }
-  // getFormControl(attributeId: string) {
-  //   console.log((this.abilityForm.get(attributeId) as FormControl));
-  //   return (this.abilityForm.get(attributeId));
-  // }
+
 
 }

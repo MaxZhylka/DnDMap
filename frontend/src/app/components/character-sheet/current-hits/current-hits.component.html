@@ -1,0 +1,11 @@
+<form [formGroup]="currentHits">
+  <div class="tempHit">
+  <div class="maxHitContainer">
+  <label class="maxHit">Максимум Хитов
+  </label>
+ <input class="maxHitInput" formControlName="maxHits" (change)="ChangeMax()" >
+  </div>
+<input class="tempHitInput" formControlName="currentHits" (change)="ChangeCurrent()">
+<div class="tempHitText" >ТЕКУЩИЕ ХИТЫ</div>
+</div>
+</form>

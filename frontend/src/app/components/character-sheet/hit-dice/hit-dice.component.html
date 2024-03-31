@@ -1,0 +1,31 @@
+<div class="diceFlexContainer">
+<div class="diceBlock">
+  <div>ВСЕГО КОСТЕЙ: {{allDice}}</div>
+  <select class="select"[(ngModel)]="selectedItem">
+  <option class="choice" *ngFor="let item of items" [value]="item">{{ item }}</option>
+</select>
+  <div>КОСТИ ХИТОВ</div>
+</div>
+
+<div class="diceBlock">
+<div>
+<div>Успех: </div>
+  <div class="pointFlexContainer">
+    <app-check-box-circle></app-check-box-circle>
+    <app-check-box-circle></app-check-box-circle>
+    <app-check-box-circle></app-check-box-circle>
+    </div>
+ </div>
+  <div>
+<div>Провал:</div>
+    <div class="pointFlexContainer">
+      <app-check-box-circle ></app-check-box-circle>
+      <app-check-box-circle></app-check-box-circle>
+      <app-check-box-circle></app-check-box-circle>
+      </div>
+  </div>
+
+<div>СПАСБРОСОК ОТ СМЕРТИ</div>
+  </div>
+
+</div>

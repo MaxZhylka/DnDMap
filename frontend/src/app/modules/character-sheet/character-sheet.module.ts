@@ -26,6 +26,16 @@ import {ArmorComponent} from "../../components/character-sheet/armor/armor.compo
 import {AcHealthSpeedComponent} from "../../components/character-sheet/ac-health-speed/ac-health-speed.component";
 import {InitiativeComponent} from "../../components/character-sheet/initiative/initiative.component";
 import {SpeedComponent} from "../../components/character-sheet/speed/speed.component";
+import {
+  SecondCharacterSheetComponent
+} from "../../components/second-character-sheet/second-character-sheet/second-character-sheet.component";
+import {SecondHeaderComponent} from "../../components/second-character-sheet/second-header/second-header.component";
+import {TemporaryHitsComponent} from "../../components/character-sheet/temporary-hits/temporary-hits.component";
+import {CurrentHitsComponent} from "../../components/character-sheet/current-hits/current-hits.component";
+import {HitDiceComponent} from "../../components/character-sheet/hit-dice/hit-dice.component";
+import {CheckBoxCircleComponent} from "../../components/character-sheet/check-box-circle/check-box-circle.component";
+
+
 
 
 @NgModule({
@@ -49,14 +59,22 @@ import {SpeedComponent} from "../../components/character-sheet/speed/speed.compo
     ArmorComponent,
     AcHealthSpeedComponent,
     InitiativeComponent,
-    SpeedComponent
-  ],
-    imports: [
-      CommonModule,
-      FormsModule,
-      ReactiveFormsModule
+    SpeedComponent,
+    SecondCharacterSheetComponent,
+    SecondHeaderComponent,
+    CurrentHitsComponent,
+    HitDiceComponent,
+    CheckBoxCircleComponent
 
-    ],
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TemporaryHitsComponent,
+
+
+  ],
   exports:[
     CharacterSheetComponent,
     CharacterHeaderComponent,
@@ -75,7 +93,9 @@ import {SpeedComponent} from "../../components/character-sheet/speed/speed.compo
     ArmorComponent,
     AcHealthSpeedComponent,
     InitiativeComponent,
-    SpeedComponent
+    SpeedComponent,
+
+
   ],
   providers:[CharacterService]
 })

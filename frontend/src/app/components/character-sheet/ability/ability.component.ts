@@ -23,24 +23,35 @@ export class AbilityComponent implements OnInit{
     }
 
  ngOnInit() {
-     this.formHead.get(this.headID)?.valueChanges.pipe(
-      tap(level => {
-        const numLevel = parseInt(level);
-        if (numLevel < 1 || numLevel > 30|| isNaN(numLevel)) {
-          let correctedLevel:number;
-          if(!isNaN(numLevel)) {
-           correctedLevel = Math.min(Math.max(numLevel, 1), 30);
-          }else
-          {
-            correctedLevel=1;
-          }
-          this.formHead.get(this.headID)?.setValue(correctedLevel, { emitEvent: false });
-        }
-        this.characterService[this.headID]=this.formHead.get(this.headID)?.value;
-        this.calculateModifire(this.formHead.get(this.headID)?.value);
-      })
-    ).subscribe();
+   this.formHead.get(this.headID)?.valueChanges.pipe(
+  tap(abilityData => {
+   if (((/^\d+$/.test(abilityData)) || abilityData == "")) {
+      const numLevel = parseInt(abilityData);
+      if (numLevel < 1 || numLevel > 30) {
+
+        const correctedLevel = Math.min(Math.max(numLevel, 1), 30);
+        this.formHead.get(this.headID)?.setValue(correctedLevel, { emitEvent: false });
+      }
+    } else {
+
+      this.formHead.get(this.headID)?.setValue(1, { emitEvent: false });
+    }
+    this.characterService[this.headID] = this.formHead.get(this.headID)?.value;
+    this.calculateModifire(this.formHead.get(this.headID)?.value);
+  })
+).subscribe();
+
  }
+onChange()
+{
+  if(this.formHead.get(this.headID)?.value=="")
+  {
+     this.formHead.get(this.headID)?.setValue(10, { emitEvent: false });
+       this.characterService[this.headID] = this.formHead.get(this.headID)?.value;
+    this.calculateModifire(this.formHead.get(this.headID)?.value);
+  }
+
+}
 
 
   calculateModifire(value: number):void {

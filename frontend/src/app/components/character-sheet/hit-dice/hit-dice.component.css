@@ -1,0 +1,43 @@
+.diceBlock
+{
+
+  width: 110px;
+  height: 75px;
+  border-radius: 20px;
+  border: 2px black solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
+}
+.diceFlexContainer
+{
+  width: 296px ;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.pointFlexContainer
+{
+
+  width: 40px;
+
+  display: flex;
+  justify-content: space-between;
+}
+.select
+{
+  width: 110px;
+  font-size: 30px;
+  text-align: center;
+  border:none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+
+}
+.select:focus {
+    outline: none;
+}
+

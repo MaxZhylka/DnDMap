@@ -77,7 +77,7 @@ class Character(models.Model):
     silver = models.IntegerField('Серебряные Монеты',default='  ')
     copper = models.IntegerField('Медные Монеты',default='  ')
     age = models.IntegerField('Возраст',default='  ')
-    height = models.IntegerField('Высота',default='  ')
+    height = models.IntegerField('Рост',default='  ')
     weight = models.IntegerField('Вес',default='  ')
     eyeColor = models.IntegerField('Глаза',default='  ')
     skinColor = models.IntegerField('Кожа',default='  ')

@@ -24,26 +24,35 @@ export class CharacterHeaderComponent {
     console.log(this.headForm)
   }
 
-    constructor(characterService:CharacterService) {
+    constructor( public characterService:CharacterService) {
     this.headForm.get('level')?.valueChanges.pipe(
-      tap(level => {
-        const numLevel = parseInt(level);
-        if (numLevel < 1 || numLevel > 20|| isNaN(numLevel)) {
-          let correctedLevel:number;
-          if(!isNaN(numLevel)) {
-           correctedLevel = Math.min(Math.max(numLevel, 1), 20);
-          }else
-          {
-            correctedLevel=1;
-          }
-          this.headForm.get('level')?.setValue(correctedLevel, { emitEvent: false });
-        }
-        characterService.level=this.headForm.get('level')?.value;
-      })
-    ).subscribe();
+  tap(level => {
+   if (((/^\d+$/.test(level)) || level == "")) {
+      const numLevel = parseInt(level);
+      if (numLevel < 1 || numLevel > 20) {
+
+        const correctedLevel = Math.min(Math.max(numLevel, 1), 20);
+        this.headForm.get("level")?.setValue(correctedLevel, { emitEvent: false });
+      }
+    } else {
+
+      this.headForm.get("level")?.setValue(1, { emitEvent: false });
+    }
+    this.characterService.level = this.headForm.get("level")?.value;
+
+  })
+).subscribe();
   }
 
+onChange()
+{
+  if(this.headForm.get("level")?.value=="")
+  {
+     this.headForm.get("level")?.setValue(1, { emitEvent: false });
+     this.characterService.level=this.headForm.get('level')?.value;
+  }
 
+}
 
 
 }

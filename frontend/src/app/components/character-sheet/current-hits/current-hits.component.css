@@ -1,0 +1,66 @@
+.tempHit
+{
+     width: 292px;
+    height: 106px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+.maxHit
+{
+
+    width: 273px;
+        height: 13px;
+    font-size: 13px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+.maxHitContainer
+{
+  display: flex;
+  flex-direction: row;
+  width: 286px;
+  height: 20px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.maxHitInput
+{
+  border: none;
+
+ border-bottom: 1px gray solid;
+  outline: none;
+  text-align: center;
+  width: 130px;
+  margin-left: 5px;
+   margin-right:  10px;
+   background-color: transparent;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.maxHitInput::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+    margin: 0;
+}
+.tempHitInput
+{
+width: 286px;
+  height: 56px;
+  border: none;
+  outline: none;
+
+  text-align: center;
+  font-size: 50px;
+  background-color: transparent;
+}
+.tempHitInput::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+    margin: 0; /* Optional */
+}
+.tempHitText
+
+{
+  padding-bottom: 10px;
+}

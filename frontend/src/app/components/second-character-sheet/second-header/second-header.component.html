@@ -1,7 +1,7 @@
-<form [formGroup]="headForm" (ngSubmit)="SubmitForm()">
+
 <div class="headSheet">
   <div class="leftHeadSheet">
-  <input formControlName="name" class="nameText" id="name" type="text" maxlength="20">
+  <input class="nameText" id="name" type="text" maxlength="20">
   <label>ИМЯ ПЕРСОНАЖА</label>
 </div>
 
@@ -10,12 +10,7 @@
     <app-head-content [text]="text" [id]="headId[i]"></app-head-content>
   </div>
   <div>
-  <input class="headContent test" formControlName="level" (change)="onChange()" id="level" maxlength="20">
-    <label>УРОВЕНЬ</label>
   </div>
 </div>
 
 </div>
-
-</form>
-

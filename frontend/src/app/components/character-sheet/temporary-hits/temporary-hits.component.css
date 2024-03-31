@@ -1,0 +1,27 @@
+.tempHit
+{
+     width: 292px;
+    height: 106px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+.tempHitInput
+{
+width: 286px;
+  height: 86px;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 50px;
+  background-color: transparent;
+}
+.tempHitInput::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+    margin: 0; /* Optional */
+}
+.tempHitText
+
+{
+  padding-bottom: 10px;
+}
