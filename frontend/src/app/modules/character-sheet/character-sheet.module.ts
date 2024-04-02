@@ -34,6 +34,11 @@ import {TemporaryHitsComponent} from "../../components/character-sheet/temporary
 import {CurrentHitsComponent} from "../../components/character-sheet/current-hits/current-hits.component";
 import {HitDiceComponent} from "../../components/character-sheet/hit-dice/hit-dice.component";
 import {CheckBoxCircleComponent} from "../../components/character-sheet/check-box-circle/check-box-circle.component";
+import {AttackSpellsComponent} from "../../components/character-sheet/attack-spells/attack-spells.component";
+import {AttacksComponent} from "../../components/character-sheet/attacks/attacks.component";
+import {
+  CalcAttackSplellsComponent
+} from "../../components/character-sheet/calc-attack-splells/calc-attack-splells.component";
 
 
 
@@ -64,8 +69,10 @@ import {CheckBoxCircleComponent} from "../../components/character-sheet/check-bo
     SecondHeaderComponent,
     CurrentHitsComponent,
     HitDiceComponent,
-    CheckBoxCircleComponent
-
+    CheckBoxCircleComponent,
+    AttackSpellsComponent,
+    AttacksComponent,
+    CalcAttackSplellsComponent
   ],
   imports: [
     CommonModule,

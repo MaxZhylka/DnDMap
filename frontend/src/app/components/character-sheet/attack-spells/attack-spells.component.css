@@ -1,0 +1,78 @@
+.flex-container
+{
+  width: 290px;
+  border-radius: 20px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid black;
+
+}
+
+/*.attackAndBtnContainer*/
+/*{*/
+/*  height:240px;*/
+/*}*/
+.textFlexContainer
+{
+
+  display: flex;
+  justify-content: space-around;
+  width: 265px;
+  height: 25px;
+  align-items: end;
+  align-content: end;
+  margin-right: 3px;
+}
+.btn
+{
+  width: 270px;
+  height: 40px;
+
+}
+
+.attackContainer
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  overflow: auto;
+  height: 200px;
+  width: 270px;
+
+}
+.attackContainer::-webkit-scrollbar
+{
+  display: none;
+}
+
+.nameText
+{
+
+}
+.modifText
+{
+
+}
+.dmgText
+{
+
+}
+.spells
+{
+  resize: none;
+  border: 1px black solid;
+  border-radius: 20px;
+  height: 75px;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 270px;
+
+}
+.spells:focus
+{
+  outline: none;
+}

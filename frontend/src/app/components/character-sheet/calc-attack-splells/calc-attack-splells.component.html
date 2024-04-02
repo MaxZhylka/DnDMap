@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="background" (click)="onClose()"></div>
+  <div class="Window">
+  <div class="closeButton" (click)="onClose()">x</div>
+     <div class="closeButton" (click)="deleteComponent()">УДАЛИТЬ</div>
+ <div class="window attackName">
+<input type="text" class="winowtempl" id="attacknametext" maxlength="20" [(ngModel)]="data.nameAttack"><br>
+   <label>НАЗВАНИЕ</label>
+ </div>
+  <div class="selectorandother">
+                        <div class="window windowSelector">
+                            <select class="windowtempl" id="windowSelect"   [(ngModel)]="data.characteristic" name="characteristic">
+                              <option *ngFor="let characteristic of characteristics" [value]="characteristic.value">
+                               {{ characteristic.display }}
+                               </option>
+                            </select><br>
+
+                            <label>ХАРАКТЕРИСТИКА</label>
+                        </div>
+
+                        <div *ngIf="displayCheckBox" class="profiencycheck">
+                            <input id="profienc-checkbox" class="profienc-checkbox winowtempl"  type="checkbox" [(ngModel)]="data.proficiency">
+                            <label>ВЛАДЕНИЕ</label>
+                        </div>
+                        <div class="window modifire">
+                            <input id="profienc-modifire" class="winowtempl" type="number"  [(ngModel)]="data.modifier"><br>
+                            <label>МОДИФИКАТОР</label>
+                        </div>
+                    </div>
+    <div class="window attackRoll">
+      <input type="text" class="winowtempl" id="attackroll" maxlength="20"  [(ngModel)]="data.damage"><br>
+      <label>УРОН</label>
+    </div>
+  </div>
+</div>
