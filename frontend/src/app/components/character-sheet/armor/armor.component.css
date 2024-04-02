@@ -11,14 +11,16 @@ input::-webkit-inner-spin-button {
 }
 .armorcl
 {
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
    position: absolute;
     top: 0;
     left: -2px;
-    width: 100%;
+    width: 75%;
     height: 100%;
     outline: none;
     border: none;
     background: none;
     text-align: center;
     font-size: 40px;
+  margin-left: 12.5%;
 }

@@ -1,12 +1,19 @@
 .savingthrows
 {
+  display: flex;
+  flex-direction: column;
     width: 93%;
     height: 130px;
     border-radius: 15px;
     border: 2px solid black;
     padding: 5px;
+  justify-content: space-between;
 }
 .function
 {
     margin-top: 4px;
+}
+label
+{
+  font-weight: bold;
 }

@@ -2,23 +2,20 @@
 
 .checkBoxStyle
 {
- padding-top: 2.5px;
 }
 .skillindex
 {
-    width: 13px;
-    height: 13px;
-    font-size: 13px;
-    margin-left: 5px;
-    font-weight: bold;
+    width: 26.75px;
+    font-size: 18px;
+    margin-left: 1px;
+  line-height: 15px;
 }
 .skilltext
 {
     text-align: left;
-    height: 13px;
-    font-size: 13px;
-    margin-left: 15px;
-    font-weight: bold;
+    font-size: 17px;
+    margin-left: 3px;
+  line-height: 15px;
 }
 .skill
 {

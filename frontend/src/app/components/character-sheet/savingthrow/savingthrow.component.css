@@ -1,50 +1,22 @@
 .savingthrow-image {
-    width: 13px; /* Новая ширина */
-    height: 13px; /* Новая высота */
-}
-.savingthrow-wrapper {
-    margin-left: -1px;
-    width: 13px;
-    height: 13px;
-    position: relative;
-    display: inline-block;
-    box-sizing: border-box; /* новое */
-}
-.savingthrow-button
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 10px;
-    height: 10px;
-    opacity: 0;
-    cursor: pointer;
-}
-.bollen {
-    position: relative;
-    width: 13px;
-    height: 13px;
+    width: 12px; /* Новая ширина */
 }
 .stindex
 {
-    width: 13px;
-    height: 13px;
-    font-size: 13px;
-    margin-left: 5px;
-    font-weight: bold;
+  width: 26.75px;
+    font-size: 18px;
+    margin-left: 1px;
+  line-height: 15px;
 }
 .sttext
 {
     text-align: left;
-    width: 13px;
-    height: 13px;
-    font-size: 13px;
-    margin-left: 15px;
-    font-weight: bold;
+    font-size: 18px;
+    margin-left: 3px;
+  line-height: 15px;
 }
 .savingthrow
 {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 7px;
 }

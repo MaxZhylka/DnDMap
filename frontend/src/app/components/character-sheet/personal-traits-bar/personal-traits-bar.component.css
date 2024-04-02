@@ -2,18 +2,22 @@
 {
     display: flex;
     flex-wrap: wrap;
-    width: 296px;
+    width: 292px;
 }
 .features
 {
   padding: 2px;
-  width: 296px;
+  width: 292px;
   border-radius: 10px;
   border: 2px solid black;
   outline: none;
 }
 .feature
 {
-  min-width: 292px; max-width: 292px;min-height: 560px; max-height: 560px;border: none;display: block;outline: none;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+  width: 288px;
+  height: 560px;
+  resize: none;
+  border: none;display: block;outline: none;
 }
 

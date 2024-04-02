@@ -1,13 +1,13 @@
 .ownerarea
 {
-  min-width: 290px;
-  max-width: 290px;
-  min-height: 345px;
-  max-height: 345px;
+  width: 288px;
+  height: 345px;
+  resize: none;
   border: none;
   display: block;
   outline: none;
   background-color: transparent;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
 }
 .ownership {
     margin-top: 5px;

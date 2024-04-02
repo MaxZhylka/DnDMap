@@ -25,7 +25,11 @@ export class CharacterHeaderComponent {
   }
 
     constructor( public characterService:CharacterService) {
-    this.headForm.get('level')?.valueChanges.pipe(
+    this.ChangeLvlSub();
+    this.ChangeNameSub();
+  }
+ChangeLvlSub() {
+  this.headForm.get('level')?.valueChanges.pipe(
   tap(level => {
    if (((/^\d+$/.test(level)) || level == "")) {
       const numLevel = parseInt(level);
@@ -42,8 +46,14 @@ export class CharacterHeaderComponent {
 
   })
 ).subscribe();
-  }
-
+}
+ChangeNameSub(){
+    this.headForm.get('name')?.valueChanges.pipe(
+      tap(name => {
+        this.characterService.name = this.headForm.get("name")?.value;
+      })
+    ).subscribe();
+}
 onChange()
 {
   if(this.headForm.get("level")?.value=="")
@@ -51,7 +61,6 @@ onChange()
      this.headForm.get("level")?.setValue(1, { emitEvent: false });
      this.characterService.level=this.headForm.get('level')?.value;
   }
-
 }
 
 

@@ -1,10 +1,11 @@
 <div class="savingthrow">
-  <div class="bollen">
-    <div class="wrapper savingthrow-wrapper">
-      <img [src]="currentImage" class="savingthrow-image">
-      <input type="checkbox"  class="savingthrow-button" (click)="toggleImage()">
-    </div>
-  </div>
+  <app-check-box-circle class="savingthrow-image" (toggleChange)="handleToggleChange($event)"></app-check-box-circle>
+<!--  <div class="bollen">-->
+<!--    <div class="wrapper savingthrow-wrapper">-->
+<!--      <img [src]="currentImage" class="savingthrow-image">-->
+<!--      <input type="checkbox"  class="savingthrow-button" (click)="toggleImage()">-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="stindex">{{calculateSavingThrow}}</div>
   <div class="sttext">{{ text}}</div>
 </div>
