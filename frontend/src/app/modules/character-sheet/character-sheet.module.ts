@@ -39,8 +39,10 @@ import {AttacksComponent} from "../../components/character-sheet/attacks/attacks
 import {
   CalcAttackSplellsComponent
 } from "../../components/character-sheet/calc-attack-splells/calc-attack-splells.component";
-
-
+import {
+  AlliesAndTreasureComponent
+} from "../../components/second-character-sheet/allies-and-treasure/allies-and-treasure.component";
+import {ImageCropperModule} from "ngx-image-cropper";
 
 
 @NgModule({
@@ -72,14 +74,15 @@ import {
     CheckBoxCircleComponent,
     AttackSpellsComponent,
     AttacksComponent,
-    CalcAttackSplellsComponent
+    CalcAttackSplellsComponent,
+     AlliesAndTreasureComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     TemporaryHitsComponent,
-
+    ImageCropperModule
 
   ],
   exports:[
@@ -101,7 +104,8 @@ import {
     AcHealthSpeedComponent,
     InitiativeComponent,
     SpeedComponent,
-
+    SecondCharacterSheetComponent,
+     AlliesAndTreasureComponent
 
   ],
   providers:[CharacterService]
