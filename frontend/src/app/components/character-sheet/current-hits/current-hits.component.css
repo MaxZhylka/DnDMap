@@ -7,12 +7,10 @@
 }
 .maxHit
 {
-
     width: 273px;
         height: 13px;
-    font-size: 13px;
-    margin-left: 15px;
-    font-weight: bold;
+    font-size: 18px;
+  line-height: 15px;
 }
 .maxHitContainer
 {
@@ -26,7 +24,7 @@
 .maxHitInput
 {
   border: none;
-
+font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
  border-bottom: 1px gray solid;
   outline: none;
   text-align: center;
@@ -45,6 +43,7 @@
 }
 .tempHitInput
 {
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
 width: 286px;
   height: 56px;
   border: none;

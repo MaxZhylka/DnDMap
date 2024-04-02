@@ -32,11 +32,18 @@ input::-webkit-inner-spin-button {
 }
 label
 {
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
   color: #838383;
-            font-size: 14px;
+  font-size: 14px;
 }
 .test
 {
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
     width: 190px;
 border: none; border-bottom: 1px solid black; display: block;outline: none;
+}
+body
+{
+
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
 }

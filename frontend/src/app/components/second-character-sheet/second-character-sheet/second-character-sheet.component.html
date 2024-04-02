@@ -1,1 +1,21 @@
 <app-second-header></app-second-header>
+<div class="mainSheet">
+  <div class="leftSheet">
+    <div class="ImageBox">
+      <label for="fileInput">
+  <img src="{{portrait}}" alt="Image" id="portrait">
+</label>
+<input id="fileInput" type="file" accept="image/*" size="3000000" (change)="onselectFile($event)" style="display: none;">
+    </div>
+    <div class="alliesAndTreasureBar">
+      <textarea class="backstory" id="backstory"></textarea>
+      <label>ПРЕДЫСТОРИЯ</label>
+    </div>
+  </div>
+    <div class="rightSheet">
+  <div class="alliesAndTreasureBar" *ngFor="let text of alliesandtreasuretext; let i = index">
+      <app-allies-and-treasure [alliesAndTreasureText]="text" [alliesAndTreasureId]="alliesandtreasureid[i]"></app-allies-and-treasure>
+  </div>
+</div>
+
+</div>

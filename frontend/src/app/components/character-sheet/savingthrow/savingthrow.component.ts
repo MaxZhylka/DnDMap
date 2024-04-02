@@ -47,6 +47,10 @@ export class SavingthrowComponent {
     else return '' + modificator;
     }
   }
+  handleToggleChange(toggle: boolean) {
+    this.toggle = toggle;
+
+  }
 
 
 }

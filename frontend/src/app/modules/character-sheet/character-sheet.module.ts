@@ -34,8 +34,10 @@ import {TemporaryHitsComponent} from "../../components/character-sheet/temporary
 import {CurrentHitsComponent} from "../../components/character-sheet/current-hits/current-hits.component";
 import {HitDiceComponent} from "../../components/character-sheet/hit-dice/hit-dice.component";
 import {CheckBoxCircleComponent} from "../../components/character-sheet/check-box-circle/check-box-circle.component";
-
-
+import {
+  AlliesAndTreasureComponent
+} from "../../components/second-character-sheet/allies-and-treasure/allies-and-treasure.component";
+import {ImageCropperModule} from "ngx-image-cropper";
 
 
 @NgModule({
@@ -64,15 +66,15 @@ import {CheckBoxCircleComponent} from "../../components/character-sheet/check-bo
     SecondHeaderComponent,
     CurrentHitsComponent,
     HitDiceComponent,
-    CheckBoxCircleComponent
-
+    CheckBoxCircleComponent,
+    AlliesAndTreasureComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     TemporaryHitsComponent,
-
+    ImageCropperModule
 
   ],
   exports:[
@@ -94,8 +96,7 @@ import {CheckBoxCircleComponent} from "../../components/character-sheet/check-bo
     AcHealthSpeedComponent,
     InitiativeComponent,
     SpeedComponent,
-
-
+    AlliesAndTreasureComponent
   ],
   providers:[CharacterService]
 })

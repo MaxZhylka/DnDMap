@@ -7,7 +7,7 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrl: './savingthrow-bar.component.css'
 })
 export class SavingthrowBarComponent {
-  saveText: string[] = ['СИЛА', 'ЛОВКОСТЬ', 'ТЕЛОСЛОЖЕНИЕ', 'ИНТЕЛЕКТ', 'МУДРОСТЬ', 'ХАРИЗМА'];
+  saveText: string[] = ['Сила', 'Ловкость', 'Телосложение', 'Интелект', 'Мудрость', 'Харизма'];
    attributesID:string[]=['strength','dexterity','constitution', 'intelligence','wisdom','charisma']
 
 }

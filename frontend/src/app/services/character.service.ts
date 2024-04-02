@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CharacterService {
+  name:string='';
   headValue:string[]=['','','','','',''];
   level:number=1;
   proficiency:number=2;

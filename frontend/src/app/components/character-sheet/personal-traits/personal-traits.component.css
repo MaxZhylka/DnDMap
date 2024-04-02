@@ -1,12 +1,19 @@
 .per
 {
-    min-width: 292px; max-width: 292px;min-height: 90px; max-height: 90px;border: none;display: block;outline: none;
+  resize: none;
+  width: 286px;
+  height: 90px;
+  border: none;
+  display: block;
+  outline: none;
+  background-color: transparent;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
 }
 .three
 {
+  padding: 2px;
     margin-bottom: 5px;
-    padding: 2px;
-    width: 296px;
+    width: 290px;
     height: 110px;
     border-radius: 10px;
     border: 2px solid black;

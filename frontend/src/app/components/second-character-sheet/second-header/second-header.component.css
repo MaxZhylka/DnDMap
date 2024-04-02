@@ -32,6 +32,7 @@ input::-webkit-inner-spin-button {
 }
 label
 {
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
   color: #838383;
             font-size: 14px;
 }
