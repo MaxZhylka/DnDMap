@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {CharacterSheetComponent} from "../../components/character-sheet/character-sheet/character-sheet.component";
 import {CharacterHeaderComponent} from "../../components/character-sheet/character-header/character-header.component";
 import {AbilityComponent} from "../../components/character-sheet/ability/ability.component";
@@ -47,6 +47,7 @@ import {CoinsComponent} from "../../components/character-sheet/coins/coins.compo
 import {EquipmentComponent} from "../../components/character-sheet/equipment/equipment.component";
 import {QuillModule} from "ngx-quill";
 import {ClickableLinksDirective} from "../../Directives/clickable-link.directive";
+import {PhotoCropperComponent} from "../../components/second-character-sheet/photo-cropper/photo-cropper.component";
 
 
 @NgModule({
@@ -82,15 +83,17 @@ import {ClickableLinksDirective} from "../../Directives/clickable-link.directive
     CoinsComponent,
     EquipmentComponent,
     ClickableLinksDirective,
-     AreaInputComponent
+     AreaInputComponent,
+     AlliesAndTreasureComponent,
+    PhotoCropperComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TemporaryHitsComponent,
-    ImageCropperModule,
-    QuillModule.forRoot()
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TemporaryHitsComponent,
+        ImageCropperModule,
+        NgOptimizedImage
 
   ],
   exports:[
@@ -99,6 +102,7 @@ import {ClickableLinksDirective} from "../../Directives/clickable-link.directive
     AbilityComponent,
     AbilityBarComponent,
     HeadContentComponent,
+
     PersonalTraitsBarComponent,
     InspirationComponent,
     SavingThrowsSkillsBarComponent,
@@ -114,7 +118,9 @@ import {ClickableLinksDirective} from "../../Directives/clickable-link.directive
     SecondCharacterSheetComponent,
      AlliesAndTreasureComponent,
     ClickableLinksDirective,
-     AreaInputComponent
+     AreaInputComponent,
+     AlliesAndTreasureComponent,
+    PhotoCropperComponent
 
   ],
   providers:[CharacterService]

@@ -17,6 +17,7 @@ export class CharacterService {
   intelligence:number=10;
   wisdom:number=10;
   charisma:number=10;
+  portrait="../../../assets/img/character.png";
   [key: string]: any;
 
   constructor() { }

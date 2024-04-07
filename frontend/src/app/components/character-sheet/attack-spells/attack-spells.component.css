@@ -1,6 +1,6 @@
 .flex-container
 {
-  width: 290px;
+  width: 292px;
   border-radius: 20px;
   height: 300px;
   display: flex;
@@ -31,7 +31,10 @@
 {
   width: 270px;
   height: 40px;
-
+border: 1px transparent solid;
+  background-color: #E4E4E4;
+  border-radius: 10px;
+  margin-bottom: 3px;
 }
 
 .attackContainer

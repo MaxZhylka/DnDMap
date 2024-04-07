@@ -1,0 +1,61 @@
+.background {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    transition: opacity 0.2s ease;
+    opacity: 50%;
+    position: fixed;
+}
+.Window {
+  display: flex;
+    background: white;
+    width: 1000px;
+    height: 500px;
+    top: calc(50% - 250px);
+    left: calc(50% - 500px);
+    text-align: center;
+    transition: opacity 0.2s ease;
+    font-size: 10px;
+    position: fixed;
+    z-index: 1000;
+    border: 1px black solid;
+    border-radius: 10px;
+  flex-direction:column ;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+}
+#portrait
+{
+  width: 100%;
+  height: 100%;
+  object-fit: contain ;
+  border-radius: 10px;
+}
+.main
+{
+  width: 600px;
+  height: 400px;
+  position: relative;
+  border: 2px solid black;
+  border-radius: 15px;
+}
+.closeButton
+{
+  align-self: end;
+  background-color: transparent;
+  width: 50px;
+    height: 50px;
+    font-size: 30px;
+    outline: none;
+    cursor: pointer;
+    border: transparent;
+
+}
+.prewie{
+  padding: 5px;
+}
