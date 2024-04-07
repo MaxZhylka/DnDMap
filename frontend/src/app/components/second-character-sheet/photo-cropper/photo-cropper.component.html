@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="background" (click)="onClose()"></div>
+  <div class="Window">
+  <div class="closeButton" (click)="onClose()">x</div>
+   <div class="row">
+    <div class="main">
+        <image-cropper
+          [imageChangedEvent]="imgChangeEvt"
+        [aspectRatio]="3/4"
+          [maintainAspectRatio]="true"
+        [resizeToWidth]="300"
+        format="jpeg"
+        (imageCropped)="cropImg($event)"
+        (imageLoaded)="imgLoad()"
+        (cropperReady)="initCropper()"
+        (loadImageFailed)="imgFailed()">
+        </image-cropper>
+    </div>
+    <img class="prewie" [src]="cropImagePreview" alt="">
+   </div>
+  </div>
+</div>

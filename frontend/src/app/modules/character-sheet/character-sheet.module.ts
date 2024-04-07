@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {CharacterSheetComponent} from "../../components/character-sheet/character-sheet/character-sheet.component";
 import {CharacterHeaderComponent} from "../../components/character-sheet/character-header/character-header.component";
 import {AbilityComponent} from "../../components/character-sheet/ability/ability.component";
@@ -43,6 +43,7 @@ import {
   AlliesAndTreasureComponent
 } from "../../components/second-character-sheet/allies-and-treasure/allies-and-treasure.component";
 import {ImageCropperModule} from "ngx-image-cropper";
+import {PhotoCropperComponent} from "../../components/second-character-sheet/photo-cropper/photo-cropper.component";
 
 
 @NgModule({
@@ -75,16 +76,18 @@ import {ImageCropperModule} from "ngx-image-cropper";
     AttackSpellsComponent,
     AttacksComponent,
     CalcAttackSplellsComponent,
-     AlliesAndTreasureComponent
+     AlliesAndTreasureComponent,
+    PhotoCropperComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TemporaryHitsComponent,
-    ImageCropperModule
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TemporaryHitsComponent,
+        ImageCropperModule,
+        NgOptimizedImage
 
-  ],
+    ],
   exports:[
     CharacterSheetComponent,
     CharacterHeaderComponent,
@@ -105,7 +108,8 @@ import {ImageCropperModule} from "ngx-image-cropper";
     InitiativeComponent,
     SpeedComponent,
     SecondCharacterSheetComponent,
-     AlliesAndTreasureComponent
+     AlliesAndTreasureComponent,
+    PhotoCropperComponent
 
   ],
   providers:[CharacterService]
