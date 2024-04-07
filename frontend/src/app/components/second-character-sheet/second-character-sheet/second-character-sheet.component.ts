@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CharacterService} from "../../../services/character.service";
 
 @Component({
   selector: 'app-second-character-sheet',
@@ -6,21 +7,20 @@ import {Component, OnInit} from '@angular/core';
   styleUrl: './second-character-sheet.component.css'
 })
 export class SecondCharacterSheetComponent implements OnInit{
-alliesandtreasureid:string[]=['allies','additionalfeatures','treasure']
+  display:boolean=false;
   alliesandtreasuretext:string[]=['СОЮЗНИКИ И ОРГАНИЗАЦИИ','ДОПОЛНИТЕЛЬНЫЕ СПОСОБНОСТИ И УМЕНИЯ','СОКРОВИЩА']
   constructor() {
   }
 ngOnInit() {
 }
 portrait="../../../assets/img/character.png";
-
-onselectFile(event: any){
-  if(event.target.files){
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload=(event:any)=>{
-      this.portrait=event.target.result;
-    }
-  }
+imageToCrop: any;
+getData(event:any){
+  this.portrait=event;
 }
+onselectFile(event: any){
+      this.imageToCrop = event;
+      this.display=true;
+    }
+
 }

@@ -1,12 +1,13 @@
 <app-second-header></app-second-header>
 <div class="mainSheet">
   <div class="leftSheet">
-    <div class="ImageBox">
+   <div class="ImageBox">
       <label for="fileInput">
-  <img src="{{portrait}}" alt="Image" id="portrait">
-</label>
-<input id="fileInput" type="file" accept="image/*" size="3000000" (change)="onselectFile($event)" style="display: none;">
+        <img src="{{portrait}}"  alt="Image" id="portrait">
+      </label>
+      <input id="fileInput" type="file" accept="image/*" size="3000000"  (change)="onselectFile($event)" style="display: none;">
     </div>
+
  <app-area-input botText="ПРЕДЫСТОРИЯ" [boxHeight]="688" [boxWidth]="297"></app-area-input>
   </div>
     <div class="rightSheet">
@@ -16,3 +17,5 @@
 </div>
 
 </div>
+
+<app-photo-cropper *ngIf="display" (outputImage)="getData($event)" [image]="imageToCrop" (close)="display=false"> </app-photo-cropper>

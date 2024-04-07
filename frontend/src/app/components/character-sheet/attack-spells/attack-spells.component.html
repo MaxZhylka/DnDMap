@@ -18,6 +18,6 @@
 
 
 </div>
-<div *ngIf="display">
-<app-calc-attack-splells (close)="closeAttackSpells()" (requestDelete)="deleteAttack()" [data]="chosenAttack"> </app-calc-attack-splells>
-</div>
+
+<app-calc-attack-splells *ngIf="display" (close)="closeAttackSpells()" (requestDelete)="deleteAttack()" [data]="chosenAttack"> </app-calc-attack-splells>
+

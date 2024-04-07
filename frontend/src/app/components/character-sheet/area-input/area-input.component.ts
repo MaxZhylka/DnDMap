@@ -59,7 +59,6 @@ ngOnInit() {
 
       this.isContextMenuVisible = this.selectedText !== "";
     } else {
-      // Выделенный текст не находится внутри элемента div
       this.isContextMenuVisible = false;
     }
   }
