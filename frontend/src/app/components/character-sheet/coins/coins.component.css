@@ -1,0 +1,11 @@
+
+.coinInput
+{
+    width: 45px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid black;
+    outline: none;
+    text-align: center;
+    font-size: 15px;
+}
