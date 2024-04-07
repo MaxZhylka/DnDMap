@@ -1,0 +1,43 @@
+
+
+.inputField
+{
+
+  border: none;
+  display: block;
+  outline: none;
+  overflow: auto;
+  font-size: 15px;
+  background-color: transparent;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+.three
+{
+
+    border-radius: 10px;
+    border: 2px solid black;
+    outline: none;
+}
+.linkInput
+{
+
+  width: 180px;
+
+}
+.linkBtn
+{
+  margin-top: 10px;
+  width:180px;
+}
+.context-menu {
+  position: absolute;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+
+

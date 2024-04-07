@@ -1,16 +1,5 @@
-.ownerarea
-{
-  width: 288px;
-  height: 345px;
-  resize: none;
-  border: none;
-  display: block;
-  outline: none;
-  background-color: transparent;
-  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
-}
+
 .ownership {
-    margin-top: 5px;
-    border-radius: 10px;
-    border: 2px solid black;
+    padding-top: 10px;
+
 }

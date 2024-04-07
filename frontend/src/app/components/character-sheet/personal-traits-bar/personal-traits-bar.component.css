@@ -1,7 +1,11 @@
 .personal
 {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: start;
+    gap:5px;
+    height: 1070px;
+    text-align: center;
     width: 292px;
 }
 .features

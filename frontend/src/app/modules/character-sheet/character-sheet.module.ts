@@ -5,7 +5,7 @@ import {CharacterHeaderComponent} from "../../components/character-sheet/charact
 import {AbilityComponent} from "../../components/character-sheet/ability/ability.component";
 import {AbilityBarComponent} from "../../components/character-sheet/ability-bar/ability-bar.component";
 import {HeadContentComponent} from "../../components/character-sheet/head-content/head-content.component";
-import {PersonalTraitsComponent} from "../../components/character-sheet/personal-traits/personal-traits.component";
+import { AreaInputComponent} from "../../components/character-sheet/area-input/area-input.component";
 import {
   PersonalTraitsBarComponent
 } from "../../components/character-sheet/personal-traits-bar/personal-traits-bar.component";
@@ -43,6 +43,10 @@ import {
   AlliesAndTreasureComponent
 } from "../../components/second-character-sheet/allies-and-treasure/allies-and-treasure.component";
 import {ImageCropperModule} from "ngx-image-cropper";
+import {CoinsComponent} from "../../components/character-sheet/coins/coins.component";
+import {EquipmentComponent} from "../../components/character-sheet/equipment/equipment.component";
+import {QuillModule} from "ngx-quill";
+import {ClickableLinksDirective} from "../../Directives/clickable-link.directive";
 
 
 @NgModule({
@@ -52,7 +56,6 @@ import {ImageCropperModule} from "ngx-image-cropper";
     AbilityComponent,
     AbilityBarComponent,
     HeadContentComponent,
-    PersonalTraitsComponent,
     PersonalTraitsBarComponent,
     InspirationComponent,
     SavingThrowsSkillsBarComponent,
@@ -75,14 +78,19 @@ import {ImageCropperModule} from "ngx-image-cropper";
     AttackSpellsComponent,
     AttacksComponent,
     CalcAttackSplellsComponent,
-     AlliesAndTreasureComponent
+     AlliesAndTreasureComponent,
+    CoinsComponent,
+    EquipmentComponent,
+    ClickableLinksDirective,
+     AreaInputComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     TemporaryHitsComponent,
-    ImageCropperModule
+    ImageCropperModule,
+    QuillModule.forRoot()
 
   ],
   exports:[
@@ -91,7 +99,6 @@ import {ImageCropperModule} from "ngx-image-cropper";
     AbilityComponent,
     AbilityBarComponent,
     HeadContentComponent,
-    PersonalTraitsComponent,
     PersonalTraitsBarComponent,
     InspirationComponent,
     SavingThrowsSkillsBarComponent,
@@ -105,7 +112,9 @@ import {ImageCropperModule} from "ngx-image-cropper";
     InitiativeComponent,
     SpeedComponent,
     SecondCharacterSheetComponent,
-     AlliesAndTreasureComponent
+     AlliesAndTreasureComponent,
+    ClickableLinksDirective,
+     AreaInputComponent
 
   ],
   providers:[CharacterService]

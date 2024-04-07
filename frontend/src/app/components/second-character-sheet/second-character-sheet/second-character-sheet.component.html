@@ -7,15 +7,12 @@
 </label>
 <input id="fileInput" type="file" accept="image/*" size="3000000" (change)="onselectFile($event)" style="display: none;">
     </div>
-    <div class="alliesAndTreasureBar">
-      <textarea class="backstory" id="backstory"></textarea>
-      <label>ПРЕДЫСТОРИЯ</label>
-    </div>
+ <app-area-input botText="ПРЕДЫСТОРИЯ" [boxHeight]="688" [boxWidth]="297"></app-area-input>
   </div>
     <div class="rightSheet">
-  <div class="alliesAndTreasureBar" *ngFor="let text of alliesandtreasuretext; let i = index">
-      <app-allies-and-treasure [alliesAndTreasureText]="text" [alliesAndTreasureId]="alliesandtreasureid[i]"></app-allies-and-treasure>
-  </div>
+
+
+      <app-area-input [boxWidth]="594"  [boxHeight]="360" *ngFor=" let text of alliesandtreasuretext; let i = index" [botText]="text"></app-area-input>
 </div>
 
 </div>
