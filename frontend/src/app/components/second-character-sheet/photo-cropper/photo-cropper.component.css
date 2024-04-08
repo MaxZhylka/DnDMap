@@ -28,6 +28,8 @@
 .row{
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 #portrait
 {
@@ -38,11 +40,9 @@
 }
 .main
 {
-  width: 600px;
-  height: 400px;
+  max-width: 600px;
+  max-height: 400px;
   position: relative;
-  border: 2px solid black;
-  border-radius: 15px;
 }
 .closeButton
 {

@@ -45,7 +45,6 @@ import {
 import {ImageCropperModule} from "ngx-image-cropper";
 import {CoinsComponent} from "../../components/character-sheet/coins/coins.component";
 import {EquipmentComponent} from "../../components/character-sheet/equipment/equipment.component";
-import {QuillModule} from "ngx-quill";
 import {ClickableLinksDirective} from "../../Directives/clickable-link.directive";
 import {PhotoCropperComponent} from "../../components/second-character-sheet/photo-cropper/photo-cropper.component";
 

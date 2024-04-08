@@ -13,6 +13,8 @@ export class AreaInputComponent implements OnInit{
   @Input() botText:string ='';
   @Input() boxHeight:number=135;
   @Input() boxWidth:number=290;
+  @Input() border:string='2px solid black';
+  @Input() borderRadius:number=10;
   @ViewChild('inputField', { static: false }) inputField!: ElementRef;
     currentLinkElement: HTMLAnchorElement | null = null;
   currentLink: string = '';

@@ -3,19 +3,17 @@
   <div class="Window">
   <div class="closeButton" (click)="onClose()">x</div>
    <div class="row">
-    <div class="main">
-        <image-cropper
+        <image-cropper class="main" style="padding: 0"
           [imageChangedEvent]="imgChangeEvt"
         [aspectRatio]="3/4"
           [maintainAspectRatio]="true"
         [resizeToWidth]="300"
-        format="jpeg"
+        format="png"
         (imageCropped)="cropImg($event)"
         (imageLoaded)="imgLoad()"
         (cropperReady)="initCropper()"
         (loadImageFailed)="imgFailed()">
         </image-cropper>
-    </div>
     <img class="prewie" [src]="cropImagePreview" alt="">
    </div>
   </div>

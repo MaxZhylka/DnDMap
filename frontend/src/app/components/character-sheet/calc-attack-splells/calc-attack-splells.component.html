@@ -1,15 +1,18 @@
 <div class="container">
   <div class="background" (click)="onClose()"></div>
   <div class="Window">
-  <div class="closeButton" (click)="onClose()">x</div>
-     <div class="closeButton" (click)="deleteComponent()">УДАЛИТЬ</div>
+  <div style=" width:30%; align-self: end; display: flex; flex-direction: row; justify-content: space-around" >
+    <div class="closeButton" (click)="deleteComponent()">УДАЛИТЬ</div>
+    <div class="closeButton" style="font-size: 30px" (click)="onClose()">x</div>
+  </div>
+    <div style="display: flex; width: 90%;height: 80%; align-self: center;flex-direction: column;justify-content: space-between">
  <div class="window attackName">
-<input type="text" class="winowtempl" id="attacknametext" maxlength="20" [(ngModel)]="data.nameAttack"><br>
-   <label>НАЗВАНИЕ</label>
+    <input type="text" class="winowtempl" id="attacknametext" maxlength="20" [(ngModel)]="data.nameAttack"><br>
+    <label>НАЗВАНИЕ</label>
  </div>
-  <div class="selectorandother">
+  <div style="display: flex;justify-content: space-between">
                         <div class="window windowSelector">
-                            <select class="windowtempl" id="windowSelect"   [(ngModel)]="data.characteristic" name="characteristic">
+                            <select class="winowtempl" id="windowSelect"   [(ngModel)]="data.characteristic" name="characteristic">
                               <option *ngFor="let characteristic of characteristics" [value]="characteristic.value">
                                {{ characteristic.display }}
                                </option>
@@ -30,6 +33,7 @@
     <div class="window attackRoll">
       <input type="text" class="winowtempl" id="attackroll" maxlength="20"  [(ngModel)]="data.damage"><br>
       <label>УРОН</label>
+    </div>
     </div>
   </div>
 </div>

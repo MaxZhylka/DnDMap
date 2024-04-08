@@ -35,8 +35,17 @@ border: 1px transparent solid;
   background-color: #E4E4E4;
   border-radius: 10px;
   margin-bottom: 3px;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out, transform 200ms ease-in-out;
 }
-
+.btn:hover
+{
+    background-color: #d0d0d0;
+}
+.btn:active
+{
+    transform: scale(0.95);
+}
 .attackContainer
 {
   display: flex;
