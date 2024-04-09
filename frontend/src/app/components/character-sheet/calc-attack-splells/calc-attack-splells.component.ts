@@ -17,7 +17,7 @@ characteristics = [
   ];
 
 
-  selectedCharacteristic: string = this.characteristics[0].value;
+
 display:boolean=false;
 
 @Input() data!:attackData;

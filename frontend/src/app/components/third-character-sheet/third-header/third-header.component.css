@@ -1,0 +1,45 @@
+.headContainer
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 75px;
+  width: 900px;
+  margin:auto;
+  align-items: center;
+}
+.nameText
+{
+    font-size:30px;width: 90%;border: none; border-bottom: 1px solid black; display: block;outline: none;
+}
+.windowtempl
+{
+  width:200px;
+  height: 30px;
+}
+.selectionUnderline
+{
+  text-align: center;
+  display: block;
+  font-size: 14px;
+  width: 200px;
+}
+.textContainer
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 150px;
+  height: 60px;
+
+}
+.dataInput
+{
+  width: 120px;
+}
+.label
+{
+  text-align: center;
+  display: block;
+  width: 128px;
+}

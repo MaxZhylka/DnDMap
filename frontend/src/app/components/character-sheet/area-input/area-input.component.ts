@@ -25,7 +25,7 @@ export class AreaInputComponent implements OnInit{
   selectedText: string ="";
 
 ngOnInit() {
-  this.inputHeight= this.boxHeight-12;
+  this.inputHeight= this.boxHeight-15;
   this.inputWidth= this.boxWidth-4;
 }
 

@@ -1,0 +1,42 @@
+.spellsSlotsInput
+{
+  height: 30px;
+  width:30px;
+  border:2px solid black;
+  border-radius: 100px;
+  text-align: center;
+  margin-left: -14px;
+  outline: none;
+}
+.spellsSlotsContainer
+{
+  height: 20px;
+  width: 170px;
+  display: flex;
+  padding-left: 10px;
+  border: 2px solid black;
+  justify-content: start;
+  align-items: center;
+  border-left: none ;
+  margin-left: -5px;
+  gap:5px;
+}
+.slotsAndCounter
+{
+
+  display: flex;
+  width:275px;
+  height: 30px;
+  justify-content: start;
+  align-items: center;
+
+}
+.spellLevel
+{
+  height: 32px;
+  width:50px;
+  border:2px solid black;
+  border-right:none;
+  text-align: center;
+  align-content: center;
+}

@@ -9,7 +9,7 @@ import {debounceTime, tap} from "rxjs";
   styleUrls: ['./character-header.component.css']
 })
 export class CharacterHeaderComponent {
-  headId: string[] = ['characterClass', 'characterBackstory', 'characterRace', 'worldviews', 'experience','level'];
+  headId: string[] = ['class', 'backstory', 'race', 'worldviews', 'experience','level'];
   headText: string[] = ['КЛАСС', 'ПРЕДЫСТОРИЯ', 'РАСА', 'МИРОВОЗРЕНИЕ', 'ОПЫТ'];
   headForm:FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -18,7 +18,7 @@ export class CharacterHeaderComponent {
     characterRace: new FormControl(''),
     worldviews: new FormControl(''),
     experience: new FormControl(''),
-    level: new FormControl('1', [Validators.required, Validators.pattern(/^[0-9]+$/)]),
+    level: new FormControl('1'),
   });
   SubmitForm(){
     console.log(this.headForm)

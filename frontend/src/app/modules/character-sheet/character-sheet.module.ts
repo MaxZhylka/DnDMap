@@ -48,6 +48,11 @@ import {EquipmentComponent} from "../../components/character-sheet/equipment/equ
 import {QuillModule} from "ngx-quill";
 import {ClickableLinksDirective} from "../../Directives/clickable-link.directive";
 import {PhotoCropperComponent} from "../../components/second-character-sheet/photo-cropper/photo-cropper.component";
+import {
+  ThirdCharacterShitComponent
+} from "../../components/third-character-sheet/third-character-shit/third-character-shit.component";
+import {ThirdHeaderComponent} from "../../components/third-character-sheet/third-header/third-header.component";
+import {SpellsByLevelComponent} from "../../components/third-character-sheet/spells-by-level/spells-by-level.component";
 
 
 @NgModule({
@@ -85,7 +90,10 @@ import {PhotoCropperComponent} from "../../components/second-character-sheet/pho
     ClickableLinksDirective,
      AreaInputComponent,
      AlliesAndTreasureComponent,
-    PhotoCropperComponent
+    PhotoCropperComponent,
+    ThirdCharacterShitComponent,
+    ThirdHeaderComponent,
+    SpellsByLevelComponent
   ],
     imports: [
         CommonModule,
@@ -120,7 +128,8 @@ import {PhotoCropperComponent} from "../../components/second-character-sheet/pho
     ClickableLinksDirective,
      AreaInputComponent,
      AlliesAndTreasureComponent,
-    PhotoCropperComponent
+    PhotoCropperComponent,
+    ThirdCharacterShitComponent
 
   ],
   providers:[CharacterService]

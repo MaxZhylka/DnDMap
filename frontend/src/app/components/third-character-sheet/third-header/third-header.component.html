@@ -1,0 +1,26 @@
+<script src="../../../services/character.service.ts"></script>
+<div class="headContainer">
+  <div>
+<input class="nameText" id="name" type="text" maxlength="40" [value]="getClass" readonly>
+  <label>КЛАСС ЗАКЛИНАТЕЛЯ</label>
+  </div>
+<div>
+   <select class="windowtempl" id="windowSelect"  [(ngModel)]="selectedIndex"  name="characteristic">
+
+   <option *ngFor="let characteristic of characteristics" [value]="characteristic.value">
+      {{ characteristic.display }}
+   </option>
+
+   </select>
+  <br>
+    <label class="selectionUnderline">БАЗОВАЯ ХАРАКТЕРИСТИКА ЗАКЛИНАНИЙ</label>
+  </div>
+  <div class="textContainer">
+    <input  class="dataInput" readonly [value]="getSavingThrow">
+    <label class="label">СЛОЖНОСТЬ СПАСБРОСКА</label>
+  </div>
+  <div  class="textContainer">
+    <input class="dataInput" readonly [value]="getAttackBonus">
+    <label class="label">БОНУС АТАКИ</label>
+  </div>
+  </div>

@@ -8,8 +8,12 @@
   outline: none;
   overflow: auto;
   font-size: 15px;
+  text-align: start;
   background-color: transparent;
   font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+  box-sizing: content-box;
+  margin-top: 3px;
+  margin-left: 5px;
 }
 .three
 {

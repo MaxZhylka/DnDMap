@@ -9,6 +9,12 @@ export class CharacterService {
   level:number=1;
   proficiency:number=2;
   perception:number = 0;
+  class:string="";
+  backstory:string="";
+  race:string="";
+  worldviews:string="";
+  experience:string="";
+
   health: number = 1;
   checkboxPerception: boolean = false;
   strength:number=10;

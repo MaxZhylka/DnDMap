@@ -1,4 +1,4 @@
 <div class="{{ id }}">
-  <input class="headContent test" id="{{ id }}" type="text" maxlength="20">
+  <input class="headContent test" id="{{ id }}" type="text" [(ngModel)]="characterService[id]" maxlength="20">
   <label>{{ text }}</label>
 </div>

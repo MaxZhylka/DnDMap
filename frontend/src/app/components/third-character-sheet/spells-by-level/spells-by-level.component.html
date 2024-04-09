@@ -1,0 +1,15 @@
+<form [formGroup]="spellsForm">
+<div class="header">
+<div class="slotsAndCounter">
+  <div class="spellLevel">{{spellLevel}}</div>
+  <input class="spellsSlotsInput" formControlName="spells" (change)="onChange()">
+  <div class="spellsSlotsContainer">
+    <app-check-box-circle *ngFor="let item of getArray()"></app-check-box-circle>
+  </div>
+</div>
+  <div class="spellList">
+    <app-check-box-circle> </app-check-box-circle>
+    <app-area-input> </app-area-input>
+  </div>
+</div>
+</form>
