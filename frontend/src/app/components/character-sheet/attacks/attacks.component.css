@@ -17,6 +17,9 @@
   height:20px;
   width:82.5px;
   margin-bottom: 3px;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out, transform 200ms ease-in-out;
+
 }
 .input:focus
 {

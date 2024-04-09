@@ -22,10 +22,43 @@
     z-index: 1000;
     border: 1px black solid;
     border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .closeButton
 {
   height: 50px;
-  margin-top: 20px;
-  border: 2px solid black;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+}
+.window
+{
+  width: 45%;
+}
+.winowtempl
+{
+  width: 100%;
+  font-size: 40px;
+  text-align: center;
+  border: none;
+  border-bottom: 1px black solid;
+  outline: none;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+label{
+  color: #838383;
+  font-size: 14px;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+#profienc-checkbox {
+    width: 50%;
+    height: 50%;
+}
+.profiencycheck{
+  display: flex;
+flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }

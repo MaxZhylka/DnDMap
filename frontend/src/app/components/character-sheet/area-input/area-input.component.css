@@ -17,9 +17,6 @@
 }
 .three
 {
-
-    border-radius: 10px;
-    border: 2px solid black;
     outline: none;
 }
 .linkInput
@@ -43,5 +40,7 @@
   z-index: 1000;
 }
 
-
+label{
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
 
