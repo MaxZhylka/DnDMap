@@ -52,6 +52,8 @@ import {
 } from "../../components/third-character-sheet/third-character-shit/third-character-shit.component";
 import {ThirdHeaderComponent} from "../../components/third-character-sheet/third-header/third-header.component";
 import {SpellsByLevelComponent} from "../../components/third-character-sheet/spells-by-level/spells-by-level.component";
+import {SelectableDirective} from "../../Directives/select-end.directive";
+import {MapModule} from "../map-sheet/map.module";
 
 
 @NgModule({
@@ -92,15 +94,17 @@ import {SpellsByLevelComponent} from "../../components/third-character-sheet/spe
     PhotoCropperComponent,
     ThirdCharacterShitComponent,
     ThirdHeaderComponent,
-    SpellsByLevelComponent
+    SpellsByLevelComponent,
+    SelectableDirective
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TemporaryHitsComponent,
-        ImageCropperModule,
-        NgOptimizedImage
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TemporaryHitsComponent,
+    ImageCropperModule,
+    NgOptimizedImage,
+    MapModule
 
   ],
   exports:[

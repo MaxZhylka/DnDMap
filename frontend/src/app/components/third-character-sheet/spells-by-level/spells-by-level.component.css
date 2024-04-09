@@ -25,7 +25,7 @@
 {
 
   display: flex;
-  width:275px;
+  width:255px;
   height: 30px;
   justify-content: start;
   align-items: center;
@@ -39,4 +39,14 @@
   border-right:none;
   text-align: center;
   align-content: center;
+}
+.spellList
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-content: center;
+  height: 40px;
+  width:250px;
+  border-top: 1px solid black ;
 }
