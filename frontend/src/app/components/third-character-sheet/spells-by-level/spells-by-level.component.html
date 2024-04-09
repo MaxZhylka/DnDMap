@@ -7,9 +7,11 @@
     <app-check-box-circle *ngFor="let item of getArray()"></app-check-box-circle>
   </div>
 </div>
-  <div class="spellList">
+  <div class="spellList" [style.height.px]="">
+    <div class="spell" *ngFor="let item of spellData">
     <app-check-box-circle> </app-check-box-circle>
-    <app-area-input [border]="'none'" [boxWidth]="240" [boxHeight]="20"> </app-area-input>
+    <app-area-input [border]="'none'" [boxWidth]="220" [boxHeight]="20"> </app-area-input>
+     </div>
   </div>
 </div>
 </form>

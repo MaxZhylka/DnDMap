@@ -1,17 +1,30 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {tap} from "rxjs";
-
+interface SpellData
+{
+  include:boolean,
+  spellName:string
+}
 @Component({
   selector: 'app-spells-by-level',
   templateUrl: './spells-by-level.component.html',
   styleUrl: './spells-by-level.component.css'
 })
-export class SpellsByLevelComponent {
+
+export class SpellsByLevelComponent implements OnInit{
   @Input() spellLevel:number=0;
   spellsForm:FormGroup = new FormGroup({
     spells: new FormControl('0')});
-getArray()
+  listHeight:number=20;
+  @Input() spellCount: number=1;
+  spellData:SpellData[]=[];
+  ngOnInit() {
+    this.spellData=new Array(this.spellCount).fill({});
+    this.listHeight=20*this.spellCount;
+  }
+
+  getArray()
 {
 
  return Array.from({ length: parseInt(this.spellsForm.get("spells")?.value)}, (_, index) => index + 1);

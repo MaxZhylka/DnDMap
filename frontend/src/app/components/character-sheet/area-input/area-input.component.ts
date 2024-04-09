@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ElementRef, HostListener} from '@angular/core';
 
 
 
@@ -27,8 +27,29 @@ export class AreaInputComponent implements OnInit {
   contextMenuPosition = {x: 0, y: 0};
   selectedRange: any;
   selectedText: string = "";
+@HostListener('window:resize', ['$event'])
+onWindowResize() {
+  this.updateSelectionAndMenuPosition();
+}
+updateSelectionAndMenuPosition() {
+  const selection = window.getSelection();
+  if (selection && selection.rangeCount > 0) {
+    this.selectedRange = selection.getRangeAt(0);
+    this.updateContextMenuPosition();
+  }
+}
 
+updateContextMenuPosition() {
+  if (!this.selectedRange) {
+    return;
+  }
 
+  const rangeRect = this.selectedRange.getBoundingClientRect();
+  this.contextMenuPosition.x = rangeRect.left + window.scrollX + (rangeRect.width / 2) - 100; // Предполагается, что ширина меню 200px
+  this.contextMenuPosition.y = rangeRect.bottom + window.scrollY + 5;
+
+  // Если Angular не обнаруживает изменения автоматически, возможно, потребуется использовать ChangeDetectorRef для принудительного обновления представления.
+}
   ngOnInit() {
     this.inputHeight = this.calcHeight();
     this.inputWidth = this.boxWidth - 4;

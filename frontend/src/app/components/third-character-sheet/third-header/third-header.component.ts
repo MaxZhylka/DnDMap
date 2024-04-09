@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {CharacterService} from "../../../services/character.service";
 import {FormControl, FormGroup} from "@angular/forms";
 
+
 @Component({
   selector: 'app-third-header',
   templateUrl: './third-header.component.html',

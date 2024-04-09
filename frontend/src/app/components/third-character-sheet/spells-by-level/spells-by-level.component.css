@@ -31,6 +31,13 @@
   align-items: center;
 
 }
+.spell
+{
+  margin-top: 5px;
+   border-top: 1px solid black ;
+  display: flex;
+  flex-direction: row;
+}
 .spellLevel
 {
   height: 32px;
@@ -43,10 +50,9 @@
 .spellList
 {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: start;
   align-content: center;
-  height: 40px;
   width:250px;
-  border-top: 1px solid black ;
+
 }
