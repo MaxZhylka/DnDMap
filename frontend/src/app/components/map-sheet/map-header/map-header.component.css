@@ -42,7 +42,7 @@
     cursor: pointer;
     padding-left: 5px;
     border-top: none;
-    /* Нет необходимости в таком высоком z-index, если структура идет правильно */
+
 }
 
 .suggestions:hover {

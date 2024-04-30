@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="text">Создайте аккаунт</div>
+  <div>
+  <input class="inputData" placeholder="Имя пользователя">
+  <div class="validationMessage"></div>
+    </div>
+  <div>
+   <input class="inputData" placeholder="Email">
+  <div class="validationMessage"></div>
+    </div>
+  <div>
+   <input class="inputData" placeholder="Пароль">
+  <div class="validationMessage"></div>
+    </div>
+  <div class="confirmButton">Регистрация</div>
+ <div class="continueWithGoogle">
+    <img class="google" [src]="GoogleImg">
+    <div class="googleText"> Continue with Google</div>
+  </div>
+  <div class="footerText" (click)="SwitchPanel.emit()">Уже есть акаунт? <a class="link">Войдите</a></div>
+</div>
