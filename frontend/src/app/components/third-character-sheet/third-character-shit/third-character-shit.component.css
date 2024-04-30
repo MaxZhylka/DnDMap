@@ -1,10 +1,13 @@
 .spellsContainer
 {
   width: 900px;
-  height:800px;
+  height: 1400px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-between;
 }
 .spellsSlotsInput
 {
@@ -33,7 +36,7 @@
 {
 
   display: flex;
-  width:255px;
+  width:270px;
   height: 30px;
   justify-content: start;
   align-items: center;
@@ -42,18 +45,22 @@
 .spell
 {
   margin-top: 5px;
-   border-top: 1px solid black ;
+   border-bottom: 1px solid #a6a6a6 ;
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
 }
 .spellLevel
 {
   height: 32px;
   width:50px;
   border:2px solid black;
+  border-bottom-left-radius: 5px ;
+  border-top-left-radius: 5px ;
   border-right:none;
   text-align: center;
   align-content: center;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
 }
 .spellList
 {
@@ -61,6 +68,6 @@
   flex-direction: column;
   justify-content: start;
   align-content: center;
-  width:250px;
+  width:270px;
 
 }
