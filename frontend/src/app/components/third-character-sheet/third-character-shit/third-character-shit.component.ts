@@ -16,14 +16,14 @@ export class ThirdCharacterShitComponent implements OnInit {
    cantripCounter=13;
   cantripData:string[]=[];
   countersByLevel: { [key: number]: number } = {
-    9: 10,
-    8: 11,
-    5: 12,
-    7: 12,
-    4: 18,
-    2: 18,
+    9: 11,
+    8: 12,
+    7: 13,
     6: 12,
-    3: 18,
+    5: 12,
+    4: 19,
+    3: 19,
+    2: 18,
     1: 18
   };
 
@@ -34,7 +34,7 @@ export class ThirdCharacterShitComponent implements OnInit {
 
   initSpellByLevel() {
 
-    const levelOrder = [ 3, 6,1, 4, 7,2, 5, 8, 9];
+    const levelOrder = [ 1, 2,3, 4, 5,6, 7, 8, 9];
     levelOrder.forEach(level => {
       const counter = this.countersByLevel[level];
       this.initSpellsByLevel.push({ level, counter });
