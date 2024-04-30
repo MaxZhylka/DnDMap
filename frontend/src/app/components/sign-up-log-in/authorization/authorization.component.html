@@ -1,6 +1,6 @@
 <form class="container" [formGroup]="auth">
   <div class="text">Вход</div>
-  <div>
+  <div class="regwidth">
     <input class="inputData" placeholder="Email" formControlName="email">
     <div class="validationMessage" *ngIf="auth.get('email')?.errors?.['required']&& auth.get('email')?.touched">
       Електронна пошта обов'язкова.
@@ -9,7 +9,7 @@
       Введіть дійсну електронну адресу.
     </div>
   </div>
-  <div>
+  <div class="regwidth">
     <input class="inputData" placeholder="Пароль" formControlName="password">
     <div class="validationMessage" *ngIf="auth.get('password')?.errors?.['passwordComplexity']">
       {{ auth.get('password')?.errors?.['passwordComplexity']?.message }}
