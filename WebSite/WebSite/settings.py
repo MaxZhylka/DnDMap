@@ -26,10 +26,17 @@ SECRET_KEY = 'django-insecure-nklzigd_i9o#+q)1zqu0_f%fv1!+=_7kpcz84)x5!&9#xd*)u$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+CORS_ALLOW_HEADERS = [
+
+    'content-type', 'origin', 'Authorization','authorization','Token'
 
 
-# Application definition
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 
 INSTALLED_APPS = [
     'registration',
@@ -42,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'rest_framework.authtoken',
     'django.contrib.staticfiles',
 ]
 
@@ -58,6 +66,15 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'WebSite.urls'
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'registration.auth.TokenAuthentication',
+    ),
+}
+
+
+
 
 TEMPLATES = [
     {
@@ -74,7 +91,7 @@ TEMPLATES = [
         },
     },
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+
 WSGI_APPLICATION = 'WebSite.wsgi.application'
 
 
@@ -106,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

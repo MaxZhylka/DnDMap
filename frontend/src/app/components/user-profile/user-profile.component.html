@@ -1,0 +1,28 @@
+<div class="container" *ngIf="userData">
+  <div class="leftColumn">
+    <img class="avatar" [src]="userData.avatar">
+    <div class="personalData">
+      <div class="name">{{userData.name}}</div>
+      <div class="email">{{userData.email}}</div>
+      <div class="CharacterCounter"></div>
+    </div>
+  </div>
+  <div class="rightColumn" [formGroup]="changes">
+    <div class="changeContainer">
+      <div class="header">Сменить имя</div>
+      <input class="input" formControlName="login">
+      <div class="button" (click)="changeNick()"><span class="button-text">Применить</span></div>
+    </div>
+     <div class="changeContainer">
+      <div class="header"> Сменить почту</div>
+      <input class="input"  formControlName="email">
+      <div class="button" (click)="changePost()"><span class="button-text">Применить</span></div>
+    </div>
+     <div class="changeContainerPassword">
+      <div class="header">Сменить пароль</div>
+      <input class="input" placeholder="Введите старый пароль"  formControlName="oldPassword">
+       <input class="input" placeholder="Введите новый пароль"  formControlName="password">
+      <div class="button" (click)="changePassword()"><span class="button-text">Применить</span></div>
+    </div>
+  </div>
+</div>

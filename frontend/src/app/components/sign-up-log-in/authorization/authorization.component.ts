@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-authorization',
@@ -7,53 +8,74 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, 
   styleUrl: './authorization.component.css'
 })
 export class AuthorizationComponent {
- @Output() SwitchPanel:EventEmitter<void>= new EventEmitter<void>();
-  GoogleImg:string="assets/img/Google.png";
-   auth: FormGroup = new FormGroup({
-    email: new FormControl('',[emailFormatValidator, Validators.required]),
-    password: new FormControl('', [passwordComplexityValidator, Validators.required])
+  @Output() SwitchPanel: EventEmitter<void> = new EventEmitter<void>();
+  GoogleImg: string = "assets/img/Google.png";
+  auth: FormGroup = new FormGroup({
+    email: new FormControl('', [this.emailFormatValidator(), Validators.required]),
+    password: new FormControl('', [this.passwordComplexityValidator(), Validators.required])
   });
-}
+
+  constructor(private authService: AuthService) {
+  }
 
 
+  emailFormatValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
 
-export function passwordComplexityValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const password = control.value;
-    if (!password) return null;
-
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumeric = /\d/.test(password);
-    const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    const isValidLength = password.length >= 8;
-
-    const isValidPassword = hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && isValidLength;
-
-    return isValidPassword ? null : {
-      passwordComplexity: {
-        valid: false,
-        message: 'Пароль має містити мінімум 8 символів, включати великі і малі літери, цифри та спеціальні символи.'
+      if (!value) {
+        return null;
       }
+
+      const hasAtSign = value.includes('@');
+      const hasDot = value.includes('.');
+
+
+      if (hasAtSign && hasDot && value.indexOf('@') > 0 && value.indexOf('.') > value.indexOf('@') + 1 && value.indexOf('.') < value.length - 1) {
+        return null;
+      } else {
+        return {emailFormat: 'Email должен содержать @ и . в правильном формате'};
+      }
+    }
+  }
+
+
+  passwordComplexityValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const password = control.value;
+      if (!password) return null;
+
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumeric = /\d/.test(password);
+      const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+      const isValidLength = password.length >= 8;
+
+      const isValidPassword = hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && isValidLength;
+
+      return isValidPassword ? null : {
+        passwordComplexity: {
+          valid: false,
+          message: 'Пароль має містити мінімум 8 символів, включати великі і малі літери, цифри та спеціальні символи.'
+        }
+      };
     };
-  };
+  }
+
+  Submit() {
+    this.authService.login(this.auth.get('email')?.value, this.auth.get('password')?.value).subscribe(data => {
+      localStorage.setItem('token', data.token);
+      console.log(data.token);
+    }, error => {
+      console.error('Login failed', error);
+    });
+
+  }
 }
 
-export function emailFormatValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
-    if (!value) {
-      return null; // не валидировать пустое значение
-    }
 
-    const hasAtSign = value.includes('@');
-    const hasDot = value.includes('.');
 
-    // Проверяем, что оба символа присутствуют после первого символа и перед последним
-    if (hasAtSign && hasDot && value.indexOf('@') > 0 && value.indexOf('.') > value.indexOf('@') + 1 && value.indexOf('.') < value.length - 1) {
-      return null; // валидный email
-    } else {
-      return { emailFormat: 'Email должен содержать @ и . в правильном формате' };
-    }
-  };
-}
+
+
+
+

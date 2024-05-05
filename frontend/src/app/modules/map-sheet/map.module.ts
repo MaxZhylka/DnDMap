@@ -15,6 +15,8 @@ import {OpendNewsComponent} from "../../components/map-sheet/opend-news/opend-ne
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { LOCALE_ID } from '@angular/core';
+import {AuthService} from "../../services/auth.service";
+import {AuthGuard} from "../../services/authGuard.service";
 registerLocaleData(localeRu);
 @NgModule({
   declarations: [

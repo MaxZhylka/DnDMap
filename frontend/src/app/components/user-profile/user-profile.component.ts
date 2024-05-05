@@ -1,24 +1,34 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService, UserData} from "../../services/auth.service";
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrl: './registration.component.css'
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrl: './user-profile.component.css'
 })
-export class RegistrationComponent {
- @Output() SwitchPanel:EventEmitter<void>= new EventEmitter<void>();
- GoogleImg:string="assets/img/Google.png";
-  auth: FormGroup = new FormGroup({
+export class UserProfileComponent implements OnInit{
+
+   changes: FormGroup = new FormGroup({
     login: new FormControl('',[Validators.maxLength(30), Validators.required]),
     email: new FormControl('',[this.emailFormatValidator(), Validators.required]),
-    password: new FormControl('', [this.passwordComplexityValidator(), Validators.required])
+    password: new FormControl('', [this.passwordComplexityValidator(), Validators.required]),
+     oldPassword: new FormControl('', [this.passwordComplexityValidator(), Validators.required])
   });
 
- constructor(private authService: AuthService) {}
 
+  userData!: UserData;
 
+   constructor(private authService: AuthService) {}
+
+     ngOnInit(): void {
+
+      this.authService.getUserData().subscribe({
+        next: (data) => { data.avatar = `http://127.0.0.1:8000/${data.avatar}`;
+          this.userData = data; },
+        error: (error) => console.error('Failed to fetch user data', error)
+      });
+  }
    emailFormatValidator(): ValidatorFn {
      return (control: AbstractControl): ValidationErrors | null => {
        const value = control.value;
@@ -61,12 +71,16 @@ export class RegistrationComponent {
     };
   };
 }
+  changeNick()
+  {
 
-Submit()
-{
-this.authService.register(this.auth.get('login')?.value,this.auth.get('email')?.value,this.auth.get('password')?.value ).subscribe(
-      success => console.log('Login Successful'),
-      error => console.log(error)
-    );
+  }
+  changePost()
+  {
+
+  }
+  changePassword()
+  {
+
   }
 }
