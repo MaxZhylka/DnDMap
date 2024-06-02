@@ -1,0 +1,7 @@
+
+  <button #openButton class="News-btn" (click)="togglePanel()">НОВОСТИ</button>
+  <button disabled class="News-btn ActivButton"  (click)="redirectToCharsheet()"> ЛИСТЫ ПЕРСОНАЖЕЙ</button>
+  <button class="News-btn " (click)="redirectToMap()"> КАРТА</button>
+  <button *ngIf="userData" class="imageButton"><img class="image" [src]="userData.avatar"></button>
+  <app-news-panel appClickOutside [ignoreElementRefs]="IgnoredElement"  (clickOutside)="closePanel()" [left]="displayLeft" > </app-news-panel>
+
