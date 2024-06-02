@@ -1,6 +1,6 @@
 <div class="container">
   <img class="mainImage" [src]="mainImage">
-<app-registration (switcher)="display=!display" *ngIf="display" (SwitchPanel)="display=!display"></app-registration>
-  <app-authorization *ngIf="!display"  (SwitchPanel)="display=!display"></app-authorization>
+<app-registration *ngIf="display" (SwitchPanel)="switchPanel()"></app-registration>
+  <app-authorization *ngIf="!display"  (SwitchPanel)="switchPanel()"></app-authorization>
 </div>
 

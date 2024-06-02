@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CharacterService} from "../../../services/character.service";
 
 @Component({
@@ -6,35 +6,39 @@ import {CharacterService} from "../../../services/character.service";
   templateUrl: './skill.component.html',
   styleUrl: './skill.component.css'
 })
-export class SkillComponent {
+export class SkillComponent implements OnInit{
   @Input() text: string = '';
   @Input() id: string = '';
   @Input() abilitysave: string = '';
+  @Input() skillsName:string='';
 
-  inspirOne: string = '../../../assets/img/inspirone.png';
-  inspirTwo: string = '../../../assets/img/inspirtwo.png';
-  currentImage: string = this.inspirOne;
-  toggle: boolean = false;
+  toggle: number =0;
 
-  constructor(private characterService: CharacterService) {
+  ngOnInit() {
+    this.toggle=this.characterService[this.skillsName];
   }
 
-  toggleImage() {
-    this.currentImage = (this.currentImage === this.inspirOne) ? this.inspirTwo : this.inspirOne;
-    if (!this.toggle) {
-      this.toggle = true;
-      } else {
-      this.toggle = false;
-    }
-    this.getPerception();
+  constructor(protected characterService: CharacterService) {
   }
-  handleToggleChange(toggle: boolean) {
+
+
+  handleToggleChange(toggle: number) {
     this.toggle = toggle;
-
+    this.setSkills();
+    console.log(this.characterService[this.skillsName]);
   }
 
   get calculateSavingThrow(): string {
-    if(this.toggle) {
+    if(this.toggle==2)
+    {
+      let proficiency: number = Math.floor((this.characterService.level - 1) / 4 + 2)*2;
+      let modificator: number = Math.floor((this.characterService[this.id] - 10) / 2)
+      let result = modificator + proficiency;
+      if (result > 0)
+        return '+' + result;
+      else return '' + result;
+    }
+    if(this.toggle==1) {
       let proficiency: number = Math.floor((this.characterService.level - 1) / 4 + 2);
       let modificator: number = Math.floor((this.characterService[this.id] - 10) / 2)
       let result = modificator + proficiency;
@@ -50,10 +54,9 @@ export class SkillComponent {
     }
   }
 
-getPerception():void{
-    if (this.text == 'Восприятие')
-    {
-    this.characterService.checkboxPerception= this.toggle;
-    }
+setSkills():void{
+
+    this.characterService[this.skillsName]= this.toggle;
+
 };
 };

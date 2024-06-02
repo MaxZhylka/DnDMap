@@ -1,4 +1,5 @@
 import {Component, Input, OnInit, ViewChild, ElementRef, HostListener} from '@angular/core';
+import {CharacterService} from "../../../services/character.service";
 
 
 
@@ -8,7 +9,9 @@ import {Component, Input, OnInit, ViewChild, ElementRef, HostListener} from '@an
   styleUrls: ['./area-input.component.css']
 })
 export class AreaInputComponent implements OnInit {
-  @Input() personalId: string = '';
+  @Input() personalId: string = 'temp';
+  @Input() spellLvl:number=-1;
+  @Input() SpellId:number=1;
   @Input() topText: string = '';
   @Input() botText: string = '';
   @Input() boxHeight: number = 135;
@@ -27,7 +30,13 @@ export class AreaInputComponent implements OnInit {
   contextMenuPosition = {x: 0, y: 0};
   selectedRange: any;
   selectedText: string = "";
-@HostListener('window:resize', ['$event'])
+
+  constructor(public characterService:CharacterService) {
+
+
+  }
+
+  @HostListener('window:resize', ['$event'])
 onWindowResize() {
   this.updateSelectionAndMenuPosition();
 }
@@ -45,15 +54,16 @@ updateContextMenuPosition() {
   }
 
   const rangeRect = this.selectedRange.getBoundingClientRect();
-  this.contextMenuPosition.x = rangeRect.left + window.scrollX + (rangeRect.width / 2) - 100; // Предполагается, что ширина меню 200px
+  this.contextMenuPosition.x = rangeRect.left + window.scrollX + (rangeRect.width / 2) - 100;
   this.contextMenuPosition.y = rangeRect.bottom + window.scrollY + 5;
 
-  // Если Angular не обнаруживает изменения автоматически, возможно, потребуется использовать ChangeDetectorRef для принудительного обновления представления.
+
 }
   ngOnInit() {
     this.inputHeight = this.calcHeight();
     this.inputWidth = this.boxWidth - 4;
     this.ignoredElement.push(this.contextMenu);
+    console.log(this.personalId);
   }
 
   calcHeight() {
@@ -104,6 +114,7 @@ updateContextMenuPosition() {
     if (this.currentLinkElement) {
       this.currentLinkElement.href = url;
       this.currentLinkElement.textContent = this.selectedText;
+       this.characterService[this.personalId]=this.inputField.nativeElement.innerHTML;
     } else {
       const link = document.createElement('a');
       link.href = url;
@@ -112,6 +123,9 @@ updateContextMenuPosition() {
 
       this.selectedRange.deleteContents();
       this.selectedRange.insertNode(link);
+
+
+      this.characterService[this.personalId]=this.inputField.nativeElement.innerHTML;
 
     }
 

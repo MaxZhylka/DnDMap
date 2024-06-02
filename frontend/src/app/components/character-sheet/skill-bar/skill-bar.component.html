@@ -1,6 +1,6 @@
 <div class="function skills">
   <div *ngFor="let id of skillID; let i = index">
-    <app-skill [id]="skillID[i]" [text]="skillText[i]"></app-skill>
+    <app-skill [id]="skillID[i]" [text]="skillText[i]" [skillsName]="skillNames[i]"></app-skill>
   </div>
   <label>НАВЫКИ</label>
 </div>

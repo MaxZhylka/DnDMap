@@ -41,6 +41,7 @@ export class MapComponent implements OnInit {
       next: (data) => {
         this.cities = data;
         this.initMap();
+
       },
       error: (error) => {
         console.log(error);

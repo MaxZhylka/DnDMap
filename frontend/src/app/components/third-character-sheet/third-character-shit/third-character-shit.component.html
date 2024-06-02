@@ -8,8 +8,8 @@
   <input class="spellsSlotsInput" value=" " readonly>
 </div>
   <div class="spellList" [style.height.px]="">
-    <div class="spell" *ngFor="let item of cantripData">
-    <app-area-input [border]="'none'" [boxWidth]="235" [boxHeight]="20"> </app-area-input>
+    <div class="spell" *ngFor="let item of cantripData;let i=index">
+    <app-area-input [border]="'none'" [boxWidth]="235" [boxHeight]="20" [personalId]="'conspiracies'+i"> </app-area-input>
      </div>
 </div>
 

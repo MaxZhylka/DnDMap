@@ -8,7 +8,8 @@ import {UserProfileComponent} from "./components/user-profile/user-profile.compo
 
 
 
-export const appRoutes: Routes = [{path:'map',component:MapComponent, canActivate: [AuthGuard]},
+export const appRoutes: Routes = [{path:'',component:MapComponent, canActivate: [AuthGuard]},
   {path:'registration/character',component:CharacterSheetComponent,  canActivate: [AuthGuard]},
   {path:'profile',component:UserProfileComponent,  canActivate:[AuthGuard]},
-  {path:'',component:MainComponent}];
+  {path:'registration',component:MainComponent},
+  {path:'login',component:MainComponent}];

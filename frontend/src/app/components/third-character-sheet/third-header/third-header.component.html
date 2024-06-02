@@ -5,7 +5,7 @@
   <label>КЛАСС ЗАКЛИНАТЕЛЯ</label>
   </div>
 <div style="display: flex;flex-direction: column;align-items: center;">
-   <select class="windowtempl" id="windowSelect"  [(ngModel)]="selectedIndex"  name="characteristic">
+   <select class="windowtempl" id="windowSelect"  [(ngModel)]="characterService.spellcastingAbilityScore"  name="characteristic">
 
    <option *ngFor="let characteristic of characteristics" [value]="characteristic.value">
       {{ characteristic.display }}

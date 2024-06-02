@@ -1,5 +1,12 @@
-import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {inject, Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {
+  CanActivate,
+  Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  CanActivateFn
+} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -23,7 +30,7 @@ canActivate(
           console.log("Авторизирован");
           return true;
         } else {
-          return this.router.createUrlTree(['']);
+          return this.router.createUrlTree(['/registration']);
         }
       })
     );
@@ -35,3 +42,7 @@ canActivate(
 
 
 }
+export const isLoggedGuardFn: CanActivateFn =(route,state)=>{
+  return inject(AuthService).isLoggedIn();
+
+};

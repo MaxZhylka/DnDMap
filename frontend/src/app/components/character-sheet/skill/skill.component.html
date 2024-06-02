@@ -1,5 +1,5 @@
 <div class="skill">
-  <app-check-box-circle class="checkBoxStyle" (toggleChange)="handleToggleChange($event)"></app-check-box-circle>
+  <app-check-box-triple class="checkBoxStyle" (toggleChange)="handleToggleChange($event)" [_toggle]="characterService[skillsName]"></app-check-box-triple>
   <div class="skillindex">{{calculateSavingThrow}}</div>
   <div class="skilltext">{{ text}}</div>
 </div>

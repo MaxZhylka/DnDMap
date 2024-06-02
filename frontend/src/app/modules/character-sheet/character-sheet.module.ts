@@ -54,6 +54,9 @@ import {ThirdHeaderComponent} from "../../components/third-character-sheet/third
 import {SpellsByLevelComponent} from "../../components/third-character-sheet/spells-by-level/spells-by-level.component";
 import {SelectableDirective} from "../../Directives/select-end.directive";
 import {MapModule} from "../map-sheet/map.module";
+import {CheckBoxTripleComponent} from "../../components/character-sheet/check-box-triple/check-box-triple.component";
+import {ContentEditableDirective} from "../../Directives/content-editable.directive";
+import {AreaInput2Component} from "../../components/character-sheet/area-input-2/area-input-2.component";
 
 
 @NgModule({
@@ -95,7 +98,8 @@ import {MapModule} from "../map-sheet/map.module";
     ThirdCharacterShitComponent,
     ThirdHeaderComponent,
     SpellsByLevelComponent,
-    SelectableDirective
+    SelectableDirective,
+    AreaInput2Component
   ],
   imports: [
     CommonModule,
@@ -104,7 +108,9 @@ import {MapModule} from "../map-sheet/map.module";
     TemporaryHitsComponent,
     ImageCropperModule,
     NgOptimizedImage,
-    MapModule
+    MapModule,
+    CheckBoxTripleComponent,
+    ContentEditableDirective
 
   ],
   exports:[

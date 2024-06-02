@@ -1,15 +1,16 @@
 import binascii
 import os
 
+from rest_framework.decorators import action
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
 from .models import Character, Player, Token
-from .serializer import CharacterSerializer
+from .serializer import CharacterSerializer, ImageSerializer
 
-from .forms import CharacterForm
 from rest_framework import status, views
 from rest_framework.response import Response
 
@@ -22,22 +23,6 @@ from django.http import HttpResponse, JsonResponse
 class CharacterApiView(viewsets.ModelViewSet):
     queryset = Character.objects.all()
     serializer_class = CharacterSerializer
-def Character(request):
-    error = ''
-    if request.method == 'POST':
-        form = CharacterForm(request.POST)
-        if form.is_valid():
-            form.save()
-        else:
-            error = 'Форма неверная'
-
-    form = CharacterForm()
-    data = {
-        'form': form,
-        'error': error
-    }
-
-    return render(request, "registration/registerCharacter.html",data)
 
 
 def generate_key():
@@ -81,3 +66,42 @@ class PlayerData(APIView):
             'name': player.name,
             'avatar': player.avatar.url if player.avatar else None
         })
+
+
+
+
+
+class ImageUploadView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        file_serializer = ImageSerializer(data=request.data)
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CharacterViewSet(viewsets.ModelViewSet):
+    queryset = Character.objects.all()
+    serializer_class = CharacterSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(player=self.request.user)
+
+    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    def my_characters(self, request):
+        characters = Character.objects.filter(player=request.user)
+        serializer = self.get_serializer(characters, many=True)
+        return Response(serializer.data)
+
+class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    def me(self, request):
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data)

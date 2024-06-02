@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CharacterService} from "../../../services/character.service";
 
 @Component({
   selector: 'app-inspiration',
@@ -9,7 +10,18 @@ export class InspirationComponent {
 inspirOne:string='../../../assets/img/inspirone.png';
 inspirTwo:string='../../../assets/img/inspirtwo.png';
 currentImage: string = this.inspirOne;
+constructor(private characterService:CharacterService) {
+}
 toggleImage() {
-    this.currentImage = (this.currentImage === this.inspirOne) ? this.inspirTwo : this.inspirOne;
+
+    this.characterService.inspiration=!this.characterService.inspiration;
+    if(!this.characterService.inspiration)
+    {
+      this.currentImage=this.inspirOne;
+    }
+    else
+    {
+      this.currentImage=this.inspirTwo;
+    }
   }
 }

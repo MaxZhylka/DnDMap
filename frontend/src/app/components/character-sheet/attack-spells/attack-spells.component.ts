@@ -1,38 +1,43 @@
 import { Component } from '@angular/core';
-import {attackData} from "../attacks/attacks.component";
+import { CharacterService } from '../../../services/character.service';
+import { attackData } from '../attacks/attacks.component';
 
 @Component({
   selector: 'app-attack-spells',
   templateUrl: './attack-spells.component.html',
-  styleUrl: './attack-spells.component.css'
+  styleUrls: ['./attack-spells.component.css']
 })
 export class AttackSpellsComponent {
-  attacks: number[]=[0,1];
-  display:boolean=false;
-  chosenAttack:any;
-  addAttack()
-{
-  this.attacks.push(this.attacks.length);
-}
-closeAttackSpells() {
+  display: boolean = false;
+  chosenAttack: any;
 
-  setTimeout(() => {
-    this.display = false;
+  constructor(public characterService: CharacterService) {}
 
-  }, 150);
-}
-deleteAttack()
-{
+  addAttack() {
+    const newAttack: attackData = {
+      id: this.characterService.getNewAttackId(),
+      nameAttack: "",
+      modifier: "",
+      characteristic: "0",
+      damage: "",
+      attackBonus: "",
+      proficiency: false
+    };
+    this.characterService.attackAndSpells.push(newAttack);
+  }
 
- this.attacks.splice(this.chosenAttack.id,1)
+  closeAttackSpells() {
+    setTimeout(() => {
+      this.display = false;
+    }, 150);
+  }
 
-}
+  deleteAttack() {
+    this.characterService.attackAndSpells = this.characterService.attackAndSpells.filter(attack => attack.id !== this.chosenAttack.id);
+  }
 
-
-  displayCalc(chosenAttack:any)
-  {
-
-    this.chosenAttack=chosenAttack;
-    this.display=!this.display;
+  displayCalc(chosenAttack: any) {
+    this.chosenAttack = chosenAttack;
+    this.display = !this.display;
   }
 }

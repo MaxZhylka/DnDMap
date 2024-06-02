@@ -1,6 +1,6 @@
 <div class="personal">
 
   <app-area-input  *ngFor="let text of personaltraitstext; let i = index" [botText]="text" [personalId]="personaltraitsid[i]"></app-area-input>
-  <app-area-input [botText]="'ОСОБЕННОСТИ'" [boxHeight]="505"></app-area-input>
+  <app-area-input [botText]="'ОСОБЕННОСТИ'" [personalId]="'features'" [boxHeight]="505"></app-area-input>
 
 </div>

@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 
 import {catchError, delay, Observable, of, tap, throwError} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {isPlatformBrowser} from "@angular/common";
 
 interface LoginResponse {
   token: string;
@@ -18,7 +19,7 @@ export class AuthService {
   private tokenKey: string = 'auth_token';
   private apiUrl = 'http://127.0.0.1:8000/registration/api/login/';
    private dataUrl = 'http://127.0.0.1:8000/registration/api/getData/';
-  constructor(private http: HttpClient) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient) {}
 
 
   saveToken(token: string): void {
@@ -33,16 +34,11 @@ export class AuthService {
     return localStorage.getItem(this.tokenKey);
   }
 
+    isLoggedIn(): Observable<boolean> {
 
-  isLoggedIn(): Observable<boolean> {
-    if (typeof localStorage === 'undefined') {
-      return of(false);
+      const token = localStorage.getItem('auth_token');
+      return of(!!token).pipe(delay(100));
     }
-
-    const token = localStorage.getItem('auth_token');
-
-    return of(!!token).pipe(delay(100));
-  }
 
   logout(): void {
     localStorage.removeItem(this.tokenKey);

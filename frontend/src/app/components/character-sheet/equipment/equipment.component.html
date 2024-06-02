@@ -1,10 +1,10 @@
 
 <div class="coinsFlexContainer">
-  <app-coins *ngFor="let coin of coinsValue" [coinValue]="coin"></app-coins>
+  <app-coins *ngFor="let coin of coinsValue; let i=index" [coinValue]="coin" [coinName]="coinsName[i]" ></app-coins>
 </div>
 <div class="equipmentFlexContainer">
 
 
-  <app-area-input [boxWidth]="270" [boxHeight]="270" [border]="'none'"></app-area-input>
+  <app-area-input [boxWidth]="270" [boxHeight]="270" [border]="'none'" [personalId]="'equipment'"></app-area-input>
   <label class="equipmentText">СНАРЯЖЕНИЕ</label>
 </div>

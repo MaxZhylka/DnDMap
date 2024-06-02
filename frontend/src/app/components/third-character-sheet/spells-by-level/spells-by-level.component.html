@@ -2,15 +2,28 @@
 <div class="header">
 <div class="slotsAndCounter">
   <div class="spellLevel">{{spellLevel}}</div>
-  <input class="spellsSlotsInput" formControlName="spells" (change)="onChange()">
+  <input class="spellsSlotsInput" formControlName="spellsSlots" (change)="onChange()">
   <div class="spellsSlotsContainer">
-    <app-check-box-circle *ngFor="let item of getArray()"></app-check-box-circle>
+    <app-check-box-circle
+    *ngFor="let item of getArray(); let i = index; trackBy: trackByIndex"
+    (toggleChangeId)="handleToggleChange($event)"
+    [id]="i"
+    [_toggle]="characterService.spellSlotsBoolean[spellLevel-1][i]"
+    >
+  </app-check-box-circle>
   </div>
 </div>
   <div class="spellList" [style.height.px]="">
-    <div class="spell" *ngFor="let item of spellData">
-    <app-check-box-circle style="height: 12px"> </app-check-box-circle>
-    <app-area-input [border]="'none'" [boxWidth]="220" [boxHeight]="20"> </app-area-input>
+    <div class="spell" *ngFor="let item of characterService.spellData[spellLevel-1];let i=index">
+    <app-check-box-circle style="height: 12px"[id]="i" [_toggle]="characterService.spellData[spellLevel-1][i].boolean" (toggleChangeId)="handleToggleChange2($event)" > </app-check-box-circle>
+      <app-area-input2
+    [border]="'none'"
+    [boxWidth]="220"
+    [boxHeight]="20"
+    [SpellId]="i"
+    [spellLvl]="spellLevel-1"
+   >
+  </app-area-input2>
      </div>
   </div>
 </div>

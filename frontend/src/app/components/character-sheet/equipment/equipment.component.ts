@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class EquipmentComponent {
 
   coinsValue=["ММ","СМ","ЗМ","ЭМ","ПМ"];
+  coinsName=['copper','silver','golden','electrium','platinum']
 }

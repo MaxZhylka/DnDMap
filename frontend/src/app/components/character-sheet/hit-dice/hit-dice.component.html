@@ -11,17 +11,17 @@
   <div class="columna">
   <label class="header">Успех:</label>
   <div class="pointFlexContainer">
-    <app-check-box-circle></app-check-box-circle>
-    <app-check-box-circle></app-check-box-circle>
-    <app-check-box-circle></app-check-box-circle>
+    <app-check-box-circle (toggleChange)="handleChange($event,'success1')" [_toggle]="characterService.success1"></app-check-box-circle>
+    <app-check-box-circle (toggleChange)="handleChange($event,'success2')" [_toggle]="characterService.success2"></app-check-box-circle>
+    <app-check-box-circle (toggleChange)="handleChange($event,'success3')" [_toggle]="characterService.success3"></app-check-box-circle>
   </div>
     </div>
   <div class="columna">
 <label class="header">Провал:</label>
     <div class="pointFlexContainer">
-      <app-check-box-circle ></app-check-box-circle>
-      <app-check-box-circle></app-check-box-circle>
-      <app-check-box-circle></app-check-box-circle>
+     <app-check-box-circle (toggleChange)="handleChange($event,'fail1')" [_toggle]="characterService.fail1"></app-check-box-circle>
+    <app-check-box-circle (toggleChange)="handleChange($event,'fail2')" [_toggle]="characterService.fail2"></app-check-box-circle>
+    <app-check-box-circle (toggleChange)="handleChange($event,'fail3')" [_toggle]="characterService.fail3"></app-check-box-circle>
       </div>
   </div>
   <label class="std">СПАСБРОСОК ОТ СМЕРТИ</label>
