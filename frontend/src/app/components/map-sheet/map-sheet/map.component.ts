@@ -2,8 +2,8 @@ import {Component, OnInit, Inject, PLATFORM_ID, AfterViewInit, inject} from '@an
 import { MapService } from "../../../services/map.service";
 import { isPlatformBrowser } from '@angular/common';
 
-
 declare const ShortestWay: any;
+
 
 @Component({
   selector: 'app-map',
@@ -22,7 +22,8 @@ export class MapComponent implements OnInit {
 
   ShortWay: any;
 
-  constructor(private apiMap: MapService) {
+  constructor(private apiMap: MapService) { this.ShortWay= new ShortestWay(this.roadsCoordinates,0,0)
+
   }
 
 
@@ -48,6 +49,7 @@ export class MapComponent implements OnInit {
       }
     });
   }
+
 }
 
  private initMap(): void {
@@ -169,6 +171,7 @@ private addRoads(): void {
             console.log(JSON.stringify(coordinatesArray));
 
             if (coordinatesArray.length === 2) {
+
               this.ShortWay.start = this.ShortWay.pointCoordinatesSwap(coordinatesArray[0]);
               this.ShortWay.end = this.ShortWay.pointCoordinatesSwap(coordinatesArray[1]);
 

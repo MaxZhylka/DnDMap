@@ -1,10 +1,7 @@
-
 <header class="Header">
 
-    <button #openButton class="News-btn" (click)="togglePanel()">
-        <img class="News-img" src="{{newsImg}} " alt="News">
-    </button>
 
+<div class="flex">
     <div class="search-form">
        <div class="CitiesContainer" *ngFor="let city of searchedCities; let i = index">
   <app-citis-el-li class="suggestions"  (mousedown)="ignoreBlur = true" [ResetFunction]="ResetFocus"  [ngStyle]="{'margin-top.px': 29+18 * i-1}" [city]="city"> </app-citis-el-li>
@@ -14,6 +11,13 @@
 <span class="hint" (mousedown)="ignoreBlur = true"  *ngIf="hint" [ngStyle]="hintMargin" (click)="moveToCity()">{{ hint }} </span>
 
     </div>
-<app-news-panel appClickOutside [ignoreElementRefs]="IgnoredElement"  (clickOutside)="closePanel()" [left]="displayLeft" > </app-news-panel>
+  <button #openButton class="News-btn" (click)="togglePanel()">
+  НОВОСТИ
+</button>
+  <button class="News-btn"  (click)="redirectToCharsheet()"> ЛИСТЫ ПЕРСОНАЖЕЙ</button>
+  <button class="News-btn" (click)="redirectToMap()"> КАРТА</button>
+  <button class="imageButton"><img class="image" [src]="userData.avatar"></button>
+</div>
+  <app-news-panel appClickOutside [ignoreElementRefs]="IgnoredElement"  (clickOutside)="closePanel()" [left]="displayLeft" > </app-news-panel>
 
 </header>
