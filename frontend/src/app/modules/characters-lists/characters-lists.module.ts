@@ -9,6 +9,9 @@ import {ListsComponent} from "../../components/character-lists/lists/lists.compo
   declarations: [GeneralSheetComponent,ListsComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    GeneralSheetComponent
   ]
 })
 export class CharactersListsModule { }

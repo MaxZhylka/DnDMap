@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-general-sheet',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './general-sheet.component.css'
 })
 export class GeneralSheetComponent {
-
+  constructor(private router: Router) {
+  }
+redirectToCharacterCreation() {
+    this.router.navigate(['/registration/character']);
+}
 }
