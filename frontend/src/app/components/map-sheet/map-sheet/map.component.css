@@ -1,9 +1,9 @@
 
 #map
 {
+  margin-top: 3%;
   overflow: hidden;
-  margin-top: 80px;
   Width:100%;
-  height: calc(100vh - 80px);
+  height: 100%;
   position: fixed;
 }

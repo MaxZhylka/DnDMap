@@ -47,6 +47,18 @@ font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
   border-radius: 23px;
   font-size: 48px;
   align-content: center;
+  cursor: pointer;
+  transition: background-color 200ms ease-in-out, transform 200ms ease-in-out;
+}
+.confirmButton:hover
+{
+  transform: scale(1.01);
+    background-color: #0077e1;
+}
+.confirmButton:active
+{
+
+    transform: scale(0.99);
 }
 .footerText
 {
@@ -56,6 +68,18 @@ font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
 .link
 {
   color: #0085FF;
+  transition: color 200ms ease-in-out, transform 200ms ease-in-out;
+
+}
+.link:hover
+{
+  transform: scale(1.01);
+    color: #0077e1;
+}
+.link:active
+{
+
+    transform: scale(0.99);
 }
 .validationMessage{
   color: #A70000;

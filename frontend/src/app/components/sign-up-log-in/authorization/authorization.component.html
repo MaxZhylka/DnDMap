@@ -15,7 +15,7 @@
       {{ auth.get('password')?.errors?.['passwordComplexity']?.message }}
     </div>
   </div>
-
+<div class="validationMessage" *ngIf="invalidData">Данные введены неверно</div>
   <div class="confirmButton" (click)="Submit()">Войти</div>
   <div class="continueWithGoogle">
     <img class="google" [src]="GoogleImg">
