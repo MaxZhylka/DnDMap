@@ -16,7 +16,7 @@
 </button>
   <button class="News-btn"  (click)="redirectToCharsheet()"> ЛИСТЫ ПЕРСОНАЖЕЙ</button>
   <button class="News-btn" (click)="redirectToMap()"> КАРТА</button>
-  <button class="imageButton"><img class="image" [src]="userData.avatar"></button>
+  <button class="imageButton" *ngIf="userData"><img class="image" [src]="userData.avatar"></button>
 </div>
   <app-news-panel appClickOutside [ignoreElementRefs]="IgnoredElement"  (clickOutside)="closePanel()" [left]="displayLeft" > </app-news-panel>
 

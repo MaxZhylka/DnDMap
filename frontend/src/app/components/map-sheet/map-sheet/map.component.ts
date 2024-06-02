@@ -1,6 +1,7 @@
 import {Component, OnInit, Inject, PLATFORM_ID, AfterViewInit, inject} from '@angular/core';
 import { MapService } from "../../../services/map.service";
 import { isPlatformBrowser } from '@angular/common';
+import {forkJoin} from "rxjs";
 
 declare const ShortestWay: any;
 
@@ -28,25 +29,17 @@ export class MapComponent implements OnInit {
 
 
  ngOnInit() {
-  if (isPlatformBrowser(this.platformId)) {
-    this.apiMap.getRoads().subscribe(
-      {
-      next: (data) => {
-        this.roadsData = data;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
-    this.apiMap.getCities().subscribe({
-      next: (data) => {
-        this.cities = data;
+    if (isPlatformBrowser(this.platformId)) {
+    forkJoin({
+      roads: this.apiMap.getRoads(),
+      cities: this.apiMap.getCities()
+    }).subscribe({
+      next: ({ roads, cities }) => {
+        this.roadsData = roads;
+        this.cities = cities;
         this.initMap();
-
       },
-      error: (error) => {
-        console.log(error);
-      }
+      error: (error) => console.error('Ошибка при загрузке данных:', error)
     });
   }
 

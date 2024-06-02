@@ -279,6 +279,7 @@ export class CharacterService {
   }
 
   createCharacter(characterData: any): Observable<any> {
+    console.log(characterData);
     return this.http.post(`http://127.0.0.1:8000/registration/characters/`, characterData, { headers: this.getAuthHeaders() });
   }
 
