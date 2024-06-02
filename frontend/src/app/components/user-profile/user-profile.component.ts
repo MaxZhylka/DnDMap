@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit{
      ngOnInit(): void {
 
       this.authService.getUserData().subscribe({
-        next: (data) => { data.avatar = `http://127.0.0.1:8000/${data.avatar}`;
+        next: (data) => { data.avatar = `http://127.0.0.1:8000${data.avatar}`;
           this.userData = data; },
         error: (error) => console.error('Failed to fetch user data', error)
       });

@@ -33,11 +33,17 @@ export class AuthService {
     return localStorage.getItem(this.tokenKey);
   }
 
-     isLoggedIn(): Observable<boolean> {
-       const token = localStorage.getItem('auth_token');
 
-       return of(!!token).pipe(delay(100));
-     }
+  isLoggedIn(): Observable<boolean> {
+    if (typeof localStorage === 'undefined') {
+      return of(false);
+    }
+
+    const token = localStorage.getItem('auth_token');
+
+    return of(!!token).pipe(delay(100));
+  }
+
   logout(): void {
     localStorage.removeItem(this.tokenKey);
   }

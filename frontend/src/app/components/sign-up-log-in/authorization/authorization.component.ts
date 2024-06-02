@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-authorization',
@@ -10,12 +11,13 @@ import {AuthService} from "../../../services/auth.service";
 export class AuthorizationComponent {
   @Output() SwitchPanel: EventEmitter<void> = new EventEmitter<void>();
   GoogleImg: string = "assets/img/Google.png";
+  invalidData: boolean = false;
   auth: FormGroup = new FormGroup({
     email: new FormControl('', [this.emailFormatValidator(), Validators.required]),
     password: new FormControl('', [this.passwordComplexityValidator(), Validators.required])
   });
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
 
@@ -63,13 +65,15 @@ export class AuthorizationComponent {
   }
 
   Submit() {
+    if(this.auth.valid){
     this.authService.login(this.auth.get('email')?.value, this.auth.get('password')?.value).subscribe(data => {
       localStorage.setItem('token', data.token);
-      console.log(data.token);
+      this.auth.reset();
+      this.router.navigate(["/map"]);
     }, error => {
-      console.error('Login failed', error);
+      this.invalidData=true;
     });
-
+}
   }
 }
 

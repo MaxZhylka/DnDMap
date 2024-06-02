@@ -15,6 +15,7 @@ export class RegistrationComponent {
     email: new FormControl('',[this.emailFormatValidator(), Validators.required]),
     password: new FormControl('', [this.passwordComplexityValidator(), Validators.required])
   });
+  @Output() switcher: EventEmitter<void>=new EventEmitter<void>;
 
  constructor(private authService: AuthService) {}
 
@@ -64,9 +65,14 @@ export class RegistrationComponent {
 
 Submit()
 {
+  if(this.auth.valid){
 this.authService.register(this.auth.get('login')?.value,this.auth.get('email')?.value,this.auth.get('password')?.value ).subscribe(
-      success => console.log('Login Successful'),
+      success => {this.auth.reset();
+        this.switcher.emit();
+        },
+
       error => console.log(error)
     );
   }
+}
 }
