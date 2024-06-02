@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MapService} from "../../../services/map.service";
+
 import {filter, ignoreElements} from "rxjs";
-import {OpendNewsComponent} from "../opend-news/opend-news.component";
-import {NewsPanelComponent} from "../news-panel/news-panel.component";
+import {MapService} from "../../../services/map.service";
+import { Router } from '@angular/router';
+import {AuthService, UserData} from "../../../services/auth.service";
+
 
 
 interface City
@@ -12,15 +14,17 @@ interface City
   disciption: string;
 
 }
+
+
+
 @Component({
   selector: 'app-map-header',
   templateUrl: './map-header.component.html',
   styleUrl: './map-header.component.css'
 })
-
-export class MapHeaderComponent implements  OnInit{
-  @ViewChild('searchField') searchField!: ElementRef;
-  @ViewChild('openButton', { static: true }) OpenButton!: ElementRef;
+export class MapHeaderComponent implements OnInit, AfterViewInit{
+@ViewChild('searchField') searchField!: ElementRef;
+   @ViewChild('openButton', { static: false }) OpenButton!: ElementRef;
 
 
   cities: City[]=[];
@@ -31,20 +35,31 @@ export class MapHeaderComponent implements  OnInit{
   newsImg: string=  "../../assets/img/news.png";
   hint:string="";
   displayLeft:number=-480;
-
-   constructor(public apiMap: MapService) {
+  Profile: string = "assets/img/pofile.png";
+  userData!: UserData;
+   constructor(public apiMap: MapService, private router: Router, private authService: AuthService) {
+      this.authService.getUserData().subscribe({
+        next: (data) => { data.avatar = `http://127.0.0.1:8000${data.avatar}`;
+          this.userData = data; },
+        error: (error) => console.error('Failed to fetch user data', error)
+      });
   }
 
- get IgnoredElement()
+  ngAfterViewInit() {
+      this.apiMap.ignoredElement.push(this.OpenButton);
+
+  }
+
+
+  get IgnoredElement()
   {
     return this.apiMap.ignoredElement;
   }
 
   ngOnInit() {
      this.getCities();
-      this.apiMap.ignoredElement.push(this.OpenButton);
-}
 
+}
 moveToCity() {
   let temp: City | undefined;
 
@@ -123,12 +138,12 @@ ResetFocus=()=>
 }
 Blur() {
   if (this.ignoreBlur) {
-    // Если флаг установлен, просто сбросьте его и не выполняйте остальную часть функции
+
     this.ignoreBlur = false;
     return;
   }
 
-  // Остальная логика функции, которая должна выполняться при потере фокуса
+
   this.hint = "";
   this.searchedCities = [];
 }
@@ -144,9 +159,13 @@ Blur() {
     }
   });
 }
-
-
-  protected readonly ElementRef = ElementRef;
-  protected readonly MapService = MapService;
-  protected readonly ignoreElements = ignoreElements;
+redirectToCharsheet() {
+    this.router.navigate(['/registration/character']);
+  }
+  redirectToMap() {
+    this.router.navigate(['/map']);
 }
+
+
+}
+

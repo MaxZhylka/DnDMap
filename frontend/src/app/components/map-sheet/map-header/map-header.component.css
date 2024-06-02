@@ -5,12 +5,32 @@
     height: 80px;
     top: 0;
     z-index: 950; /* Ниже, чем у .CitiesContainer и .suggestions, чтобы они были поверх Header */
-    display: flex;
     flex-wrap: nowrap;
+  display: flex;
+    align-items: center;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px ;
+}
+.flex{
+width: 100%;
+    display: flex;
+    justify-content: space-around;
     align-items: center;
 }
-
-.search-form {
+.image{
+  width: 95%;
+  height: 95%;
+  object-fit: cover;
+}
+.imageButton{
+  position: relative;
+  width: 8vh;
+  height: 8vh;
+  border: 0.2vw solid black;
+    border-radius: 50%;
+  background-color: transparent;
+}
+  .search-form {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -89,21 +109,20 @@ hint:hover
 
 .News-btn
 {
+  text-align: center;
+   font-size: 1.5vw;
     background-color: transparent;
-    width:80px;
-    height:80px;
     border: none;
     border-radius: 10px;
-      transition: background-color 500ms ease-in-out, transform 200ms ease-in-out;
+      transition: color 200ms ease-in-out, font-size 200ms ease-in-out;
 }
 .News-btn:hover
 {
-    background-color: #FF9900;
+    color: #FFFFFF;
 }
 .News-btn:active
 {
-
-    transform: scale(0.9);
+    color: #e0e0e0;
 }
 
 .News-img
