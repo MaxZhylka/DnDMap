@@ -1,12 +1,13 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {attackData} from '../attacks/attacks.component'
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { attackData } from '../attacks/attacks.component';
+
 @Component({
   selector: 'app-calc-attack-splells',
   templateUrl: './calc-attack-splells.component.html',
-  styleUrl: './calc-attack-splells.component.css'
+  styleUrls: ['./calc-attack-splells.component.css']
 })
 export class CalcAttackSplellsComponent {
-characteristics = [
+  characteristics = [
     { value: '0', display: 'Без Характеристики' },
     { value: 'strength', display: 'Сила' },
     { value: 'dexterity', display: 'Ловкость' },
@@ -16,34 +17,25 @@ characteristics = [
     { value: 'charisma', display: 'Харизма' }
   ];
 
+  display: boolean = false;
 
-
-display:boolean=false;
-
-@Input() data!:attackData;
-  @Output() close = new EventEmitter<void>;
+  @Input() data!: attackData;
+  @Output() close = new EventEmitter<void>();
   @Output() requestDelete = new EventEmitter<void>();
-  onClose()
-  {
 
+  onClose() {
     this.close.emit();
   }
-  deleteComponent()
-  {
 
+  deleteComponent() {
     this.requestDelete.emit();
-     this.close.emit();
+    this.close.emit();
   }
-get displayCheckBox()
-{
-  if(this.data.characteristic=="0")
-  {
-    this.data.proficiency=false;
+
+  get displayCheckBox() {
+    if (this.data.characteristic == "0") {
+      this.data.proficiency = false;
+    }
+    return this.data.characteristic != '0';
   }
-  return this.data.characteristic != '0';
-
-}
-
-
-
 }

@@ -10,7 +10,7 @@ declare const ShortestWay: any;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css','../../../../../node_modules/leaflet/dist/leaflet.css']
 })
-export class MapComponent implements OnInit, AfterViewInit {
+export class MapComponent implements OnInit {
   cities: any = [];
   roadsData: any=[];
   chosenRoads: any=[];
@@ -25,83 +25,89 @@ export class MapComponent implements OnInit, AfterViewInit {
   constructor(private apiMap: MapService) {
   }
 
-  ngAfterViewInit() {
 
+ ngOnInit() {
+  if (isPlatformBrowser(this.platformId)) {
+    this.apiMap.getRoads().subscribe(
+      {
+      next: (data) => {
+        this.roadsData = data;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+    this.apiMap.getCities().subscribe({
+      next: (data) => {
+        this.cities = data;
+        this.initMap();
 
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
+}
 
-  ngOnInit() {
-    this.getCities();
-    this.getRoads();
-    if (isPlatformBrowser(this.platformId)) {
-      this.showLeaflet = true;
-      this.initMap();
-      this.ShortWay= new ShortestWay(this.roadsCoordinates,0,0);
+ private initMap(): void {
+  import('leaflet').then((L) => {
+    this.map = L.map('map', {
+      crs: L.CRS.Simple, zoomControl: false, attributionControl: false, zoomAnimation: true
+    });
 
-    }
-  }
+    let bounds = L.latLngBounds(L.latLng(0, 0), L.latLng(1061, 1587));
+    L.imageOverlay(this.image, bounds).addTo(this.map);
+    this.map.fitBounds(bounds);
+    this.map.setMaxBounds(bounds);
+    this.map.maxBounds = bounds;
+    this.map.maxBoundsViscosity = 1000.0;
+    this.map.setMaxZoom(3);
+    this.map.setMinZoom(1);
+    this.map.setView([0, 0], 1);
 
-  private initMap(): void {
- if (isPlatformBrowser(this.platformId)) {
-    import('leaflet').then((L) => {
-        this.map = L.map('map', {
-          crs: L.CRS.Simple, zoomControl: false, attributionControl: false, zoomAnimation: true
-        },);
-        let bounds = L.latLngBounds(L.latLng(0, 0), L.latLng(1061, 1587));
-        L.imageOverlay(this.image, bounds).addTo(this.map);
-        this.map.fitBounds(bounds);
-        this.map.setMaxBounds(bounds);
-        this.map.maxBounds = bounds;
-        this.map.maxBoundsViscosity = 1000.0;
-        this.map.setMaxZoom(3);
-        this.map.setMinZoom(1);
-        this.map.setView([0, 0], 1);
-        //Added elements on map
-       this.addMarkers();
-       this.addRoads();
-       this.FindWay();
-       this.apiMap.setMap(this.map);
- });
-  }
-  }
+    this.addMarkers();
+    this.addRoads();
+    this.FindWay();
+    this.apiMap.setMap(this.map);
+  });
+}
  getMap()
 {
   return this.map;
 }
 private addMarkers(): void {
-  if (isPlatformBrowser(this.platformId)) {
-    import('leaflet').then((L) => {
-      this.cities.forEach((city: any) => {
-        const coords = city.coordinates.split(/,\s*/).map(Number);
-        const icon = L.icon({iconUrl: city.icon,  iconSize:     [35, 45],
-    iconAnchor:   [17.5, 45],
-    popupAnchor:  [-3, -46]});
-        L.marker( coords, {icon: icon})
-          .addTo(this.map)
-          .bindPopup(city.name);
+  import('leaflet').then((L) => {
+    this.cities.forEach((city: any) => {
+      const coords = city.coordinates.split(/,\s*/).map(Number);
+      const icon = L.icon({
+        iconUrl: city.icon,
+        iconSize: [35, 45],
+        iconAnchor: [17.5, 45],
+        popupAnchor: [-3, -46]
       });
+      L.marker(coords, { icon: icon })
+        .addTo(this.map)
+        .bindPopup(city.name);
     });
-  }
+  });
 }
-private addRoads(): void
-{
-  if(isPlatformBrowser(this.platformId)){
-    import('leaflet').then((L)=>{
-      for(let el of this.roadsData)
-      {
-        let coordinates: number= JSON.parse(el.coordinates);
-        let road: any={
-          "type":"LineString",
-          "coordinates": coordinates
-        }
-        this.roadsCoordinates.push(road);
-        L.geoJSON(road, {style: function (feature) {return {color: '#808080',weight: 5};
-                    }
-                }).addTo(this.map);
+private addRoads(): void {
+  import('leaflet').then((L) => {
+    for (let el of this.roadsData) {
+      let coordinates: number[] = JSON.parse(el.coordinates);
+      let road: any = {
+        "type": "LineString",
+        "coordinates": coordinates
       }
-
-    });
-  }
+      this.roadsCoordinates.push(road);
+      L.geoJSON(road, {
+        style: function (feature) {
+          return { color: '#808080', weight: 5 };
+        }
+      }).addTo(this.map);
+    }
+  });
 }
 
  getCities = () => {

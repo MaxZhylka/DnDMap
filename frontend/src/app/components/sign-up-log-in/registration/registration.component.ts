@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -9,6 +10,7 @@ import {AuthService} from "../../../services/auth.service";
 })
 export class RegistrationComponent {
  @Output() SwitchPanel:EventEmitter<void>= new EventEmitter<void>();
+ displayError:boolean=false;
  GoogleImg:string="assets/img/Google.png";
   auth: FormGroup = new FormGroup({
     login: new FormControl('',[Validators.maxLength(30), Validators.required]),
@@ -16,7 +18,7 @@ export class RegistrationComponent {
     password: new FormControl('', [this.passwordComplexityValidator(), Validators.required])
   });
 
- constructor(private authService: AuthService) {}
+ constructor(private authService: AuthService, private  router:Router) {}
 
 
    emailFormatValidator(): ValidatorFn {
@@ -65,8 +67,8 @@ export class RegistrationComponent {
 Submit()
 {
 this.authService.register(this.auth.get('login')?.value,this.auth.get('email')?.value,this.auth.get('password')?.value ).subscribe(
-      success => console.log('Login Successful'),
-      error => console.log(error)
+      success => this.router.navigate(['/login']),
+      error => this.displayError=true
     );
   }
 }

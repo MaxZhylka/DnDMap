@@ -16,14 +16,18 @@ export class PassivePerceptionComponent {
 get calculateSavingThrow(): number {
       let proficiency: number = Math.floor((this.characterService.level - 1) / 4 + 2);
       let modificator = Math.floor((this.characterService.wisdom - 10) / 2);
-      let checkBox:boolean = this.characterService.checkboxPerception;
-      if (checkBox)
+      let checkBox:number = this.characterService.perception;
+      if(checkBox==0)
+      {
+         return 10 + modificator;
+      }
+      else if (checkBox==1)
       {
         return 10 + proficiency + modificator;
       }
       else
       {
-        return 10 + modificator;
+        return 10 + proficiency*2 + modificator;
       }
   }
 }

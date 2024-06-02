@@ -8,7 +8,7 @@
   <div class="attackAndBtnContainer">
   <div class="attackContainer">
 
-   <app-attacks   (attackClick)="displayCalc($event)"  *ngFor="let attack of attacks; let i = index" class="hoverEffect" [attackId]="i"></app-attacks>
+   <app-attacks   (attackClick)="displayCalc($event)"  *ngFor="let attack of this.characterService.attackAndSpells; let i = index" class="hoverEffect" [attackId]="i"></app-attacks>
   </div>
       <button class="btn" (click)="addAttack()">Добавить</button>
     </div>

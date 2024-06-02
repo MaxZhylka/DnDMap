@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {tap} from "rxjs";
+import {CharacterService} from "../../../services/character.service";
 interface SpellData
 {
   include:boolean,
@@ -15,47 +16,66 @@ interface SpellData
 export class SpellsByLevelComponent implements OnInit{
   @Input() spellLevel:number=0;
   spellsForm:FormGroup = new FormGroup({
-    spells: new FormControl('0')});
+    spellsSlots: new FormControl('0')});
   listHeight:number=20;
   @Input() spellCount: number=1;
   spellData:SpellData[]=[];
+
   ngOnInit() {
     this.spellData=new Array(this.spellCount).fill({});
     this.listHeight=20*this.spellCount;
+
   }
 
-  getArray()
-{
-
- return Array.from({ length: parseInt(this.spellsForm.get("spells")?.value)}, (_, index) => index + 1);
-}
-constructor() {
+  getArray() {
+    return this.characterService.spellSlotsBoolean[this.spellLevel - 1].slice(0, this.characterService.spellSlots[this.spellLevel-1]);
+  }
+constructor(public  characterService:CharacterService) {
   this.ChangeLvlSub();
 }
 ChangeLvlSub() {
-  this.spellsForm.get('spells')?.valueChanges.pipe(
+  this.spellsForm.get('spellsSlots')?.valueChanges.pipe(
     tap(spells => {
-      if (((/^\d+$/.test(spells)) || spells == "")) {
+      if ((/^\d+$/.test(spells)) || spells === "") {
         const numLevel = parseInt(spells);
         if (numLevel < 0 || numLevel > 10) {
-
           const correctedLevel = Math.min(Math.max(numLevel, 0), 10);
-          this.spellsForm.get("spells")?.setValue(correctedLevel, {emitEvent: false});
+          this.spellsForm.get("spellsSlots")?.setValue(correctedLevel, { emitEvent: false });
         }
+        this.updateCharacterService(); //
       } else {
-
-        this.spellsForm.get("spells")?.setValue(0, {emitEvent: false});
+        this.spellsForm.get("spellsSlots")?.setValue(0, { emitEvent: false });
       }
-
-
+      this.updateCharacterService();
     })
   ).subscribe();
 }
+  updateCharacterService() {
+    this.characterService.spellSlots[this.spellLevel-1]=this.spellsForm.get("spellsSlots")?.value;
+  }
+    trackByIndex(index: number, item: any) {
+    return index;
+  }
 onChange()
 {
-  if(this.spellsForm.get("spells")?.value=="")
+  if(this.spellsForm.get("spellsSlots")?.value=="")
   {
-     this.spellsForm.get("spells")?.setValue(0, { emitEvent: false });
+     this.spellsForm.get("spellsSlots")?.setValue(0, { emitEvent: false });
+      this.updateCharacterService();
   }
 }
+handleToggleChange(event:any)
+{
+
+  this.characterService.spellSlotsBoolean[this.spellLevel-1][event.id]=event.toggle;
+
+}
+handleToggleChange2(event:any)
+{
+
+  this.characterService.spellData[this.spellLevel-1][event.id].boolean=event.toggle;
+
+
+}
+
 }

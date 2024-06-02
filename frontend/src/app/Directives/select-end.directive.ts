@@ -12,12 +12,6 @@ export class SelectableDirective {
   onMouseup(event: MouseEvent) {
     this.emitSelection();
   }
-
-  @HostListener('document:keyup', ['$event'])
-  onKeyup(event: KeyboardEvent) {
-    this.emitSelection();
-  }
-
   private emitSelection() {
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0 && this.el.nativeElement.contains(selection.anchorNode)) {

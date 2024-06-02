@@ -9,7 +9,7 @@ import {CharacterService} from "../../../services/character.service";
 })
 export class HitDiceComponent {
 
-  selectedItem: string="1d6";
+  selectedItem:string=this.characterService.hitDice;
   items: string[] = ['1d6', '1d8', '1d10', '1d12'];
   toggle: boolean = false;
   constructor( public characterService: CharacterService) {
@@ -21,5 +21,8 @@ export class HitDiceComponent {
     return  this.characterService.level;
   }
 
-
+handleChange(event:boolean, data:string)
+{
+  this.characterService[data]=event;
+}
 }

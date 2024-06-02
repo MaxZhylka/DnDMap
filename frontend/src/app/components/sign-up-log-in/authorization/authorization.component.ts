@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-authorization',
@@ -14,8 +15,8 @@ export class AuthorizationComponent {
     email: new FormControl('', [this.emailFormatValidator(), Validators.required]),
     password: new FormControl('', [this.passwordComplexityValidator(), Validators.required])
   });
-
-  constructor(private authService: AuthService) {
+  displayError: boolean= false;
+  constructor(private authService: AuthService, private router:Router) {
   }
 
 
@@ -65,9 +66,9 @@ export class AuthorizationComponent {
   Submit() {
     this.authService.login(this.auth.get('email')?.value, this.auth.get('password')?.value).subscribe(data => {
       localStorage.setItem('token', data.token);
-      console.log(data.token);
+      this.router.navigate(['']);
     }, error => {
-      console.error('Login failed', error);
+      this.displayError=true;
     });
 
   }

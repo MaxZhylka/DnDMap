@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CharacterService} from "../../../services/character.service";
 
 @Component({
   selector: 'app-ownership',

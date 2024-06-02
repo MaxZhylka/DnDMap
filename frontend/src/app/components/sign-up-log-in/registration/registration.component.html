@@ -12,10 +12,10 @@
  <div class="regwidth">
     <input class="inputData" placeholder="Email" formControlName="email">
     <div class="validationMessage" *ngIf="auth.get('email')?.errors?.['required']&& auth.get('email')?.touched">
-      Електронна пошта обов'язкова.
+      Електронная почта обязательна.
     </div>
     <div class="validationMessage" *ngIf="auth.get('email')?.errors?.['emailFormat']&& this.auth.get('email')?.touched">
-      Введіть дійсну електронну адресу.
+      Введите действительную электронную почту.
     </div>
   </div>
    <div class="regwidth">
@@ -30,4 +30,10 @@
     <div class="googleText"> Continue with Google</div>
   </div>
   <div class="footerText" (click)="SwitchPanel.emit()">Уже есть акаунт? <a class="link">Войдите</a></div>
+   <div class="validationMessage" *ngIf="displayError">
+      Что-то пошло не так, попробуйте позже
+    </div>
+   <div class="validationMessage" *ngIf="displayError">
+      Что-то пошло не так, попробуйте позже
+    </div>
 </div>

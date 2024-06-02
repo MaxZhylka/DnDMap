@@ -19,9 +19,11 @@
   justify-content: start;
   align-items: center;
   border-left: none ;
-  margin-left: -10px;
-  gap:5px;
-  z-index: -1;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin-left: -5px;
+  gap: 8px;
+
 }
 .slotsAndCounter
 {
