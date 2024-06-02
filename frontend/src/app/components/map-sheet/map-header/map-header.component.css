@@ -64,7 +64,9 @@ width: 100%;
     border-top: none;
 
 }
-
+.ActivButton{
+  color: #FFFFFF;
+}
 .suggestions:hover {
     background-color: #f0f0f0;
 }

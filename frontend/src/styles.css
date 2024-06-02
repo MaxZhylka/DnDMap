@@ -19,5 +19,11 @@ app-root{
   width: 100%;
 }
 body{
-  margin:0;
+  margin: 0;
+}
+.default-bg {
+  background-color: white;
+}
+.characterlist-bg {
+  background-color: #FFE1B4;
 }
