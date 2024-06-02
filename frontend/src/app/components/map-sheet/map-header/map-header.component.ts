@@ -160,7 +160,7 @@ Blur() {
   });
 }
 redirectToCharsheet() {
-    this.router.navigate(['/registration/character']);
+    this.router.navigate(['/characterlist']);
   }
   redirectToMap() {
     this.router.navigate(['/map']);

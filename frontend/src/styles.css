@@ -21,3 +21,9 @@ app-root{
 body{
   margin: 0;
 }
+.default-bg {
+  background-color: white;
+}
+.characterlist-bg {
+  background-color: #FFE1B4;
+}

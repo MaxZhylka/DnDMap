@@ -17,7 +17,6 @@ import localeRu from '@angular/common/locales/ru';
 import { LOCALE_ID } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {AuthGuard} from "../../services/authGuard.service";
-import {MainHeaderComponent} from "../../components/main-header/main-header.component";
 registerLocaleData(localeRu);
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ registerLocaleData(localeRu);
     NewsPanelComponent,
     ClickOutsideDirective,
     OpendNewsComponent,
-    MainHeaderComponent
   ],
     imports: [
         HttpClientModule,
@@ -44,7 +42,8 @@ registerLocaleData(localeRu);
   ],
   exports: [
     MapComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    NewsPanelComponent
   ],
   bootstrap: [
     MapComponent,

@@ -8,9 +8,6 @@ import {AuthService} from "../../../services/auth.service";
   styleUrl: './general-sheet.component.css'
 })
 export class GeneralSheetComponent {
-  constructor(private router: Router) {
-  }
-redirectToCharacterCreation() {
-    this.router.navigate(['/registration/character']);
-}
+
+
 }
