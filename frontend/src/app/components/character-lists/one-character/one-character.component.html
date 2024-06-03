@@ -3,10 +3,8 @@
   <div class="dataContainer">
     <div class="CharacterName">{{characterData.name}}</div>
     <div class="textContainer">
-      <div class="text">{{characterData.race}}</div>
-      <div class="text">{{characterData.class}}</div>
-      <div class="text">{{characterData.level}}</div>
-      <div class="text">{{characterData.experience}}</div>
+      <div class="text">{{characterData.race}} {{characterData.characterClass}} {{characterData.level}} ур.</div>
+      <div class="text">Опыт:{{characterData.experience}}/{{getExperience(characterData.level+1)}}</div>
     </div>
     <div class="locationContainer">
       <img class="pointer" src="{{pointer}}">
