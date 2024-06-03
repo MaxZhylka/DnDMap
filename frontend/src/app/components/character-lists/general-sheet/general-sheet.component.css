@@ -1,22 +1,5 @@
-.Header {
-    background-color: #FFB74B;
-    width: 100%;
-    height: 9vh;
-    top: 0;
-    z-index: 950;
-    flex-wrap: nowrap;
-  display: flex;
-    align-items: center;
-  border-bottom-left-radius: 3vh;
-  border-bottom-right-radius: 3vh ;
-}
-.flex{
-width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
 .charactersList{
+  margin-top: 10vh;
   display: flex;
   width: 100%;
   height: 100%;
@@ -28,7 +11,6 @@ width: 100%;
 
 .container
 {
-  margin-top: 2vh;
   display: flex;
 
   height: 100%;
