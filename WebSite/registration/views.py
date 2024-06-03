@@ -3,7 +3,7 @@ import os
 
 from rest_framework.decorators import action
 from django.shortcuts import render
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions,  generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -89,13 +89,6 @@ class CharacterViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(player=self.request.user)
-
-    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
-    def my_characters(self, request):
-        characters = Character.objects.filter(player=request.user)
-        serializer = self.get_serializer(characters, many=True)
-        return Response(serializer.data)
-
 class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
@@ -105,3 +98,18 @@ class PlayerViewSet(viewsets.ReadOnlyModelViewSet):
     def me(self, request):
         serializer = self.get_serializer(request.user)
         return Response(serializer.data)
+
+class MyCharactersViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = CharacterSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Character.objects.filter(player=self.request.user)
+
+class CharacterUpdateView(generics.UpdateAPIView):
+    queryset = Character.objects.all()
+    serializer_class = CharacterSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return self.queryset.filter(id=self.kwargs['pk'])

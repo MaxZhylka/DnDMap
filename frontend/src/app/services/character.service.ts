@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {attackData} from "../components/character-sheet/attacks/attacks.component";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, debounceTime, distinctUntilChanged, from, Observable, switchMap} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
@@ -22,8 +22,22 @@ export class CharacterService {
 
   private characterDataSubject: BehaviorSubject<any> = new BehaviorSubject(this.collectCharacterData());
   characterData$: Observable<any> = this.characterDataSubject.asObservable();
+
+
+
+
+
+
+
+
+
+
+
+
+
    constructor(private http: HttpClient) {
      this.initializeSpellData();
+
    }
 
    initializeSpellData(): void {
@@ -75,6 +89,9 @@ export class CharacterService {
   sleightOfHand: number = 0;
   stealth: number = 0;
   survival: number = 0;
+
+
+
 
 
   //hits and other's
@@ -167,7 +184,7 @@ export class CharacterService {
    conspiracies10:string='';
    conspiracies11:string='';
    conspiracies12:string='';
-
+   id:number=-1;
   uploadImage(image: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('image', image, image.name);
@@ -269,6 +286,7 @@ export class CharacterService {
       conspiracies10: this.conspiracies10,
       conspiracies11: this.conspiracies11,
       conspiracies12: this.conspiracies12,
+      id:this.id
     };
   }
 
@@ -371,6 +389,7 @@ export class CharacterService {
     conspiracies12: ''
   };
   setData(characterData: any): void {
+    this.id= characterData.id;
   this.name = characterData.name;
   this.class = characterData.characterClass;
   this.backstory = characterData.backstory;
@@ -478,6 +497,10 @@ export class CharacterService {
     return this.http.post(`http://127.0.0.1:8000/registration/characters/`, characterData, { headers: this.getAuthHeaders() });
   }
 
+   updateData(characterData: any): Observable<any> {
+    const url = `http://127.0.0.1:8000/registration/characters/${characterData.id}/`;
+    return this.http.put(url, characterData, { headers: this.getAuthHeaders() });
+  }
   getMyCharacters(): Observable<any> {
     return this.http.get(`http://127.0.0.1:8000/registration/my_characters/`, { headers: this.getAuthHeaders() });
   }

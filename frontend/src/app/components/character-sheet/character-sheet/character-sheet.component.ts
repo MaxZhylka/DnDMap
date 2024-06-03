@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CharacterService} from "../../../services/character.service";
 import {response} from "express";
 import {ActivatedRoute} from "@angular/router";
@@ -8,8 +8,8 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './character-sheet.component.html',
   styleUrl: './character-sheet.component.css'
 })
-export class CharacterSheetComponent implements OnInit{
-
+export class CharacterSheetComponent implements OnInit, OnDestroy{
+    private updateInterval: any;
   constructor(  private route: ActivatedRoute, private characterService:CharacterService) {
   }
   ngOnInit() {
@@ -40,6 +40,28 @@ export class CharacterSheetComponent implements OnInit{
          });
        }
         });
+       this.updateInterval = setInterval(() => {
+      this.updateCharacterData();
+    }, 15000);
+  }
+  ngOnDestroy() {
+      if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+    this.characterService.updateData(this.characterService.collectCharacterData()).subscribe(
+      {
+        next:(data)=>{console.log(data)},
+        error:(data)=>{console.log(data)}
+      }
+    )
+
+
+  }
+   private updateCharacterData() {
+    this.characterService.updateData(this.characterService.collectCharacterData()).subscribe({
+      next: (data) => { console.log('Data updated:', data) },
+      error: (error) => { console.error('Error updating data:', error) }
+    });
   }
 }
 
