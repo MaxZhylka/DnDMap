@@ -130,7 +130,7 @@ class Character(models.Model):
     skinColor = models.TextField('Кожа', default='  ', blank=True)
     hairColor = models.TextField('Волосы', default='  ', blank=True)
 
-    appearance = models.ImageField('Изображение', upload_to='registration/photo/', default='', blank=True)
+    appearance = models.FileField('Изображение', upload_to='registration/photo/', default='', blank=True)
 
     allies = models.TextField('Союзники и Организации', default='', blank=True)
     backstorys = models.TextField('Предыстория персонажа', default='', blank=True)

@@ -262,7 +262,7 @@ export class CharacterService {
       eyeColor: this.eyeColor,
       skinColor: this.skinColor,
       hairColor: this.hairColor,
-     //удален файл с картинкой аватарки
+      appearance: this.appearance,
       allies: this.allies,
       backstorys: this.backstorys,
       additionalfeatures: this.additionalfeatures,
@@ -418,6 +418,7 @@ export class CharacterService {
   this.deception = characterData.deception;
   this.history = characterData.history;
   this.insight = characterData.insight;
+  this.appearance= characterData.appearance;
   this.intimidation = characterData.intimidation;
   this.investigation = characterData.investigation;
   this.medicine = characterData.medicine;
@@ -497,10 +498,29 @@ export class CharacterService {
     return this.http.post(`http://127.0.0.1:8000/registration/characters/`, characterData, { headers: this.getAuthHeaders() });
   }
 
-   updateData(characterData: any): Observable<any> {
-    const url = `http://127.0.0.1:8000/registration/characters/${characterData.id}/`;
-    return this.http.put(url, characterData, { headers: this.getAuthHeaders() });
+updateData(characterData: any): Observable<any> {
+  const formData: FormData = new FormData();
+  characterData.appearance=this.imageToLoad;
+  for (const key in characterData) {
+    if (characterData.hasOwnProperty(key)) {
+      if (key === 'appearance' && characterData[key] instanceof File) {
+        formData.append(key, characterData[key], characterData[key].name);
+      } else if (Array.isArray(characterData[key])) {
+        formData.append(key, JSON.stringify(characterData[key]));  // Преобразование массивов в JSON
+      } else {
+        formData.append(key, characterData[key]);
+      }
+    }
   }
+
+  const url = `http://127.0.0.1:8000/registration/characters/${characterData.id}/`;
+  return this.http.put(url, formData, {
+    headers: new HttpHeaders({
+      'Authorization': `Token ${localStorage.getItem('auth_token')}`
+    })
+  });
+}
+
   getMyCharacters(): Observable<any> {
     return this.http.get(`http://127.0.0.1:8000/registration/my_characters/`, { headers: this.getAuthHeaders() });
   }

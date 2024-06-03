@@ -40,9 +40,9 @@ export class CharacterSheetComponent implements OnInit, OnDestroy{
          });
        }
         });
-       this.updateInterval = setInterval(() => {
-      this.updateCharacterData();
-    }, 15000);
+    //    this.updateInterval = setInterval(() => {
+    //   this.updateCharacterData();
+    // }, 15000);
   }
   ngOnDestroy() {
       if (this.updateInterval) {

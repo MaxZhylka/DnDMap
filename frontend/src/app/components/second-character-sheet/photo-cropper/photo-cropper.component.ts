@@ -27,6 +27,7 @@ export class PhotoCropperComponent implements OnInit {
 
   onClose() {
     if (this.croppedFile) {
+      console.log(this.croppedFile);
       this.imageUploadService.imageToLoad=this.croppedFile;
     }
     this.close.emit();

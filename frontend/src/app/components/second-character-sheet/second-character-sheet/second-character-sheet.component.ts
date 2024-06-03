@@ -15,7 +15,18 @@ export class SecondCharacterSheetComponent implements OnInit {
 
   constructor(private characterService: CharacterService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.characterService.characterData$.subscribe({
+
+      next:(data)=> {
+           console.log(data);
+        this.portrait = data.appearance;
+      }
+    });
+
+
+
+  }
 
   getData(event: any) {
     this.portrait = event;
