@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 10vh;
+  width: 15vw;
+  background-color: #FFB74B;
+   border-radius: 2vh;
+  overflow: hidden;
+  padding: 0.5vh;
+
+}
+
+.avatar {
+  height: 8vh;
+  width: auto;
+  border-radius: 10px;
+  margin-right: 1vh;
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.CharacterName {
+  font-size: 1.2vh;
+  font-weight: bold;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  font-size: 1vh;
+}
+
+.locationContainer {
+  display: flex;
+  align-items: center;
+}
+
+.pointer {
+  height: 1.5vh;
+  width: auto;
+  margin-right: 0.5vh;
+}
+
+.Position {
+  font-size: 1vh;
+  font-weight: bold;
+}

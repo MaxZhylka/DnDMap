@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormControl, FormGroup } from "@angular/forms";
 import { tap } from "rxjs/operators";
 import { CharacterService } from "../../../services/character.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-current-hits',
   templateUrl: './current-hits.component.html',
   styleUrls: ['./current-hits.component.css']
 })
-export class CurrentHitsComponent implements OnInit {
+export class CurrentHitsComponent implements OnInit, OnDestroy {
   currentHits: FormGroup;
+  subscription= new Subscription();
 
   constructor(private characterService: CharacterService) {
     this.currentHits = new FormGroup({
@@ -38,9 +40,19 @@ export class CurrentHitsComponent implements OnInit {
 
 
   ngOnInit() {
+    this.subscription= this.characterService.characterData$.subscribe({
+      next:(data)=>
+      {
+        this.currentHits.get('currentHits')?.setValue(data.hitPoints)  ;
+        this.currentHits.get('maxHits')?.setValue(data.hitPointsMax)  ;
+      }
+    })
     this.subscribeCurrentHit();
     this.subscribeMaxHit();
   }
+ngOnDestroy() {
+    this.subscription.unsubscribe();
+}
 
   subscribeMaxHit() {
     this.currentHits.get("maxHits")?.valueChanges.pipe(

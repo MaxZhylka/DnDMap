@@ -63,7 +63,7 @@ updateContextMenuPosition() {
     this.inputHeight = this.calcHeight();
     this.inputWidth = this.boxWidth - 4;
     this.ignoredElement.push(this.contextMenu);
-    console.log(this.personalId);
+
   }
 
   calcHeight() {

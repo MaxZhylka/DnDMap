@@ -1,14 +1,14 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CharacterService} from "../../../services/character.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {debounceTime, tap} from "rxjs";
+import {debounceTime, Subscription, tap} from "rxjs";
 
 @Component({
   selector: 'app-character-header',
   templateUrl: './character-header.component.html',
   styleUrls: ['./character-header.component.css']
 })
-export class CharacterHeaderComponent {
+export class CharacterHeaderComponent implements OnInit, OnDestroy{
   headId: string[] = ['class', 'backstory', 'race', 'worldviews', 'experience','level'];
   headText: string[] = ['КЛАСС', 'ПРЕДЫСТОРИЯ', 'РАСА', 'МИРОВОЗРЕНИЕ', 'ОПЫТ'];
   headForm:FormGroup = new FormGroup({
@@ -20,6 +20,19 @@ export class CharacterHeaderComponent {
     experience: new FormControl(''),
     level: new FormControl('1'),
   });
+ subscription: Subscription = new Subscription();
+
+ngOnInit() {
+    this.subscription = this.characterService.characterData$.subscribe(characterData => {
+      this.headForm.patchValue({
+        name: characterData.name,
+        level: characterData.level
+      });
+    });
+
+
+  }
+
   SubmitForm(){
     console.log(this.headForm)
   }
@@ -61,6 +74,10 @@ onChange()
      this.headForm.get("level")?.setValue(1, { emitEvent: false });
      this.characterService.level=this.headForm.get('level')?.value;
   }
+}
+ngOnDestroy() {
+
+  this.subscription.unsubscribe();
 }
 
 

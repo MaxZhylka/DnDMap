@@ -10,6 +10,7 @@ router = routers.DefaultRouter()
 router.register(r'api/characters', CharacterApiView)
 router.register(r'characters', CharacterViewSet)
 router.register(r'players', PlayerViewSet)
+router.register(r'my_characters', CharacterViewSet)
 
 urlpatterns = [
     path('user', views.User),

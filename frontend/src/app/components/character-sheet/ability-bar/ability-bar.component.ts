@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {CharacterService} from "../../../services/character.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-ability-bar',
@@ -7,6 +9,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrl: './ability-bar.component.css'
 })
 export class AbilityBarComponent {
+  subscription= new Subscription();
   abilityForm: FormGroup =new FormGroup(
 
      {
@@ -23,8 +26,20 @@ export class AbilityBarComponent {
   attributesID:string[]=['strength','dexterity','constitution', 'intelligence','wisdom','charisma']
   attributes:string[]= ['Сила', 'Ловкость', 'Телосложение', 'Интеллект', 'Мудрость', 'Харизма'];
 
-  constructor() {
+  constructor(private  characterService:CharacterService) {
 
+    this.subscription= this.characterService.characterData$.subscribe({next:
+        (data:any)=>{
+      this.abilityForm.patchValue({
+        strength: data.strength,
+        dexterity: data.dexterity,
+        constitution: data.constitution,
+        intelligence: data.intelligence,
+        wisdom: data.wisdom,
+        charisma: data.charisma
+
+      })
+        }})
 
   }
 

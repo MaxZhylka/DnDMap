@@ -1,29 +1,29 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-check-box-circle',
   templateUrl: './check-box-circle.component.html',
-  styleUrl: './check-box-circle.component.css'
+  styleUrls: ['./check-box-circle.component.css']
 })
-export class CheckBoxCircleComponent implements OnInit{
+export class CheckBoxCircleComponent implements OnInit, OnChanges {
   inspirOne: string = '../../../assets/img/inspirone.png';
   inspirTwo: string = '../../../assets/img/inspirthree.png';
   currentImage: string = this.inspirOne;
-   @Input() id:number=-1;
-   @Output() toggleChange = new EventEmitter<boolean>();
-    @Output() toggleChangeId = new EventEmitter<{toggle:boolean, id:number}>();
 
-   @Input() _toggle: boolean = false;
+  @Input() id: number = -1;
+  @Output() toggleChange = new EventEmitter<boolean>();
+  @Output() toggleChangeId = new EventEmitter<{ toggle: boolean, id: number }>();
+
+  @Input() _toggle: boolean = false;
 
   ngOnInit() {
-    if(this.toggle)
-    {
-      this.currentImage=this.inspirTwo;
+    this.updateImage();
+  }
 
-    }
-    else
-    {
-      this.currentImage=this.inspirOne;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['_toggle']) {
+      this.updateImage();
+
     }
   }
 
@@ -42,9 +42,11 @@ export class CheckBoxCircleComponent implements OnInit{
   }
 
   toggleImage() {
-    this.currentImage = (this.currentImage === this.inspirOne) ? this.inspirTwo : this.inspirOne;
     this.toggle = !this.toggle; // Это вызовет setter и отправит событие
   }
 
+  private updateImage() {
+    this.currentImage = this._toggle ? this.inspirTwo : this.inspirOne;
 
+  }
 }

@@ -1,9 +1,9 @@
 .button{
   width: 15vw;
-  height: 4vw;
+  height: 10vh;
   background-color: #FFB74B;
   border: none;
-  border-radius: 20px;
+  border-radius: 2vh;
   display: flex;
   font-size: 1.5vw;
   justify-content: space-between;

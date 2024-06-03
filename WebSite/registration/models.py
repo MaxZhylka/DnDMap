@@ -141,8 +141,7 @@ class Character(models.Model):
         (1, 'Мудрость'),
         (2, 'Харизма'),
     )
-    spellcastingAbilityScore = models.TextField('Базовые характеристики Заклинаний', choices=spellcastingAbility,
-                                                   default='0')
+    spellcastingAbilityScore = models.TextField('Базовые характеристики Заклинаний', default='0')
 
     spellSlots = models.JSONField('Информация о слотах', default=list)
     spellSlotsBoolean = models.JSONField('Информация о слотах чекбоксы', default=list)

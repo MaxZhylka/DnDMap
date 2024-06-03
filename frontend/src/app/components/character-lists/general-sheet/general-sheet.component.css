@@ -1,14 +1,14 @@
 .Header {
     background-color: #FFB74B;
     width: 100%;
-    height: 80px;
+    height: 9vh;
     top: 0;
-    z-index: 950; /* Ниже, чем у .CitiesContainer и .suggestions, чтобы они были поверх Header */
+    z-index: 950;
     flex-wrap: nowrap;
   display: flex;
     align-items: center;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px ;
+  border-bottom-left-radius: 3vh;
+  border-bottom-right-radius: 3vh ;
 }
 .flex{
 width: 100%;
@@ -16,13 +16,24 @@ width: 100%;
     justify-content: space-around;
     align-items: center;
 }
-.Head{
+.charactersList{
   display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
-.list{
-  width: 60vw;
+
+
+.container
+{
+  margin-top: 2vh;
   display: flex;
-  padding: 10px;
+
+  height: 100%;
+  flex-wrap: wrap;
+  width: 68vw;
+  gap: 1vw;
+
 }

@@ -1,4 +1,9 @@
-<div class="Head">
 <app-lists-header class="Header flex"></app-lists-header>
-<app-lists class="list"></app-lists>
+<div class="charactersList">
+
+  <div class="container">
+    <app-one-character *ngFor="let item of characters;let i=index" [characterData]="item" [id]="i"></app-one-character>
+<app-lists *ngIf="characters.length<20"></app-lists>
+    </div>
+
 </div>

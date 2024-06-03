@@ -15,4 +15,6 @@ export const appRoutes: Routes = [{path:'',component:MapComponent, canActivate: 
   {path:'characterlist',component:GeneralSheetComponent, canActivate: [AuthGuard]},
   {path:'profile',component:UserProfileComponent,  canActivate:[AuthGuard]},
   {path:'registration',component:MainComponent},
-  {path:'login',component:MainComponent}];
+  {path:'login',component:MainComponent},
+  { path: 'character-list/:id', component: CharacterSheetComponent, canActivate: [AuthGuard] }];
+

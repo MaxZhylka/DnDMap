@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {attackData} from "../components/character-sheet/attacks/attacks.component";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
@@ -20,11 +20,13 @@ export class CharacterService {
   };
 
 
-
+  private characterDataSubject: BehaviorSubject<any> = new BehaviorSubject(this.collectCharacterData());
+  characterData$: Observable<any> = this.characterDataSubject.asObservable();
    constructor(private http: HttpClient) {
      this.initializeSpellData();
    }
-       private initializeSpellData(): void {
+
+   initializeSpellData(): void {
     for (let level in this.countersByLevel) {
       if (this.countersByLevel.hasOwnProperty(level)) {
         this.spellData[+level] = Array.from({ length: this.countersByLevel[level] }, () => ({ boolean: false, string: "" }));
@@ -231,9 +233,9 @@ export class CharacterService {
       flaws: this.flaws,
       features: this.features,
       proficiencies: this.proficiencies,
-      attackAndSpells: this.attackAndSpells,
+      spells: this.attackAndSpells,
       platinum: this.platinum,
-      electrium: this.electrium,
+      electrum: this.electrium,
       golden: this.golden,
       silver: this.silver,
       copper: this.copper,
@@ -270,6 +272,199 @@ export class CharacterService {
     };
   }
 
+    defaultValues: any = {
+    name: 'Имя персонажа',
+    class: '',
+    backstory: '',
+    race: '',
+    worldviews: '',
+    experience: '',
+    level: 1,
+    proficiency: 2,
+    strength: 10,
+    dexterity: 10,
+    constitution: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10,
+    inspiration: false,
+    strength_savingthrow: false,
+    dexterity_savingthrow: false,
+    constitution_savingthrow: false,
+    intelligence_savingthrow: false,
+    wisdom_savingthrow: false,
+    charisma_savingthrow: false,
+    acrobatic: 0,
+    animalHandling: 0,
+    arcane: 0,
+    athletics: 0,
+    deception: 0,
+    history: 0,
+    insight: 0,
+    intimidation: 0,
+    investigation: 0,
+    medicine: 0,
+    nature: 0,
+    perception: 0,
+    performance: 0,
+    persuasion: 0,
+    religion: 0,
+    sleightOfHand: 0,
+    stealth: 0,
+    survival: 0,
+    armourclass: 0,
+    speed: 30,
+    hitPointsMax: 1,
+    hitPoints: 1,
+    temporaryHitPoints: null,
+    hitDice: '1d6',
+    success1: false,
+    success2: false,
+    success3: false,
+    fail1: false,
+    fail2: false,
+    fail3: false,
+    personalTraits: '',
+    ideals: '',
+    bonds: '',
+    flaws: '',
+    features: '',
+    proficiencies: '',
+    spells: [
+      { id: 0, nameAttack: '', modifier: '', characteristic: '0', damage: '', attackBonus: '', proficiency: false },
+      { id: 1, nameAttack: '', modifier: '', characteristic: '0', damage: '', attackBonus: '', proficiency: false }
+    ],
+    platinum: 0,
+    electrum: 0,
+    golden: 0,
+    silver: 0,
+    copper: 0,
+    age: '',
+    height: '',
+    weight: '',
+    eyeColor: '',
+    skinColor: '',
+    hairColor: '',
+    appearance: '../../../assets/img/character.png',
+    allies: '',
+    backstorys: '',
+    additionalfeatures: '',
+    treasure: '',
+    spellcastingAbilityScore: '0',
+    temp: '',
+    equipment: '',
+    spellSlots: Array(9).fill(0),
+    spellSlotsBoolean: Array.from({ length: 9 }, () => Array(10).fill(false)),
+    spellData:[],
+    conspiracies0: '',
+    conspiracies1: '',
+    conspiracies2: '',
+    conspiracies3: '',
+    conspiracies4: '',
+    conspiracies5: '',
+    conspiracies6: '',
+    conspiracies7: '',
+    conspiracies8: '',
+    conspiracies9: '',
+    conspiracies10: '',
+    conspiracies11: '',
+    conspiracies12: ''
+  };
+  setData(characterData: any): void {
+  this.name = characterData.name;
+  this.class = characterData.characterClass;
+  this.backstory = characterData.backstory;
+  this.race = characterData.race;
+  this.worldviews = characterData.worldviews;
+  this.experience = characterData.experience;
+  this.level = characterData.level;
+  this.proficiency = characterData.proficiency;
+  this.strength = characterData.strength;
+  this.dexterity = characterData.dexterity;
+  this.constitution = characterData.constitution;
+  this.intelligence = characterData.intelligence;
+  this.wisdom = characterData.wisdom;
+  this.charisma = characterData.charisma;
+  this.inspiration = characterData.inspiration;
+  this.strength_savingthrow = characterData.strength_savingthrow;
+  this.dexterity_savingthrow = characterData.dexterity_savingthrow;
+  this.constitution_savingthrow = characterData.constitution_savingthrow;
+  this.intelligence_savingthrow = characterData.intelligence_savingthrow;
+  this.wisdom_savingthrow = characterData.wisdom_savingthrow;
+  this.charisma_savingthrow = characterData.charisma_savingthrow;
+  this.acrobatic = characterData.acrobatic;
+  this.animalHandling = characterData.animalHandling;
+  this.arcane = characterData.arcane;
+  this.athletics = characterData.athletics;
+  this.deception = characterData.deception;
+  this.history = characterData.history;
+  this.insight = characterData.insight;
+  this.intimidation = characterData.intimidation;
+  this.investigation = characterData.investigation;
+  this.medicine = characterData.medicine;
+  this.nature = characterData.nature;
+  this.perception = characterData.perception;
+  this.performance = characterData.performance;
+  this.persuasion = characterData.persuasion;
+  this.religion = characterData.religion;
+  this.sleightOfHand = characterData.sleightOfHand;
+  this.stealth = characterData.stealth;
+  this.survival = characterData.survival;
+  this.armourclass = characterData.armourclass;
+  this.speed = characterData.speed;
+  this.hitPointsMax = characterData.hitPointsMax;
+  this.hitPoints = characterData.hitPoints;
+  this.temporaryHitPoints = characterData.temporaryHitPoints;
+  this.hitDice = characterData.hitDice;
+  this.success1 = characterData.success1;
+  this.success2 = characterData.success2;
+  this.success3 = characterData.success3;
+  this.fail1 = characterData.fail1;
+  this.fail2 = characterData.fail2;
+  this.fail3 = characterData.fail3;
+  this.personalTraits = characterData.personalTraits;
+  this.ideals = characterData.ideals;
+  this.bonds = characterData.bonds;
+  this.flaws = characterData.flaws;
+  this.features = characterData.features;
+  this.proficiencies = characterData.proficiencies;
+  this.attackAndSpells = characterData.spells;
+  this.platinum = characterData.platinum;
+  this.electrium = characterData.electrum;
+  this.golden = characterData.golden;
+  this.silver = characterData.silver;
+  this.copper = characterData.copper;
+  this.age = characterData.age;
+  this.height = characterData.height;
+  this.weight = characterData.weight;
+  this.eyeColor = characterData.eyeColor;
+  this.skinColor = characterData.skinColor;
+  this.hairColor = characterData.hairColor;
+  this.allies = characterData.allies;
+  this.backstorys = characterData.backstorys;
+  this.additionalfeatures = characterData.additionalfeatures;
+  this.treasure = characterData.treasure;
+  this.spellcastingAbilityScore = characterData.spellcastingAbilityScore;
+  this.temp = characterData.temp;
+  this.equipment = characterData.equipment;
+  this.spellSlots = characterData.spellSlots;
+  this.spellSlotsBoolean = characterData.spellSlotsBoolean;
+  this.spellData = characterData.spellData;
+  this.conspiracies0 = characterData.conspiracies0;
+  this.conspiracies1 = characterData.conspiracies1;
+  this.conspiracies2 = characterData.conspiracies2;
+  this.conspiracies3 = characterData.conspiracies3;
+  this.conspiracies4 = characterData.conspiracies4;
+  this.conspiracies5 = characterData.conspiracies5;
+  this.conspiracies6 = characterData.conspiracies6;
+  this.conspiracies7 = characterData.conspiracies7;
+  this.conspiracies8 = characterData.conspiracies8;
+  this.conspiracies9 = characterData.conspiracies9;
+  this.conspiracies10 = characterData.conspiracies10;
+  this.conspiracies11 = characterData.conspiracies11;
+  this.conspiracies12 = characterData.conspiracies12;
+   this.characterDataSubject.next(this.collectCharacterData());
+}
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('auth_token');
     return new HttpHeaders({
@@ -279,12 +474,12 @@ export class CharacterService {
   }
 
   createCharacter(characterData: any): Observable<any> {
-    console.log(characterData);
+
     return this.http.post(`http://127.0.0.1:8000/registration/characters/`, characterData, { headers: this.getAuthHeaders() });
   }
 
   getMyCharacters(): Observable<any> {
-    return this.http.get(`http://127.0.0.1:8000/characters/my_characters/`, { headers: this.getAuthHeaders() });
+    return this.http.get(`http://127.0.0.1:8000/registration/my_characters/`, { headers: this.getAuthHeaders() });
   }
 
   [key: string]: any;

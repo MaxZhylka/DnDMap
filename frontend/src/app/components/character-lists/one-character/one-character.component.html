@@ -1,0 +1,16 @@
+<div class="container" (click)="openList()">
+  <img class="avatar" src="{{avatar}}">
+  <div class="dataContainer">
+    <div class="CharacterName">{{characterData.name}}</div>
+    <div class="textContainer">
+      <div class="text">{{characterData.race}}</div>
+      <div class="text">{{characterData.class}}</div>
+      <div class="text">{{characterData.level}}</div>
+      <div class="text">{{characterData.experience}}</div>
+    </div>
+    <div class="locationContainer">
+      <img class="pointer" src="{{pointer}}">
+      <div class="Position">{{characterData.location}}</div>
+    </div>
+  </div>
+</div>
