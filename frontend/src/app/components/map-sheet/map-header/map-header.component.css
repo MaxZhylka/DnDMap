@@ -117,6 +117,7 @@ hint:hover
     border: none;
     border-radius: 10px;
       transition: color 200ms ease-in-out, font-size 200ms ease-in-out;
+  cursor: pointer;
 }
 .News-btn:hover
 {

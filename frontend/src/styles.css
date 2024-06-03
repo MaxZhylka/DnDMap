@@ -27,3 +27,7 @@ body{
 .characterlist-bg {
   background-color: #FFE1B4;
 }
+.text
+{
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}

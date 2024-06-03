@@ -1,33 +1,43 @@
 .container {
   display: flex;
   align-items: center;
-  height: 10vh;
-  width: 15vw;
+  height: 12vh;
+  width: 20vw;
   background-color: #FFB74B;
    border-radius: 2vh;
   overflow: hidden;
-  padding: 0.5vh;
-
+  transition: background-color 100ms ease-in-out,transform 100ms ease-in-out;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+cursor: pointer
+}
+.container:hover{
+  background-color: #FFAE35;
+}
+.container:active
+{
+    transform: scale(0.95);
 }
 
 .avatar {
-  height: 8vh;
-  width: auto;
-  border-radius: 10px;
-  margin-right: 1vh;
+  height: 100%;
+  border-radius: 2vh;
 }
 
 .dataContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 100%;
   width: 100%;
 }
 
 .CharacterName {
-  font-size: 1.2vh;
+  font-size: 2.5vh;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 12vw;
 }
 
 .textContainer {
@@ -36,21 +46,23 @@
 }
 
 .text {
-  font-size: 1vh;
+  font-size: 1.1vw;
 }
 
 .locationContainer {
   display: flex;
   align-items: center;
+  align-self: end;
+  margin-right:1vw;
+  margin-bottom: 0.5vh;
 }
 
 .pointer {
-  height: 1.5vh;
-  width: auto;
-  margin-right: 0.5vh;
+  width: 1.2vw;
 }
 
 .Position {
-  font-size: 1vh;
+  margin-left: 0.1vw;
+  font-size: 2vh;
   font-weight: bold;
 }

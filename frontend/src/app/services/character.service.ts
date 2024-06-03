@@ -52,7 +52,7 @@ export class CharacterService {
   backstory:string="";
   race:string="";
   worldviews:string="";
-  experience:string="";
+  experience:string="0";
   level:number=1;
   proficiency:number=2;
   //ability value
@@ -296,7 +296,7 @@ export class CharacterService {
     backstory: '',
     race: '',
     worldviews: '',
-    experience: '',
+    experience: '0',
     level: 1,
     proficiency: 2,
     strength: 10,

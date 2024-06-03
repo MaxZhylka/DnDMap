@@ -1,6 +1,6 @@
 .button{
-  width: 15vw;
-  height: 10vh;
+  width: 20vw;
+  height: 12vh;
   background-color: #FFB74B;
   border: none;
   border-radius: 2vh;
@@ -9,6 +9,8 @@
   justify-content: space-between;
   align-items: center;
   transition: background-color 100ms ease-in-out,transform 100ms ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 .button:hover{
   background-color: #FFAE35;
@@ -18,5 +20,6 @@
     transform: scale(0.95);
 }
 .img{
-  width: 25%;
+  height: 100%;
+  border-radius: 2vh;
 }
