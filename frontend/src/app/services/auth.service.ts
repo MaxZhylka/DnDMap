@@ -40,8 +40,12 @@ export class AuthService {
       return of(!!token).pipe(delay(100));
     }
 
-  logout(): void {
-    localStorage.removeItem(this.tokenKey);
+  logout(): Observable<void> {
+    return new Observable<void>((observer) => {
+      localStorage.removeItem(this.tokenKey);
+      observer.next();
+      observer.complete();
+    });
   }
   login(email: string, password: string): Observable<LoginResponse> {
     const headers = {

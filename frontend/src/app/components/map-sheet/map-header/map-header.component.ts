@@ -4,6 +4,7 @@ import {filter, ignoreElements} from "rxjs";
 import {MapService} from "../../../services/map.service";
 import { Router } from '@angular/router';
 import {AuthService, UserData} from "../../../services/auth.service";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 
 
@@ -20,13 +21,23 @@ interface City
 @Component({
   selector: 'app-map-header',
   templateUrl: './map-header.component.html',
-  styleUrl: './map-header.component.css'
+  styleUrl: './map-header.component.css',
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({
+        opacity: 0
+      })),
+      transition(':enter, :leave', [
+        animate(100)
+      ])
+    ])
+  ]
 })
 export class MapHeaderComponent implements OnInit, AfterViewInit{
 @ViewChild('searchField') searchField!: ElementRef;
    @ViewChild('openButton', { static: false }) OpenButton!: ElementRef;
 
-
+isMenuVisible: boolean = false;
   cities: City[]=[];
   searchQuery:string="";
   hintMargin={};
@@ -147,7 +158,14 @@ Blur() {
   this.hint = "";
   this.searchedCities = [];
 }
-
+onLogout() {
+  this.authService.logout().subscribe(() => {
+    this.router.navigate(['/login']);
+  });
+}
+toggleMenu() {
+    this.isMenuVisible = !this.isMenuVisible;
+  }
 
   getCities = () => {
   this.apiMap.getCities().subscribe({
@@ -165,6 +183,9 @@ redirectToCharsheet() {
   redirectToMap() {
     this.router.navigate(['/map']);
 }
+redirectToProfile() {
+    this.router.navigate(['/profile']);
+  }
 
 
 }
