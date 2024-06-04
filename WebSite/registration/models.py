@@ -49,11 +49,11 @@ class Player(AbstractBaseUser):
 
 class Character(models.Model):
     player = models.ForeignKey(Player, related_name='characters', on_delete=models.CASCADE)
-    name = models.CharField('Имя персонажа', max_length=20, default='', blank=True)
-    characterClass = models.CharField('Класс', max_length=20, default='', blank=True)
-    backstory = models.CharField('Предыстория', max_length=20, default='', blank=True)
-    race = models.CharField('Раса', max_length=20, default='', blank=True)
-    worldviews = models.CharField('Мировозрение', max_length=20, default='', blank=True)
+    name = models.CharField('Имя персонажа', max_length=50, default='', blank=True)
+    characterClass = models.CharField('Класс', max_length=50, default='', blank=True)
+    backstory = models.CharField('Предыстория', max_length=50, default='', blank=True)
+    race = models.CharField('Раса', max_length=50, default='', blank=True)
+    worldviews = models.CharField('Мировозрение', max_length=50, default='', blank=True)
     experience = models.CharField('Опыт', default=0,max_length=10, blank=True)
     level = models.IntegerField('Уровень', default=1)
     profiency = models.IntegerField('Бонус Мастерства', default=2)
@@ -102,7 +102,7 @@ class Character(models.Model):
     hitPoints = models.IntegerField('Текущие Хиты', validators=[MinValueValidator(0)], default=1)
     temporaryHitPoints = models.TextField('Временные Хиты', default=0, blank=True, null=True)
 
-    hitDice = models.CharField('Кости Хитов', max_length=20, default=0)
+    hitDice = models.CharField('Кости Хитов', max_length=50, default=0)
     success1 = models.BooleanField('Успех 1', default=0)
     success2 = models.BooleanField('Успех 2', default=0)
     success3 = models.BooleanField('Успех 3', default=0)
@@ -161,7 +161,7 @@ class Character(models.Model):
     conspiracies11 = models.TextField('Заговоры 12', default=list, blank=True)
     conspiracies12 = models.TextField('Заговоры 13', default=list, blank=True)
 
-    location = models.CharField('Текущее местополжение', max_length=20, default='waterdeep')
+    location = models.CharField('Текущее местополжение', max_length=50, default='waterdeep')
 
 
     def __str__(self):
