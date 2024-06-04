@@ -106,10 +106,27 @@ class MyCharactersViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         return Character.objects.filter(player=self.request.user)
 
-class CharacterUpdateView(generics.UpdateAPIView):
-    queryset = Character.objects.all()
-    serializer_class = CharacterSerializer
+class CharacterUpdateView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        return self.queryset.filter(id=self.kwargs['pk'])
+    def put(self, request, *args, **kwargs):
+        character = Character.objects.get(pk=kwargs['pk'])
+        serializer = CharacterSerializer(character, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class ImageUpdateView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, *args, **kwargs):
+        character = Character.objects.get(pk=kwargs['pk'])
+        serializer = ImageSerializer(character, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

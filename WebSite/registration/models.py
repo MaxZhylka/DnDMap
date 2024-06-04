@@ -1,12 +1,13 @@
 import binascii
 import os
-
+from django.db.models.signals import post_save
 from django.contrib.auth.hashers import check_password
 from django.db import models
 from django.core.validators import MaxValueValidator
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.dispatch import receiver
 
 from WebSite import settings
 
@@ -44,19 +45,19 @@ class Player(AbstractBaseUser):
     REQUIRED_FIELDS = ['name']
 
     def __str__(self):
-        return self.email
+        return self.name
 
 class Character(models.Model):
     player = models.ForeignKey(Player, related_name='characters', on_delete=models.CASCADE)
     name = models.CharField('Имя персонажа', max_length=20, default='', blank=True)
-    characterClass = models.CharField('Класс', max_length=20, default='')
+    characterClass = models.CharField('Класс', max_length=20, default='', blank=True)
     backstory = models.CharField('Предыстория', max_length=20, default='', blank=True)
     race = models.CharField('Раса', max_length=20, default='', blank=True)
     worldviews = models.CharField('Мировозрение', max_length=20, default='', blank=True)
     experience = models.CharField('Опыт', default=0,max_length=10, blank=True)
     level = models.IntegerField('Уровень', default=1)
     profiency = models.IntegerField('Бонус Мастерства', default=2)
-    сharacterPlayer = models.CharField('Имя игрока', max_length=20, default='')
+
     strength = models.IntegerField('Сила', validators=[MinValueValidator(0), MaxValueValidator(30)], default=10)
     dexterity = models.IntegerField('Ловкость', validators=[MinValueValidator(0), MaxValueValidator(30)], default=10)
     constitution = models.IntegerField('Телосложение', validators=[MinValueValidator(0), MaxValueValidator(30)],
@@ -99,7 +100,7 @@ class Character(models.Model):
     speed = models.IntegerField('Скорость', default=0)
     hitPointsMax = models.IntegerField('Максимальные Хиты', default=1)
     hitPoints = models.IntegerField('Текущие Хиты', validators=[MinValueValidator(0)], default=1)
-    temporaryHitPoints = models.IntegerField('Временные Хиты', default=0, blank=True, null=True)
+    temporaryHitPoints = models.TextField('Временные Хиты', default=0, blank=True, null=True)
 
     hitDice = models.CharField('Кости Хитов', max_length=20, default=0)
     success1 = models.BooleanField('Успех 1', default=0)
@@ -162,6 +163,7 @@ class Character(models.Model):
 
     location = models.CharField('Текущее местополжение', max_length=20, default='waterdeep')
 
+
     def __str__(self):
         return self.name
 
@@ -180,3 +182,4 @@ class Token(models.Model):
 
     def __str__(self):
         return self.key
+

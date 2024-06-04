@@ -19,7 +19,8 @@ cursor: pointer
 }
 
 .avatar {
-  height: 100%;
+  height: 12vh;
+  width: 12vh;
   border-radius: 2vh;
 }
 

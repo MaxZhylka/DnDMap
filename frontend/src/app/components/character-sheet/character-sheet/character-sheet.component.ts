@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {CharacterService} from "../../../services/character.service";
 import {response} from "express";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-character-sheet',
@@ -10,8 +10,20 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class CharacterSheetComponent implements OnInit, OnDestroy{
     private updateInterval: any;
-  constructor(  private route: ActivatedRoute, private characterService:CharacterService) {
+  constructor(  private route: ActivatedRoute,private router:Router, private characterService:CharacterService) {
   }
+
+
+  @HostListener('window:beforeunload')
+  sendData()
+  {
+
+   this.updateCharacterData();
+
+  }
+
+
+
   ngOnInit() {
 
      this.route.paramMap.subscribe(params => {
@@ -19,27 +31,19 @@ export class CharacterSheetComponent implements OnInit, OnDestroy{
        if (id) {
          this.characterService.getMyCharacters().subscribe({
            next: (data) => {
-             console.log(data[id]);
+
+             if(id>data.length)
+             {
+               this.router.navigate(['/characterlist'])
+             }
              this.characterService.setData(data[id]);
            },
            error: (error) => {
              console.log(error)
            }
          });
-       } else {
-
-          this.characterService.setData(this.characterService.defaultValues);
-          this.characterService.initializeSpellData();
-         this.characterService.createCharacter(this.characterService.collectCharacterData()).subscribe({
-           next: (response) => {
-             console.log('Character created:', response);
-           },
-           error: (error) => {
-             console.error('Error creating character:', error);
-           }
-         });
        }
-        });
+     })
        this.updateInterval = setInterval(() => {
       this.updateCharacterData();
     }, 15000);
@@ -47,22 +51,28 @@ export class CharacterSheetComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
       if (this.updateInterval) {
       clearInterval(this.updateInterval);
+
     }
-    this.characterService.updateData(this.characterService.collectCharacterData()).subscribe(
-      {
-        next:(data)=>{console.log(data)},
-        error:(data)=>{console.log(data)}
-      }
-    )
+
+  this.characterService.updateData(this.characterService.collectCharacterData()).subscribe({
+      next: (data) => { console.log('Data updated:', data) },
+      error: (error) => { console.error('Error updating data:', error) }
+    });
 
 
   }
    private updateCharacterData() {
-    this.characterService.updateData(this.characterService.collectCharacterData()).subscribe({
-      next: (data) => { console.log('Data updated:', data) },
-      error: (error) => { console.error('Error updating data:', error) }
-    });
-  }
+
+       this.characterService.updateData(this.characterService.collectCharacterData()).subscribe({
+         next: (data) => {
+           console.log('Data updated:', data)
+         },
+         error: (error) => {
+           console.error('Error updating data:', error)
+         }
+       });
+
+   }
 }
 
 

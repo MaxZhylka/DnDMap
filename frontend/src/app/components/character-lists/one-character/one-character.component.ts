@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {CharacterService} from "../../../services/character.service";
 
 @Component({
   selector: 'app-one-character',
@@ -12,7 +13,7 @@ export class OneCharacterComponent implements OnInit {
   @Input() characterData!:any;
   avatar:string='assets/img/img.png';
   pointer:string='assets/img/pointer.png';
-  constructor(private router:Router)
+  constructor(private router:Router, private characterService:CharacterService)
 {
 
 }
@@ -46,7 +47,8 @@ export class OneCharacterComponent implements OnInit {
     17: 225000,
     18: 265000,
     19: 305000,
-    20: 355000
+    20: 355000,
+    21:355000
   };
 
   return experienceByLevel[level] || null;

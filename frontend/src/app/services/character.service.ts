@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {attackData} from "../components/character-sheet/attacks/attacks.component";
-import {BehaviorSubject, debounceTime, distinctUntilChanged, from, Observable, switchMap} from "rxjs";
+import {BehaviorSubject, debounceTime, distinctUntilChanged, from, Observable, switchMap, throwError} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
@@ -185,16 +185,12 @@ export class CharacterService {
    conspiracies11:string='';
    conspiracies12:string='';
    id:number=-1;
-  uploadImage(image: File): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('image', image, image.name);
-    return this.http.post('http://127.0.0.1:8000/registration/upload/', formData);
-  }
+
 
     collectCharacterData() {
     return {
       name: this.name,
-      class: this.class,
+      characterClass: this.class,
       backstory: this.backstory,
       race: this.race,
       worldviews: this.worldviews,
@@ -262,7 +258,7 @@ export class CharacterService {
       eyeColor: this.eyeColor,
       skinColor: this.skinColor,
       hairColor: this.hairColor,
-     //удален файл с картинкой аватарки
+      appearance: this.appearance,
       allies: this.allies,
       backstorys: this.backstorys,
       additionalfeatures: this.additionalfeatures,
@@ -418,6 +414,7 @@ export class CharacterService {
   this.deception = characterData.deception;
   this.history = characterData.history;
   this.insight = characterData.insight;
+  this.appearance= characterData.appearance;
   this.intimidation = characterData.intimidation;
   this.investigation = characterData.investigation;
   this.medicine = characterData.medicine;
@@ -497,10 +494,32 @@ export class CharacterService {
     return this.http.post(`http://127.0.0.1:8000/registration/characters/`, characterData, { headers: this.getAuthHeaders() });
   }
 
-   updateData(characterData: any): Observable<any> {
-    const url = `http://127.0.0.1:8000/registration/characters/${characterData.id}/`;
-    return this.http.put(url, characterData, { headers: this.getAuthHeaders() });
-  }
+updateData(characterData: any): Observable<any> {
+
+    if(characterData.id==-1) {
+      return throwError(() => new Error('Некорректный ID'));
+    }
+  const url = `http://127.0.0.1:8000/registration/characters/${characterData.id}/`;
+  return this.http.put(url, characterData, {
+    headers: new HttpHeaders({
+      'Authorization': `Token ${localStorage.getItem('auth_token')}`
+    })
+  });
+}
+
+updateImage(characterData: any) {
+  const url = `http://127.0.0.1:8000/registration/image/${characterData.id}/`;
+
+  const formData = new FormData();
+  formData.append('appearance', this.imageToLoad);
+
+  return this.http.put(url, formData, {
+    headers: new HttpHeaders({
+      'Authorization': `Token ${localStorage.getItem('auth_token')}`
+    })
+  });
+}
+
   getMyCharacters(): Observable<any> {
     return this.http.get(`http://127.0.0.1:8000/registration/my_characters/`, { headers: this.getAuthHeaders() });
   }
