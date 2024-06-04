@@ -1,6 +1,6 @@
 import binascii
 import os
-
+from django.conf import settings
 from rest_framework.decorators import action
 from django.shortcuts import render
 from rest_framework import viewsets, permissions,  generics
@@ -118,15 +118,30 @@ class CharacterUpdateView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class ImageUpdateView(APIView):
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [IsAuthenticated]
 
     def put(self, request, *args, **kwargs):
         character = Character.objects.get(pk=kwargs['pk'])
+
+
+        old_avatar = character.appearance
+
         serializer = ImageSerializer(character, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
+
+
+            if old_avatar:
+
+                file_path = os.path.join(settings.MEDIA_ROOT, str(old_avatar))
+
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
