@@ -6,9 +6,11 @@
   background-color: #FFB74B;
    border-radius: 2vh;
   overflow: hidden;
+  justify-content: start;
   transition: background-color 100ms ease-in-out,transform 100ms ease-in-out;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-cursor: pointer
+cursor: pointer;
+  gap: 0.5vw;
 }
 .container:hover{
   background-color: #FFAE35;
@@ -22,14 +24,15 @@ cursor: pointer
   height: 12vh;
   width: 12vh;
   border-radius: 2vh;
+  object-fit: cover;
+  object-position: top;
 }
 
 .dataContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 100%;
-  width: 100%;
+  width: 13vw;
 }
 
 .CharacterName {

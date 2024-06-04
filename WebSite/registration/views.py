@@ -124,9 +124,22 @@ class ImageUpdateView(APIView):
 
     def put(self, request, *args, **kwargs):
         character = Character.objects.get(pk=kwargs['pk'])
+
+
+        old_avatar = character.appearance
+
         serializer = ImageSerializer(character, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
+
+
+            if old_avatar:
+
+                file_path = os.path.join(settings.MEDIA_ROOT, str(old_avatar))
+
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
