@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {attackData} from "../components/character-sheet/attacks/attacks.component";
-import {BehaviorSubject, debounceTime, distinctUntilChanged, from, Observable, switchMap} from "rxjs";
+import {BehaviorSubject, debounceTime, distinctUntilChanged, from, Observable, switchMap, throwError} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
@@ -185,16 +185,12 @@ export class CharacterService {
    conspiracies11:string='';
    conspiracies12:string='';
    id:number=-1;
-  uploadImage(image: File): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('image', image, image.name);
-    return this.http.post('http://127.0.0.1:8000/registration/upload/', formData);
-  }
+
 
     collectCharacterData() {
     return {
       name: this.name,
-      class: this.class,
+      characterClass: this.class,
       backstory: this.backstory,
       race: this.race,
       worldviews: this.worldviews,
@@ -499,21 +495,24 @@ export class CharacterService {
   }
 
 updateData(characterData: any): Observable<any> {
-  const formData: FormData = new FormData();
-  characterData.appearance=this.imageToLoad;
-  for (const key in characterData) {
-    if (characterData.hasOwnProperty(key)) {
-      if (key === 'appearance' && characterData[key] instanceof File) {
-        formData.append(key, characterData[key], characterData[key].name);
-      } else if (Array.isArray(characterData[key])) {
-        formData.append(key, JSON.stringify(characterData[key]));  // Преобразование массивов в JSON
-      } else {
-        formData.append(key, characterData[key]);
-      }
-    }
-  }
 
+    if(characterData.id==-1) {
+      return throwError(() => new Error('Некорректный ID'));
+    }
   const url = `http://127.0.0.1:8000/registration/characters/${characterData.id}/`;
+  return this.http.put(url, characterData, {
+    headers: new HttpHeaders({
+      'Authorization': `Token ${localStorage.getItem('auth_token')}`
+    })
+  });
+}
+
+updateImage(characterData: any) {
+  const url = `http://127.0.0.1:8000/registration/image/${characterData.id}/`;
+
+  const formData = new FormData();
+  formData.append('appearance', this.imageToLoad);
+
   return this.http.put(url, formData, {
     headers: new HttpHeaders({
       'Authorization': `Token ${localStorage.getItem('auth_token')}`

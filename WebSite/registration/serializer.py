@@ -9,7 +9,8 @@ class CharacterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = '__all__'
-        read_only_fields = ('player',)
+        read_only_fields = ('player','appearance')
+
 
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,5 +41,5 @@ class AuthTokenSerializer(serializers.Serializer):
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UploadedImage
-        fields = ('id', 'image', 'uploaded_at')
+        model = Character
+        fields = ('id','appearance')

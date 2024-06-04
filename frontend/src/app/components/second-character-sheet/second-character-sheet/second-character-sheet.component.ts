@@ -16,11 +16,15 @@ export class SecondCharacterSheetComponent implements OnInit {
   constructor(private characterService: CharacterService) {}
 
   ngOnInit() {
+
     this.characterService.characterData$.subscribe({
 
       next:(data)=> {
-           console.log(data);
-        this.portrait = data.appearance;
+          if(data.appearance!=null) {
+            this.portrait = data.appearance;
+          }
+          else this.portrait='assets/img/character.png'
+
       }
     });
 

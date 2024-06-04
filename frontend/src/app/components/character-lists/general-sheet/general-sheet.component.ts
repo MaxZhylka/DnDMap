@@ -1,31 +1,28 @@
-import { Component } from '@angular/core';
-import {Router} from "@angular/router";
-import {AuthService} from "../../../services/auth.service";
-import {CharacterService} from "../../../services/character.service";
+import { Component, OnInit } from '@angular/core';
+import { CharacterService } from "../../../services/character.service";
 
 @Component({
   selector: 'app-general-sheet',
   templateUrl: './general-sheet.component.html',
-  styleUrl: './general-sheet.component.css'
+  styleUrls: ['./general-sheet.component.css']
 })
-export class GeneralSheetComponent {
+export class GeneralSheetComponent implements OnInit {
+  characters: any[] = [];
 
-  characters:any[]=[];
+  constructor(public characterService: CharacterService) {}
 
-  constructor(public characterService:CharacterService) {
-    this.characterService.getMyCharacters().subscribe({
-      next:(value)=>{
+  ngOnInit() {
+    setTimeout(() => {
+         this.characterService.getMyCharacters().subscribe({
+      next: (value) => {
         console.log(value);
-        this.characters=value;
+        this.characters = value;
       },
-      error:(error)=>
-      {
+      error: (error) => {
         console.log(error);
       }
-
-    })
-
+    });
+    }, 10);
   }
-
 
 }

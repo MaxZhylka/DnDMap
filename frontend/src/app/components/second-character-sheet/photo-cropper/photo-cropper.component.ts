@@ -27,8 +27,21 @@ export class PhotoCropperComponent implements OnInit {
 
   onClose() {
     if (this.croppedFile) {
-      console.log(this.croppedFile);
-      this.imageUploadService.imageToLoad=this.croppedFile;
+    this.imageUploadService.imageToLoad=this.croppedFile;
+
+     this.imageUploadService.updateImage(this.imageUploadService.collectCharacterData()).subscribe(
+       {
+         next:(data)=>{
+           console.log(data);
+           console.log('Картинка загружена');
+         },
+         error:(data)=>
+         {
+            console.log(data);
+           console.log('Картинка НЕ загружена');
+         }
+       }
+     )
     }
     this.close.emit();
   }
