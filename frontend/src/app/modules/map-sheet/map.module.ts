@@ -32,8 +32,7 @@ registerLocaleData(localeRu);
         HttpClientModule,
         FormsModule,
         CommonModule,
-        NgOptimizedImage,
-
+        NgOptimizedImage
     ],
   providers: [
     MapService,

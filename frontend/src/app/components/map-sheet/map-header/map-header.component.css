@@ -23,12 +23,14 @@ width: 100%;
   object-fit: cover;
 }
 .imageButton{
-  position: relative;
+  position: static;
   width: 8vh;
   height: 8vh;
   border: 0.2vw solid black;
     border-radius: 50%;
   background-color: transparent;
+
+  cursor: pointer;
 }
   .search-form {
     position: relative;
@@ -134,3 +136,25 @@ hint:hover
     width:50px;
     height:50px;
 }
+.Userflex {
+  margin-top: 9.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profandexist {
+  position: absolute;
+  left: 89.5vw;
+  top: 9vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+  background-color: #ffba59;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+
