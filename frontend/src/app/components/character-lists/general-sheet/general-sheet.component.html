@@ -2,8 +2,8 @@
 <div class="charactersList">
 
   <div class="container">
-    <app-one-character *ngFor="let item of characters;let i=index" [characterData]="item" [id]="i"></app-one-character>
-<app-lists *ngIf="characters.length<20" [id]="characters.length"></app-lists>
+    <app-one-character *ngFor="let item of characters;let i=index" (updateData)="updateData()" [characterData]="item" [id]="i"></app-one-character>
+<app-lists *ngIf="characters.length<20"   [id]="characters.length"></app-lists>
     </div>
 
 </div>

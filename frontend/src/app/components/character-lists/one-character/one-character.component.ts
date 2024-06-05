@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {CharacterService} from "../../../services/character.service";
 
@@ -13,6 +13,10 @@ export class OneCharacterComponent implements OnInit {
   @Input() characterData!:any;
   avatar:string='assets/img/img.png';
   pointer:string='assets/img/pointer.png';
+  context:boolean=false;
+  jsonData: string = '';
+  @Output() updateData=new EventEmitter<void>;
+
   constructor(private router:Router, private characterService:CharacterService)
 {
 
@@ -21,6 +25,7 @@ export class OneCharacterComponent implements OnInit {
     if(this.characterData.appearance!=null)
     {
       this.avatar=this.characterData.appearance;
+      this.downloadData();
     }
   }
   openList(): void {
@@ -53,4 +58,47 @@ export class OneCharacterComponent implements OnInit {
 
   return experienceByLevel[level] || null;
 }
+downloadData() {
+  const encodedData = encodeURIComponent(JSON.stringify(this.characterData));
+  const blob = new Blob([encodedData], { type: 'application/json' });
+  this.jsonData = window.URL.createObjectURL(blob);
+}
+
+displayContext(event:Event)
+{
+
+  event.stopPropagation()
+  this.context=!this.context;
+
+}
+close()
+{
+  this.context=false;
+}
+downloadClose(event:Event)
+{
+  event.stopPropagation();
+  this.context=false;
+}
+delete(event:Event)
+{
+  event.stopPropagation()
+  this.characterService.deleteCharacter(this.characterData.id).subscribe(
+    {
+      next:()=>{
+        this.updateData.emit();
+      },
+      error:(errorData)=>
+      {
+        console.log(errorData);
+      }
+
+    }
+  )
+
+
+  ;
+
+}
+
 }

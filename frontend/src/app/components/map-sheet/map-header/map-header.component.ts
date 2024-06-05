@@ -178,7 +178,7 @@ toggleMenu() {
   });
 }
 redirectToCharsheet() {
-    this.router.navigate(['/characterlist']);
+    this.router.navigate(['/character-list']);
   }
   redirectToMap() {
     this.router.navigate(['/map']);

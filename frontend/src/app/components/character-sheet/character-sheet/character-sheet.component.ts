@@ -34,7 +34,7 @@ export class CharacterSheetComponent implements OnInit, OnDestroy{
 
              if(id>data.length)
              {
-               this.router.navigate(['/characterlist'])
+               this.router.navigate(['/character-list'])
              }
              this.characterService.setData(data[id]);
            },

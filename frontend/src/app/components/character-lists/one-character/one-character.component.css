@@ -11,14 +11,12 @@
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 cursor: pointer;
   gap: 0.5vw;
+  z-index: 800;
 }
 .container:hover{
   background-color: #FFAE35;
 }
-.container:active
-{
-    transform: scale(0.95);
-}
+
 
 .avatar {
   height: 12vh;
@@ -41,7 +39,30 @@ cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 12vw;
+
+}
+
+.contextButton
+{
+
+  position: relative;
+  z-index: 900;
+  border-radius: 0.8vh;
+  text-align: center;
+  height: 1.4vw;
+  line-height: 0.65vw;
+  width: 1.4vw;
+  background-color:#FFE1B4;
+  align-content: start;
+  font-size: 1.4vw;
+   user-select: none;
+  cursor: pointer;
+}
+.nameAndButtonContainer
+{
+  display: flex;
+  justify-content: space-between;
+  width: 13vw;
 }
 
 .textContainer {
@@ -69,4 +90,32 @@ cursor: pointer;
   margin-left: 0.1vw;
   font-size: 2vh;
   font-weight: bold;
+}
+.contextMenu
+{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color:  #FFE1B4;
+  color: black;
+    width: 8vw;
+    height: 7vh;
+    margin-left: 11.5vw;
+  margin-top: 1vh;
+  border-radius: 1vw;
+}
+
+.button {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-size: 1vw;
+  text-align: center;
+  height: 3.5vh;
+  align-content: center;
+  text-decoration: none;
+  color: inherit;
 }

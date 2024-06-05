@@ -14,7 +14,14 @@
         (cropperReady)="initCropper()"
         (loadImageFailed)="imgFailed()">
         </image-cropper>
-    <img class="prewie" [src]="cropImagePreview" alt="">
+     <div class="imageContainer">
+    <img class="prewie" [src]="cropImagePreview" alt="Картинка на листах персонажа">
+       <span class="text">Картинка в листе персонажа </span>
+       </div>
+     <div class="imageContainer">
+     <img class="avatar" [src]="cropImagePreview" alt="Аватарка">
+          <span class="text">Картинка аватарки </span>
+       </div>
    </div>
   </div>
 </div>

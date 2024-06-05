@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {tap} from "rxjs";
+import {Subscription, tap} from "rxjs";
 import {CharacterService} from "../../../services/character.service";
 interface SpellData
 {
@@ -13,10 +13,11 @@ interface SpellData
   styleUrl: './spells-by-level.component.css'
 })
 
-export class SpellsByLevelComponent implements OnInit{
+export class SpellsByLevelComponent implements OnInit,OnDestroy{
   @Input() spellLevel:number=0;
   spellsForm:FormGroup = new FormGroup({
     spellsSlots: new FormControl('0')});
+  subscription= new Subscription();
   listHeight:number=20;
   @Input() spellCount: number=1;
   spellData:SpellData[]=[];
@@ -25,7 +26,20 @@ export class SpellsByLevelComponent implements OnInit{
     this.spellData=new Array(this.spellCount).fill({});
     this.listHeight=20*this.spellCount;
 
+    this.subscription=this.characterService.characterData$.subscribe(
+      {
+        next:(data)=>{
+          if(data.spellSlots) {
+            this.spellsForm.get('spellsSlots')?.setValue(data.spellSlots[this.spellLevel - 1]);
+          }
+          }
+      }
+    )
+
   }
+ngOnDestroy() {
+    this.subscription.unsubscribe();
+}
 
   getArray() {
     return this.characterService.spellSlotsBoolean[this.spellLevel - 1].slice(0, this.characterService.spellSlots[this.spellLevel-1]);
