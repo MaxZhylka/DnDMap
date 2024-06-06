@@ -8,7 +8,9 @@
        appContentEditable
        appSelectEnd
        (selectionDone)="onTextSelect($event)"
+        (dragover)="off($event)"
        #inputField
+         selector="#input"
        class="inputField"
        [style.width.px]="inputWidth"
        [style.height.px]="inputHeight"

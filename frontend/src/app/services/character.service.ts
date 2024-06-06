@@ -519,6 +519,16 @@ updateImage(characterData: any) {
     })
   });
 }
+deleteCharacter(id:number)
+{
+    const url = `http://127.0.0.1:8000/registration/characters/${id}/`;
+  return this.http.delete(url,{
+    headers: new HttpHeaders({
+      'Authorization': `Token ${localStorage.getItem('auth_token')}`
+    })
+  });
+}
+
 
   getMyCharacters(): Observable<any> {
     return this.http.get(`http://127.0.0.1:8000/registration/my_characters/`, { headers: this.getAuthHeaders() });

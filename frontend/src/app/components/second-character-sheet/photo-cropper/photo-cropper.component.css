@@ -7,14 +7,15 @@
     transition: opacity 0.2s ease;
     opacity: 50%;
     position: fixed;
+    z-index: 1000;
 }
 .Window {
   display: flex;
     background: white;
-    width: 1000px;
+    width: 1200px;
     height: 500px;
     top: calc(50% - 250px);
-    left: calc(50% - 500px);
+    left: calc(50% - 600px);
     text-align: center;
     transition: opacity 0.2s ease;
     font-size: 10px;
@@ -24,6 +25,13 @@
     border-radius: 10px;
   flex-direction:column ;
   font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+.avatar {
+  height: 12vh;
+  width: 12vh;
+  border-radius: 2vh;
+  object-fit: cover;
+  object-position: top;
 }
 .row{
   display: flex;
@@ -58,4 +66,15 @@
 }
 .prewie{
   padding: 5px;
+}
+.imageContainer
+{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.text
+{
+  font-size: 20px;
 }

@@ -1,4 +1,4 @@
-import { Directive, HostListener, ElementRef, Renderer2, forwardRef } from '@angular/core';
+import {Directive, HostListener, ElementRef, Renderer2, forwardRef, Input} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Directive({
@@ -17,6 +17,8 @@ export class ContentEditableDirective implements ControlValueAccessor {
   private onTouched: any;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+
 
   @HostListener('input', ['$event.target.innerHTML'])
   onInput(value: any): void {

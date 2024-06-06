@@ -1,8 +1,8 @@
 import binascii
 import os
-
+from django.conf import settings
 from rest_framework.decorators import action
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from rest_framework import viewsets, permissions,  generics
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
@@ -17,7 +17,6 @@ from rest_framework.response import Response
 from .serializer import PlayerSerializer, AuthTokenSerializer
 from .auth import TokenAuthentication
 from django.http import HttpResponse, JsonResponse
-
 
 # Create your views here.
 class CharacterApiView(viewsets.ModelViewSet):
@@ -118,6 +117,12 @@ class CharacterUpdateView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, *args, **kwargs):
+        character = get_object_or_404(Character, pk=kwargs['pk'])
+        character.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 class ImageUpdateView(APIView):
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [IsAuthenticated]

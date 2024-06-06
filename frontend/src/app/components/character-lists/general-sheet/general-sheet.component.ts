@@ -15,14 +15,24 @@ export class GeneralSheetComponent implements OnInit {
     setTimeout(() => {
          this.characterService.getMyCharacters().subscribe({
       next: (value) => {
-        console.log(value);
         this.characters = value;
       },
       error: (error) => {
         console.log(error);
       }
     });
-    }, 10);
+    }, 25);
   }
 
+  updateData()
+  {
+    this.characterService.getMyCharacters().subscribe({
+      next: (value) => {
+        this.characters = value;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
 }

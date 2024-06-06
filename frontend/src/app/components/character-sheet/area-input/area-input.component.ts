@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild, ElementRef, HostListener} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit} from '@angular/core';
 import {CharacterService} from "../../../services/character.service";
 
 
@@ -8,7 +8,7 @@ import {CharacterService} from "../../../services/character.service";
   templateUrl: './area-input.component.html',
   styleUrls: ['./area-input.component.css']
 })
-export class AreaInputComponent implements OnInit {
+export class AreaInputComponent implements OnInit, AfterViewInit {
   @Input() personalId: string = 'temp';
   @Input() spellLvl:number=-1;
   @Input() SpellId:number=1;
@@ -36,6 +36,8 @@ export class AreaInputComponent implements OnInit {
 
   }
 
+
+
   @HostListener('window:resize', ['$event'])
 onWindowResize() {
   this.updateSelectionAndMenuPosition();
@@ -47,7 +49,17 @@ updateSelectionAndMenuPosition() {
     this.updateContextMenuPosition();
   }
 }
+ setupPasteListener() {
 
+    this.inputField.nativeElement.addEventListener('paste', (event: ClipboardEvent) => {
+      event.preventDefault();
+      const text = event.clipboardData?.getData('text/plain');
+       this.isContextMenuVisible = false;
+      if (text) {
+        document.execCommand("insertText", false, text);
+      }
+    });
+  }
 updateContextMenuPosition() {
   if (!this.selectedRange) {
     return;
@@ -64,6 +76,10 @@ updateContextMenuPosition() {
     this.inputWidth = this.boxWidth - 4;
     this.ignoredElement.push(this.contextMenu);
 
+  }
+  ngAfterViewInit()
+  {
+        this.setupPasteListener();
   }
 
   calcHeight() {
@@ -120,7 +136,9 @@ updateContextMenuPosition() {
       link.href = url;
       link.target = "_blank";
       link.textContent = this.selectedText;
-
+      link.style.setProperty('text-decoration', 'none');
+      link.style.setProperty('font-weight', 'bold');
+      link.style.setProperty('color', '#1A01CC');
       this.selectedRange.deleteContents();
       this.selectedRange.insertNode(link);
 
@@ -131,9 +149,17 @@ updateContextMenuPosition() {
 
     this.isContextMenuVisible = false;
   }
+  onBackspace()
+  {
+     this.isContextMenuVisible = false;
+  }
 
   close() {
     this.isContextMenuVisible = false;
 
+  }
+  off(event:any)
+  {
+    event.preventDefault();
   }
 }

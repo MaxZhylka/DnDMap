@@ -12,7 +12,7 @@ import {GeneralSheetComponent} from "./components/character-lists/general-sheet/
 
 export const appRoutes: Routes = [{path:'',component:MapComponent, canActivate: [AuthGuard]},
   {path:'registration/character',component:CharacterSheetComponent,  canActivate: [AuthGuard]},
-  {path:'characterlist',component:GeneralSheetComponent, canActivate: [AuthGuard]},
+  {path:'character-list',component:GeneralSheetComponent, canActivate: [AuthGuard]},
   {path:'profile',component:UserProfileComponent,  canActivate:[AuthGuard]},
   {path:'registration',component:MainComponent},
   {path:'login',component:MainComponent},

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild, ElementRef, HostListener} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit} from '@angular/core';
 import {CharacterService} from "../../../services/character.service";
 
 
@@ -8,7 +8,7 @@ import {CharacterService} from "../../../services/character.service";
   templateUrl: './area-input-2.component.html',
   styleUrls: ['./area-input-2.component.css']
 })
-export class AreaInput2Component implements OnInit {
+export class AreaInput2Component implements OnInit,AfterViewInit {
 
   @Input() spellLvl:number=0;
   @Input() SpellId:number=0;
@@ -107,24 +107,46 @@ updateContextMenuPosition() {
       }
     }
   }
+  ngAfterViewInit()
+  {
+    this.setupPasteListener();
+  }
+   setupPasteListener() {
+
+    this.inputField.nativeElement.addEventListener('paste', (event: ClipboardEvent) => {
+      event.preventDefault();
+        this.isContextMenuVisible = false;
+      const text = event.clipboardData?.getData('text/plain');
+      if (text) {
+        document.execCommand("insertText", false, text);
+      }
+    });
+  }
+ onBackspace()
+  {
+     this.isContextMenuVisible = false;
+  }
 
 
   addLink(url: string) {
     if (this.currentLinkElement) {
       this.currentLinkElement.href = url;
       this.currentLinkElement.textContent = this.selectedText;
-      this.characterService.spellData[this.spellLvl-1][this.SpellId].string=this.inputField.nativeElement.innerHTML;
+
+      this.characterService.spellData[this.spellLvl][this.SpellId].string=this.inputField.nativeElement.innerHTML;
     } else {
       const link = document.createElement('a');
       link.href = url;
       link.target = "_blank";
+      link.className='link';
       link.textContent = this.selectedText;
-
+      link.style.setProperty('text-decoration', 'none');
+      link.style.setProperty('font-weight', 'bold');
+      link.style.setProperty('color', '#1A01CC');
       this.selectedRange.deleteContents();
       this.selectedRange.insertNode(link);
 
-
-      this.characterService.spellData[this.spellLvl-1][this.SpellId].string=this.inputField.nativeElement.innerHTML;
+      this.characterService.spellData[this.spellLvl][this.SpellId].string=this.inputField.nativeElement.innerHTML;
 
     }
 
@@ -134,5 +156,9 @@ updateContextMenuPosition() {
   close() {
     this.isContextMenuVisible = false;
 
+  }
+    off(event:any)
+  {
+    event.preventDefault();
   }
 }
