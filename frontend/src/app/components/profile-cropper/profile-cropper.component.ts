@@ -37,8 +37,7 @@ portrait: string = '';
      this.imageUploadService.updateImage().subscribe(
        {
          next:(data)=>{
-           console.log(data);
-           console.log('Картинка загружена');
+              console.log(data);
          },
          error:(data)=>
          {

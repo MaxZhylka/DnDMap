@@ -1,14 +1,14 @@
-<div class="container" *ngIf="userData">
+<div class="container" *ngIf="user">
   <div class="leftColumn">
     <div class="ImageBox">
       <label for="fileInput">
-        <img [src]="userData.avatar" class="avatar" alt="Image" id="portrait">
+        <img [src]="user.avatar" class="avatar" alt="Image" id="portrait">
       </label>
       <input id="fileInput" type="file" accept="image/*" size="3000000"  (change)="onselectFile($event)" style="display: none;">
     </div>
     <div class="personalData">
-      <div class="name">{{userData.name}}</div>
-      <div class="email">{{userData.email}}</div>
+      <div class="name">{{user.name}}</div>
+      <div class="email">{{user.email}}</div>
       <div class="CharacterCounter"></div>
       <div>
         <button (click)="deleteProf()">Удалить аккаунт</button>
@@ -23,13 +23,13 @@
     </div>
      <div class="changeContainer">
       <div class="header"> Сменить почту</div>
-      <input class="input" formControlName="email">
+      <input class="input"  formControlName="email">
       <div class="button" (click)="changePost()"><span class="button-text">Применить</span></div>
     </div>
      <div class="changeContainerPassword">
       <div class="header">Сменить пароль</div>
-      <input class="input" placeholder="Введите старый пароль" formControlName="oldPassword">
-      <input class="input" placeholder="Введите новый пароль" formControlName="password">
+      <input class="input" placeholder="Введите старый пароль"  formControlName="oldPassword">
+       <input class="input" placeholder="Введите новый пароль"  formControlName="password">
       <div class="button" (click)="changePassword()"><span class="button-text">Применить</span></div>
     </div>
   </div>

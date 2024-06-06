@@ -1,12 +1,12 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { AuthService, UserData } from "../../services/auth.service";
+import {Component, Inject, NgZone,ElementRef, OnInit, PLATFORM_ID, Renderer2} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {AuthService, UserData} from "../../services/auth.service";
+import {isPlatformBrowser} from "@angular/common";
 import { Router } from "@angular/router";
-
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css'] // Fix this line if it should be 'styleUrls' instead of 'styleUrl'
+  styleUrl: './user-profile.component.css'
 })
 export class UserProfileComponent implements OnInit {
   display: boolean = false;
@@ -19,18 +19,25 @@ export class UserProfileComponent implements OnInit {
     oldPassword: new FormControl('', [this.passwordComplexityValidator(), Validators.required]),
   });
 
-  userData!: UserData;
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private authService: AuthService, private router: Router) {}
+  user!: UserData;
 
-  ngOnInit(): void {
-    this.authService.getUserData().subscribe({
-      next: (data) => {
-        data.avatar = `http://127.0.0.1:8000${data.avatar}`;
-        this.userData = data;
-      },
-      error: (error) => console.error('Failed to fetch user data', error)
-    });
+   constructor(private renderer: Renderer2, private el: ElementRef,private ngZone: NgZone,@Inject(PLATFORM_ID)  private platformId: any,private router: Router,private authService: AuthService) {}
+
+     ngOnInit() {
+if(isPlatformBrowser(this.platformId)) {
+       this.authService.getUserData().subscribe({
+         next: (data) => {
+
+              this.user = data;
+            this.user.avatar=`http://127.0.0.1:8000`+this.user.avatar;
+          },
+
+
+         error: (error) => console.error('Failed to fetch user data', error)
+       });
+     }
+
   }
 
   emailFormatValidator(): ValidatorFn {
@@ -76,7 +83,7 @@ export class UserProfileComponent implements OnInit {
     this.renderer.setAttribute(element, 'data-valid-attribute', this.dynamicValue);
   }
 getData(event: any) {
-    this.userData.avatar = event;
+    this.user.avatar = event;
   }
 
   onselectFile(event: any)
@@ -104,12 +111,11 @@ getData(event: any) {
   changeNick() {
     // Implementation for changing nickname
   }
-
   changePost() {
-    // Implementation for changing email
-  }
 
-  changePassword() {
-    // Implementation for changing password
+  }
+  changePassword()
+  {
+
   }
 }

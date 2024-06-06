@@ -1,0 +1,80 @@
+.background {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    transition: opacity 0.2s ease;
+    opacity: 50%;
+    position: fixed;
+    z-index: 1000;
+}
+.Window {
+  display: flex;
+    background: white;
+    width: 1200px;
+    height: 500px;
+    top: calc(50% - 250px);
+    left: calc(50% - 600px);
+    text-align: center;
+    transition: opacity 0.2s ease;
+    font-size: 10px;
+    position: fixed;
+    z-index: 1000;
+    border: 1px black solid;
+    border-radius: 10px;
+  flex-direction:column ;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+.avatar {
+  height: 12vh;
+  width: 12vh;
+  border-radius: 2vh;
+  object-fit: cover;
+  object-position: top;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+#portrait
+{
+  width: 100%;
+  height: 100%;
+  object-fit: contain ;
+  border-radius: 10px;
+}
+.main
+{
+  max-width: 600px;
+  max-height: 400px;
+  position: relative;
+}
+.closeButton
+{
+  align-self: end;
+  background-color: transparent;
+  width: 50px;
+    height: 50px;
+    font-size: 30px;
+    outline: none;
+    cursor: pointer;
+    border: transparent;
+
+}
+.prewie{
+  padding: 5px;
+}
+.imageContainer
+{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.text
+{
+  font-size: 20px;
+}

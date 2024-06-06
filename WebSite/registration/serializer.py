@@ -28,6 +28,11 @@ class PlayerSerializer(serializers.ModelSerializer):
         return user
 
 
+class PlayerAvatarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Player
+        fields = ['avatar']
+
 class AuthTokenSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()

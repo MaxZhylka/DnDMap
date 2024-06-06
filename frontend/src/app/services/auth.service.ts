@@ -21,13 +21,14 @@ export class AuthService {
   private apiUrl = 'http://127.0.0.1:8000/registration/api/login/';
    private dataUrl = 'http://127.0.0.1:8000/registration/api/getData/';
    private deleteUrl = 'http://127.0.0.1:8000/registration/delete_user/';
+      private avatarUrl = 'http://127.0.0.1:8000/registration/api/getAvatar/';
   constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient) {}
 
 updateImage() {
-  const url = `http://127.0.0.1:8000/registration/image/`;
+  const url = `http://127.0.0.1:8000/registration/update_avatar/`;
 
   const formData = new FormData();
-  formData.append('appearance', this.imageToLoad);
+  formData.append('avatar', this.imageToLoad);
 
   return this.http.put(url, formData, {
     headers: new HttpHeaders({
@@ -94,7 +95,7 @@ getUserData(): Observable<UserData> {
     }
   };
 
-  console.log(options);
+
 
   return this.http.get<UserData>(this.dataUrl, options).pipe(
     catchError(error => {
@@ -103,6 +104,34 @@ getUserData(): Observable<UserData> {
     })
   );
 }
+
+getUserAvatar(): Observable<UserData> {
+  const token = this.getToken();
+
+  if (!token) {
+    console.error('Token is missing!');
+    return throwError(() => new Error('Token is missing!'));
+  }
+
+  const options = {
+    headers: {
+      'Authorization': `Token ${token}`
+    }
+  };
+
+
+
+  return this.http.get<UserData>(this.avatarUrl, options).pipe(
+    catchError(error => {
+      console.error('Error fetching user data:', error);
+      return throwError(() => new Error('Error fetching user data'));
+    })
+  );
+}
+
+
+
+
 deleteCharacter(): Observable<void> {
     const token = this.getToken();
 
