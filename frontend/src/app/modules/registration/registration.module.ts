@@ -9,17 +9,21 @@ import {AuthGuard} from "../../services/authGuard.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {UserProfileComponent} from "../../components/user-profile/user-profile.component";
 import {MapModule} from "../map-sheet/map.module";
+import {CharacterSheetModule} from "../character-sheet/character-sheet.module";
+import {ProfileCropperComponent} from "../../components/profile-cropper/profile-cropper.component";
 
 
 
 @NgModule({
   declarations: [MainComponent, RegistrationComponent, AuthorizationComponent, UserProfileComponent],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        MapModule
-    ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MapModule,
+    CharacterSheetModule,
+    ProfileCropperComponent
+  ],
   providers: [AuthService, AuthGuard]
 })
 export class RegistrationModule { }

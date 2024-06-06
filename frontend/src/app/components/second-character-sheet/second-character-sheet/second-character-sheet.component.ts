@@ -36,12 +36,10 @@ export class SecondCharacterSheetComponent implements OnInit {
     this.portrait = event;
   }
 
-  onselectFile(event: any) {
+  onselectFile(event: any)
+  {
     this.imageToCrop = event;
     this.display = true;
-
-
-
   }
   close()
   {
