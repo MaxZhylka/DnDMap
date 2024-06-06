@@ -8,16 +8,18 @@ import {AuthService} from "../../services/auth.service";
 import {AuthGuard} from "../../services/authGuard.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {UserProfileComponent} from "../../components/user-profile/user-profile.component";
+import {MapModule} from "../map-sheet/map.module";
 
 
 
 @NgModule({
   declarations: [MainComponent, RegistrationComponent, AuthorizationComponent, UserProfileComponent],
-  imports: [
-    CommonModule,
-      ReactiveFormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MapModule
+    ],
   providers: [AuthService, AuthGuard]
 })
 export class RegistrationModule { }

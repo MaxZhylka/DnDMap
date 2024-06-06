@@ -1,10 +1,12 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild} from '@angular/core';
 
-import {filter, ignoreElements} from "rxjs";
+import {filter, ignoreElements, Subscription} from "rxjs";
 import {MapService} from "../../../services/map.service";
-import { Router } from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {AuthService, UserData} from "../../../services/auth.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {jsDocComment} from "@angular/compiler";
+import {isPlatformBrowser} from "@angular/common";
 
 
 
@@ -33,12 +35,15 @@ interface City
     ])
   ]
 })
-export class MapHeaderComponent implements OnInit, AfterViewInit{
+export class MapHeaderComponent implements OnInit, AfterViewInit, OnDestroy{
 @ViewChild('searchField') searchField!: ElementRef;
    @ViewChild('openButton', { static: false }) OpenButton!: ElementRef;
-
+map:boolean=false;
 isMenuVisible: boolean = false;
   cities: City[]=[];
+    isActiveMapButton = false;
+  isActiveListsButton = false;
+   private routerSubscription!: Subscription;
   searchQuery:string="";
   hintMargin={};
   ignoreBlur: boolean= false;
@@ -48,12 +53,17 @@ isMenuVisible: boolean = false;
   displayLeft:number=-480;
   Profile: string = "assets/img/pofile.png";
   userData!: UserData;
-   constructor(public apiMap: MapService, private router: Router, private authService: AuthService) {
-      this.authService.getUserData().subscribe({
-        next: (data) => { data.avatar = `http://127.0.0.1:8000${data.avatar}`;
-          this.userData = data; },
-        error: (error) => console.error('Failed to fetch user data', error)
-      });
+   constructor(  @Inject(PLATFORM_ID) private platformId: any,public apiMap: MapService, private router: Router, private authService: AuthService) {
+     if(isPlatformBrowser(this.platformId)) {
+       this.authService.getUserData().subscribe({
+         next: (data) => {
+           data.avatar = `http://127.0.0.1:8000${data.avatar}`
+           ;
+           this.userData = data;
+         },
+         error: (error) => console.error('Failed to fetch user data', error)
+       });
+     }
   }
 
   ngAfterViewInit() {
@@ -69,8 +79,25 @@ isMenuVisible: boolean = false;
 
   ngOnInit() {
      this.getCities();
+    this.routerSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.checkUrl();
+      }
+    });
 
 }
+ ngOnDestroy() {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+  checkUrl() {
+    const currentUrl = this.router.url;
+
+      this.isActiveMapButton =currentUrl === '/';
+         this.map=currentUrl === '/';
+    this.isActiveListsButton = currentUrl === '/character-list';
+  }
 moveToCity() {
   let temp: City | undefined;
 
@@ -103,40 +130,53 @@ moveToCity() {
   {
      this.displayLeft=-480;
   }
+    getMarginTop(index: number): number {
+    const pixelValue = 2.6 + 1.4* (index - 1);
+
+    return pixelValue;
+  }
 suggestCities() {
-     if(this.searchQuery=="")
-     {
-       this.searchedCities=[];
-       this.hint="";
-       return;
-     }
-  this.hint = '';
-  const searchQueryWidth = document.createElement('span');
-  searchQueryWidth.style.visibility = 'hidden';
-  searchQueryWidth.style.whiteSpace="pre"
-  searchQueryWidth.style.fontSize='20px';
-  searchQueryWidth.style.border='none';
-  searchQueryWidth.style.fontFamily=" \"Times New Roman\",  sans-serif"
+  if (this.searchQuery == "") {
+    this.searchedCities = [];
+    this.hint = "";
+    return;
+  }
+
+  this.hint = "";
+  const searchQueryWidth = document.createElement("span");
+  searchQueryWidth.style.visibility = "hidden";
+  searchQueryWidth.style.whiteSpace = "pre";
+  searchQueryWidth.style.fontSize = "1.2vw";
+  searchQueryWidth.style.border = "none";
+  searchQueryWidth.style.fontFamily = '"Times New Roman", sans-serif';
   searchQueryWidth.innerText = this.searchQuery;
 
   document.body.appendChild(searchQueryWidth);
 
+
   const lastLetterWidth = searchQueryWidth.offsetWidth;
-  const calcMargin = 16 + lastLetterWidth;
+
+
+  const fontSize = parseFloat(getComputedStyle(searchQueryWidth).fontSize);
+  const calcMargin = 0.4 + (lastLetterWidth / fontSize) ;
+
 
   this.hintMargin = {
-    'margin-left.px': calcMargin
+    "margin-left.em": calcMargin
   };
+
   document.body.removeChild(searchQueryWidth);
+
   this.searchedCities = this.cities.filter(city => city.name.toLowerCase().startsWith(this.searchQuery.toLowerCase()));
   if (this.searchedCities.length > 0 && this.searchQuery) {
     const matchingCity = this.searchedCities[0].name;
     if (matchingCity.toLowerCase().startsWith(this.searchQuery.toLowerCase())) {
       this.hint = matchingCity.substring(this.searchQuery.length);
-
     }
   }
 }
+
+
 
 ResetFocus=()=>
 {
@@ -181,7 +221,7 @@ redirectToCharsheet() {
     this.router.navigate(['/character-list']);
   }
   redirectToMap() {
-    this.router.navigate(['/map']);
+    this.router.navigate(['/']);
 }
 redirectToProfile() {
     this.router.navigate(['/profile']);

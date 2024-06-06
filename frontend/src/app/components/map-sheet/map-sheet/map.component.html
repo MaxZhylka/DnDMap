@@ -1,6 +1,6 @@
 
 
-<app-map-header></app-map-header>
+
 <div *ngIf="cities && roadsData" class="map-container">
   <div class="map-frame">
 <div id="map"></div>
@@ -8,3 +8,42 @@
     </div>
 </div>
 
+
+<aside *ngIf="isSidebarOpen" [@slideInOut] class="sideContainer">
+
+  <div class="city" *ngIf="isCity">
+    <img class="cityPhoto"  [src]="selectedCity.cityPhoto" >
+    <div class="city"  *ngIf="isAnim" [@fadeInOut]>
+    <div class="cityName" >{{selectedCity.name}}</div>
+    <div class="cityRegion">{{selectedCity.region}}</div>
+    <div class="cityDescription">{{selectedCity.description}}</div>
+    <button class="continue"  (click)="isCity=false">Проложить маршрут</button>
+      </div>
+  </div>
+  <div   *ngIf="!isCity" class="confirmWay">
+  <div class="text">Выберите персонажа</div>
+    <img>
+    <div class="text"> Выберите транспорт</div>
+    <div class="chooseTransport">
+      <img>
+      <img>
+      <img>
+      <img>
+      <img>
+      <img>
+    </div>
+    <div class="distanceCotainer">
+      <img>
+      <div class="distance">
+        <div class="cityTarget"></div>
+        <div class="distanceText"></div>
+         <div class="cityTarget"></div>
+      </div>
+    </div>
+    <div class="checkBox"></div>
+    <div class="confirmButton"></div>
+    <div  class="text">Примерное время поездки:</div>
+    <div class="tripTime"></div>
+
+  </div>
+</aside>
