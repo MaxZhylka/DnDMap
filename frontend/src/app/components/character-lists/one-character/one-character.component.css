@@ -41,16 +41,19 @@ cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 12vw;
 }
 
 .textContainer {
   display: flex;
   flex-direction: column;
+
 }
 
 .text {
   font-size: 1.1vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .locationContainer {
