@@ -1,7 +1,7 @@
 from django.urls import path,include
 from rest_framework import routers
 from .views import CharacterApiView, RegisterView, LoginView, PlayerData, CharacterViewSet, \
-    PlayerViewSet, MyCharactersViewSet, CharacterUpdateView, ImageUpdateView
+    PlayerViewSet, MyCharactersViewSet, CharacterUpdateView, ImageUpdateView, PlayerAvatar, DeleteUserView
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static

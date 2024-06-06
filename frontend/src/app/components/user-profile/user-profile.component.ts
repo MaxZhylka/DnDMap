@@ -111,10 +111,9 @@ getData(event: any) {
   changeNick() {
     // Implementation for changing nickname
   }
-  changePost()
-  {
+  changePost() {
 
- }
+  }
   changePassword()
   {
 

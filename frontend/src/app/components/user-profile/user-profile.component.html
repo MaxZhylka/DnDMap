@@ -1,8 +1,8 @@
-<div class="container" *ngIf="userData">
+<div class="container" *ngIf="user">
   <div class="leftColumn">
     <div class="ImageBox">
       <label for="fileInput">
-        <img [src]="userData.avatar" class="avatar" alt="Image" id="portrait">
+        <img [src]="user.avatar" class="avatar" alt="Image" id="portrait">
       </label>
       <input id="fileInput" type="file" accept="image/*" size="3000000"  (change)="onselectFile($event)" style="display: none;">
     </div>
