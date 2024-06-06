@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, NgZone, OnInit, PLATFORM_ID} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {AuthService, UserData} from "../../services/auth.service";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-user-profile',
@@ -17,17 +18,24 @@ export class UserProfileComponent implements OnInit{
   });
 
 
-  userData!: UserData;
+  user:any ;
 
-   constructor(private authService: AuthService) {}
+   constructor(private ngZone: NgZone,@Inject(PLATFORM_ID) private platformId: any,private authService: AuthService) {}
 
-     ngOnInit(): void {
+     ngOnInit() {
+if(isPlatformBrowser(this.platformId)) {
+       this.authService.getUserData().subscribe({
+         next: (data) => {
 
-      this.authService.getUserData().subscribe({
-        next: (data) => { data.avatar = `http://127.0.0.1:8000${data.avatar}`;
-          this.userData = data; },
-        error: (error) => console.error('Failed to fetch user data', error)
-      });
+              this.user = data;
+            this.user.avatar=`http://127.0.0.1:8000`+this.user.avatar;
+          },
+
+
+         error: (error) => console.error('Failed to fetch user data', error)
+       });
+     }
+
   }
    emailFormatValidator(): ValidatorFn {
      return (control: AbstractControl): ValidationErrors | null => {

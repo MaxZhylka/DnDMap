@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild} from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild
+} from '@angular/core';
 
 import {filter, ignoreElements, Subscription} from "rxjs";
 import {MapService} from "../../../services/map.service";
@@ -52,18 +62,10 @@ isMenuVisible: boolean = false;
   hint:string="";
   displayLeft:number=-480;
   Profile: string = "assets/img/pofile.png";
-  userData!: UserData;
-   constructor(  @Inject(PLATFORM_ID) private platformId: any,public apiMap: MapService, private router: Router, private authService: AuthService) {
-     if(isPlatformBrowser(this.platformId)) {
-       this.authService.getUserData().subscribe({
-         next: (data) => {
-           data.avatar = `http://127.0.0.1:8000${data.avatar}`
-           ;
-           this.userData = data;
-         },
-         error: (error) => console.error('Failed to fetch user data', error)
-       });
-     }
+  userData!: any;
+
+   constructor(  private cdr: ChangeDetectorRef, private ngZone: NgZone, @Inject(PLATFORM_ID) private platformId: any,public apiMap: MapService, private router: Router, private authService: AuthService) {
+
   }
 
   ngAfterViewInit() {
@@ -77,15 +79,27 @@ isMenuVisible: boolean = false;
     return this.apiMap.ignoredElement;
   }
 
-  ngOnInit() {
-     this.getCities();
-    this.routerSubscription = this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.checkUrl();
-      }
-    });
+ngOnInit() {
+  this.getCities();
+  if (isPlatformBrowser(this.platformId)) {
+    this.authService.getUserAvatar().subscribe({
+      next: (data) => {
 
+        this.userData = data;
+
+         this.userData.avatar = `http://127.0.0.1:8000${this.userData.avatar}`;
+      },
+      error: (error) => console.error('Failed to fetch user data', error)
+    });
+  }
+
+  this.routerSubscription = this.router.events.subscribe(event => {
+    if (event instanceof NavigationEnd) {
+      this.checkUrl();
+    }
+  });
 }
+
  ngOnDestroy() {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();

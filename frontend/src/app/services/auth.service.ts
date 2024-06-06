@@ -19,6 +19,7 @@ export class AuthService {
   private tokenKey: string = 'auth_token';
   private apiUrl = 'http://127.0.0.1:8000/registration/api/login/';
    private dataUrl = 'http://127.0.0.1:8000/registration/api/getData/';
+      private avatarUrl = 'http://127.0.0.1:8000/registration/api/getAvatar/';
   constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient) {}
 
 
@@ -81,9 +82,32 @@ getUserData(): Observable<UserData> {
     }
   };
 
-  console.log(options);
+
 
   return this.http.get<UserData>(this.dataUrl, options).pipe(
+    catchError(error => {
+      console.error('Error fetching user data:', error);
+      return throwError(() => new Error('Error fetching user data'));
+    })
+  );
+}
+getUserAvatar(): Observable<UserData> {
+  const token = this.getToken();
+
+  if (!token) {
+    console.error('Token is missing!');
+    return throwError(() => new Error('Token is missing!'));
+  }
+
+  const options = {
+    headers: {
+      'Authorization': `Token ${token}`
+    }
+  };
+
+
+
+  return this.http.get<UserData>(this.avatarUrl, options).pipe(
     catchError(error => {
       console.error('Error fetching user data:', error);
       return throwError(() => new Error('Error fetching user data'));

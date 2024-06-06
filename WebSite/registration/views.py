@@ -66,6 +66,15 @@ class PlayerData(APIView):
             'avatar': player.avatar.url if player.avatar else None
         })
 
+class PlayerAvatar(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        player = request.user
+        return Response({
+            'avatar': player.avatar.url if player.avatar else None
+        })
 
 
 

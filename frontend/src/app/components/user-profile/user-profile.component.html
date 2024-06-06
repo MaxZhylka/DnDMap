@@ -1,10 +1,10 @@
 
-<div class="container" *ngIf="userData">
-  <div class="leftColumn">
-    <img class="avatar" [src]="userData.avatar">
+<div class="container" *ngIf="user">
+  <div  class="leftColumn">
+    <img class="avatar" [src]="user.avatar">
     <div class="personalData">
-      <div class="name">{{userData.name}}</div>
-      <div class="email">{{userData.email}}</div>
+      <div class="name">{{user.name}}</div>
+      <div class="email">{{user.email}}</div>
       <div class="CharacterCounter"></div>
     </div>
   </div>
