@@ -72,6 +72,9 @@ cursor: pointer;
 
 .text {
   font-size: 1.1vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .locationContainer {
