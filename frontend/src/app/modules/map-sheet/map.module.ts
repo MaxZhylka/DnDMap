@@ -39,11 +39,12 @@ registerLocaleData(localeRu);
     provideHttpClient(withFetch()),
     { provide: LOCALE_ID, useValue: 'ru' }
   ],
-  exports: [
-    MapComponent,
-    ClickOutsideDirective,
-    NewsPanelComponent
-  ],
+    exports: [
+        MapComponent,
+        ClickOutsideDirective,
+        NewsPanelComponent,
+        MapHeaderComponent
+    ],
   bootstrap: [
     MapComponent,
 

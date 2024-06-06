@@ -48,9 +48,12 @@ class Player(AbstractBaseUser):
         return self.name
 
 class Character(models.Model):
+
     player = models.ForeignKey(Player, related_name='characters', on_delete=models.CASCADE)
     name = models.CharField('Имя персонажа', max_length=50, default='', blank=True)
     characterClass = models.CharField('Класс', max_length=50, default='', blank=True)
+    hasMagicFlyingItem= models.BooleanField('Магический пердмет для полетов', default=False, blank=True )
+    hasMagicWalkingItem = models.BooleanField('Магический наземный премдмет', default=False, blank=True)
     backstory = models.CharField('Предыстория', max_length=50, default='', blank=True)
     race = models.CharField('Раса', max_length=50, default='', blank=True)
     worldviews = models.CharField('Мировозрение', max_length=50, default='', blank=True)

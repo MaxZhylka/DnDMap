@@ -2,14 +2,16 @@ import {Component, OnInit, Inject, PLATFORM_ID, AfterViewInit, inject} from '@an
 import { MapService } from "../../../services/map.service";
 import { isPlatformBrowser } from '@angular/common';
 import {forkJoin} from "rxjs";
-
+import * as L from "leaflet";
+import {fadeInOut, fadeInOutImg, slideInOutAnimation} from "../../../animations/slideInOut";
 declare const ShortestWay: any;
 
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css','../../../../../node_modules/leaflet/dist/leaflet.css']
+  styleUrls: ['./map.component.css','../../../../../node_modules/leaflet/dist/leaflet.css'],
+  animations:[slideInOutAnimation, fadeInOut,fadeInOutImg]
 })
 export class MapComponent implements OnInit {
   cities: any = [];
@@ -18,11 +20,13 @@ export class MapComponent implements OnInit {
   roadsCoordinates: any=[];
   image: string = "assets/Test2.jpg";
    map: any;
+   isSidebarOpen:boolean=false;
   showLeaflet = false;
   platformId = inject(PLATFORM_ID);
-
+  selectedCity:any;
   ShortWay: any;
-
+  isCity:boolean=true;
+   isAnim: boolean=true;
   constructor(private apiMap: MapService) { this.ShortWay= new ShortestWay(this.roadsCoordinates,0,0)
 
   }
@@ -63,7 +67,8 @@ export class MapComponent implements OnInit {
 
     this.addMarkers();
     this.addRoads();
-    this.FindWay();
+    // this.FindWay();
+
     this.apiMap.setMap(this.map);
   });
 }
@@ -73,6 +78,7 @@ export class MapComponent implements OnInit {
 }
 private addMarkers(): void {
   import('leaflet').then((L) => {
+
     this.cities.forEach((city: any) => {
       const coords = city.coordinates.split(/,\s*/).map(Number);
       const icon = L.icon({
@@ -81,9 +87,13 @@ private addMarkers(): void {
         iconAnchor: [17.5, 45],
         popupAnchor: [-3, -46]
       });
-      L.marker(coords, { icon: icon })
+      const marker = L.marker(coords, { icon: icon })
         .addTo(this.map)
-        .bindPopup(city.name);
+
+
+      marker.on('click', () => {
+        this.openSidebar(city);
+      });
     });
   });
 }
@@ -149,39 +159,51 @@ private addRoads(): void {
         });
       }
     }
-  FindWay = () => {
-  if (isPlatformBrowser(this.platformId)) {
-    import('leaflet').then((L) => {
-      let coordinatesArray: number[][] = []; // Перемещение объявления сюда
-      this.map.eachLayer((layer: L.Layer) => {
-        if (layer instanceof L.Marker) {
-          layer.on('click', (e: L.LeafletMouseEvent) => {
-            const lat: number = e.latlng.lat;
-            const lng: number = e.latlng.lng;
+  // FindWay = () => {
+  // if (isPlatformBrowser(this.platformId)) {
+  //   import('leaflet').then((L) => {
+  //     let coordinatesArray: number[][] = []; // Перемещение объявления сюда
+  //     this.map.eachLayer((layer: L.Layer) => {
+  //       if (layer instanceof L.Marker) {
+  //         layer.on('click', (e: L.LeafletMouseEvent) => {
+  //           const lat: number = e.latlng.lat;
+  //           const lng: number = e.latlng.lng;
+  //
+  //           coordinatesArray.push([lng, lat]);
+  //
+  //           console.log(JSON.stringify(coordinatesArray));
+  //
+  //           if (coordinatesArray.length === 2) {
+  //
+  //             this.ShortWay.start = this.ShortWay.pointCoordinatesSwap(coordinatesArray[0]);
+  //             this.ShortWay.end = this.ShortWay.pointCoordinatesSwap(coordinatesArray[1]);
+  //
+  //             this.chosenRoads.push(this.ShortWay.GetShortestRoad());
+  //             console.log(this.chosenRoads[this.chosenRoads.length-1]);
+  //             console.log( ShortestWay.ReturnLength(this.chosenRoads[this.chosenRoads.length-1]));
+  //             this.DrawRedLine(this.chosenRoads[this.chosenRoads.length-1]);
+  //
+  //             coordinatesArray.length = 0;
+  //           }
+  //         });
+  //       }
+  //     });
+  //   });
+  // }
+  //}
 
-            coordinatesArray.push([lng, lat]);
+openSidebar(city: any): void {
 
-            console.log(JSON.stringify(coordinatesArray));
+    if(city==this.selectedCity)
+    {
+      return;
+    }
+  this.selectedCity = city;
+   this.isSidebarOpen = true;
+       this.isCity=true;
+       this.isAnim=false
+     setTimeout( ()=>{ this.isAnim=true;},100)
 
-            if (coordinatesArray.length === 2) {
-
-              this.ShortWay.start = this.ShortWay.pointCoordinatesSwap(coordinatesArray[0]);
-              this.ShortWay.end = this.ShortWay.pointCoordinatesSwap(coordinatesArray[1]);
-
-              this.chosenRoads.push(this.ShortWay.GetShortestRoad());
-              console.log(this.chosenRoads[this.chosenRoads.length-1]);
-              console.log( ShortestWay.ReturnLength(this.chosenRoads[this.chosenRoads.length-1]));
-              this.DrawRedLine(this.chosenRoads[this.chosenRoads.length-1]);
-
-              coordinatesArray.length = 0;
-            }
-          });
-        }
-      });
-    });
-  }
 }
-
-
 
 }
