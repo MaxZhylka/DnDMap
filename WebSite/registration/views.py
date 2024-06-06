@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
 from .models import Character, Player, Token
-from .serializer import CharacterSerializer, ImageSerializer
+from .serializer import CharacterSerializer, ImageSerializer,  PlayerAvatarSerializer
 
 from rest_framework import status, views
 from rest_framework.response import Response
@@ -165,3 +165,25 @@ class DeleteUserView(APIView):
         user = request.user
         user.delete()
         return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+class UserAvatarUpdateView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, *args, **kwargs):
+        user = request.user
+        old_avatar = user.avatar.path if user.avatar else None
+
+        serializer = PlayerAvatarSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+
+            if 'avatar' in request.data and old_avatar and old_avatar != user.avatar.path:
+                file_path = old_avatar
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

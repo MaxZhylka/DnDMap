@@ -1,7 +1,8 @@
 from django.urls import path,include
 from rest_framework import routers
 from .views import CharacterApiView, RegisterView, LoginView, PlayerData, CharacterViewSet, \
-    PlayerViewSet, MyCharactersViewSet, CharacterUpdateView, ImageUpdateView, PlayerAvatar, DeleteUserView
+    PlayerViewSet, MyCharactersViewSet, CharacterUpdateView, ImageUpdateView, PlayerAvatar, DeleteUserView, \
+    UserAvatarUpdateView
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,4 +24,5 @@ urlpatterns = [
     path('characters/<int:pk>/', CharacterUpdateView.as_view(), name='character-update'),
     path('image/<int:pk>/', ImageUpdateView.as_view(), name='image-update'),
     path('delete_user/', DeleteUserView.as_view(), name='delete_user'),
+    path('update_avatar/', UserAvatarUpdateView.as_view(), name='update_avatar')
 ]

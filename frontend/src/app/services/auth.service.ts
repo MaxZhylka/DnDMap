@@ -25,10 +25,10 @@ export class AuthService {
   constructor(@Inject(PLATFORM_ID) private platformId: Object,private http: HttpClient) {}
 
 updateImage() {
-  const url = `http://127.0.0.1:8000/registration/image/`;
+  const url = `http://127.0.0.1:8000/registration/update_avatar/`;
 
   const formData = new FormData();
-  formData.append('appearance', this.imageToLoad);
+  formData.append('avatar', this.imageToLoad);
 
   return this.http.put(url, formData, {
     headers: new HttpHeaders({
