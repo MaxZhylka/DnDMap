@@ -179,7 +179,7 @@ class UserAvatarUpdateView(APIView):
         if serializer.is_valid():
             serializer.save()
 
-            if 'avatar' in request.data and old_avatar and old_avatar != user.avatar.path:
+            if old_avatar:
                 file_path = old_avatar
                 if os.path.exists(file_path):
                     os.remove(file_path)

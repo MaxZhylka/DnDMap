@@ -32,6 +32,8 @@ export class MapService {
   getNews(): Observable<any> {
     return this.http.get<any>(this.baseurl+'/api/news/')
   }
-
+getSeaRoads(): Observable<any> {
+    return this.http.get<any>(this.baseurl+'/api/seaRoads/')
+  }
 
 }

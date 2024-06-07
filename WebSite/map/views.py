@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from .models import Cities, Roads, News
-from .Serializer import CitySerializer, RoadSerializer, NewsSerializer
+from .models import Cities, Roads, News, SeaRoute
+from .Serializer import CitySerializer, RoadSerializer, NewsSerializer, SeaRoadsSerializer
 from registration.models import Character
 from rest_framework import viewsets
 
@@ -27,4 +27,8 @@ class RoadsApiView(viewsets.ModelViewSet):
 class NewsApiView(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
+    http_method_names = ['get']
+class SeaRoadsApiView(viewsets.ModelViewSet):
+    queryset = SeaRoute.objects.all()
+    serializer_class = SeaRoadsSerializer
     http_method_names = ['get']

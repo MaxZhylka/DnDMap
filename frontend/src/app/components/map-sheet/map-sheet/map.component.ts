@@ -55,6 +55,8 @@ export class MapComponent implements OnInit {
   isCity: boolean = true;
   isAnim: boolean = true;
   displaySelection: boolean = false;
+  seaRoads: any[]=[];
+  seaRoadsCoordinates: any=[];
 
   constructor(private apiMap: MapService, private characterService: CharacterService) {
     this.ShortWay = new ShortestWay(this.roadsCoordinates, 0, 0);
@@ -63,14 +65,16 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       forkJoin({
+        seaRoads: this.apiMap.getSeaRoads(),
         roads: this.apiMap.getRoads(),
         cities: this.apiMap.getCities(),
         characters: this.characterService.getMyCharacters()
       }).subscribe({
-        next: ({ roads, cities, characters }) => {
+        next: ({seaRoads, roads, cities, characters }) => {
           this.roadsData = roads;
           this.cities = cities;
           this.characters = characters;
+          this.seaRoads = seaRoads;
           console.log(this.characters);
           this.initMap();
         },
@@ -109,12 +113,17 @@ export class MapComponent implements OnInit {
 
         this.addMarkers();
         this.addRoads();
+        this.addSeaRoads();
           this.map.on('contextmenu', (e: L.LeafletMouseEvent) => {
         let latlng = e.latlng;
         let coords:[number,number] = [latlng.lng ,  latlng.lat ];
         this.arr.push(coords);
         const marker=L.marker([e.latlng.lat, e.latlng.lng],{icon: icon}).addTo(this.map);
-
+this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
+  if (e.originalEvent.button === 1) {
+    this.arr=[];
+  }
+});
       marker.on('click', (e: L.LeafletMouseEvent) => {
         let latlng = e.latlng;
         this.arr.push([latlng.lng, latlng.lat]);
@@ -177,6 +186,23 @@ export class MapComponent implements OnInit {
         L.geoJSON(road, {
           style: function (feature) {
             return {color: '#808080', weight: 5};
+          }
+        }).addTo(this.map);
+      }});
+
+  };
+  private addSeaRoads(): void {
+    import('leaflet').then((L) => {
+      for (let el of this.seaRoads) {
+        let coordinates: number[] = JSON.parse(el.coordinates);
+        let road: any = {
+          "type": "LineString",
+          "coordinates": coordinates
+        }
+        this.seaRoadsCoordinates.push(road);
+        L.geoJSON(road, {
+          style: function (feature) {
+            return {color: '#00bbff', weight: 5};
           }
         }).addTo(this.map);
       }});
