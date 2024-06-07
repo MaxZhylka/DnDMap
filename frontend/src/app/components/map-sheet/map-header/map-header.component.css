@@ -21,7 +21,7 @@ width: 100vw;
   width: 7vh;
   height: 7vh;
   object-fit: cover;
-    border: 0.2vw solid black;
+    border: 0.1vw solid black;
     border-radius: 50%;
 }
 .imageButton{

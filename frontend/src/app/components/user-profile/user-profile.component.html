@@ -10,9 +10,8 @@
       <div class="name">{{user.name}}</div>
       <div class="email">{{user.email}}</div>
       <div class="CharacterCounter"></div>
-      <div>
-        <button (click)="deleteProf()">Удалить аккаунт</button>
-      </div>
+      <button class="button" (click)="deleteProf()">Удалить аккаунт</button>
+
     </div>
   </div>
   <div class="rightColumn" [formGroup]="changes">
