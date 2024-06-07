@@ -59,29 +59,32 @@ export class MapComponent implements OnInit {
 
 }
 
- private initMap(): void {
-  import('leaflet').then((L) => {
-    this.map = L.map('map', {
-      crs: L.CRS.Simple, zoomControl: false, attributionControl: false, zoomAnimation: true
-    });
+  private initMap(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      import('leaflet').then((L) => {
 
-    let bounds = L.latLngBounds(L.latLng(0, 0), L.latLng(1061, 1587));
-    L.imageOverlay(this.image, bounds).addTo(this.map);
-    this.map.fitBounds(bounds);
-    this.map.setMaxBounds(bounds);
-    this.map.maxBounds = bounds;
-    this.map.maxBoundsViscosity = 1000.0;
-    this.map.setMaxZoom(3);
-    this.map.setMinZoom(1);
-    this.map.setView([0, 0], 1);
+          this.map = L.map('map', {
+            crs: L.CRS.Simple, zoomControl: false, attributionControl: false, zoomAnimation: true
+          });
 
-    this.addMarkers();
-    this.addRoads();
-    // this.FindWay();
+          let bounds = L.latLngBounds(L.latLng(0, 0), L.latLng(1061, 1587));
+          L.imageOverlay(this.image, bounds).addTo(this.map);
+          this.map.fitBounds(bounds);
+          this.map.setMaxBounds(bounds);
+          this.map.maxBounds = bounds;
+          this.map.maxBoundsViscosity = 1000.0;
+          this.map.setMaxZoom(3);
+          this.map.setMinZoom(1);
+          this.map.setView([0, 0], 1);
 
-    this.apiMap.setMap(this.map);
-  });
-}
+          this.addMarkers();
+          this.addRoads();
+
+          this.apiMap.setMap(this.map);
+        });
+      }
+
+  }
  getMap()
 {
   return this.map;
@@ -153,7 +156,7 @@ private addRoads(): void {
 DrawRedLine(chosenRoad: any, startPoint: string, endPoint: string) {
   if (isPlatformBrowser(this.platformId)) {
     import('leaflet').then((L) => {
-      import('leaflet.polyline.snakeanim');
+
       var CompletedRoad = chosenRoad.GetRoad();
 
       for (let el of CompletedRoad) {
@@ -171,7 +174,7 @@ DrawRedLine(chosenRoad: any, startPoint: string, endPoint: string) {
         });
 
 
-        geojsonLine.snakeIn();
+
       }
     });
   }
@@ -261,6 +264,7 @@ calculateDistance() {
         return;
       }
       let length=  Math.floor(ShortestWay.ReturnLength(chosenWay))
+      this.DrawRedLine(chosenWay,firstCity.name,this.selectedCity.name);
       this.calculatedDistance=length+' миль' ;
       return ;
     } else {
