@@ -35,7 +35,7 @@ platformId = inject(PLATFORM_ID);
   updateBackgroundClass(url: string) {
     if (isPlatformBrowser(this.platformId)) {
       let Body = document.getElementById("Body");
-      if (url === '/character-list' && Body) {
+      if (url === '/character-list' && Body|| url==='/profile'&&Body) {
       Body.className = 'characterlist-bg';
     } else if (/\/character-list(\/\d+)?/.test(url) && Body) {
       Body.className = 'default-bg';

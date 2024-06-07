@@ -24,16 +24,16 @@
   <div class="text">{{selectedCharacter? selectedCharacter.name:'Выберите персонажа'}}</div>
     <img class="characterAvatar" (click)="openCharacterSelection()" [src]="selectedCharacter ? selectedCharacter.appearance : defaultImg" >
     <div class="text"> Выберите транспорт</div>
-    <div class="chooseTransport">
-      <img>
-      <img>
-      <img>
-      <img>
-      <img>
-      <img>
-    </div>
-    <div class="distanceCotainer">
-      <img>
+ <div class="chooseTransport">
+  <img *ngFor="let transport of transports; let i = index"
+       [src]="transport.src"
+       [alt]="transport.alt"
+       [class.selected]="selectedTransport === i"
+       (click)="selectTransport(i)">
+  <div class="highlight" [ngStyle]="{'left.vw': highlightPosition}"></div>
+</div>
+    <div class="distanceContainer">
+      <img class="road" src="assets/img/road.png">
       <div class="distance">
         <div class="cityTarget">{{selectedCharacter?selectedCharacter.location:''}}</div>
         <div class="distanceText" *ngIf="selectedCharacter">{{calculatedDistance}}</div>
@@ -43,7 +43,7 @@
     <div class="checkBox"></div>
     <div class="confirmButton"></div>
     <div  class="text">Примерное время поездки:</div>
-    <div class="tripTime"></div>
+    <div class="tripTime">{{tripTime}}</div>
 
   </div>
   <div class="selectCharacter" *ngIf="displaySelection">
