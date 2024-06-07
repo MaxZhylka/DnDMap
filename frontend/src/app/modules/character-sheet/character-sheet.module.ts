@@ -57,6 +57,7 @@ import {MapModule} from "../map-sheet/map.module";
 import {CheckBoxTripleComponent} from "../../components/character-sheet/check-box-triple/check-box-triple.component";
 import {ContentEditableDirective} from "../../Directives/content-editable.directive";
 import {AreaInput2Component} from "../../components/character-sheet/area-input-2/area-input-2.component";
+import {AreYouSureComponent} from "../../components/are-you-sure/are-you-sure.component";
 
 
 @NgModule({
@@ -99,7 +100,8 @@ import {AreaInput2Component} from "../../components/character-sheet/area-input-2
     ThirdHeaderComponent,
     SpellsByLevelComponent,
     SelectableDirective,
-    AreaInput2Component
+    AreaInput2Component,
+    AreYouSureComponent
   ],
   imports: [
     CommonModule,
@@ -138,8 +140,8 @@ import {AreaInput2Component} from "../../components/character-sheet/area-input-2
      AreaInputComponent,
      AlliesAndTreasureComponent,
     PhotoCropperComponent,
-    ThirdCharacterShitComponent
-
+    ThirdCharacterShitComponent,
+AreYouSureComponent
   ],
   providers:[CharacterService]
 })
