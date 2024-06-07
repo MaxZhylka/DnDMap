@@ -10,9 +10,8 @@
       <div class="name">{{user.name}}</div>
       <div class="email">{{user.email}}</div>
       <div class="CharacterCounter"></div>
-      <div>
-        <button (click)="deleteProf()">Удалить аккаунт</button>
-      </div>
+      <button (click)="togglePanel()" class="button">Удалить аккаунт</button>
+
     </div>
   </div>
   <div class="rightColumn" [formGroup]="changes">
@@ -35,3 +34,4 @@
   </div>
 </div>
 <app-profile-cropper *ngIf="display" (outputImage)="getData($event)" [image]="imageToCrop" (close)="close()"> </app-profile-cropper>
+<app-are-you-sure *ngIf="Deldisplay" (close)="close()" ></app-are-you-sure>

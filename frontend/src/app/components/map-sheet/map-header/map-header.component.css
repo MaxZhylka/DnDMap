@@ -1,144 +1,139 @@
 .Header {
-    background-color: #FFB74B;
-    width: 100vw;
-    height: 9vh;
-    top: 0;
-    z-index: 950;
+  background-color: #FFB74B;
+  width: 100vw;
+  height: 9vh;
+  top: 0;
+  z-index: 950;
   position: fixed;
-    flex-wrap: nowrap;
   display: flex;
-    align-items: center;
+  justify-content: center;
   border-bottom-left-radius: 3vh;
-  border-bottom-right-radius: 3vh ;
+  border-bottom-right-radius: 3vh;
 }
-.flex{
-width: 100vw;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+
+.flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-.image{
+
+.image {
   width: 7vh;
   height: 7vh;
   object-fit: cover;
-    border: 0.2vw solid black;
-    border-radius: 50%;
+  border: 0.1vw solid black;
+  border-radius: 50%;
 }
-.imageButton{
+
+.imageButton {
   position: relative;
   width: 7vh;
   height: 7vh;
   border: none;
   background-color: transparent;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-  .search-form {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    height: 5vh;
-    width: 15vw;
-    border-radius: 2vw;
 
-    background-color: white;
-    border: 0.5vh solid #FF9900;
-    z-index: 951; /* Убедитесь, что .search-form находится над Header */
+.search-form {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 5vh;
+  width: 15vw;
+  border-radius: 2vw;
+  background-color: white;
+  border: 0.5vh solid #FF9900;
+  z-index: 951; /* Ensure .search-form is above the Header */
 }
 
 .CitiesContainer {
-    position: absolute;
-    z-index: 952; /* Значение должно быть выше, чем у .search-form для видимости поверх остальных элементов */
-    width: 100%; /* Или конкретная ширина в пикселях, если требуется */
-    /* Дополнительные стили для позиционирования и отображения, если нужно */
+  position: absolute;
+  z-index: 952; /* Higher value than .search-form for visibility */
+  width: 100%; /* Or specific pixel width, if needed */
+  /* Additional positioning and display styles if needed */
 }
 
 .suggestions {
-
-    position: absolute;
-    top:100%;
-    font-size: 1.3vw;
-    box-sizing: border-box;
-    width:13.02vw;
-    height: 1.4vw;
-    left:1.30vw;
-    background-color: white;
-    cursor: pointer;
-    padding-left: 2.1vw;
-    border-top: none;
-
-}
-.ActivButton{
-  color: #FFFFFF;
+  position: absolute;
+  top: 100%;
+  font-size: 1.3vw;
+  box-sizing: border-box;
+  width: 13.02vw;
+  height: 1.4vw;
+  left: 1.30vw;
+  background-color: white;
+  cursor: pointer;
+  padding-left: 2.1vw;
+  border-top: none;
 }
 
 .suggestions:hover {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
-
 .search-form_txt {
-    padding: 0;
-    border: none;
-    padding-left: 0.4vw;
-    height: 5vh;
-    width: 14.6vw;
-    border-radius: 2vw;
-    outline: none;
-    font-size: 1.2vw;
-    background-color: white;
-  font-family: "Times New Roman",  sans-serif;
+  padding: 0;
+  border: none;
+  padding-left: 0.4vw;
+  height: 5vh;
+  width: 14.6vw;
+  border-radius: 2vw;
+  outline: none;
+  font-size: 1.2vw;
+  background-color: white;
+  font-family: "Times New Roman", sans-serif;
 }
 
 .hint {
   white-space: pre;
-    outline: none;
-    border: none;
-   padding: 0;
-    position: absolute;
-    cursor: pointer;
-    Width:7.5vw;
-    font-family: "Times New Roman",  sans-serif;
-    font-size:  1.2vw;
-    color: #999;
+  outline: none;
+  border: none;
+  padding: 0;
+  position: absolute;
+  cursor: pointer;
+  width: 7.5vw;
+  font-family: "Times New Roman", sans-serif;
+  font-size: 1.2vw;
+  color: #999;
 }
-hint:hover
-{
+
+.hint:hover {
   color: black;
 }
 
-
 .search-form_txt + .hint {
-    padding-left: 0;
+  padding-left: 0;
 }
 
-
-
-.News-btn
-{
+.News-btn {
   text-align: center;
-   font-size: 1.5vw;
+  font-size: 1.5vw;
   outline: none;
-    background-color: transparent;
-    border: none;
-      transition: color 200ms ease-in-out;
+  background-color: transparent;
+  border: none;
+  transition: color 200ms ease-in-out;
   cursor: pointer;
   padding: 0;
 }
-.News-btn.ActiveBtn
-{
+
+.News-btn.ActiveBtn {
   color: #FFFFFF;
 }
-.News-btn:hover
-{
-    color: #FFFFFF;
+
+.News-btn:hover {
+  color: #FFFFFF;
 }
 
-.News-img
-{
-    margin-top:-2px;
-    width:50px;
-    height:50px;
+.News-img {
+  margin-top: -2px;
+  width: 50px;
+  height: 50px;
 }
+
 .Userflex {
   margin-top: 9.5vh;
   display: flex;
@@ -148,7 +143,6 @@ hint:hover
 
 .profandexist {
   position: absolute;
-  left: 89.5vw;
   top: 9vh;
   display: flex;
   flex-direction: column;
@@ -157,7 +151,4 @@ hint:hover
   background-color: #ffba59;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
 }
-
-

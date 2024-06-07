@@ -41,6 +41,5 @@ platformId = inject(PLATFORM_ID);
       Body.className = 'default-bg';
     }
     }
-
-  }
+}
 }

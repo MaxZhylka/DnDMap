@@ -1,4 +1,4 @@
-import {Component, Inject, NgZone,ElementRef, OnInit, PLATFORM_ID, Renderer2} from '@angular/core';
+import {Component, Inject, NgZone, ElementRef, OnInit, PLATFORM_ID, Renderer2, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {AuthService, UserData} from "../../services/auth.service";
 import {isPlatformBrowser} from "@angular/common";
@@ -9,7 +9,10 @@ import { Router } from "@angular/router";
   styleUrl: './user-profile.component.css'
 })
 export class UserProfileComponent implements OnInit {
+  @ViewChild('openButton', { static: false }) OpenButton!: ElementRef;
   display: boolean = false;
+  Deldisplay: boolean = false;
+  displayLeft:number=-480;
   imageToCrop: any;
   dynamicValue = 'exampleValue';
   changes: FormGroup = new FormGroup({
@@ -85,7 +88,10 @@ if(isPlatformBrowser(this.platformId)) {
 getData(event: any) {
     this.user.avatar = event;
   }
-
+togglePanel = ()=>
+  {
+    this.Deldisplay = true;
+  }
   onselectFile(event: any)
   {
     this.imageToCrop = event;
@@ -94,19 +100,11 @@ getData(event: any) {
   close()
   {
     this.display=false;
+    this.Deldisplay=false;
         const fileInput = this.imageToCrop.target as HTMLInputElement;
     fileInput.value = '';
   }
-  deleteProf() {
-    this.authService.deleteCharacter().subscribe({
-      next: () => {
-        this.router.navigate(["/registration"]);
-      },
-      error: (errorData) => {
-        console.log(errorData);
-      }
-    });
-  }
+
 
   changeNick() {
     // Implementation for changing nickname
