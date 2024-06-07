@@ -27,6 +27,17 @@ class Roads(models.Model):
         verbose_name = 'Дорога'
         verbose_name_plural = 'Дороги'
 
+class SeaRoute(models.Model):
+    name = models.CharField('Название Морской дороги', max_length=20)
+    coordinates = models.TextField('coordinates')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Морская дорога'
+        verbose_name_plural = 'Морские дороги'
+
 class News(models.Model):
     mainHeader = models.CharField('Главный заголвовк', max_length=30)
     mainText = models.TextField('Главный текст')
