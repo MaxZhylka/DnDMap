@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit, ChangeDetectorRef,
   Component,
   ElementRef,
@@ -45,7 +46,7 @@ interface City
     ])
   ]
 })
-export class MapHeaderComponent implements OnInit, AfterViewInit, OnDestroy{
+export class MapHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 @ViewChild('searchField') searchField!: ElementRef;
    @ViewChild('openButton', { static: false }) OpenButton!: ElementRef;
 map:boolean=false;
@@ -63,6 +64,8 @@ isMenuVisible: boolean = false;
   displayLeft:number=-480;
   Profile: string = "assets/img/pofile.png";
   userData!: any;
+  @ViewChild('avatar', { static: false }) Avatar!:ElementRef;
+  ignoredAvatar:ElementRef[]=[]
 
    constructor(  private cdr: ChangeDetectorRef, private ngZone: NgZone, @Inject(PLATFORM_ID) private platformId: any,public apiMap: MapService, private router: Router, private authService: AuthService) {
 
@@ -70,6 +73,7 @@ isMenuVisible: boolean = false;
 
   ngAfterViewInit() {
       this.apiMap.ignoredElement.push(this.OpenButton);
+      this.updateIgnoredAvatar();
 
   }
 
@@ -77,6 +81,11 @@ isMenuVisible: boolean = false;
   get IgnoredElement()
   {
     return this.apiMap.ignoredElement;
+  }
+
+    get IgnoredElementAvatar()
+  {
+    return this.ignoredAvatar;
   }
 
 ngOnInit() {
@@ -88,6 +97,10 @@ ngOnInit() {
         this.userData = data;
 
          this.userData.avatar = `http://127.0.0.1:8000${this.userData.avatar}`;
+         this.cdr.detectChanges();
+        setTimeout(() => {
+        this.updateIgnoredAvatar();
+      });
       },
       error: (error) => console.error('Failed to fetch user data', error)
     });
@@ -99,7 +112,12 @@ ngOnInit() {
     }
   });
 }
+private updateIgnoredAvatar() {
 
+    if (this.Avatar) {
+      this.ignoredAvatar.push(this.Avatar);
+    }
+  }
  ngOnDestroy() {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();

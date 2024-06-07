@@ -59,8 +59,8 @@ export class OneCharacterComponent implements OnInit {
   return experienceByLevel[level] || null;
 }
 downloadData() {
-  const encodedData = encodeURIComponent(JSON.stringify(this.characterData));
-  const blob = new Blob([encodedData], { type: 'application/json' });
+  const jsonString = JSON.stringify(this.characterData, null, 2);
+  const blob = new Blob([jsonString], { type: 'application/json' });
   this.jsonData = window.URL.createObjectURL(blob);
 }
 

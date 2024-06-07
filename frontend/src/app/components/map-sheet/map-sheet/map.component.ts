@@ -159,12 +159,18 @@ DrawRedLine(chosenRoad: any, startPoint: string, endPoint: string) {
 
       var CompletedRoad = chosenRoad.GetRoad();
 
-      for (let el of CompletedRoad) {
-        var geojsonLine = L.geoJSON(el, {
+
+        var geojsonLine = L.geoJSON( CompletedRoad, {
           style: function (feature) {
             return {color: '#ff0000', weight: 7};
-          }
-        }).addTo(this.map);
+
+        }}).addTo(this.map);
+          setTimeout(() => {
+        this.map.flyToBounds(geojsonLine.getBounds(), {
+          maxZoom: 15,
+          duration: 1
+        });
+      }, 0);
 
 
         this.previewRoad.push({
@@ -174,9 +180,8 @@ DrawRedLine(chosenRoad: any, startPoint: string, endPoint: string) {
         });
 
 
-
       }
-    });
+    );
   }
 }
 
@@ -238,39 +243,52 @@ setSelection(character:any)
   this.displaySelection=false;
 }
 calculateDistance() {
-    let firstCity;
-    if(!this.selectedCity||!this.selectedCharacter)
-    {
-      this.calculatedDistance='';
+
+  if (!this.selectedCity || !this.selectedCharacter) {
+    this.calculatedDistance = '';
+    return;
+  }
+
+
+  const firstCity = this.cities.find((item: { name: string; }) =>
+    item.name.toLowerCase() === this.selectedCharacter.location.toLowerCase()
+  );
+
+
+  if (firstCity && firstCity.coordinates === this.selectedCity.coordinates) {
+    this.calculatedDistance = 'Персонаж уже в этом городе!';
+    return;
+  }
+
+  if (firstCity) {
+
+    this.ShortWay.start = firstCity.coordinates.split(/,\s*/).map(Number);
+    this.ShortWay.end = this.selectedCity.coordinates.split(/,\s*/).map(Number);
+
+
+    const chosenWay = this.ShortWay.GetShortestRoad();
+
+
+    if (chosenWay === null) {
+      this.calculatedDistance = 'Нету дороги в этот город!';
       return;
     }
-    for(let item of this.cities)
-    {
-      if(item.name.toLowerCase()===this.selectedCharacter.location.toLowerCase())
-      {
-        firstCity=item;
-        break;
-      }
-    }
 
-    if (firstCity) {
-      this.ShortWay.start = firstCity.coordinates.split(/,\s*/).map(Number);
-      this.ShortWay.end = this.selectedCity.coordinates.split(/,\s*/).map(Number);
-      let chosenWay= this.ShortWay.GetShortestRoad();
 
-      if (chosenWay==null)
-      {
-        this.calculatedDistance= 'Нету дороги в этот город!'
-        return;
-      }
-      let length=  Math.floor(ShortestWay.ReturnLength(chosenWay))
-      this.DrawRedLine(chosenWay,firstCity.name,this.selectedCity.name);
-      this.calculatedDistance=length+' миль' ;
-      return ;
-    } else {
-       this.calculatedDistance= 'Ошибка с поиском города, обратитесь к Эдику!'
-    }
+    const length = Math.floor(ShortestWay.ReturnLength(chosenWay));
+
+
+    this.previewRoad.forEach(item => item.layer.remove());
+
+
+    this.DrawRedLine(chosenWay, firstCity.name, this.selectedCity.name);
+
+
+    this.calculatedDistance = `${length} миль`;
+  } else {
+    this.calculatedDistance = 'Ошибка с поиском города, обратитесь к Эдику!';
   }
+}
   OpenSecondState()
   {
     this.isCity=false ;
