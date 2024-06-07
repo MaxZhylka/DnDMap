@@ -22,11 +22,11 @@
 </button>
   <button class="News-btn" id="lists" [class.ActiveBtn]="isActiveListsButton"  (click)="redirectToCharsheet()"> ЛИСТЫ ПЕРСОНАЖЕЙ</button>
   <button  class="News-btn " [class.ActiveBtn]="isActiveMapButton" (click)="redirectToMap() " id="mapButton" > КАРТА</button>
-  <button *ngIf="userData" (click)="toggleMenu()" class="imageButton">
+  <button #avatar  appClickOutside [ignoreElementRefs]="IgnoredElementAvatar"  (clickOutside)="isMenuVisible=false"  *ngIf="userData" (click)="toggleMenu()" class="imageButton">
       <img  class="image" *ngIf="userData.avatar"   [src]="userData.avatar">
     </button>
 </div>
-  <div *ngIf="isMenuVisible" [@fadeInOut] class="profandexist">
+  <div  *ngIf="isMenuVisible" [@fadeInOut] class="profandexist">
       <button class="News-btn profbutton" (click)="redirectToProfile()">Профиль</button>
       <button class="News-btn profbutton" (click)="onLogout()">Выйти</button>
   </div>
