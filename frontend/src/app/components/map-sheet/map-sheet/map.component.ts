@@ -2,8 +2,8 @@ import {Component, OnInit, Inject, PLATFORM_ID, AfterViewInit, inject} from '@an
 import { MapService } from "../../../services/map.service";
 import { isPlatformBrowser } from '@angular/common';
 import {forkJoin} from "rxjs";
-import * as L from "leaflet";
 import {fadeInOut, fadeInOutImg, slideInOutAnimation} from "../../../animations/slideInOut";
+import {CharacterService} from "../../../services/character.service";
 declare const ShortestWay: any;
 
 
@@ -20,14 +20,21 @@ export class MapComponent implements OnInit {
   roadsCoordinates: any=[];
   image: string = "assets/Test2.jpg";
    map: any;
+   defaultImg="assets/img/defaultCharacter.png"
    isSidebarOpen:boolean=false;
+   selectedCharacter:any;
+   characters:any;
+   previewRoad:any[] = [];
+   defaultCharacter:string='assets/img/img.png';
   showLeaflet = false;
   platformId = inject(PLATFORM_ID);
   selectedCity:any;
+  calculatedDistance:string='';
   ShortWay: any;
   isCity:boolean=true;
-   isAnim: boolean=true;
-  constructor(private apiMap: MapService) { this.ShortWay= new ShortestWay(this.roadsCoordinates,0,0)
+  isAnim: boolean=true;
+  displaySelection: boolean=false;
+  constructor(private apiMap: MapService, private  characterService:CharacterService) { this.ShortWay= new ShortestWay(this.roadsCoordinates,0,0)
 
   }
 
@@ -36,11 +43,14 @@ export class MapComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
     forkJoin({
       roads: this.apiMap.getRoads(),
-      cities: this.apiMap.getCities()
+      cities: this.apiMap.getCities(),
+      characters: this.characterService.getMyCharacters()
     }).subscribe({
-      next: ({ roads, cities }) => {
+      next: ({ roads, cities, characters }) => {
         this.roadsData = roads;
         this.cities = cities;
+        this.characters= characters;
+        console.log(this.characters);
         this.initMap();
       },
       error: (error) => console.error('Ошибка при загрузке данных:', error)
@@ -139,26 +149,34 @@ private addRoads(): void {
     });
 
   }
-    DrawRedLine(chosenRoad:any) {
-      if (isPlatformBrowser(this.platformId)) {
-        import('leaflet').then((L) => {
-          var CompletedRoad = chosenRoad.GetRoad();
 
-          for (let el of CompletedRoad) {
-            if (isPlatformBrowser(this.platformId)) {
-              import('leaflet').then((L) => {
+DrawRedLine(chosenRoad: any, startPoint: string, endPoint: string) {
+  if (isPlatformBrowser(this.platformId)) {
+    import('leaflet').then((L) => {
+      import('leaflet.polyline.snakeanim');
+      var CompletedRoad = chosenRoad.GetRoad();
 
-                var geojsonLine = L.geoJSON(el, {
-                  style: function (feature) {
-                    return {color: '#ff0000', weight: 7};
-                  }
-                }).addTo(this.map);
-              });
-            }
+      for (let el of CompletedRoad) {
+        var geojsonLine = L.geoJSON(el, {
+          style: function (feature) {
+            return {color: '#ff0000', weight: 7};
           }
+        }).addTo(this.map);
+
+
+        this.previewRoad.push({
+          layer: geojsonLine,
+          start: startPoint,
+          end: endPoint
         });
+
+
+        geojsonLine.snakeIn();
       }
-    }
+    });
+  }
+}
+
   // FindWay = () => {
   // if (isPlatformBrowser(this.platformId)) {
   //   import('leaflet').then((L) => {
@@ -204,6 +222,60 @@ openSidebar(city: any): void {
        this.isAnim=false
      setTimeout( ()=>{ this.isAnim=true;},100)
 
+}
+openCharacterSelection()
+{
+  this.displaySelection=true;
+}
+
+setSelection(character:any)
+{
+  this.selectedCharacter=character;
+  this.calculateDistance();
+  this.displaySelection=false;
+}
+calculateDistance() {
+    let firstCity;
+    if(!this.selectedCity||!this.selectedCharacter)
+    {
+      this.calculatedDistance='';
+      return;
+    }
+    for(let item of this.cities)
+    {
+      if(item.name.toLowerCase()===this.selectedCharacter.location.toLowerCase())
+      {
+        firstCity=item;
+        break;
+      }
+    }
+
+    if (firstCity) {
+      this.ShortWay.start = firstCity.coordinates.split(/,\s*/).map(Number);
+      this.ShortWay.end = this.selectedCity.coordinates.split(/,\s*/).map(Number);
+      let chosenWay= this.ShortWay.GetShortestRoad();
+
+      if (chosenWay==null)
+      {
+        this.calculatedDistance= 'Нету дороги в этот город!'
+        return;
+      }
+      let length=  Math.floor(ShortestWay.ReturnLength(chosenWay))
+      this.calculatedDistance=length+' миль' ;
+      return ;
+    } else {
+       this.calculatedDistance= 'Ошибка с поиском города, обратитесь к Эдику!'
+    }
+  }
+  OpenSecondState()
+  {
+    this.isCity=false ;
+    this.calculateDistance();
+  }
+close()
+{
+  this.isSidebarOpen=false;
+  this.selectedCity=null;
 }
 
 }

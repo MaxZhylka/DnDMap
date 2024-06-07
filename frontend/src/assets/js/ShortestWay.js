@@ -89,6 +89,7 @@ class ShortestWay
         RecursiveSearch(PossibleRoads, chosenRoad, index,  CompletedRoads, start)
         {
 
+
             chosenRoad = this.chooseNextRoad(start, this.roads, PossibleRoads, chosenRoad, CompletedRoads);
 
 
@@ -118,7 +119,10 @@ class ShortestWay
                  index = PossibleRoads.indexOf(chosenRoad);
                 PossibleRoads.splice(index, 1);
                 CompletedRoads.push(chosenRoad.getRoad());
-
+                if(PossibleRoads.length===0)
+                {
+                  return null;
+                }
                 // console.log(CompletedRoads);
                 return this.RecursiveSearch(PossibleRoads, chosenRoad, index, CompletedRoads,start);
             }
@@ -289,8 +293,8 @@ class ShortestWay
         }
 
        }
-       class RGBDistance
-{
+  class RGBDistance
+  {
     constructor(Road = 0, Green = 0, Blue = 0, FinalRoad=[])
             {
                 this.road=Road;

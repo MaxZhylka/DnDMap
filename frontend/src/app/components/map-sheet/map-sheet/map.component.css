@@ -6,6 +6,7 @@
   Width:100vw;
   height: 100vh;
   position: fixed;
+  z-index: 940;
 }
 .city
 {
@@ -20,6 +21,7 @@
   height: 79.25vh;
   background-color: #FFB74B;
   border-radius: 1vw;
+  z-index: 1000;
   transition: transform 300ms;
 
 }
@@ -67,4 +69,87 @@ margin-top: 1.5vh;
   border: none;
   height: 3.8vh;
   padding: 0;
+}
+.confirmWay
+{
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.text
+{
+  text-align: center;
+  font-size: 1.25vw;
+  color: black;
+  margin-top: 1.2vh;
+  overflow: hidden;
+}
+.characterAvatar
+{
+   margin-top: 1.2vh;
+  height: 8.28vw;
+  width: 8.28vw;
+  object-fit: cover;
+  object-position: top;
+}
+.selectCharacter
+{
+  width: 57.65vw;
+  height: 69.8vh;
+
+  position: fixed;
+  left: 21.2vw;
+  top: 15.2vh;
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: flex;
+    align-items: center;
+  justify-content: center;
+  background-color:#FFE8C6 ;
+  border: #FF9900 solid 0.5vw;
+  border-radius: 2vw;
+  z-index: 1003;
+
+}
+.overflow
+{
+   width: 11.875vw;
+  overflow: hidden;
+}
+.background
+{
+  top:0;
+  left:0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1002;
+  background-color: black;
+  opacity: 20%;
+}
+.character
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ width: 11.875vw;
+  height: 22.3vh;
+  cursor: pointer;
+  }
+.characterContainer
+{
+  width: 57.65vw;
+  height: 52.7vh;
+  overflow: scroll;
+    flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5vw;
+  display: flex;
+    align-items: center;
+  justify-content: center;
+}
+.characterContainer::-webkit-scrollbar
+{
+   display: none;
 }
