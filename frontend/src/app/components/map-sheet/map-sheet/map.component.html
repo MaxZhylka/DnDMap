@@ -9,7 +9,7 @@
 </div>
 
 
-<aside *ngIf="isSidebarOpen" [@slideInOut] class="sideContainer">
+<aside *ngIf="isSidebarOpen" (dblclick)="close()" [@slideInOut] class="sideContainer">
 
   <div class="city" *ngIf="isCity">
     <img class="cityPhoto"  [src]="selectedCity.cityPhoto" >
@@ -17,12 +17,12 @@
     <div class="cityName" >{{selectedCity.name}}</div>
     <div class="cityRegion">{{selectedCity.region}}</div>
     <div class="cityDescription">{{selectedCity.description}}</div>
-    <button class="continue"  (click)="isCity=false">Проложить маршрут</button>
+    <button class="continue"  (click)=" OpenSecondState()">Проложить маршрут</button>
       </div>
   </div>
   <div   *ngIf="!isCity" class="confirmWay">
-  <div class="text">Выберите персонажа</div>
-    <img>
+  <div class="text">{{selectedCharacter? selectedCharacter.name:'Выберите персонажа'}}</div>
+    <img class="characterAvatar" (click)="openCharacterSelection()" [src]="selectedCharacter ? selectedCharacter.appearance : defaultImg" >
     <div class="text"> Выберите транспорт</div>
     <div class="chooseTransport">
       <img>
@@ -35,9 +35,9 @@
     <div class="distanceCotainer">
       <img>
       <div class="distance">
-        <div class="cityTarget"></div>
-        <div class="distanceText"></div>
-         <div class="cityTarget"></div>
+        <div class="cityTarget">{{selectedCharacter?selectedCharacter.location:''}}</div>
+        <div class="distanceText" *ngIf="selectedCharacter">{{calculatedDistance}}</div>
+         <div class="cityTarget">{{selectedCity.name}}</div>
       </div>
     </div>
     <div class="checkBox"></div>
@@ -46,4 +46,13 @@
     <div class="tripTime"></div>
 
   </div>
+  <div class="selectCharacter" *ngIf="displaySelection">
+    <div class="characterContainer">
+    <div class="character" (click)="setSelection(character)" *ngFor="let character of characters">
+      <img class="characterAvatar" [src]="character.appearance? character.appearance: defaultCharacter" >
+      <span class="text overflow">{{character.name}}</span>
+    </div>
+  </div>
+    </div>
+  <div class="background" *ngIf="displaySelection" (click)="displaySelection=false"></div>
 </aside>
