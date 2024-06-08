@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cities, Roads, News
+from .models import Cities, Roads, News, SeaRoute
 
 
 class CitySerializer(serializers.ModelSerializer):
@@ -13,4 +13,8 @@ class RoadSerializer(serializers.ModelSerializer):
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
+        fields = '__all__'
+class SeaRoadsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SeaRoute
         fields = '__all__'
