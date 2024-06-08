@@ -87,12 +87,35 @@ margin-top: 1.5vh;
 }
 .characterAvatar
 {
-   margin-top: 1.2vh;
+
   height: 8.28vw;
   width: 8.28vw;
+  margin-top: 1.2vh;
   border-radius: 0.7vw;
   object-fit: cover;
   object-position: top;
+}
+.overlay {
+  position: absolute;
+  margin-top: 1.2vh;
+  border-radius: 0.7vw;
+  top: 0;
+  left: 0;
+  height: 8.28vw;
+  width: 8.28vw;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5vw;
+  font-weight: bold;
+  transition: opacity 200ms ease-in-out;
+}
+.image-container {
+  position: relative;
+  display: inline-block;
 }
 .selectCharacter
 {
@@ -129,6 +152,12 @@ margin-top: 1.5vh;
   background-color: black;
   opacity: 20%;
 }
+
+
+.character:hover .overlay {
+  opacity: 1;
+}
+
 .character
 {
   display: flex;
@@ -140,15 +169,14 @@ margin-top: 1.5vh;
   }
 .characterContainer
 {
-  width: 57.65vw;
-  height: 52.7vh;
+  width: 52vw;
+  height: 57.7vh;
   overflow: scroll;
     flex-direction: row;
   flex-wrap: wrap;
   gap: 1.5vw;
   display: flex;
-    align-items: center;
-  justify-content: center;
+
 }
 .characterContainer::-webkit-scrollbar
 {
@@ -211,11 +239,12 @@ margin-top: 1.5vh;
   flex-direction: column;
   justify-content: space-between;
   width: 13vw;
-  height: 19.9vh;
+  height: 17.9vh;
   background-color: transparent;
 }
 .cityTarget
 {
-  font-size: 1.875vw;
+  text-align: center;
+  font-size: 1.5vw;
 
 }

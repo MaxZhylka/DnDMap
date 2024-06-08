@@ -1,6 +1,7 @@
 import binascii
 import os
 from django.conf import settings
+from django.contrib.auth.hashers import check_password
 from rest_framework.decorators import action
 from django.shortcuts import render,get_object_or_404
 from rest_framework import viewsets, permissions,  generics
@@ -9,7 +10,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
 from .models import Character, Player, Token
-from .serializer import CharacterSerializer, ImageSerializer,  PlayerAvatarSerializer
+from .serializer import CharacterSerializer, ImageSerializer, PlayerAvatarSerializer, UpdateNameSerializer, \
+    UpdateEmailSerializer, UpdatePasswordSerializer
 
 from rest_framework import status, views
 from rest_framework.response import Response
@@ -187,3 +189,39 @@ class UserAvatarUpdateView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UpdateNameView(views.APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        serializer = UpdateNameSerializer(data=request.data, instance=request.user)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Name updated successfully.'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UpdateEmailView(views.APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        serializer = UpdateEmailSerializer(data=request.data, instance=request.user)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message': 'Email updated successfully.'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UpdatePasswordView(views.APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        serializer = UpdatePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            user = request.user
+            if not check_password(serializer.validated_data['old_password'], user.password):
+                return Response({'error': 'Old password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+            return Response({'message': 'Password updated successfully.'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

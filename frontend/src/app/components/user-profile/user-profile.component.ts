@@ -59,27 +59,24 @@ if(isPlatformBrowser(this.platformId)) {
     }
   }
 
-  passwordComplexityValidator(): ValidatorFn {
+   passwordComplexityValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.value;
       if (!password) return null;
 
-      const hasUpperCase = /[A-Z]/.test(password);
       const hasLowerCase = /[a-z]/.test(password);
       const hasNumeric = /\d/.test(password);
-      const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
       const isValidLength = password.length >= 8;
-
-      const isValidPassword = hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && isValidLength;
-
+      const isValidPassword =  hasLowerCase && hasNumeric  && isValidLength;
       return isValidPassword ? null : {
         passwordComplexity: {
           valid: false,
-          message: 'Пароль має містити мінімум 8 символів, включати великі і малі літери, цифри та спеціальні символи.'
+          message: 'Пароль должен содержать минимум 8 символов, включать цифры'
         }
       };
     };
   }
+
 
   setDynamicAttribute() {
     const element = this.el.nativeElement.querySelector('div');
@@ -107,13 +104,22 @@ togglePanel = ()=>
 
 
   changeNick() {
-    // Implementation for changing nickname
+    this.authService.updateName(this.changes.get('login')?.value).subscribe(response => {
+      console.log(response);
+      window.location.reload()
+    });
   }
   changePost() {
-
+        this.authService.updateEmail(this.changes.get('email')?.value).subscribe(response => {
+      console.log(response);
+      window.location.reload()
+    });
   }
   changePassword()
   {
-
+           this.authService.updatePassword( this.changes.get('oldPassword')?.value,this.changes.get('password')?.value).subscribe(response => {
+      console.log(response);
+      window.location.reload()
+    });
   }
 }

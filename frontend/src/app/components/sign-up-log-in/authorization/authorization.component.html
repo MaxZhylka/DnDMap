@@ -1,7 +1,7 @@
-<form class="container" [formGroup]="auth">
+<form class="container" [formGroup]="auth" (ngSubmit)="Submit()">
   <div class="text">Вход</div>
   <div class="regwidth">
-    <input class="inputData" placeholder="Электронная почта" formControlName="email">
+    <input class="inputData" placeholder="Электронная почта" formControlName="email" name="email" autocomplete="username">
     <div class="validationMessage" *ngIf="auth.get('email')?.errors?.['required'] && auth.get('email')?.touched">
       Электронная почта обязательна.
     </div>
@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="regwidth">
-    <input class="inputData" placeholder="Пароль" formControlName="password" type="password">
+    <input class="inputData" placeholder="Пароль" formControlName="password" name="password" type="password" autocomplete="current-password">
     <div class="validationMessage" *ngIf="auth.get('password')?.errors?.['passwordComplexity'] && auth.get('password')?.touched">
       {{ auth.get('password')?.errors?.['passwordComplexity']?.message }}
     </div>
@@ -19,12 +19,11 @@
     </div>
   </div>
   <div class="validationMessage" *ngIf="invalidData">Данные введены неверно</div>
-  <div class="confirmButton" (click)="Submit()">Войти</div>
+  <button class="confirmButton" type="submit">Войти</button>
   <div class="continueWithGoogle">
     <img class="google" [src]="GoogleImg">
     <div class="googleText"> Войти через Google</div>
   </div>
   <div class="footerText" (click)="SwitchPanel.emit()">Еще нет аккаунта? <a class="link">Зарегистрируйтесь</a></div>
   <div class="validationMessage" *ngIf="displayError">Неправильный логин или пароль</div>
-
 </form>

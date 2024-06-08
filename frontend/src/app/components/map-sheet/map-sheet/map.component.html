@@ -35,7 +35,7 @@
     <div class="distanceContainer">
       <img class="road" src="assets/img/road.png">
       <div class="distance">
-        <div class="cityTarget">{{selectedCharacter?selectedCharacter.location:''}}</div>
+        <div class="cityTarget">{{selectedCharacter?selectedCharacter.location:'Персонаж не выбран'}}</div>
         <div class="distanceText" *ngIf="selectedCharacter">{{calculatedDistance}}</div>
          <div class="cityTarget">{{selectedCity.name}}</div>
       </div>
@@ -49,11 +49,16 @@
 
 </aside>
   <div class="selectCharacter" *ngIf="displaySelection">
-    <div class="characterContainer">
+  <div class="characterContainer">
     <div class="character" (click)="setSelection(character)" *ngFor="let character of characters">
-      <img class="characterAvatar" [src]="character.appearance? character.appearance: defaultCharacter" >
+
+       <div class="image-container">
+        <img class="characterAvatar" [src]="character.appearance ? character.appearance : defaultCharacter">
+        <div class="overlay">Выбрать</div>
+      </div>
+
       <span class="text overflow">{{character.name}}</span>
     </div>
   </div>
-    </div>
-  <div class="background" *ngIf="displaySelection" (click)="displaySelection=false"></div>
+</div>
+<div class="background" *ngIf="displaySelection" (click)="displaySelection=false"></div>

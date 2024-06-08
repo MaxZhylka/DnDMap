@@ -40,16 +40,15 @@ export class AuthorizationComponent {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.value;
       if (!password) return null;
-      const hasUpperCase = /[A-Z]/.test(password);
+
       const hasLowerCase = /[a-z]/.test(password);
       const hasNumeric = /\d/.test(password);
-      const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
       const isValidLength = password.length >= 8;
-      const isValidPassword = hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && isValidLength;
+      const isValidPassword = hasLowerCase && hasNumeric && isValidLength;
       return isValidPassword ? null : {
         passwordComplexity: {
           valid: false,
-          message: 'Пароль должен содержать минимум 8 символов, включать большие и маленькие буквы, цифры и специальные символы.'
+          message: 'Пароль должен содержать минимум 8 символов, включать цифры'
         }
       };
     };

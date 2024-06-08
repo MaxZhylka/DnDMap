@@ -31,6 +31,7 @@
     background-color: rgba(0, 0, 0, 0.4);
     left: 0;
     top: 0;
+
   transition: opacity 150ms;
 }
 .Author_Flex_Container

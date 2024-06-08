@@ -48,3 +48,17 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Character
         fields = ('id','appearance')
+
+class UpdateNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Player
+        fields = ['name']
+
+class UpdateEmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Player
+        fields = ['email']
+
+class UpdatePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
