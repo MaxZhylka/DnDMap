@@ -2,15 +2,15 @@
 {
     display: block;
     position: fixed;
-    z-index: 999;
-    margin-top:9vh;
+    z-index: 941;
+    padding-top:9vh;
     background-color: #FFE1B4;
-    width: 480px;
-   transition: 500ms;
-    height: calc(100vh - 80px);
+    width: 25vw;
+   transition:left 500ms ease-in-out;
+    height: calc(100vh - 9vh);
     list-style: none;
 
-   padding: 0;
+
     overflow-y: auto;
 }
 

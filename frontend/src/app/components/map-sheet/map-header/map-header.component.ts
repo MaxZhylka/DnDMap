@@ -150,17 +150,17 @@ moveToCity() {
 
   togglePanel = ()=>
   {
-    if(this.displayLeft==-480)
+    if(this.displayLeft==-25)
     {
       this.displayLeft=0;
     }
     else {
-      this.displayLeft=-480;
+      this.displayLeft=-25;
     }
   }
   closePanel=()=>
   {
-     this.displayLeft=-480;
+     this.displayLeft=-25;
   }
     getMarginTop(index: number): number {
     const pixelValue = 2.6 + 1.4* (index - 1);

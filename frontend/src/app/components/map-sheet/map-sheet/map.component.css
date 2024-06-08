@@ -21,7 +21,7 @@
   height: 79.25vh;
   background-color: #FFB74B;
   border-radius: 1vw;
-  z-index: 1000;
+  z-index: 940;
   transition: transform 300ms;
 
 }

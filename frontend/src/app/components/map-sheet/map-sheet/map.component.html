@@ -46,6 +46,8 @@
     <div class="tripTime">{{tripTime}}</div>
 
   </div>
+
+</aside>
   <div class="selectCharacter" *ngIf="displaySelection">
     <div class="characterContainer">
     <div class="character" (click)="setSelection(character)" *ngFor="let character of characters">
@@ -55,4 +57,3 @@
   </div>
     </div>
   <div class="background" *ngIf="displaySelection" (click)="displaySelection=false"></div>
-</aside>

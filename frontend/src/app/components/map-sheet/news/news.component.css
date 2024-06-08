@@ -3,12 +3,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  margin-top: 10px;
-  height: 300px;
-    width: 460px;
-    transition:  200ms ease-in-out;
-border-radius: 15px;
+  margin-left: 0.5vw;
+
+  margin-top: 1vh;
+  height: 27.7vh;
+    width: 24vw;
+    transition: transform 200ms ease-in-out;
+border-radius: 1vw;
 }
 .News_Style:hover
 {
@@ -28,30 +29,30 @@ border-radius: 15px;
     width: 100%;
     height: 100%;
     background-image: linear-gradient(to bottom, transparent,transparent,  rgba(0,0,0,70%));
-    border-radius: 15px;
+    border-radius: 1vw;
 }
 .Main_Header {
 
   color: white;
-    width: 460px;
+    width: 24vw;
   z-index: 1001;
 
-  font-size: 24px;
-    padding-left:5px;
-    padding-right:5px;
-    margin-top:5px;
-    margin-bottom: 5px;
+  font-size: 3vh;
+    padding-left:0.3vw;
+    padding-right:0.3vw;
+    margin-top:0.3vw;
+    margin-bottom: 0.3vw;
 }
 .Main_Text {
 
-  font-size: 16px;
+  font-size: 2vh;
       color: white;
-    width: 460px;
+    width: 24vw;
     left:0;
 
    z-index: 1001;
-        padding-left:5px;
-        padding-right:5px;
+        padding-left:0.3vw;
+        padding-right:0.3vw;
 }
 .News_Flex_Container
 {
@@ -59,17 +60,17 @@ border-radius: 15px;
     display: flex;
     position: absolute;
     flex-direction: column;
-    bottom: 10px;
+    bottom: 1vh;
 
 }
 .Main_News_Image {
-  width: 460px;
-  height: 300px;
+  width: 24vw;
+  height: 27.7vh;
      object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 999;
-    border-radius: 15px;
+    border-radius: 1vw;
 
 }

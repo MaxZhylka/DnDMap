@@ -167,9 +167,9 @@ this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
 
 
 
-        // marker.on('click', () => {
-        //   this.openSidebar(city);
-        // });
+        marker.on('click', () => {
+          this.openSidebar(city);
+        });
       });
     });
   }

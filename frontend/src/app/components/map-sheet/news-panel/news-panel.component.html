@@ -1,6 +1,6 @@
 
 
-<div class="newsPanel" [ngStyle]="{'left.px': left}">
+<div class="newsPanel" [ngStyle]="{'left.vw': left}">
 <div *ngFor="let news of Newses; let i =index ">
 
  <app-news (click)="displayFullNews(Newses[Newses.length-i-1])" [news]="Newses[Newses.length-i-1]"></app-news>

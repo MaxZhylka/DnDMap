@@ -7,7 +7,7 @@ from django.utils import timezone
 
 class Cities(models.Model):
     name=models.CharField('Название города', max_length=20)
-    coordinates=models.CharField('Координаты', max_length=20)
+    coordinates=models.CharField('Координаты', max_length=50)
     cityPhoto=models.ImageField(upload_to='CityPhotos/',default='CityPhotos/default.jpg')
     region=models.CharField('Регион', max_length=50, default='Побережье Мечей')
     icon=models.ImageField(upload_to='CityIcon/', default='CityIcon/point.png')
