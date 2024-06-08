@@ -20,3 +20,36 @@ padding-top: 10vh;
   gap: 1vw;
 
 }
+.button{
+  width: 20vw;
+  height: 12vh;
+  background-color: #FFB74B;
+  border: none;
+  border-radius: 2vh;
+  display: flex;
+  font-size: 1.5vw;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 100ms ease-in-out,transform 100ms ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.button:hover{
+  background-color: #FFAE35;
+}
+.button:active
+{
+    transform: scale(0.95);
+}
+.img{
+
+  height: 12vh;
+  width: 12vh;
+  border-radius: 2vh;
+}
+.text
+{
+  padding-right: 4vh;
+  width: 13vw;
+}
