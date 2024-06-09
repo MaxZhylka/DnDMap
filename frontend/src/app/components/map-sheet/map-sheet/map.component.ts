@@ -192,20 +192,46 @@ this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
 
   };
   private addSeaRoads(): void {
-    import('leaflet').then((L) => {
-      for (let el of this.seaRoads) {
-        let coordinates: number[] = JSON.parse(el.coordinates);
-        let road: any = {
-          "type": "LineString",
-          "coordinates": coordinates
-        }
-        this.seaRoadsCoordinates.push(road);
-        L.geoJSON(road, {
-          style: function (feature) {
+  import('leaflet').then((L) => {
+    for (let el of this.seaRoads) {
+      let coordinates: number[][] = JSON.parse(el.coordinates);
+      let road: any = {
+        "type": "LineString",
+        "coordinates": coordinates
+      }
+
+      const icon = L.icon({
+        iconUrl: 'assets/img/seapoint.png',
+        iconSize: [35, 45],
+        iconAnchor: [17.5, 45],
+        popupAnchor: [-3, -46]
+      });
+
+      let coordinates1:[number,number]=[coordinates[0][1],coordinates[0][0]];
+        let coordinates2:[number,number]=[coordinates[coordinates.length - 1][1],coordinates[coordinates.length - 1][0]];
+
+      const markerStart = L.marker(coordinates1, { icon: icon }).addTo(this.map);
+
+      const markerEnd = L.marker(coordinates2, { icon: icon }).addTo(this.map);
+markerStart.on('click', (e: L.LeafletMouseEvent) => {
+        let latlng = e.latlng;
+        this.arr.push([latlng.lng, latlng.lat]);
+        console.log(JSON.stringify(this.arr));
+      });
+markerEnd.on('click', (e: L.LeafletMouseEvent) => {
+        let latlng = e.latlng;
+        this.arr.push([latlng.lng, latlng.lat]);
+        console.log(JSON.stringify(this.arr));
+      });
+      this.seaRoadsCoordinates.push(road);
+      L.geoJSON(road, {
+        style: function (feature) {
             return {color: '#00bbff', weight: 5};
-          }
-        }).addTo(this.map);
-      }});
+        }
+      }).addTo(this.map);
+
+    }
+  });
 
   };
 
