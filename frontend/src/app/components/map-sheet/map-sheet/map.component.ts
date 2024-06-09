@@ -51,6 +51,7 @@ export class MapComponent implements OnInit {
   distance: number = 0;
   calculatedDistance: string = '';
   ShortWay: any;
+  ShortSee:any;
   arr:any=[];
   isCity: boolean = true;
   isAnim: boolean = true;
@@ -60,6 +61,7 @@ export class MapComponent implements OnInit {
 
   constructor(private apiMap: MapService, private characterService: CharacterService) {
     this.ShortWay = new ShortestWay(this.roadsCoordinates, 0, 0);
+    this.ShortSee = new ShortestWay(this.seaRoadsCoordinates,0,0);
   }
 
   ngOnInit() {
@@ -158,11 +160,12 @@ this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
           .addTo(this.map)
 
 
-      marker.on('click', (e: L.LeafletMouseEvent) => {
-        let latlng = e.latlng;
-        this.arr.push([latlng.lng, latlng.lat]);
-        console.log(JSON.stringify(this.arr));
-      });
+      //
+      // marker.on('click', (e: L.LeafletMouseEvent) => {
+      //   let latlng = e.latlng;
+      //   this.arr.push([latlng.lng, latlng.lat]);
+      //   console.log(JSON.stringify(this.arr));
+      // });
 
 
 
@@ -191,23 +194,39 @@ this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
       }});
 
   };
-  private addSeaRoads(): void {
-    import('leaflet').then((L) => {
-      for (let el of this.seaRoads) {
-        let coordinates: number[] = JSON.parse(el.coordinates);
-        let road: any = {
-          "type": "LineString",
-          "coordinates": coordinates
-        }
-        this.seaRoadsCoordinates.push(road);
-        L.geoJSON(road, {
-          style: function (feature) {
-            return {color: '#00bbff', weight: 5};
-          }
-        }).addTo(this.map);
-      }});
+private addSeaRoads(): void {
+  import('leaflet').then((L) => {
+    for (let el of this.seaRoads) {
+      let coordinates: number[][] = JSON.parse(el.coordinates);
+      let road: any = {
+        "type": "LineString",
+        "coordinates": coordinates
+      }
+      //
+      // const icon = L.icon({
+      //   iconUrl: 'assets/img/seapoint.png',
+      //   iconSize: [35, 45],
+      //   iconAnchor: [17.5, 45],
+      //   popupAnchor: [-3, -46]
+      // });
+      //
+      // let coordinates1:[number,number]=[coordinates[0][1],coordinates[0][0]];
+      //   let coordinates2:[number,number]=[coordinates[coordinates.length - 1][1],coordinates[coordinates.length - 1][0]];
+      //
+      // const markerStart = L.marker(coordinates1, { icon: icon }).addTo(this.map);
+      //
+      // const markerEnd = L.marker(coordinates2, { icon: icon }).addTo(this.map);
 
-  };
+      this.seaRoadsCoordinates.push(road);
+      L.geoJSON(road, {
+        style: function (feature) {
+            return {color: '#00bbff', weight: 5};
+        }
+      }).addTo(this.map);
+    }
+  });
+};
+
 
 
   getCities = () => {
@@ -316,6 +335,38 @@ this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
     }
 
     if (firstCity) {
+
+        console.log(this.ShortSee);
+        console.log(this.ShortWay);
+      if(this.selectedTransport==5)
+      {
+        this.ShortSee.end   = firstCity.coordinates.split(/,\s*/).map(Number);
+         this.ShortSee.start= this.selectedCity.coordinates.split(/,\s*/).map(Number);
+
+          const chosenSee = this.ShortSee.GetShortestRoad();
+          if (chosenSee === null) {
+        this.distance = 0;
+        this.calculatedDistance = 'Между этими городами нет морского пути!';
+        this.calculateTime();
+        return;
+
+      }
+
+      const length = Math.floor(ShortestWay.ReturnLength(chosenSee));
+      this.previewRoad.forEach(item => item.layer.remove());
+      this.DrawRedLine(chosenSee, firstCity.name, this.selectedCity.name);
+      this.distance = length;
+      this.calculateTime();
+      this.calculatedDistance = `${length} миль`;
+      return
+
+      }
+
+
+
+
+
+
       this.ShortWay.start = firstCity.coordinates.split(/,\s*/).map(Number);
       this.ShortWay.end = this.selectedCity.coordinates.split(/,\s*/).map(Number);
 
@@ -323,7 +374,7 @@ this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
 
       if (chosenWay === null) {
         this.distance = 0;
-        this.calculatedDistance = 'Нету дороги в этот город!';
+        this.calculatedDistance = 'Между этими городами нет дороги!';
         this.calculateTime();
         return;
       }
@@ -355,6 +406,7 @@ this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
   selectTransport(index: number): void {
     this.selectedTransport = index;
     this.highlightPosition = index * (2.66 + 0.2);
+    this.calculateDistance();
     this.calculateTime();
   }
 

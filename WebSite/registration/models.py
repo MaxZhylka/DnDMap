@@ -1,5 +1,7 @@
 import binascii
 import os
+
+from django.utils import timezone
 from django.db.models.signals import post_save
 from django.contrib.auth.hashers import check_password
 from django.db import models
@@ -39,6 +41,8 @@ class Player(AbstractBaseUser):
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
     name = models.CharField(max_length=100)
     avatar = models.ImageField(upload_to='Profiles/', default='Profiles/img.png')
+    is_email_verified = models.BooleanField(default=False)
+    email_verification_sent_at = models.DateTimeField(default=timezone.now)
     objects = PlayerManager()
 
     USERNAME_FIELD = 'email'

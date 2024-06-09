@@ -28,4 +28,5 @@ urlpatterns = [
     path('update-name/', UpdateNameView.as_view(), name='update-name'),
     path('update-email/', UpdateEmailView.as_view(), name='update-email'),
     path('update-password/', UpdatePasswordView.as_view(), name='update-password'),
+
 ]
