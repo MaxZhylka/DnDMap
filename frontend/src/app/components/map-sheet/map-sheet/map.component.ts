@@ -160,12 +160,12 @@ this.map.on('mousedown', (e : L.LeafletMouseEvent)=> {
           .addTo(this.map)
 
 
-      //
-      // marker.on('click', (e: L.LeafletMouseEvent) => {
-      //   let latlng = e.latlng;
-      //   this.arr.push([latlng.lng, latlng.lat]);
-      //   console.log(JSON.stringify(this.arr));
-      // });
+
+      marker.on('click', (e: L.LeafletMouseEvent) => {
+        let latlng = e.latlng;
+        this.arr.push([latlng.lng, latlng.lat]);
+        console.log(JSON.stringify(this.arr));
+      });
 
 
 
@@ -202,7 +202,7 @@ private addSeaRoads(): void {
         "type": "LineString",
         "coordinates": coordinates
       }
-      //
+
       // const icon = L.icon({
       //   iconUrl: 'assets/img/seapoint.png',
       //   iconSize: [35, 45],
@@ -213,9 +213,23 @@ private addSeaRoads(): void {
       // let coordinates1:[number,number]=[coordinates[0][1],coordinates[0][0]];
       //   let coordinates2:[number,number]=[coordinates[coordinates.length - 1][1],coordinates[coordinates.length - 1][0]];
       //
+      //
       // const markerStart = L.marker(coordinates1, { icon: icon }).addTo(this.map);
       //
       // const markerEnd = L.marker(coordinates2, { icon: icon }).addTo(this.map);
+      //             markerStart.on('click', (e: L.LeafletMouseEvent) => {
+      //   let latlng = e.latlng;
+      //   this.arr.push([latlng.lng, latlng.lat]);
+      //   console.log(JSON.stringify(this.arr));
+      // });
+      //
+      //          markerEnd.on('click', (e: L.LeafletMouseEvent) => {
+      //   let latlng = e.latlng;
+      //   this.arr.push([latlng.lng, latlng.lat]);
+      //   console.log(JSON.stringify(this.arr));
+      // });
+      //
+      //
 
       this.seaRoadsCoordinates.push(road);
       L.geoJSON(road, {
@@ -340,8 +354,8 @@ private addSeaRoads(): void {
         console.log(this.ShortWay);
       if(this.selectedTransport==5)
       {
-        this.ShortSee.end   = firstCity.coordinates.split(/,\s*/).map(Number);
-         this.ShortSee.start= this.selectedCity.coordinates.split(/,\s*/).map(Number);
+        this.ShortSee.start = firstCity.coordinates.split(/,\s*/).map(Number);
+         this.ShortSee.end = this.selectedCity.coordinates.split(/,\s*/).map(Number);
 
           const chosenSee = this.ShortSee.GetShortestRoad();
           if (chosenSee === null) {
@@ -416,7 +430,11 @@ private addSeaRoads(): void {
       if (this.selectedTransport == 0) {
         this.tripTime = '±' + Math.floor(this.distance / 18) + " дней";
       }
-      else if (this.selectedTransport == 1 || this.selectedTransport == 5) {
+      else if (this.selectedTransport == 5)
+      {
+        this.tripTime = '±' + Math.floor(this.distance / 90) + " дней";
+      }
+      else if (this.selectedTransport == 1 ) {
         this.tripTime = '±' + Math.floor(this.distance / 30) + " дней";
       }
       else if (this.selectedTransport == 2 || this.selectedTransport == 3 || this.selectedTransport == 4) {

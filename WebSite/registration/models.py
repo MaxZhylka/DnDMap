@@ -167,8 +167,14 @@ class Character(models.Model):
     conspiracies10 = models.TextField('Заговоры 11', default=list, blank=True)
     conspiracies11 = models.TextField('Заговоры 12', default=list, blank=True)
     conspiracies12 = models.TextField('Заговоры 13', default=list, blank=True)
-
     location = models.CharField('Текущее местополжение', max_length=50, default='waterdeep')
+    #Переменные для перемещения
+    inWay = models.BooleanField('Находится ли персонаж в пути', default=False, blank=True, null=True)
+    dateOfStart = models.DateTimeField('Время начала пути', blank=True, null=True)
+    dateOfEnd = models.DateTimeField('Время конца пути', blank=True, null=True)
+    newCityLocation = models.CharField('Город к которому идет персонаж', default='', max_length=50, blank=True,
+                                       null=True)
+    WayCoordinates = models.TextField('Координаты пути', default='', blank=True, null=True)
 
 
     def __str__(self):

@@ -26,9 +26,7 @@ SECRET_KEY = 'django-insecure-nklzigd_i9o#+q)1zqu0_f%fv1!+=_7kpcz84)x5!&9#xd*)u$
 DEBUG = True
 
 CORS_ALLOW_HEADERS = [
-
     'content-type', 'origin', 'Authorization', 'authorization', 'Token'
-
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -46,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'rest_framework.authtoken',
     'django.contrib.staticfiles',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -128,17 +127,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "map/static",
-
 ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Настройки Celery
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_TIMEZONE = 'UTC'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_ENABLE_UTC = True
+
+# Настройки периодических задач Celery Beat
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'check-and-update-characters-every-minute': {
+        'task': 'registration.tasks.check_end_dates',
+        'schedule': crontab(minute='*'),  # Каждую минуту
+    },
+}
