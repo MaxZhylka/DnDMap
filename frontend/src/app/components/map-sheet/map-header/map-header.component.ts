@@ -61,7 +61,7 @@ isMenuVisible: boolean = false;
   searchedCities: City[]=[];
   newsImg: string=  "../../assets/img/news.png";
   hint:string="";
-  displayLeft:number=-480;
+  displayLeft:number=-50;
   Profile: string = "assets/img/pofile.png";
   userData!: any;
   @ViewChild('avatar', { static: false }) Avatar!:ElementRef;
@@ -150,17 +150,17 @@ moveToCity() {
 
   togglePanel = ()=>
   {
-    if(this.displayLeft==-25)
+    if(this.displayLeft==-50)
     {
       this.displayLeft=0;
     }
     else {
-      this.displayLeft=-25;
+      this.displayLeft=-50;
     }
   }
   closePanel=()=>
   {
-     this.displayLeft=-25;
+     this.displayLeft=-50;
   }
     getMarginTop(index: number): number {
     const pixelValue = 2.6 + 1.4* (index - 1);

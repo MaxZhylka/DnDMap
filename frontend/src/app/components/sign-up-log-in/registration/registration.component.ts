@@ -43,32 +43,33 @@ export class RegistrationComponent {
 
 
    passwordComplexityValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const password = control.value;
-    if (!password) return null;
+    return (control: AbstractControl): ValidationErrors | null => {
+      const password = control.value;
+      if (!password) return null;
 
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumeric = /\d/.test(password);
-    const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    const isValidLength = password.length >= 8;
-
-    const isValidPassword = hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && isValidLength;
-
-    return isValidPassword ? null : {
-      passwordComplexity: {
-        valid: false,
-        message: 'Пароль має містити мінімум 8 символів, включати великі і малі літери, цифри та спеціальні символи.'
-      }
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumeric = /\d/.test(password);
+      const isValidLength = password.length >= 8;
+      const isValidPassword =  hasLowerCase && hasNumeric  && isValidLength;
+      return isValidPassword ? null : {
+        passwordComplexity: {
+          valid: false,
+          message: 'Пароль должен содержать минимум 8 символов, включать цифры'
+        }
+      };
     };
-  };
-}
+  }
 
 Submit()
 {
 this.authService.register(this.auth.get('login')?.value,this.auth.get('email')?.value,this.auth.get('password')?.value ).subscribe(
-      success => this.router.navigate(['/login']),
-      error => this.displayError=true
-    );
+  {
+    next: ()=>{
+      this.router.navigate(['/login']);
+      },
+      error:(data)=>{ this.displayError=true}
+  })
   }
+
+
 }

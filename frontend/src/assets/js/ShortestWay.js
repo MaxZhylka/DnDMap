@@ -91,7 +91,10 @@ class ShortestWay
 
 
             chosenRoad = this.chooseNextRoad(start, this.roads, PossibleRoads, chosenRoad, CompletedRoads);
-
+            if(chosenRoad===null)
+            {
+              return  null;
+            }
 
 
 
@@ -119,10 +122,10 @@ class ShortestWay
                  index = PossibleRoads.indexOf(chosenRoad);
                 PossibleRoads.splice(index, 1);
                 CompletedRoads.push(chosenRoad.getRoad());
-                if(PossibleRoads.length===0)
-                {
-                  return null;
-                }
+                // if(PossibleRoads.length===0)
+                // {
+                //   return null;
+                // }
                 // console.log(CompletedRoads);
                 return this.RecursiveSearch(PossibleRoads, chosenRoad, index, CompletedRoads,start);
             }
@@ -207,18 +210,27 @@ class ShortestWay
 }
 
       chooseNextRoad(currentPoint, Roads, PossibleRoads, chosenRoad, CompletedRoads) {
+
             let newCurrentPoint = this.pointCoordinatesSwap(currentPoint.slice());
             for (let el of Roads) {
-                let Point = this.FirstRoadPoint(el);
-                let Point1 = this.LastRoadPoint(el);
-                if (this.checkForExistInCompletedRoads(el, CompletedRoads) && (newCurrentPoint[0] ==Point[0]&&newCurrentPoint[1]==Point[1] || newCurrentPoint[0] ==Point1[0]&&newCurrentPoint[1]==Point1[1])) {
+
+
+                for (let coordinates of el.coordinates)
+                {
+                    if (this.checkForExistInCompletedRoads(el, CompletedRoads) && (newCurrentPoint[0] ==coordinates[0]&&newCurrentPoint[1]==coordinates[1] )) {
 
                     let existingRoads = chosenRoad.GetRoad() || [];
                     let combinedRoads = existingRoads.concat(el);
                       PossibleRoads.push(new RGBDistance(el, this.calculateGreen(el) + chosenRoad.getGreenValue(), this.calculateBlue(el, this.end,currentPoint),combinedRoads));
                 }
+                }
+
             }
 
+            if(PossibleRoads.length===0)
+            {
+              return null;
+            }
             return this.CompareRedIndex(PossibleRoads);
         }
          checkForExistInCompletedRoads(road,CompletedRoads)

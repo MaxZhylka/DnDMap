@@ -4,6 +4,16 @@
   <div class="container">
     <app-one-character *ngFor="let item of characters;let i=index" (updateData)="updateData()" [characterData]="item" [id]="i"></app-one-character>
 <app-lists *ngIf="characters.length<20"   [id]="characters.length"></app-lists>
+
+
+
+
+     <input type="file" id="fileInput" class="inputFile" (change)="onFileSelected($event)" style="display: none;">
+    <button class="button" (click)="triggerFileInput()" *ngIf="characters.length < 20">
+      <img class="img" src="assets/img/json.png">
+      <div class="text">Загрузить персонажа</div>
+    </button>
+
   </div>
 
 </div>

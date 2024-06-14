@@ -1,0 +1,17 @@
+<div *ngIf="character&&display" class="popup" [ngStyle]="{'top': position.y + 'px', 'left': position.x + 'px'}">
+  <img [src]="character.appearance" alt="Аватар" class="avatar">
+  <p class="text">Осталось времени: {{ calculateRemainingTime }}</p>
+  <button class="closeButton" (click)="doDisplay()">Отменить поездку</button>
+</div>
+
+
+<div (click)="closeAll()" *ngIf="displayWarning" class="background"></div>
+<div *ngIf="displayWarning" class="warning">
+  <div>Вы уверенны в отмене поездки?</div>
+  <div class="text" *ngIf="character.ifFlying">Вы будете сразу возвращены в исходную точку</div>
+  <div class='text' *ngIf="!character.ifFlying&&nearestCity">Персонаж дойдет до ближайшего города - {{nearestCity[0].name}}</div>
+  <div  style="width: 20vw;display:flex;justify-content: space-evenly;">
+    <div class="button" (click)="cancelJourney()">Да</div>
+    <div class="button"  (click)="closeAll()">Нет</div>
+  </div>
+</div>

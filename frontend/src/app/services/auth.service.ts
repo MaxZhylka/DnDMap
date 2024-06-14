@@ -3,6 +3,7 @@ import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {catchError, delay, Observable, of, tap, throwError} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {isPlatformBrowser} from "@angular/common";
+import {AbstractControl, ɵFormGroupRawValue, ɵGetProperty, ɵTypedOrUntyped} from "@angular/forms";
 
 interface LoginResponse {
   token: string;
@@ -152,5 +153,25 @@ deleteCharacter(): Observable<void> {
         return throwError(() => new Error('Error deleting user'));
       })
     );
+  }
+
+
+  updateName(name: string | null): Observable<any> {
+      const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Token ${token}`);
+    return this.http.put(`http://127.0.0.1:8000/registration/update-name/`, { name }, { headers });
+  }
+
+  updateEmail(email: string): Observable<any> {
+      const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Token ${token}`);
+    return this.http.put(`http://127.0.0.1:8000/registration/update-email/`, { email }, { headers });
+  }
+
+  updatePassword(oldPassword: string, newPassword: string): Observable<any> {
+      const token = this.getToken();
+      console.log(token);
+    const headers = new HttpHeaders().set('Authorization', `Token ${token}`);
+    return this.http.put(`http://127.0.0.1:8000/registration/update-password/`, { old_password: oldPassword, new_password: newPassword }, { headers });
   }
 }

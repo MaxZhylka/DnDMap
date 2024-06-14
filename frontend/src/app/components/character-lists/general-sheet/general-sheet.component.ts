@@ -8,7 +8,7 @@ import { CharacterService } from "../../../services/character.service";
 })
 export class GeneralSheetComponent implements OnInit {
   characters: any[] = [];
-
+    selectedFile: File | null = null;
   constructor(public characterService: CharacterService) {}
 
   ngOnInit() {
@@ -23,7 +23,27 @@ export class GeneralSheetComponent implements OnInit {
     });
     }, 25);
   }
+  triggerFileInput() {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    fileInput.click();
+  }
+ onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file && file.type === 'application/json') {
+      this.selectedFile = file;
+      this.uploadCharacter();
+    } else {
 
+    }
+  }
+uploadCharacter() {
+
+    this.characterService.createCharacter(this.selectedFile).subscribe(
+      { next:(data)=>{
+ this.updateData();
+  }}
+    )
+  }
   updateData()
   {
     this.characterService.getMyCharacters().subscribe({

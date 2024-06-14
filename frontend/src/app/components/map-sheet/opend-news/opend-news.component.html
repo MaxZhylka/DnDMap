@@ -1,5 +1,5 @@
 <div #OpenNews>
-<div [ngStyle]="{'opacity': opacity}"  class="BG_Style" (click)="onClose()">
+
   </div>
   <div [ngStyle]="{'opacity': opacity}" class="Full_News">
     <div class="btn-position">
@@ -16,4 +16,5 @@
       <div class='Date'>{{news.dateOfPublishing| date: 'medium'}}</div>
     </div>
   </div>
-</div>
+
+<div [ngStyle]="{'opacity': opacity}"  class="BG_Style" (click)="onClose()"></div>

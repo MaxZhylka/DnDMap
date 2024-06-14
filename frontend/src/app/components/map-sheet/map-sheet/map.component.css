@@ -87,18 +87,40 @@ margin-top: 1.5vh;
 }
 .characterAvatar
 {
-   margin-top: 1.2vh;
+
   height: 8.28vw;
   width: 8.28vw;
+  margin-top: 1.2vh;
   border-radius: 0.7vw;
   object-fit: cover;
   object-position: top;
+}
+.overlay {
+  position: absolute;
+  margin-top: 1.2vh;
+  border-radius: 0.7vw;
+  top: 0;
+  left: 0;
+  height: 8.28vw;
+  width: 8.28vw;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5vw;
+  font-weight: bold;
+  transition: opacity 200ms ease-in-out;
+}
+.image-container {
+  position: relative;
+  display: inline-block;
 }
 .selectCharacter
 {
   width: 57.65vw;
   height: 69.8vh;
-
   position: fixed;
   left: 21.2vw;
   top: 15.2vh;
@@ -129,6 +151,12 @@ margin-top: 1.5vh;
   background-color: black;
   opacity: 20%;
 }
+
+
+.character:hover .overlay {
+  opacity: 1;
+}
+
 .character
 {
   display: flex;
@@ -140,15 +168,14 @@ margin-top: 1.5vh;
   }
 .characterContainer
 {
-  width: 57.65vw;
-  height: 52.7vh;
+  width: 52vw;
+  height: 57.7vh;
   overflow: scroll;
     flex-direction: row;
   flex-wrap: wrap;
   gap: 1.5vw;
   display: flex;
-    align-items: center;
-  justify-content: center;
+
 }
 .characterContainer::-webkit-scrollbar
 {
@@ -172,6 +199,7 @@ margin-top: 1.5vh;
   transition: background 0.5s;
   cursor: pointer;
   z-index: 1000;
+
 }
 
 
@@ -211,11 +239,148 @@ margin-top: 1.5vh;
   flex-direction: column;
   justify-content: space-between;
   width: 13vw;
-  height: 19.9vh;
+  height: 17.9vh;
   background-color: transparent;
+}
+.distanceText
+{
+  text-align: center;
+  font-size: 1.5vw;
 }
 .cityTarget
 {
-  font-size: 1.875vw;
+  text-align: center;
+  font-size: 1.5vw;
 
+}
+.confirmButton
+{
+  border: none;
+  padding: 0;
+  text-align: center;
+  width: 12vw;
+  background-color: #2D8DFF;
+  border-radius: 2vw;
+  margin-top: 1vw;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 2vw;
+  transition: scale 200ms;
+}
+.confirmButton:active
+{
+  scale: 0.97;
+}
+.textArrived
+{
+    text-align: center;
+  font-size: 1.25vw;
+  color: black;
+  margin-top: 1.2vh;
+ height: 3.75vw;
+}
+.roadsSwitcher
+{
+  display: flex;
+  width: 7.91vw;
+  height: 6.48vh;
+  background-color: #D9D9D9;
+  border-radius: 2vw;
+  justify-content: space-evenly;
+  position: fixed;
+  z-index: 1000;
+  align-items: center;
+  right: 2vw;
+  top: 10vh;
+}
+.switchImg
+{
+  width: 2.29vw;
+  height: 2.29vw;
+
+}
+.switchBG
+{ display: flex;
+  justify-content: center;
+  align-items: center;
+   width: 2.8vw;
+  height: 2.8vw;
+  border-radius: 10vw;
+  cursor: pointer;
+}
+
+.activeSwitch {
+  background-color: rgba(255, 0, 0, 50%);
+}
+.inactiveSwitch {
+  background-color: transparent;
+}
+
+.imgCheckBox
+{
+  width: 1.7vw;
+  height: 1.7vw;
+
+}
+.checkBox
+{
+  display: flex;
+  justify-content: center;
+  width: 16.04vw;
+  gap: 0.3vw;
+  height: 3vh;
+  cursor: pointer;
+  margin-top: 1vw;
+}
+.textCheckBox
+{
+  font-size: 1.5vw;
+}
+.speedInput
+{
+  margin-top: 1vh;
+  border: none;
+  outline: none;
+  padding: 0;
+  text-align: center;
+ background-color: #FFD698;
+  width: 12.34vw;
+  height: 4vh;
+  font-size: 3vh;
+  border-radius: 2vw;
+
+}
+.speedInput::placeholder
+{
+  color:black;
+  text-align: center;
+  font-size: 2vh;
+  align-items: center;
+  padding: 0;
+  vertical-align: middle;
+}
+.select
+{
+   width: 16.04vw;
+  margin-top: 1vh;
+  height: 4vh;
+  font-size: 1vw;
+  border-radius: 2vw;
+  background-color: #FFD698;
+  text-align: center;
+}
+option
+{
+   background-color: #FFD698;
+}
+
+.error
+{
+  color: red;
+  font-size: 1.6vw;
+}
+
+.popup
+{
+  display: none;
 }
