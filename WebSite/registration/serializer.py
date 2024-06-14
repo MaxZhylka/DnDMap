@@ -62,3 +62,13 @@ class UpdateEmailSerializer(serializers.ModelSerializer):
 class UpdatePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+class CharacterInWaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Character
+        fields = ['id', 'inWay', 'dateOfStart', 'dateOfEnd', 'newCityLocation', 'WayCoordinates','location','selectedTransport','ifFlying']
+
+class UpdateCoinsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Character
+        fields = ['platinum', 'electrum', 'golden', 'silver', 'copper']

@@ -2,7 +2,7 @@ from django.urls import path,include
 from rest_framework import routers
 from .views import CharacterApiView, RegisterView, LoginView, PlayerData, CharacterViewSet, \
     PlayerViewSet, MyCharactersViewSet, CharacterUpdateView, ImageUpdateView, PlayerAvatar, DeleteUserView, \
-    UserAvatarUpdateView, UpdateNameView, UpdateEmailView, UpdatePasswordView
+    UserAvatarUpdateView, UpdateNameView, UpdateEmailView, UpdatePasswordView, CharacterUpdateRoadsView, UpdateCoinsView
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -28,5 +28,6 @@ urlpatterns = [
     path('update-name/', UpdateNameView.as_view(), name='update-name'),
     path('update-email/', UpdateEmailView.as_view(), name='update-email'),
     path('update-password/', UpdatePasswordView.as_view(), name='update-password'),
-
+    path('update-way/<int:pk>/', CharacterUpdateRoadsView.as_view(), name='character-update-way'),
+    path('update-coins/<int:pk>/', UpdateCoinsView.as_view(), name='update-coins')
 ]

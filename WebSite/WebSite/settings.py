@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import sys
 from pathlib import Path
 import os
 
@@ -137,21 +137,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Настройки Celery
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_TIMEZONE = 'UTC'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_ENABLE_UTC = True
-
-# Настройки периодических задач Celery Beat
-from celery.schedules import crontab
-
-CELERY_BEAT_SCHEDULE = {
-    'check-and-update-characters-every-minute': {
-        'task': 'registration.tasks.check_end_dates',
-        'schedule': crontab(minute='*'),  # Каждую минуту
-    },
-}

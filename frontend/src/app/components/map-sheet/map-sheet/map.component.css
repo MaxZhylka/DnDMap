@@ -121,7 +121,6 @@ margin-top: 1.5vh;
 {
   width: 57.65vw;
   height: 69.8vh;
-
   position: fixed;
   left: 21.2vw;
   top: 15.2vh;
@@ -200,6 +199,7 @@ margin-top: 1.5vh;
   transition: background 0.5s;
   cursor: pointer;
   z-index: 1000;
+
 }
 
 
@@ -242,9 +242,145 @@ margin-top: 1.5vh;
   height: 17.9vh;
   background-color: transparent;
 }
+.distanceText
+{
+  text-align: center;
+  font-size: 1.5vw;
+}
 .cityTarget
 {
   text-align: center;
   font-size: 1.5vw;
 
+}
+.confirmButton
+{
+  border: none;
+  padding: 0;
+  text-align: center;
+  width: 12vw;
+  background-color: #2D8DFF;
+  border-radius: 2vw;
+  margin-top: 1vw;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 2vw;
+  transition: scale 200ms;
+}
+.confirmButton:active
+{
+  scale: 0.97;
+}
+.textArrived
+{
+    text-align: center;
+  font-size: 1.25vw;
+  color: black;
+  margin-top: 1.2vh;
+ height: 3.75vw;
+}
+.roadsSwitcher
+{
+  display: flex;
+  width: 7.91vw;
+  height: 6.48vh;
+  background-color: #D9D9D9;
+  border-radius: 2vw;
+  justify-content: space-evenly;
+  position: fixed;
+  z-index: 1000;
+  align-items: center;
+  right: 2vw;
+  top: 10vh;
+}
+.switchImg
+{
+  width: 2.29vw;
+  height: 2.29vw;
+
+}
+.switchBG
+{ display: flex;
+  justify-content: center;
+  align-items: center;
+   width: 2.8vw;
+  height: 2.8vw;
+  border-radius: 10vw;
+  cursor: pointer;
+}
+
+.activeSwitch {
+  background-color: rgba(255, 0, 0, 50%);
+}
+.inactiveSwitch {
+  background-color: transparent;
+}
+
+.imgCheckBox
+{
+  width: 1.7vw;
+  height: 1.7vw;
+
+}
+.checkBox
+{
+  display: flex;
+  justify-content: center;
+  width: 16.04vw;
+  gap: 0.3vw;
+  height: 3vh;
+  cursor: pointer;
+  margin-top: 1vw;
+}
+.textCheckBox
+{
+  font-size: 1.5vw;
+}
+.speedInput
+{
+  margin-top: 1vh;
+  border: none;
+  outline: none;
+  padding: 0;
+  text-align: center;
+ background-color: #FFD698;
+  width: 12.34vw;
+  height: 4vh;
+  font-size: 3vh;
+  border-radius: 2vw;
+
+}
+.speedInput::placeholder
+{
+  color:black;
+  text-align: center;
+  font-size: 2vh;
+  align-items: center;
+  padding: 0;
+  vertical-align: middle;
+}
+.select
+{
+   width: 16.04vw;
+  margin-top: 1vh;
+  height: 4vh;
+  font-size: 1vw;
+  border-radius: 2vw;
+  background-color: #FFD698;
+  text-align: center;
+}
+option
+{
+   background-color: #FFD698;
+}
+
+.error
+{
+  color: red;
+  font-size: 1.6vw;
+}
+
+.popup
+{
+  display: none;
 }

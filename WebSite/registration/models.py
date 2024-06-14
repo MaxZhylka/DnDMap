@@ -125,11 +125,13 @@ class Character(models.Model):
     proficiencies = models.TextField('Умения', default='', blank=True)
     spells = models.JSONField('Заклинания', default=list)
     equipment = models.TextField('Снарежение', default='', blank=True)
-    platinum = models.IntegerField('Платиновые Монеты',default=0)
-    electrum = models.IntegerField('Электровиумые Монеты', default=0)
-    golden = models.IntegerField('Золотые Монеты', default=0)
-    silver = models.IntegerField('Серебряные Монеты', default=0)
-    copper = models.IntegerField('Медные Монеты', default=0)
+
+
+    platinum = models.IntegerField('Платиновые Монеты',default=0, blank=True)
+    electrum = models.IntegerField('Электровиумые Монеты', default=0, blank=True)
+    golden = models.IntegerField('Золотые Монеты', default=0, blank=True)
+    silver = models.IntegerField('Серебряные Монеты', default=0, blank=True)
+    copper = models.IntegerField('Медные Монеты', default=0, blank=True)
 
     age = models.TextField('Возраст', default='  ', blank=True)
     height = models.TextField('Рост', default='  ', blank=True)
@@ -167,16 +169,16 @@ class Character(models.Model):
     conspiracies10 = models.TextField('Заговоры 11', default=list, blank=True)
     conspiracies11 = models.TextField('Заговоры 12', default=list, blank=True)
     conspiracies12 = models.TextField('Заговоры 13', default=list, blank=True)
-    location = models.CharField('Текущее местополжение', max_length=50, default='waterdeep')
+    location = models.TextField('Текущее местополжение', max_length=50, default='waterdeep', blank=True)
     #Переменные для перемещения
     inWay = models.BooleanField('Находится ли персонаж в пути', default=False, blank=True, null=True)
     dateOfStart = models.DateTimeField('Время начала пути', blank=True, null=True)
     dateOfEnd = models.DateTimeField('Время конца пути', blank=True, null=True)
     newCityLocation = models.CharField('Город к которому идет персонаж', default='', max_length=50, blank=True,
                                        null=True)
-    WayCoordinates = models.TextField('Координаты пути', default='', blank=True, null=True)
-
-
+    WayCoordinates = models.JSONField('Координаты пути', null=True, blank=True)
+    selectedTransport =models.CharField('Выбранный транспорт', null=True, blank=True, max_length=30)
+    ifFlying= models.BooleanField('Летающий', default=False, blank=True, null=True)
     def __str__(self):
         return self.name
 

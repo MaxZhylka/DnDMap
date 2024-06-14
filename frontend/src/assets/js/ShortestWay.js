@@ -213,16 +213,18 @@ class ShortestWay
 
             let newCurrentPoint = this.pointCoordinatesSwap(currentPoint.slice());
             for (let el of Roads) {
-                let Point = this.FirstRoadPoint(el);
-                let Point1 = this.LastRoadPoint(el);
 
-                if (this.checkForExistInCompletedRoads(el, CompletedRoads) && (newCurrentPoint[0] ==Point[0]&&newCurrentPoint[1]==Point[1] || newCurrentPoint[0] ==Point1[0]&&newCurrentPoint[1]==Point1[1])) {
 
+                for (let coordinates of el.coordinates)
+                {
+                    if (this.checkForExistInCompletedRoads(el, CompletedRoads) && (newCurrentPoint[0] ==coordinates[0]&&newCurrentPoint[1]==coordinates[1] )) {
 
                     let existingRoads = chosenRoad.GetRoad() || [];
                     let combinedRoads = existingRoads.concat(el);
                       PossibleRoads.push(new RGBDistance(el, this.calculateGreen(el) + chosenRoad.getGreenValue(), this.calculateBlue(el, this.end,currentPoint),combinedRoads));
                 }
+                }
+
             }
 
             if(PossibleRoads.length===0)

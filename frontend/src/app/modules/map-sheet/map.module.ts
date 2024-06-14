@@ -6,7 +6,7 @@ import {MapComponent} from "../../components/map-sheet/map-sheet/map.component";
 import {MapHeaderComponent} from "../../components/map-sheet/map-header/map-header.component";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 
-import { FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CitisElLiComponent} from "../../components/map-sheet/citis-el-li/citis-el-li.component";
 import {NewsComponent} from "../../components/map-sheet/news/news.component";
 import {NewsPanelComponent} from "../../components/map-sheet/news-panel/news-panel.component";
@@ -17,6 +17,8 @@ import localeRu from '@angular/common/locales/ru';
 import { LOCALE_ID } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {AuthGuard} from "../../services/authGuard.service";
+import {FilterInWayPipe} from "../../pipes/InWayPipe";
+import {CharacterPopupComponent} from "../../components/map-sheet/character-popup/character-popup.component";
 registerLocaleData(localeRu);
 @NgModule({
   declarations: [
@@ -27,12 +29,15 @@ registerLocaleData(localeRu);
     NewsPanelComponent,
     ClickOutsideDirective,
     OpendNewsComponent,
+    FilterInWayPipe,
+    CharacterPopupComponent
   ],
     imports: [
         HttpClientModule,
         FormsModule,
         CommonModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        ReactiveFormsModule
     ],
   providers: [
     MapService,
