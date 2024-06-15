@@ -50,12 +50,14 @@
 }
 .cityDescription
 {
-
   font-size: 1vw;
   width: 18.38vw;
   margin-top: 1.5vh;
   align-self: center;
   text-align: start;
+  max-height: 25vh;
+  overflow: hidden;
+    text-overflow: ellipsis;
 }
 .continue
 {
@@ -67,22 +69,34 @@ margin-top: 1.5vh;
   color: white;
   border-radius: 1vw;
   border: none;
-  height: 3.8vh;
+  height: 4.5vh;
   padding: 0;
+  transition: scale 200ms, background-color 200ms;
+}
+.continue:hover
+{
+  background-color: #2587ff;
+}
+.continue:active
+{
+  scale: 0.97;
 }
 .confirmWay
 {
  display: flex;
   flex-direction: column;
   align-items: center;
-
+}
+.flexi{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .text
 {
   text-align: center;
   font-size: 1.25vw;
   color: black;
-  margin-top: 1.2vh;
   overflow: hidden;
 }
 .characterAvatar
@@ -112,6 +126,7 @@ margin-top: 1.5vh;
   font-size: 1.5vw;
   font-weight: bold;
   transition: opacity 200ms ease-in-out;
+  cursor: pointer;
 }
 .image-container {
   position: relative;
@@ -130,9 +145,10 @@ margin-top: 1.5vh;
     align-items: center;
   justify-content: center;
   background-color:#FFE8C6 ;
-  border: #FF9900 solid 0.5vw;
   border-radius: 2vw;
   z-index: 1003;
+  box-shadow: 0 0.2vh rgba(0, 0, 0, 0.25);
+
 
 }
 .overflow
@@ -156,6 +172,9 @@ margin-top: 1.5vh;
 .character:hover .overlay {
   opacity: 1;
 }
+.flexi:hover .overlay {
+  opacity: 1;
+}
 
 .character
 {
@@ -175,7 +194,6 @@ margin-top: 1.5vh;
   flex-wrap: wrap;
   gap: 1.5vw;
   display: flex;
-
 }
 .characterContainer::-webkit-scrollbar
 {
@@ -265,7 +283,11 @@ margin-top: 1.5vh;
   color: #FFFFFF;
   cursor: pointer;
   font-size: 2vw;
-  transition: scale 200ms;
+  transition: scale 200ms, background-color 200ms;
+}
+.confirmButton:hover
+{
+  background-color: #2587ff;
 }
 .confirmButton:active
 {
@@ -288,7 +310,7 @@ margin-top: 1.5vh;
   border-radius: 2vw;
   justify-content: space-evenly;
   position: fixed;
-  z-index: 1000;
+  z-index: 945;
   align-items: center;
   right: 2vw;
   top: 10vh;

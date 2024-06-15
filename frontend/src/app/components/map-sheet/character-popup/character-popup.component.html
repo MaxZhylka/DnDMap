@@ -1,4 +1,4 @@
-<div *ngIf="character&&display" class="popup" [ngStyle]="{'top': position.y + 'px', 'left': position.x + 'px'}">
+<div *ngIf="character && display" class="popup" [ngStyle]="{'top': positionYNew() +'vh', 'left': positionXNew()  + 'vw'}">
   <img [src]="character.appearance" alt="Аватар" class="avatar">
   <p class="text">Осталось времени: {{ calculateRemainingTime }}</p>
   <button class="closeButton" (click)="doDisplay()">Отменить поездку</button>

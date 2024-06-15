@@ -32,6 +32,17 @@ export class CharacterPopupComponent {
     this.position = newPosition;
     this.cdr.detectChanges(); // Обновить позицию в представлении
   }
+ positionXNew()
+ {
+   return this.position.x/window.innerWidth*100-10;
+ }
+ positionYNew()
+ {
+let position = this.position.y/window.innerHeight*100+5;
+if (position>75){return 75}
+else return position;
+ }
+
    cancelJourney()
    {
      this.cancel.emit(this.character);

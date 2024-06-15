@@ -144,6 +144,7 @@
 .profandexist {
   position: absolute;
   top: 9vh;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
   align-items: center;

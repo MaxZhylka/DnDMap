@@ -21,17 +21,25 @@
       </div>
   </div>
   <div   *ngIf="!isCity" class="confirmWay">
-  <div class="text">{{selectedCharacter? selectedCharacter.name:'Выберите персонажа'}}</div>
-    <img class="characterAvatar" (click)="openCharacterSelection()" [src]="selectedCharacter ? selectedCharacter.appearance : defaultImg" >
-    <div class="text"> Выберите транспорт</div>
- <div class="chooseTransport">
-  <img *ngFor="let transport of transports; let i = index"
-       [src]="transport.src"
-       [alt]="transport.alt"
-       [class.selected]="selectedTransport === i"
-       (click)="selectTransport(i)">
-  <div class="highlight" [ngStyle]="{'left.vw': highlightPosition}"></div>
-</div>
+    <div class="flexi">
+      <div class="text">{{selectedCharacter? selectedCharacter.name:'Выберите персонажа'}}</div>
+      <div class="image-container">
+        <img class="characterAvatar"  [src]="selectedCharacter ? selectedCharacter.appearance : defaultImg" >
+        <div class="overlay" (click)="openCharacterSelection()">Выбрать</div>
+      </div>
+    </div>
+    <div class="flexi">
+      <div class="text"> Выберите транспорт</div>
+      <div class="chooseTransport">
+        <img *ngFor="let transport of transports; let i = index"
+           [src]="transport.src"
+           [alt]="transport.alt"
+           [class.selected]="selectedTransport === i"
+           (click)="selectTransport(i)">
+      <div class="highlight" [ngStyle]="{'left.vw': highlightPosition}"></div>
+      </div>
+    </div>
+    <div class="flexi">
     <div class="distanceContainer">
       <img class="road" src="assets/img/road.png">
       <div class="distance">
@@ -50,7 +58,10 @@
       <div class="textCheckBox">Летающий предмет?</div>
 
     </div>
-    <input (dblclick)="preventDoubleClick($event)" formControlName="magicSpeedControl" (change)="setDefault()" *ngIf="selectedTransport==4" class="speedInput" placeholder="Введите скорость">
+      <div *ngIf="selectedTransport==4">
+        <input (dblclick)="preventDoubleClick($event)" formControlName="magicSpeedControl" (change)="setDefault()" class="speedInput" placeholder="Введите скорость">
+        <div class="text">Мили в час</div>
+      </div>
     <div *ngIf="selectedTransport==5" (dblclick)="preventDoubleClick($event)">
       <select id="ships" class="select" formControlName="selectedShip">
   <option *ngFor="let ship of ships" [value]="ship.name">
@@ -58,13 +69,13 @@
   </option>
       </select>
     </div>
-    <div  class="text" *ngIf="tripTime!=''&&selectedCharacter">Примерное время поездки:</div>
-    <div class="text" *ngIf="selectedCharacter">{{tripTime}}</div>
+    <div  class="text" *ngIf="tripTime!=''&&selectedCharacter">Время поездки:{{tripTime}}</div>
+<!--    <div class="text" *ngIf="selectedCharacter">{{tripTime}}</div>-->
     <div  class="text" *ngIf="price!=''&&selectedCharacter">Цена поездки: {{price}}</div>
     <div class="confirmButton" *ngIf="isRoadExist&&tripTime!=''&&enoughMoney&&selectedCharacter" (click)="goTo()">В путь!</div>
     <div *ngIf="!enoughMoney&&selectedCharacter&&isRoadExist" class="error">Недостаточно денег</div>
   </div>
-
+  </div>
 </aside>
   <div class="selectCharacter" *ngIf="displaySelection">
   <div class="characterContainer">

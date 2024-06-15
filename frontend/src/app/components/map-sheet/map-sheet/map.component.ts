@@ -15,7 +15,7 @@ declare const ShortestWay: any;
 declare const RGBDistance: any;
 import * as L from 'leaflet';
 import {FormControl, FormGroup} from "@angular/forms";
-import {CharacterPopupComponent} from "../character-popup/character-popup.component";
+
 
 interface OrderSegmentsResult {
   orderedSegments: any[];
@@ -204,17 +204,17 @@ preventDoubleClick(event: MouseEvent) {
       }
 
       if (segmentIndex === -1) {
-        //console.log("Сегмент для текущей точки не найден. Проверяем конечную точку...");
+        console.log("Сегмент для текущей точки не найден. Проверяем конечную точку...");
         currentPoint = endPoint;
         segmentIndex = wayPoints.findIndex(segment => {
           const firstCoordMatch = this.coordinatesMatch(segment.coordinates[0], currentPoint);
           const lastCoordMatch = this.coordinatesMatch(segment.coordinates[segment.coordinates.length - 1], currentPoint);
-          //
-          // console.log("Проверка сегмента для конечной точки:");
-          // console.log(endPoint);
-          // console.log( segment);
-          // console.log("Совпадение первой координаты:", firstCoordMatch);
-          // console.log("Совпадение последней координаты:", lastCoordMatch);
+
+          console.log("Проверка сегмента для конечной точки:");
+          console.log(endPoint);
+          console.log( segment);
+          console.log("Совпадение первой координаты:", firstCoordMatch);
+          console.log("Совпадение последней координаты:", lastCoordMatch);
            lastMatch=lastCoordMatch;
           return firstCoordMatch || lastCoordMatch;
 
@@ -226,8 +226,8 @@ preventDoubleClick(event: MouseEvent) {
         break;
       }
 
-      // console.log(segmentIndex);
-      // console.log(wayPoints[segmentIndex]);
+      console.log(segmentIndex);
+      console.log(wayPoints[segmentIndex]);
       const segment = wayPoints[segmentIndex];
 
       if (this.coordinatesMatch(segment.coordinates[0], currentPoint)) {
@@ -368,7 +368,7 @@ preventDoubleClick(event: MouseEvent) {
 
       segmentsParts = [];
 
-      if (!character.road) {
+      if (!character.road||character.updateRoad) {
         character.road = L.geoJSON(wayPoints.orderedSegments, {
             style: function (feature) {
               return {color: '#37ff00', weight: 7};
@@ -942,7 +942,7 @@ closePopup()
     }
   })
 
-    //console.log(this.checkBoxActive);
+    console.log(this.checkBoxActive);
     let data: any = {
       inWay: true,
       dateOfStart: dateOfStart,
@@ -952,6 +952,7 @@ closePopup()
       selectedTransport: this.selectedTransport,
       ifFlying:this.checkBoxActive
     };
+    this.selectedCharacter.ifFlying=this.checkBoxActive;
     this.apiMap.setInWay(data, this.selectedCharacter.id).subscribe({
       next: (data) => {
 
@@ -1102,16 +1103,16 @@ closePopup()
 
       let nearestCityCoordinates = nearestCity[0].coordinates.split(/,\s*/);
       //console.log(JSON.stringify(nearestCity[0].changedWay));
-      let wayPoints = this.orderSegments(nearestCity[0].changedWay, [newStart[0], newStart[1]], [nearestCityCoordinates[1], nearestCityCoordinates[0]])
-          console.log(wayPoints);
-      if(wayPoints.lastMatch) {
+      let wayPoints = this.orderSegments(JSON.parse(JSON.stringify(nearestCity[0].changedWay)), [newStart[0], newStart[1]], [nearestCityCoordinates[1], nearestCityCoordinates[0]])
+
+
         wayPoints =  { orderedSegments: wayPoints.orderedSegments.reverse(),lastMatch:true};
         wayPoints.orderedSegments.map(segment => {
           segment.coordinates.reverse()
         });
 
 
-      }
+
       let indexSegment = 1;
       let indexPart = 1;
       for (let i = 0; i < wayPoints.orderedSegments.length; i++) {
@@ -1126,11 +1127,15 @@ closePopup()
 
 
       }
-       wayPoints.orderedSegments.splice(0, indexSegment);
-         wayPoints.orderedSegments[indexSegment].coordinates.splice(0, indexPart);
+
+       if(indexPart!=wayPoints.orderedSegments[indexSegment].coordinates.length-1) {
+      wayPoints.orderedSegments.splice(0, indexSegment);
+      wayPoints.orderedSegments[indexSegment].coordinates.splice(0, indexPart);
+    }
 
 
       this.characters.map((character1: {
+          updateRoad: boolean;
         road: any;
         id: any; WayCoordinates: any; dateOfStart: string; dateOfEnd: string; newCityLocation: any; location: string
       }) => {
@@ -1140,8 +1145,9 @@ closePopup()
           character1.dateOfStart = date.toISOString();
           character1.dateOfEnd = dateOfEnd;
           character1.newCityLocation = nearestCity[0].name;
+          character1.updateRoad=true;
           this.map.removeLayer(character1.road);
-          character1.road = null;
+
 
         }
       })
@@ -1164,6 +1170,7 @@ closePopup()
 
 
       this.characters.map((character1: {
+        updateRoad: boolean;
         marker: null;
         inWay: boolean;
         road: any;
@@ -1176,9 +1183,9 @@ closePopup()
           character1.dateOfEnd = null
           character1.newCityLocation = '';
           this.map.removeLayer(character1.road);
-          character1.road = null;
           this.map.removeLayer(character.marker);
           character1.marker=null;
+          character1.updateRoad=true;
           this.arrivedCharacters.push(character1);
           this.displayWayEnd=true;
         }
