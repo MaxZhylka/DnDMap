@@ -369,6 +369,11 @@ preventDoubleClick(event: MouseEvent) {
       segmentsParts = [];
 
       if (!character.road||character.updateRoad) {
+       if(character.updateRoad)
+       {
+         this.map.removeLayer(character.road);
+         character.updateRoad=false;
+       }
         character.road = L.geoJSON(wayPoints.orderedSegments, {
             style: function (feature) {
               return {color: '#37ff00', weight: 7};
@@ -1111,7 +1116,46 @@ closePopup()
           segment.coordinates.reverse()
         });
 
+if(this.coordinatesMatch([newStart[0],newStart[1]],[nearestCityCoordinates[1], nearestCityCoordinates[0]]))
+{
+  character.inWay=false;
+  character.WayCoordinates='';
+  character.location=nearestCity[0].name;
+  this.arrivedCharacters.push(character);
+  this.displayWayEnd=true;
+     this.characters.map((character1: {
+        marker: null;
+        inWay: boolean;
+        road: any;
+        id: any; WayCoordinates: any; dateOfStart: string|null; dateOfEnd: string|null; newCityLocation: any; location: string;
+      }) => {
+        if (character1.id == character.id) {
+          character1.inWay=false;
+          character1.WayCoordinates = '';
+          character1.dateOfStart = null;
+          character1.dateOfEnd = null;
+          character1.location= nearestCity[0].name;
+          character1.newCityLocation = '';
+          this.map.removeLayer(character1.road);
+          this.map.removeLayer(character.marker);
+          character1.marker=null;
 
+
+        }
+              let dataToUpdate: any = {
+                inWay: false,
+                WayCoordinates: '',
+                dateOfStart: null,
+                dateOfEnd: null,
+                newCityLocation: '',
+                selectedTransport:'',
+                ifFlying:false,
+                location: nearestCity[0].name
+              };
+        this.apiMap.setInWay(dataToUpdate,character.id).subscribe();
+      })
+  return;
+}
 
       let indexSegment = 1;
       let indexPart = 1;
@@ -1120,7 +1164,7 @@ closePopup()
           if (wayPoints.orderedSegments[i].coordinates[j].toString() == newStart.toString()) {
             indexSegment = i;
             indexPart = j;
-            break
+            break;
           }
         }
 
@@ -1128,11 +1172,10 @@ closePopup()
 
       }
 
-       if(indexPart!=wayPoints.orderedSegments[indexSegment].coordinates.length-1) {
+    if(indexPart!=wayPoints.orderedSegments[indexSegment].coordinates.length-1) {
       wayPoints.orderedSegments.splice(0, indexSegment);
       wayPoints.orderedSegments[indexSegment].coordinates.splice(0, indexPart);
     }
-
 
       this.characters.map((character1: {
           updateRoad: boolean;
@@ -1146,7 +1189,6 @@ closePopup()
           character1.dateOfEnd = dateOfEnd;
           character1.newCityLocation = nearestCity[0].name;
           character1.updateRoad=true;
-          this.map.removeLayer(character1.road);
 
 
         }
@@ -1170,7 +1212,6 @@ closePopup()
 
 
       this.characters.map((character1: {
-        updateRoad: boolean;
         marker: null;
         inWay: boolean;
         road: any;
@@ -1185,7 +1226,6 @@ closePopup()
           this.map.removeLayer(character1.road);
           this.map.removeLayer(character.marker);
           character1.marker=null;
-          character1.updateRoad=true;
           this.arrivedCharacters.push(character1);
           this.displayWayEnd=true;
         }
