@@ -1,0 +1,65 @@
+
+
+.inputField
+{
+
+  border: none;
+  display: block;
+  outline: none;
+  overflow: auto;
+  font-size: 15px;
+  text-align: start;
+  background-color: transparent;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+  box-sizing: content-box;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+ .custom-link {
+  text-decoration: none;
+  text-underline: none;
+  outline: none;
+  font-weight: bold;
+  color: #1A01CC;
+}
+
+.three
+{
+    outline: none;
+}
+.linkInput
+{
+
+  width: 180px;
+
+}
+.linkBtn
+{
+  margin-top: 10px;
+  width:180px;
+}
+.context-menu {
+  position: absolute;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+.background {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+    position: fixed;
+    z-index: 801;
+}
+label{
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+

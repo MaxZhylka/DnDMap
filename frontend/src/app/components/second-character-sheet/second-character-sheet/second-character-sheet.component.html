@@ -1,0 +1,21 @@
+<app-second-header></app-second-header>
+<div class="mainSheet">
+  <div class="leftSheet">
+   <div class="ImageBox">
+      <label for="fileInput">
+        <img src="{{portrait}}"  alt="Image" id="portrait">
+      </label>
+      <input id="fileInput" type="file" accept="image/*" size="3000000"  (change)="onselectFile($event)" style="display: none;">
+    </div>
+
+ <app-area-input botText="ПРЕДЫСТОРИЯ" [boxHeight]="688" [boxWidth]="293" [personalId]="'backstorys'"></app-area-input>
+  </div>
+    <div class="rightSheet">
+
+
+      <app-area-input [boxWidth]="594"  [boxHeight]="360" *ngFor=" let text of alliesandtreasuretext; let i = index" [botText]="text" [personalId]="personalId[i]"></app-area-input>
+</div>
+
+</div>
+
+<app-photo-cropper *ngIf="display" (outputImage)="getData($event)" [image]="imageToCrop" (close)="close()"> </app-photo-cropper>

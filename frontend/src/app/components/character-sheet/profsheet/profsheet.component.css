@@ -1,0 +1,33 @@
+.function
+{
+  margin-top: 4px;
+}
+.profsheet
+{
+    width:98%;
+    height:38px ;
+    border-radius: 30px;
+    border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+.profiency
+{
+    border-radius: 30px;
+    border: 2px solid black;
+    margin-left: -1px;
+    margin-top: -1px;
+    font-size: 30px;
+    width: 72px;
+    height: 36px;
+}
+.profiencytext
+{
+    font-size: 15px;
+    width:100px;
+    height:36px ;
+    text-align: center;
+    margin-top: 2px;
+    font-weight: bold;
+}

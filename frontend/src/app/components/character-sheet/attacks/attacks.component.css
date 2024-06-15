@@ -1,0 +1,27 @@
+.attackFlexBox
+{
+  display: flex;
+  flex-direction: row;
+  width:270px;
+  height:20px;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+}
+.input
+{
+  text-align: center;
+  border: 1px transparent solid;
+  background-color: #E4E4E4;
+  border-radius: 10px;
+  height:20px;
+  width:82.5px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out, transform 200ms ease-in-out;
+
+}
+.input:focus
+{
+  outline: none;
+}

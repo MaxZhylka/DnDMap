@@ -1,0 +1,43 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.otst
+{
+    margin-bottom: 5px;
+}
+.arinsp
+{
+    justify-content: space-around;
+    display: flex;
+    width: 296px;
+}
+.initiative
+{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.armor
+{
+    width: 80px;
+    height: 80px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}
+.initiative
+{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.speed
+{
+  width: 80px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

@@ -1,0 +1,9 @@
+<div [ngStyle]="{'opacity': opacity}" [@fadeInOut] class="BG_Style" (click)="onClose()">
+  <div class="container">
+  Вы уверены что хотите удалить аккаунт?
+  <div style="width: 20vw;display:flex;justify-content: space-evenly;">
+    <button class="button" (click)="deleteProf()">Да</button>
+    <button class="button">Нет</button>
+  </div>
+</div>
+</div>

@@ -1,0 +1,20 @@
+<div class="three personalTraits" [style.width.px]="boxWidth" [style.border]="border" [style.border-radius.px]="borderRadius" [style.height.px]="boxHeight" >
+
+  <label *ngIf="topText!=''">{{topText}}</label>
+  <div [contentEditable]="true"  (keydown.backspace)="onBackspace()"  (dragover)="off($event)"  [(ngModel)]="this.characterService[personalId]"  appContentEditable appSelectEnd  (selectionDone)="onTextSelect($event)" #inputField class="inputField" [style.width.px]="inputWidth" [style.height.px]="inputHeight" appClickableLinks >
+
+  </div>
+  <div *ngIf="isContextMenuVisible">
+    <div class="background" (click)="close()"></div>
+<div #contextMenu   appClickOutside
+
+
+     [ngStyle]="{ 'top': contextMenuPosition.y + 'px', 'left': contextMenuPosition.x + 'px'}"
+     class="context-menu">
+    <input type="text" class="linkInput" [(ngModel)]="currentLink" #urlInput placeholder="Введите URL">
+    <button class="linkBtn" (click)="addLink(urlInput.value); urlInput.value=''">Добавить ссылку</button>
+
+</div>
+    </div>
+  <label *ngIf="botText!=''">{{botText}}</label>
+</div>

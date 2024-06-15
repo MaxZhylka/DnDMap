@@ -1,0 +1,124 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 12vh;
+  width: 20vw;
+  background-color: #FFB74B;
+   border-radius: 2vh;
+  overflow: hidden;
+  justify-content: start;
+  transition: background-color 100ms ease-in-out,transform 100ms ease-in-out;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+cursor: pointer;
+  gap: 0.5vw;
+  z-index: 800;
+}
+.container:hover{
+  background-color: #FFAE35;
+}
+
+
+.avatar {
+  height: 12vh;
+  width: 12vh;
+  border-radius: 2vh;
+  object-fit: cover;
+  object-position: top;
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 13vw;
+}
+
+.CharacterName {
+  font-size: 2.5vh;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.contextButton
+{
+
+  position: relative;
+  z-index: 900;
+  border-radius: 0.8vh;
+  text-align: center;
+  height: 1.4vw;
+  line-height: 0.65vw;
+  width: 1.4vw;
+  background-color:#FFE1B4;
+  align-content: start;
+  font-size: 1.4vw;
+   user-select: none;
+  cursor: pointer;
+}
+.nameAndButtonContainer
+{
+  display: flex;
+  justify-content: space-between;
+  width: 13vw;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  font-size: 1.1vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.locationContainer {
+  display: flex;
+  align-items: center;
+  align-self: end;
+  margin-right:1vw;
+  margin-bottom: 0.5vh;
+}
+
+.pointer {
+  width: 1.2vw;
+}
+
+.Position {
+  margin-left: 0.1vw;
+  font-size: 2vh;
+  font-weight: bold;
+}
+.contextMenu
+{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color:  #FFE1B4;
+  color: black;
+    width: 8vw;
+    height: 7vh;
+    margin-left: 11.5vw;
+  margin-top: 1vh;
+  border-radius: 1vw;
+}
+
+.button {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-size: 1vw;
+  text-align: center;
+  height: 3.5vh;
+  align-content: center;
+  text-decoration: none;
+  color: inherit;
+}

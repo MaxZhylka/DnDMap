@@ -1,0 +1,37 @@
+<div class="container" [formGroup]="auth">
+  <div class="text">Создайте аккаунт</div>
+ <div class="regwidth">
+    <input class="inputData" placeholder="Имя пользователя" formControlName="login">
+    <div class="validationMessage" *ngIf="auth.get('login')?.errors?.['required']&& auth.get('login')?.touched">
+     Имя пользователя обязательно.
+    </div>
+    <div class="validationMessage" *ngIf="auth.get('login')?.errors?.['maxLength']&& this.auth.get('login')?.touched">
+      Имя пользователя должно быть меньше 30 символов.
+    </div>
+  </div>
+ <div class="regwidth">
+    <input class="inputData" placeholder="Email" formControlName="email">
+    <div class="validationMessage" *ngIf="auth.get('email')?.errors?.['required']&& auth.get('email')?.touched">
+      Електронная почта обязательна.
+    </div>
+    <div class="validationMessage" *ngIf="auth.get('email')?.errors?.['emailFormat']&& this.auth.get('email')?.touched">
+      Введите действительную электронную почту.
+    </div>
+  </div>
+   <div class="regwidth">
+    <input class="inputData" placeholder="Пароль" formControlName="password">
+    <div class="validationMessage" *ngIf="auth.get('password')?.errors?.['passwordComplexity']&& this.auth.get('password')?.touched">
+      {{ auth.get('password')?.errors?.['passwordComplexity']?.message }}
+    </div>
+  </div>
+  <div class="confirmButton" (click)="Submit()">Регистрация</div>
+ <div class="continueWithGoogle">
+    <img class="google" [src]="GoogleImg">
+    <div class="googleText"> Continue with Google</div>
+  </div>
+  <div class="footerText" (click)="SwitchPanel.emit()">Уже есть акаунт? <a class="link">Войдите</a></div>
+   <div class="validationMessage" *ngIf="displayError">
+      Что-то пошло не так, попробуйте позже
+    </div>
+
+</div>

@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-equipment',
+  templateUrl: './equipment.component.html',
+  styleUrl: './equipment.component.css'
+})
+export class EquipmentComponent {
+
+  coinsValue=["ММ","СМ","ЗМ","ЭМ","ПМ"];
+  coinsName=['copper','silver','golden','electrium','platinum']
+}

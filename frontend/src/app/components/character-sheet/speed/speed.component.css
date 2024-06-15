@@ -1,0 +1,23 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.speedIndexa
+{
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 72px;
+    height: 74px;
+    border-radius: 20px;
+    border: 2px solid black;
+    font-size: 50px;
+    outline: none;
+}
+.speedIndex{
+    margin-left: 4px;
+    width: 80px;
+    height: 80px;
+}

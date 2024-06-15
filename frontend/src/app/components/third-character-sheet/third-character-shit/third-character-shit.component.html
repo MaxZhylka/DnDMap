@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="../../character-sheet/character-sheet/character-sheet.component.css">
+<app-third-header></app-third-header>
+<div class="spellsContainer">
+
+  <div class="cantrips">
+<div class="slotsAndCounter">
+  <div class="spellLevel">0</div>
+  <input class="spellsSlotsInput" value=" " readonly>
+</div>
+  <div class="spellList" [style.height.px]="">
+    <div class="spell" *ngFor="let item of cantripData;let i=index">
+    <app-area-input [border]="'none'" [boxWidth]="235" [boxHeight]="20" [personalId]="'conspiracies'+i"> </app-area-input>
+     </div>
+</div>
+
+  </div>
+
+
+
+
+<app-spells-by-level *ngFor="let item of initSpellsByLevel" [spellCount]="item.counter" [spellLevel]="item.level"></app-spells-by-level>
+</div>

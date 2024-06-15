@@ -1,0 +1,8 @@
+<div [formGroup]="formHead" class="abilliti">
+  <div class="text">{{ attribute }} </div>
+  <div class="modifier">
+    {{ modifire }}
+  </div>
+ <input  class="InputAttribute"  formControlName="{{headID}}"  (change)="onChange()" [value]="index">
+
+</div>

@@ -1,0 +1,67 @@
+.spellsSlotsInput
+{
+  height: 30px;
+  width:30px;
+  border:2px solid black;
+  border-radius: 100px;
+  text-align: center;
+  margin-left: -16px;
+  outline: none;
+}
+.spellsSlotsContainer
+{
+  height: 20px;
+  width: 200px;
+  display: flex;
+  padding-left: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  justify-content: start;
+  align-items: center;
+  border-left: none ;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin-left: -5px;
+  gap: 8px;
+
+}
+.slotsAndCounter
+{
+
+  display: flex;
+  width:290px;
+  height: 30px;
+  justify-content: start;
+  align-items: center;
+
+}
+.spell
+{
+  margin-top: 5px;
+   border-bottom: 1px solid #a6a6a6 ;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 19px;
+}
+.spellLevel
+{
+  height: 32px;
+  width:50px;
+  border:2px solid black;
+  border-bottom-left-radius: 5px ;
+  border-top-left-radius: 5px ;
+  border-right:none;
+  text-align: center;
+  align-content: center;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+.spellList
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-content: center;
+  width:285px;
+
+}

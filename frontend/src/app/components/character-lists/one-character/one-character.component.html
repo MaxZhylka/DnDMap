@@ -1,0 +1,33 @@
+<div class="container"  (click)="openList()">
+  <img class="avatar" src="{{avatar}}">
+  <div class="dataContainer">
+    <div class="nameAndButtonContainer">
+      <div class="CharacterName">{{characterData.name}}</div>
+      <div class="contextButton" (click)="displayContext($event)">
+
+        ...
+      </div>
+    </div>
+
+    <div class="textContainer" >
+      <div class="text">{{characterData.race}} {{characterData.characterClass}} {{characterData.level}} ур.</div>
+      <div class="text">Опыт:{{characterData.experience}}/{{getExperience(characterData.level+1)}}</div>
+    </div>
+    <div class="locationContainer">
+      <img class="pointer" src="{{pointer}}">
+      <div class="Position">{{characterData.location}}</div>
+    </div>
+  </div>
+
+  <div *ngIf="context" class="contextMenu">
+      <a class="button" [href]="jsonData" (click)="downloadClose($event)" download="{{ characterData.name }}.json">
+    Скачать Json
+  </a>
+    <button class="button" (click)="delete($event)">
+      Удалить
+    </button>
+  </div>
+
+
+</div>
+

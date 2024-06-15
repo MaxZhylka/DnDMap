@@ -1,0 +1,64 @@
+.background {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    transition: opacity 0.2s ease;
+    opacity: 50%;
+    position: fixed;
+    z-index: 801;
+}
+.Window {
+    background: white;
+    width: 1000px;
+    height: 500px;
+    top: calc(50% - 250px);
+    left: calc(50% - 500px);
+    text-align: center;
+    transition: opacity 0.2s ease;
+    font-size: 10px;
+    position: fixed;
+    z-index: 1000;
+    border: 1px black solid;
+    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.closeButton
+{
+  height: 50px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+}
+.window
+{
+  width: 45%;
+}
+.winowtempl
+{
+  width: 100%;
+  font-size: 40px;
+  text-align: center;
+  border: none;
+  border-bottom: 1px black solid;
+  outline: none;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+label{
+  color: #838383;
+  font-size: 14px;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+#profienc-checkbox {
+    width: 50%;
+    height: 50%;
+}
+.profiencycheck{
+  display: flex;
+flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}

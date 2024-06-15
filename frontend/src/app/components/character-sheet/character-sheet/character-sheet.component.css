@@ -1,0 +1,61 @@
+.mainSheet
+{
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+  width: 900px;
+  height: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: auto;
+
+}
+.abillitis
+{
+    width: 30.5%;
+    height: 675px;
+}
+
+
+.headSheet{
+    width: 900px;
+    height: 100px;
+    display: flex;
+    margin: auto;
+}
+.onemainSheet
+{
+    display: flex;
+    width: 296px;
+    height: 1070px;
+    text-align: center;
+    font-size: 10px;
+    flex-wrap: wrap;
+}
+.twomainSheet
+{
+    display: flex;
+    width: 296px;
+    height: 1070px;
+    flex-direction: column;
+    gap:5px;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 10px;
+
+}
+.threemainSheet
+{
+       display: flex;
+    width: 296px;
+    height: 1070px;
+    flex-direction: column;
+
+    font-size: 10px;
+
+}
+.staticstiq
+{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

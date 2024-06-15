@@ -1,0 +1,90 @@
+.flex-container
+{
+  width: 292px;
+  border-radius: 20px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid black;
+
+}
+
+/*.attackAndBtnContainer*/
+/*{*/
+/*  height:240px;*/
+/*}*/
+.textFlexContainer
+{
+
+  display: flex;
+  justify-content: space-around;
+  width: 265px;
+  height: 25px;
+  align-items: end;
+  align-content: end;
+  margin-right: 3px;
+}
+.btn
+{
+  width: 270px;
+  height: 40px;
+border: 1px transparent solid;
+  background-color: #E4E4E4;
+  border-radius: 10px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  transition: background-color 100ms ease-in-out, transform 200ms ease-in-out;
+}
+.btn:hover
+{
+    background-color: #d0d0d0;
+}
+.btn:active
+{
+    transform: scale(0.95);
+}
+.attackContainer
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  overflow: auto;
+  height: 200px;
+  width: 270px;
+
+}
+.attackContainer::-webkit-scrollbar
+{
+  display: none;
+}
+
+.nameText
+{
+
+}
+.modifText
+{
+
+}
+.dmgText
+{
+
+}
+.spells
+{
+  resize: none;
+  border: 1px black solid;
+  border-radius: 20px;
+  height: 75px;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 270px;
+
+}
+.spells:focus
+{
+  outline: none;
+}

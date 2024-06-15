@@ -1,0 +1,27 @@
+.personal
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap:5px;
+    height: 1070px;
+    text-align: center;
+    width: 292px;
+}
+.features
+{
+  padding: 2px;
+  width: 292px;
+  border-radius: 10px;
+  border: 2px solid black;
+  outline: none;
+}
+.feature
+{
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+  width: 288px;
+  height: 568px;
+  resize: none;
+  border: none;display: block;outline: none;
+}
+

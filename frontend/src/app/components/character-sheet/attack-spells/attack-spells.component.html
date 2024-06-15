@@ -1,0 +1,23 @@
+<div class="flex-container">
+
+   <div class="textFlexContainer">
+ <div class="nameText">Название</div>
+     <div class="modifText">Бонус Атаки</div>
+  <div class="dmgText">Урон/Тип</div>
+    </div>
+  <div class="attackAndBtnContainer">
+  <div class="attackContainer">
+
+   <app-attacks   (attackClick)="displayCalc($event)"  *ngFor="let attack of this.characterService.attackAndSpells; let i = index" class="hoverEffect" [attackId]="i"></app-attacks>
+  </div>
+      <button class="btn" (click)="addAttack()">Добавить</button>
+    </div>
+
+
+    <div>АТАКИ И ЗАКЛИНАНИЯ</div>
+
+
+</div>
+
+<app-calc-attack-splells *ngIf="display" (close)="closeAttackSpells()" (requestDelete)="deleteAttack()" [data]="chosenAttack"> </app-calc-attack-splells>
+

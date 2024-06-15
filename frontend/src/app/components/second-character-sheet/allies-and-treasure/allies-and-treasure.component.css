@@ -1,0 +1,13 @@
+.alliesAndTreasure{
+  width: 100%;
+  height: 333px;
+  resize: none;
+  border: none;
+  display: block;
+  outline: none;
+  background-color: transparent;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+label{
+  font-family:Roboto Condensed, Roboto, Helvetica, sans-serif ;
+}

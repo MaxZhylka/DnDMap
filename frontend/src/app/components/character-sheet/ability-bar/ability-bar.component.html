@@ -1,0 +1,5 @@
+<form [formGroup]="abilityForm">
+<div *ngFor="let attribute of attributes; let i=index">
+  <app-ability [formHead]="abilityForm"  [headID]="attributesID[i]" [attribute]="attribute"></app-ability>
+</div>
+</form>

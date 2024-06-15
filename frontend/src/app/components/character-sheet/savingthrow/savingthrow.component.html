@@ -1,0 +1,8 @@
+<div class="savingthrow">
+
+  <app-check-box-circle class="savingthrow-image" (toggleChange)="handleToggleChange($event)" [_toggle]="this.characterService[this.attributeId+'_savingthrow']"></app-check-box-circle>
+  <div class="stindex">{{calculateSavingThrow}}</div>
+  <div class="sttext">{{ text}}</div>
+</div>
+
+

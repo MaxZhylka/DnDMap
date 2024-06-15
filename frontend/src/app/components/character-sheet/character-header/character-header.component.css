@@ -1,0 +1,49 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.rightHeadSheet
+{
+    width: 66%;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+.leftHeadSheet
+{
+    width: 33%;
+    padding: 5px;
+    margin: auto;
+    flex-basis: 33% ;
+}
+.headSheet{
+    width: 900px;
+    height: 100px;
+    display: flex;
+    margin: auto;
+}
+.nameText
+{
+    font-size:30px;width: 90%;border: none; border-bottom: 1px solid black; display: block;outline: none;
+}
+label
+{
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+  color: #838383;
+  font-size: 14px;
+}
+.test
+{
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+    width: 190px;
+border: none; border-bottom: 1px solid black; display: block;outline: none;
+}
+body
+{
+
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}

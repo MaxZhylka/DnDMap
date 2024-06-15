@@ -1,0 +1,109 @@
+.container
+{
+  position: absolute;
+  width: 40%;
+  left:60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 3% 0 0 3%;
+  background-color: #FFB74B;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 46px;
+  overflow: auto;
+font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+.text{
+  font-size: 64px;
+}
+.inputData
+{
+  width: 100%;
+  height: 65px;
+  border-radius: 28px;
+  background-color: #FFE1B4;
+  border: none;
+  outline: none;
+  font-size: 24px;
+   padding-left: 10px;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+.inputData::placeholder
+{
+
+  font-size: 24px;
+
+  opacity: 82%;
+}
+.confirmButton
+{
+  width: 400px;
+  height: 75px;
+  background-color: #0085FF;
+  color: white;
+  border-radius: 23px;
+  font-size: 48px;
+  align-content: center;
+  transition: background-color 200ms ease-in-out, transform 200ms ease-in-out;
+}
+.confirmButton:hover
+{
+  transform: scale(1.01);
+    background-color: #0077e1;
+}
+.confirmButton:active
+{
+
+    transform: scale(0.99);
+}
+.footerText
+{
+  font-size: 24px;
+  cursor: pointer;
+}
+.link
+{
+  color: #0085FF;
+  transition: color 200ms ease-in-out, transform 200ms ease-in-out;
+
+}
+.link:hover
+{
+  transform: scale(1.01);
+    color: #0077e1;
+}
+.link:active
+{
+    transform: scale(0.99);
+}
+.validationMessage{
+  color: #A70000;
+  font-size: 24px;
+}
+.google{
+  width: 24px;
+  height: 24px;
+}
+.continueWithGoogle
+{
+  display: flex;
+  width: 250px;
+  height: 50px;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+}
+.googleText
+{
+  font-size: 20px;
+  opacity: 54%;
+  font-family: Roboto Condensed, Roboto, Helvetica, sans-serif;
+}
+.regwidth{
+  width: 66%;
+}

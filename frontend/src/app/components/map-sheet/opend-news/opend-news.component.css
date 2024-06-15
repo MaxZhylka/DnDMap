@@ -1,0 +1,145 @@
+.Full_News {
+    width: 80%;
+    max-width: 800px;
+    height: auto;
+    min-height: 20%;
+    max-height: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    z-index: 1003;
+    background-color: #FFE9C9;
+    padding: 0 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+
+  transition: opacity 150ms ;
+}
+.Full_News::-webkit-scrollbar {
+  display: none;
+    z-index: 0;
+
+}
+
+.BG_Style {
+    z-index: 1002;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.4);
+    left: 0;
+    top: 0;
+
+  transition: opacity 150ms;
+}
+.Author_Flex_Container
+{
+
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    justify-content: end;
+    padding: 0 5%;
+    box-sizing: border-box;
+
+}
+.btn-position
+{
+  display: flex;
+  justify-content: right;
+
+
+}
+.close-button {
+  position: absolute;
+  margin-left: 20px;
+  font-size: 24px;
+  right: 10px;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:  0.3s;
+  border-radius: 50px;
+}
+
+.close-button:hover{
+background-color: #FFE9B9;
+}
+
+.close-button:active {
+  transform: scale(0.9);
+}
+
+.Secondary_News_Img {
+    width: 95%;
+    height: auto;
+
+    max-height: 500px;
+    object-fit: cover;
+
+    margin: 30px auto 15px auto;
+
+    display: block;
+    border-radius: 15px;
+}
+
+ .Secondary_Text {
+    font-size: 16px;
+    font-family: "Times New Roman", sans-serif;
+    text-align: justify;
+    margin: 0 0 15px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+ .Secondary_Header
+ {
+   font-size: 20px;
+    font-family: "Times New Roman", sans-serif;
+      text-align: justify;
+   margin: 0 0 10px 0;
+ }
+.Secondary_Flex_Container{
+    padding: 0 5%;
+    box-sizing: border-box;
+    margin-bottom: 0;
+}
+
+
+.AuthorText{
+    background-color: #FF9900;
+    border-radius: 100px;
+    padding: 5px 10px;
+    margin-right: 10px;
+} .Date {
+    background-color: #FF9900;
+    border-radius: 100px;
+    padding: 5px 10px;
+
+}
+
+@media (max-width: 768px) {
+    .Full_News {
+        width: 95%;
+        min-height: 60%;
+    }
+
+    .Secondary_News_Img {
+        width: 70%; /* Увеличиваем ширину изображения на мобильных устройствах для лучшей видимости */
+    }
+
+    .Secondary_Flex_Container, .Author_Flex_Container {
+        padding: 0 2%;
+    }
+}

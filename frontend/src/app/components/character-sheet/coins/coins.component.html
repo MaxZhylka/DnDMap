@@ -1,0 +1,5 @@
+
+ <form [formGroup]="coinForm">
+    <input type="text" class="coinInput" formControlName="coinInput" (change)="ChangeCurrent()">
+  </form>
+<label class="coinText">{{coinValue}}</label>

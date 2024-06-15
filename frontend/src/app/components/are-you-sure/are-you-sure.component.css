@@ -1,0 +1,49 @@
+.BG_Style{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.49);
+    position: fixed;
+    z-index: 1000;
+    transition: opacity 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button
+{
+ width: 7vw;
+  padding: 0;
+  cursor: pointer;
+  height: 3.5vh;
+  border-radius: 2vw;
+  border: none;
+  text-align: center;
+  align-content: center;
+  background-color: #FFB74B;
+  font-size: 1.6vw;
+  transition: 200ms;
+   box-shadow: 0px 2px  rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+.button:active
+{
+  scale: 0.97;
+}
+.button-text {
+  transition: inherit;
+}
+.container{
+  width: 25vw;
+    height: 20vh;
+    display: flex;
+  text-align: center;
+    background: #bfbfbf;
+    flex-direction: column;
+  font-size: 1.5vw;
+    align-items: center;
+    justify-content: space-evenly;
+  border-radius: 2vw;
+}

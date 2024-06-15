@@ -1,0 +1,126 @@
+
+
+
+<div *ngIf="cities && roadsData" class="map-container">
+  <div class="map-frame">
+<div id="map"></div>
+
+    </div>
+</div>
+
+
+<aside [formGroup]="MagicSpeed" *ngIf="isSidebarOpen" (dblclick)="close()" [@slideInOut] class="sideContainer">
+
+  <div class="city" *ngIf="isCity">
+    <img class="cityPhoto"  [src]="selectedCity.cityPhoto" >
+    <div class="city"  *ngIf="isAnim" [@fadeInOut]>
+    <div class="cityName" >{{selectedCity.name}}</div>
+    <div class="cityRegion">{{selectedCity.region}}</div>
+    <div class="cityDescription">{{selectedCity.description}}</div>
+    <button class="continue"  (click)=" OpenSecondState()">Проложить маршрут</button>
+      </div>
+  </div>
+  <div   *ngIf="!isCity" class="confirmWay">
+    <div class="flexi">
+      <div class="text">{{selectedCharacter? selectedCharacter.name:'Выберите персонажа'}}</div>
+      <div class="image-container">
+        <img class="characterAvatar"  [src]="selectedCharacter ? selectedCharacter.appearance : defaultImg" >
+        <div class="overlay" (click)="openCharacterSelection()">Выбрать</div>
+      </div>
+    </div>
+    <div class="flexi">
+      <div class="text"> Выберите транспорт</div>
+      <div class="chooseTransport">
+        <img *ngFor="let transport of transports; let i = index"
+           [src]="transport.src"
+           [alt]="transport.alt"
+           [class.selected]="selectedTransport === i"
+           (click)="selectTransport(i)">
+      <div class="highlight" [ngStyle]="{'left.vw': highlightPosition}"></div>
+      </div>
+    </div>
+    <div class="flexi">
+    <div class="distanceContainer">
+      <img class="road" src="assets/img/road.png">
+      <div class="distance">
+        <div class="cityTarget">{{selectedCharacter?selectedCharacter.location:'Персонаж не выбран'}}</div>
+        <div class="distanceText" *ngIf="selectedCharacter">{{calculatedDistance}}</div>
+         <div class="cityTarget">{{selectedCity.name}}</div>
+      </div>
+    </div>
+    <div (click)=" hasHorse=!hasHorse; calculateTime()"   (dblclick)="preventDoubleClick($event)" class="checkBox" *ngIf="selectedTransport==1">
+      <img class="imgCheckBox" src="{{ hasHorse?'assets/img/activeCheckBox.png':'assets/img/inactiveCheckBox.png'}}">
+      <div  class="textCheckBox">Есть конь?</div>
+    </div>
+
+      <div (click)="switchMagicItem()"  (dblclick)="preventDoubleClick($event)"  class="checkBox" *ngIf="selectedTransport==4">
+      <img  class="imgCheckBox" src="{{checkBoxActive?'assets/img/activeCheckBox.png':'assets/img/inactiveCheckBox.png'}}">
+      <div class="textCheckBox">Летающий предмет?</div>
+
+    </div>
+      <div *ngIf="selectedTransport==4">
+        <input (dblclick)="preventDoubleClick($event)" formControlName="magicSpeedControl" (change)="setDefault()" class="speedInput" placeholder="Введите скорость">
+        <div class="text">Мили в час</div>
+      </div>
+    <div *ngIf="selectedTransport==5" (dblclick)="preventDoubleClick($event)">
+      <select id="ships" class="select" formControlName="selectedShip">
+  <option *ngFor="let ship of ships" [value]="ship.name">
+    {{ ship.name }} - {{ ship.speed }} миль/час
+  </option>
+      </select>
+    </div>
+    <div  class="text" *ngIf="tripTime!=''&&selectedCharacter">Время поездки:{{tripTime}}</div>
+<!--    <div class="text" *ngIf="selectedCharacter">{{tripTime}}</div>-->
+    <div  class="text" *ngIf="price!=''&&selectedCharacter">Цена поездки: {{price}}</div>
+    <div class="confirmButton" *ngIf="isRoadExist&&tripTime!=''&&enoughMoney&&selectedCharacter" (click)="goTo()">В путь!</div>
+    <div *ngIf="!enoughMoney&&selectedCharacter&&isRoadExist" class="error">Недостаточно денег</div>
+  </div>
+  </div>
+</aside>
+  <div class="selectCharacter" *ngIf="displaySelection">
+  <div class="characterContainer">
+    <div class="character" (click)="setSelection(character)" *ngFor="let character of characters| filterInWay: false">
+
+       <div class="image-container">
+        <img class="characterAvatar" [src]="character.appearance ? character.appearance : defaultCharacter">
+        <div class="overlay">Выбрать</div>
+      </div>
+
+      <span class="text overflow">{{character.name}}</span>
+    </div>
+  </div>
+</div>
+<div class="background" *ngIf="displaySelection" (click)="displaySelection=false"></div>
+
+ <div class="selectCharacter" *ngIf="displayWayEnd">
+  <div class="characterContainer">
+    <div class="character"  *ngFor="let character of arrivedCharacters">
+
+       <div class="image-container">
+        <img class="characterAvatar" [src]="character.appearance ? character.appearance : defaultCharacter">
+
+      </div>
+
+      <span class="textArrived ">{{character.name}} прибыл(а) в {{character.location}}</span>
+    </div>
+  </div>
+</div>
+<div class="background"  *ngIf="displayWayEnd" (click)="displayWayEnd=false; arrivedCharacters=[]"></div>
+<div class="roadsSwitcher">
+  <div class="switchBG activeSwitch" id="walk" (click)="switchWalk()">
+  <img class="switchImg"  src="assets/img/walk.png">
+    </div>
+  <div class="switchBG " id='boat' (click)="switchBoat()">
+  <img class="switchImg"  src="assets/img/boat.png" >
+    </div>
+</div>
+
+
+<app-character-popup   appClickOutside (clickOutside)="closePopup()"
+                       (cancel)="cancelJourney($event)"
+                       [ignoreElementRefs]="ignoreElements"
+                       [character]="popupCharacter"
+                       [display]="displayPopup"
+                       [mapComponent]="this"
+                       [position]="popupCoordinates"></app-character-popup>
+

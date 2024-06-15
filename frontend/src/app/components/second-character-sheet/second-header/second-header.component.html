@@ -1,0 +1,16 @@
+
+<div class="headSheet">
+  <div class="leftHeadSheet">
+  <input class="nameText" id="name" type="text" maxlength="20" value="{{name}}" readonly>
+  <label>ИМЯ ПЕРСОНАЖА</label>
+</div>
+
+<div class="rightHeadSheet">
+  <div *ngFor="let text of headText; let i = index">
+    <app-head-content [text]="text" [id]="headId[i]"></app-head-content>
+  </div>
+  <div>
+  </div>
+</div>
+
+</div>

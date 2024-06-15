@@ -1,0 +1,55 @@
+<div class="container" *ngIf="user">
+  <div class="leftColumn">
+    <div class="ImageBox">
+      <label for="fileInput">
+        <img [src]="user.avatar" class="avatar" alt="Image" id="portrait">
+      </label>
+      <input id="fileInput" type="file" accept="image/*" size="3000000"  (change)="onselectFile($event)" style="display: none;">
+    </div>
+    <div class="personalData">
+      <div class="name">{{user.name}}</div>
+      <div class="email">{{user.email}}</div>
+      <div class="CharacterCounter"></div>
+      <button (click)="togglePanel()" class="button">Удалить аккаунт</button>
+
+    </div>
+  </div>
+  <div class="rightColumn" [formGroup]="changes">
+    <div class="changeContainer">
+      <div class="header">Сменить имя</div>
+      <input class="input" formControlName="login" placeholder="Новое имя" maxlength="30">
+          <div class="validationMessage" *ngIf="changes.get('login')?.errors?.['maxLength']&& changes.get('login')?.touched">
+      Имя пользователя должно быть меньше 30 символов.
+    </div>
+      <div class="button" (click)="changeNick()"><span class="button-text">Применить</span></div>
+    </div>
+     <div class="changeContainer">
+      <div class="header"> Сменить почту</div>
+       <input class="input" placeholder="Электронная почта" formControlName="email">
+    <div class="validationMessage" *ngIf="changes.get('email')?.errors?.['emailFormat'] && changes.get('email')?.touched">
+      Введите действительный адрес электронной почты.
+    </div>
+      <div class="button" (click)="changePost()"><span class="button-text">Применить</span></div>
+    </div>
+     <div class="changeContainerPassword">
+      <div class="header">Сменить пароль</div>
+    <input class="input" placeholder="Новый пароль" formControlName="password" type="password">
+    <div class="validationMessage" *ngIf="changes.get('password')?.errors?.['passwordComplexity'] && changes.get('password')?.touched">
+      {{ changes.get('password')?.errors?.['passwordComplexity']?.message }}
+    </div>
+    <div class="validationMessage" *ngIf="changes.get('password')?.errors?.['required'] && changes.get('password')?.touched">
+      Пароль обязателен.
+    </div>
+  <input class="input" placeholder="Cтарый пароль" formControlName="oldPassword" type="password">
+    <div class="validationMessage" *ngIf="changes.get('oldPassword')?.errors?.['passwordComplexity'] && changes.get('oldPassword')?.touched">
+      {{ changes.get('password')?.errors?.['passwordComplexity']?.message }}
+    </div>
+    <div class="validationMessage" *ngIf="changes.get('oldPassword')?.errors?.['required'] && changes.get('oldPassword')?.touched">
+      Пароль обязателен.
+    </div>
+      <div class="button" (click)="changePassword()"><span class="button-text">Применить</span></div>
+    </div>
+  </div>
+</div>
+<app-profile-cropper *ngIf="display" (outputImage)="getData($event)" [image]="imageToCrop" (close)="close()"> </app-profile-cropper>
+<app-are-you-sure *ngIf="Deldisplay" (close)="close()" ></app-are-you-sure>

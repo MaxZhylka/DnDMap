@@ -1,0 +1,22 @@
+.savingthrow-image {
+    width: 12px; /* Новая ширина */
+}
+.stindex
+{
+  width: 26.75px;
+    font-size: 18px;
+    margin-left: 1px;
+  line-height: 15px;
+}
+.sttext
+{
+    text-align: left;
+    font-size: 18px;
+    margin-left: 3px;
+  line-height: 15px;
+}
+.savingthrow
+{
+    display: flex;
+    flex-wrap: wrap;
+}
